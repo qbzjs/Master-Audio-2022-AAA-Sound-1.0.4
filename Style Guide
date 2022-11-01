@@ -2,6 +2,11 @@ Code style guide for Hellscaper. Last updated 11/1/22
 
 Function names: CapitalCamelCase
 
-Global variable names:
-Local variable names: 
-Properties?
+When to comment:
+//function contracts
+x = 3; //magic numbers
+y = x % 3 * Foo() - Foo2() //confusing lines
+//long if / else strings 
+
+Properties - use 'em, private variable is lowerCase public is UpperCase 
+
