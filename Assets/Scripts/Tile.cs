@@ -10,8 +10,6 @@ public class Tile
 
     public void Initialize() {
         int i = Random.Range(0, Tiles.Length);
-
-        // Spawn Group at current Position
         tilePrefab = Instantiate(tilePrefab,
                     transform.position,
                     Quaternion.identity);
