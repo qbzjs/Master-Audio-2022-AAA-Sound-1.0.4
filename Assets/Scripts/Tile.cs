@@ -9,10 +9,10 @@ public class Tile
     public SpriteRenderer tilePrefab;
 
     public void Initialize() {
-        int i = Random.Range(0, Tiles.Length);
+        /*int i = Random.Range(0, Tiles.Length);
         tilePrefab = Instantiate(tilePrefab,
                     transform.position,
                     Quaternion.identity);
-        tilePrefab.sprite = TileOptions[i]; 
+        tilePrefab.sprite = TileOptions[i]; */
     }
 }

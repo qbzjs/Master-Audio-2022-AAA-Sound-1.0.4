@@ -8,6 +8,10 @@ public class GridManager : MonoBehaviour
     [SerializeField]
     private int size;
 
+    [SerializeField] private LineRenderer gridLine;
+    [SerializeField] private Transform bottomLeft, topRight, gridParent;
+    private float gridUnit;
+    
     private Grid grid;
     
     // Start is called before the first frame update
@@ -15,6 +19,37 @@ public class GridManager : MonoBehaviour
     {
         //TODO make this default Tile value stand for an "empty" tile
         grid = new Grid(size, new Tile());
+        DrawGrid();
+    }
+
+    private void DrawGrid()
+    {
+        Vector2 tr = topRight.position;
+        Vector2 bl = bottomLeft.position;
+        Vector2 dist = topRight.position - bottomLeft.position;
+        gridUnit = Mathf.Min(dist.x, dist.y) / size;
+        float xLeft = bl.x;
+        float xRight = bl.x + size * gridUnit;
+        float yTop = bl.y + size * gridUnit;
+        float yBottom = bl.y;
+        
+        for(int x = 0; x <= size; x++ )
+        {
+            float xPos = bl.x + gridUnit * x;
+            DrawGridLine(xPos, yBottom, xPos, yTop);
+        }
+        
+        for(int y = 0; y <= size; y++ ){
+            float yPos = bl.y + gridUnit * y;
+            DrawGridLine(xLeft, yPos, xRight, yPos);        
+        }  
+    }
+
+    private void DrawGridLine(float x1, float y1, float x2, float y2)
+    {
+        Instantiate(gridLine, gridParent);
+        Vector3[] positions = {new Vector3(x1, y1, 0), new Vector3(x2, y2, 0)};
+        gridLine.SetPositions(positions);
     }
 
     // Update is called once per frame
