@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+public class Tile 
 {
-    public Sprite[] tileOptions;
-    public GameObject tileObject;
+    public GameObject TileObject;
     
-
-    public void Initialize() {
-        int i = Random.Range(0, tileOptions.Length);
-        tileObject.AddComponent<SpriteRenderer>();
-        tileObject = Instantiate(tileObject,
-                    transform.position,
-                    Quaternion.identity);
-        tileObject.GetComponent<SpriteRenderer>().sprite = tileOptions[i]; 
+    public Tile(){
+        
+    }
+    public Tile(Sprite[] options, Vector3 pos) 
+    {
+        this.TileObject = new GameObject("Tile");
+        int i = Random.Range(0, options.Length);
+        this.TileObject.AddComponent<SpriteRenderer>();
+        this.TileObject.transform.position = pos;
+        this.TileObject.transform.rotation = Quaternion.identity;
+        this.TileObject.GetComponent<SpriteRenderer>().sprite = options[i];
     }
 }
-
