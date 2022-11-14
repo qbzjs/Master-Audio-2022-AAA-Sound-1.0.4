@@ -443,7 +443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329261076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.62, y: -4.23, z: 0}
+  m_LocalPosition: {x: -4, y: -4.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -905,15 +905,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d08f2163c79642e89a87f5e80bb3a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileOptions:
-  - {fileID: 21300000, guid: 0eff5a06cef5d420fa58538581861ef5, type: 3}
-  - {fileID: 21300000, guid: 4c6e9f213225e4eda8cc9f89e7a216bf, type: 3}
-  - {fileID: 21300000, guid: abcfef9b57229494d90a5a102825fa6a, type: 3}
-  - {fileID: 21300000, guid: 5aee46a2fd6744a259241d1897a391a1, type: 3}
-  - {fileID: 21300000, guid: 9e05ce9bf5c3b4e7ba199946d2c08a03, type: 3}
-  - {fileID: 21300000, guid: ecad06edb8b223e4dae41e16be60ad84, type: 3}
-  - {fileID: 21300000, guid: 489035bf2118d461bb2d5f9f4a690145, type: 3}
-  maxBlockSize: 8
+  TileOptions: []
+  MaxBlockSize: 0
 --- !u!1 &1383839340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605296173}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.97, y: 3.81, z: 0}
+  m_LocalPosition: {x: 4, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1447,6 +1440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit

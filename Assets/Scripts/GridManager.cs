@@ -22,8 +22,11 @@ public class GridManager : MonoBehaviour
         DrawGrid();
     }
 
+    //Uses copies of the gridLine prefab to draw a grid.
     private void DrawGrid()
     {
+        gridLine.enabled = true;
+        
         Vector2 tr = topRight.position;
         Vector2 bl = bottomLeft.position;
         Vector2 dist = topRight.position - bottomLeft.position;
@@ -42,14 +45,16 @@ public class GridManager : MonoBehaviour
         for(int y = 0; y <= size; y++ ){
             float yPos = bl.y + gridUnit * y;
             DrawGridLine(xLeft, yPos, xRight, yPos);        
-        }  
+        }
+
+        gridLine.enabled = false;
     }
 
     private void DrawGridLine(float x1, float y1, float x2, float y2)
     {
-        Instantiate(gridLine, gridParent);
+        LineRenderer newLine = Instantiate(gridLine, gridParent);
         Vector3[] positions = {new Vector3(x1, y1, 0), new Vector3(x2, y2, 0)};
-        gridLine.SetPositions(positions);
+        newLine.SetPositions(positions);
     }
 
     // Update is called once per frame
