@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,10 +58,32 @@ public class GridManager : MonoBehaviour
         newLine.SetPositions(positions);
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Rounds a Vector3 to the nearest position on the grid, does nothing if not on the grid. For snapping tiles to the grid.
+    /// </summary>
+    public Vector3 SnapToGrid(Vector3 worldPos)
     {
+        Vector2Int gridPos = WorldToGridPos(worldPos);
+        return (grid.InRange(gridPos.x, gridPos.y) ? worldPos : GridToWorldPos(gridPos) );
+    }
+    
+    /// <summary>
+    /// translates the world position to grid position
+    /// </summary>
+    /// <param name="worldPos">world position to be converted</param>
+    /// <returns>the grid position equivalent: note that the value may be out of range</returns>
+    public Vector2Int WorldToGridPos(Vector3 worldPos)
+    {
+        Vector3 diff = worldPos - bottomLeft.position;
+        Vector3 scaled = diff / gridUnit;
+        return new Vector2Int(Mathf.FloorToInt(scaled.x), Mathf.FloorToInt(scaled.y));
+    }
 
+    public Vector3 GridToWorldPos(Vector2Int gridPos)
+    {
+        float x = bottomLeft.position.x + (gridPos.x + 0.5f) * gridUnit;
+        float y = bottomLeft.position.y + (gridPos.y + 0.5f) * gridUnit;
+        return  new Vector3(x, y,0);
     }
 }
 
