@@ -12,6 +12,10 @@ public class GridManager : MonoBehaviour
     [SerializeField] private LineRenderer gridLine;
     [SerializeField] private Transform bottomLeft, topRight, gridParent;
     private float gridUnit;
+
+    public float GridUnit {
+        get => gridUnit;
+    }
     
     private Grid grid;
     
