@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GridManager : MonoBehaviour
+public class GridManager : Singleton<GridManager>
 {
     [SerializeField]
     private int size;
+    
 
     [SerializeField] private LineRenderer gridLine;
     [SerializeField] private Transform bottomLeft, topRight, gridParent;
