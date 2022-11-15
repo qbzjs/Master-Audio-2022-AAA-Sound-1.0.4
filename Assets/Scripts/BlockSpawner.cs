@@ -17,25 +17,25 @@ public class BlockSpawner : MonoBehaviour
     
     void Start()
     {
-    //    GenerateBlock();
+        GenerateBlock();
     }
 
     // Update is called once per frame
     void Update()
     {
-    /*    if (Input.GetKeyDown("space")){
-            if (newBlock != null)
+        if (Input.GetKeyDown("space")){
+            if (NewBlock != null)
             {
-                List<Tile> tmpTiles = newBlock.Tiles;
+                List<Tile> tmpTiles = NewBlock.Tiles;
                 for (int i = 0; i < tmpTiles.Count; i++)
                 {
-                    GameObject.Destroy(tmpTiles[i].tileObject);
+                    GameObject.Destroy(tmpTiles[i].TileObject);
                 }
-                //newBlock.Tiles.Clear();
+                NewBlock.Tiles.Clear();
             }
             Vector3 currPos = transform.position;
-            int blockSize = Random.Range(1, maxBlockSize);
-            newBlock = new Block(currPos, blockSize, tileOptions);
-        } */
+            int blockSize = Random.Range(1, MaxBlockSize);
+            NewBlock = new Block(currPos, blockSize, TileOptions);
+        } 
     } 
 }
