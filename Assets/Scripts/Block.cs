@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class Block : MonoBehaviour 
+public class Block : MonoBehaviour
 {
     public List<GameObject> Tiles = new List<GameObject>();
     private List<Vector3> Directions = new List<Vector3>()
@@ -60,15 +62,26 @@ public class Block : MonoBehaviour
     {
         cam = Camera.main;
     }
-    void OnMouseDrag()
+
+    void OnMouseDown()
     {
-        transform.position = GetMousePos();
+        dragOffset = transform.position - GetMousePos();
     }
     
+    void OnMouseDrag()
+    {
+        transform.position = GridManager.Instance.SnapToGrid( dragOffset + GetMousePos());
+    }
+
+    /*private void OnMouseUp()
+    {
+        throw new NotImplementedException();
+    }*/
+
     Vector3 GetMousePos()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
         mousePos.z = 0;
-       return mousePos;
+        return mousePos;
     }
 }
