@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
 {
-    public GameObject[] TileOptions;
+    public Sprite[] TileOptions;
     public int MaxBlockSize;
     
     void GenerateBlock()
     {
-       GameObject NewBlock; NewBlock = new GameObject("NewBlock");
+        GameObject NewBlock; 
+        NewBlock = new GameObject("NewBlock");
         NewBlock.transform.parent = transform;
         NewBlock.AddComponent<Block>();
         NewBlock.AddComponent<BoxCollider>();

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Block : MonoBehaviour 
 {
-    public List<GameObject> Tiles = new List<GameObject>();
+    public List<Tile> Tiles = new List<Tile>();
+    
     private List<Vector3> Directions = new List<Vector3>()
     {
         new Vector3(1, 0, 0),
@@ -18,10 +19,8 @@ public class Block : MonoBehaviour
     private Vector3 currPos;
 
     private Camera cam;
-    private Vector3 dragOffset;
-    [SerializeField] private float speed = 2;
     
-    public void GenerateTiles(Transform parentTransform, int blockSize, GameObject[] tileOptions)
+    public void GenerateTiles(Transform parentTransform, int blockSize, Sprite[] tileOptions)
     {
         Vector3 position = parentTransform.position;
 
@@ -36,9 +35,8 @@ public class Block : MonoBehaviour
         int tmpIdx;
         for(int i = 0; i < blockSize; i++){
             int rand = Random.Range(0, tileOptions.Length);
-            GameObject myTile = Instantiate(tileOptions[rand], parentTransform);
-            myTile.transform.localScale *= GridManager.Instance.GridUnit;
-            myTile.transform.position = currPos;
+            Tile myTile = new Tile(tileOptions[rand], parentTransform, currPos);
+           // myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
             Tiles.Add(myTile);
             options.Remove(currPos);
             optionsList.Remove(currPos);
@@ -62,6 +60,7 @@ public class Block : MonoBehaviour
     }
     void OnMouseDrag()
     {
+        Debug.Log("HERE");
         transform.position = GetMousePos();
     }
     
