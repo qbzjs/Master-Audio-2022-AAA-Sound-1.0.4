@@ -5,9 +5,8 @@ using UnityEngine;
 public interface ITile 
 {
     public GameObject TileObject { get; set; }
-    [SerializeField] private int scoreWorth;
 
-    public int calulate_score();
+    public int CalculateScore();
 }
 
 

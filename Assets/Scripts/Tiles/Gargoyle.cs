@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-<<<<<<< Updated upstream:Assets/Scripts/Tile.cs
-public class Tile : MonoBehaviour
-=======
 public class Gargoyle : ITile
->>>>>>> Stashed changes:Assets/Scripts/Tiles/Gargoyle.cs
 {
     public GameObject TileObject { get; set; }
     [SerializeField] private int scoreWorth = 10;
@@ -21,7 +17,7 @@ public class Gargoyle : ITile
         this.TileObject.GetComponent<SpriteRenderer>().sprite = options[i];
     }
 
-    public int calulate_score()
+    public int CalculateScore()
     {
         return scoreWorth;
     }
