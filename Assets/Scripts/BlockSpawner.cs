@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
 {
-    public Sprite[] TileOptions;
+    public GameObject[] TileOptions;
     public int MaxBlockSize;
-    public Block NewBlock;
     
     void GenerateBlock()
     {
-         Vector3 currPos = transform.position;
-         int blockSize = Random.Range(1, MaxBlockSize);
-         NewBlock = new Block(currPos, blockSize, TileOptions);
+       GameObject NewBlock; NewBlock = new GameObject("NewBlock");
+        NewBlock.transform.parent = transform;
+        NewBlock.AddComponent<Block>();
+        NewBlock.AddComponent<BoxCollider>();
+        int blockSize = Random.Range(1, MaxBlockSize);
+        NewBlock.GetComponent<Block>().GenerateTiles(NewBlock.transform, blockSize, TileOptions);
     }
     
     void Start()
@@ -22,20 +24,22 @@ public class BlockSpawner : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+   {
         if (Input.GetKeyDown("space")){
-            if (NewBlock != null)
+            GenerateBlock();
+    /*        if (NewBlock != null)
             {
-                List<Tile> tmpTiles = NewBlock.Tiles;
+                List<GameObject> tmpTiles = NewBlock.Tiles;
+                Debug.Log(tmpTiles.Count);
                 for (int i = 0; i < tmpTiles.Count; i++)
                 {
-                    GameObject.Destroy(tmpTiles[i].TileObject);
+                    GameObject.Destroy(tmpTiles[i]);
                 }
                 NewBlock.Tiles.Clear();
             }
             Vector3 currPos = transform.position;
             int blockSize = Random.Range(1, MaxBlockSize);
-            NewBlock = new Block(currPos, blockSize, TileOptions);
-        } 
-    } 
+            NewBlock = new Block(currPos, blockSize, TileOptions); */
+        }   
+    }  
 }
