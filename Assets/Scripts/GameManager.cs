@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private Image progressBar;
     [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter;
@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         set
         {
             score = value;
+            Debug.Log("updating score to: " + score);
             if (score >= winningScore)
             {
                 winButton.SetActive(true);
@@ -62,9 +63,9 @@ public class GameManager : MonoBehaviour
     }
 
     [NaughtyAttributes.Button]
-    public void IncrementScore()
+    public void UpdateScore()
     {
-        Score += 50;
+        Score = GridManager.Instance.UpdateScore();
     }
     
     

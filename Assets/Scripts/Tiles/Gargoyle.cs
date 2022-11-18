@@ -1,15 +1,16 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile 
+public class Gargoyle : ITile
 {
-    public GameObject TileObject;
-    
-    public Tile(){
+    public GameObject TileObject { get; set; }
+    [SerializeField] private int scoreWorth = 10;
+    public Gargoyle()
+    {
         
     }
-    public Tile(Sprite mySprite, Transform parentTransform, Vector3 tmpPos) 
+    public Gargoyle(Sprite[] options, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
         this.TileObject.AddComponent<SpriteRenderer>();
@@ -18,5 +19,10 @@ public class Tile
         this.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
         this.TileObject.transform.parent = parentTransform;
         this.TileObject.GetComponent<SpriteRenderer>().sprite = mySprite;
+    }
+
+    public int CalculateScore()
+    {
+        return scoreWorth;
     }
 }
