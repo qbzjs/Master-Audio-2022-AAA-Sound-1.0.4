@@ -24,7 +24,7 @@ public class GridManager : Singleton<GridManager>
     void Start()
     {
         //TODO make this default Tile value stand for an "empty" tile
-        grid = new Grid(size, new EmptyTile());
+        grid = new Grid(size, new Gargoyle());//new EmptyTile());
         DrawGrid();
     }
 

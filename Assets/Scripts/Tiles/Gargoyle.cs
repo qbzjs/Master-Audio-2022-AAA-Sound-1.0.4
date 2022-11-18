@@ -6,7 +6,10 @@ public class Gargoyle : ITile
 {
     public GameObject TileObject { get; set; }
     [SerializeField] private int scoreWorth = 10;
-
+    public Gargoyle()
+    {
+        
+    }
     public Gargoyle(Sprite[] options, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
