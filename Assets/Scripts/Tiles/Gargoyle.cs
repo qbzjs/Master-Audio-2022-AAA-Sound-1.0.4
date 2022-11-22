@@ -10,15 +10,15 @@ public class Gargoyle : ITile
     {
         
     }
-    public Gargoyle(Sprite[] options, Vector3 pos)
+    public Gargoyle(Sprite[] options, Transform parentTransform, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
         this.TileObject.AddComponent<SpriteRenderer>();
-        this.TileObject.transform.position = tmpPos;
+        this.TileObject.transform.position = pos;
         this.TileObject.transform.rotation = Quaternion.identity;
         this.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
         this.TileObject.transform.parent = parentTransform;
-        this.TileObject.GetComponent<SpriteRenderer>().sprite = mySprite;
+        this.TileObject.GetComponent<SpriteRenderer>().sprite = options[Random.Range(0, options.Length)];
     }
 
     public int CalculateScore()

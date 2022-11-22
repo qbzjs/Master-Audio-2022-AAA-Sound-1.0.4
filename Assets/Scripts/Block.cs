@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Block : MonoBehaviour
 {
-    public List<Tile> Tiles = new List<Tile>();
+    public List<ITile> Tiles = new List<ITile>();
     
     private List<Vector3> Directions = new List<Vector3>()
     {
@@ -18,7 +18,7 @@ public class Block : MonoBehaviour
     private List<Vector3> optionsList = new List<Vector3>();
     private HashSet<Vector3> options = new HashSet<Vector3>();
     private HashSet<Vector3> taken = new HashSet<Vector3>();
-    private Vector3 currPos;
+    private Vector3 currPos, dragOffset;
 
     private Camera cam;
     
@@ -37,7 +37,7 @@ public class Block : MonoBehaviour
         int tmpIdx;
         for(int i = 0; i < blockSize; i++){
             int rand = Random.Range(0, tileOptions.Length);
-            Tile myTile = new Tile(tileOptions[rand], parentTransform, currPos);
+            ITile myTile = new Gargoyle(tileOptions, transform, currPos);
            // myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
             Tiles.Add(myTile);
             options.Remove(currPos);
