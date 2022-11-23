@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,6 +21,7 @@ public class Block : MonoBehaviour, IDragParent
     private HashSet<Vector3> options = new HashSet<Vector3>();
     private HashSet<Vector3> taken = new HashSet<Vector3>();
     private Vector3 currPos, dragOffset;
+    private bool dragging;
 
     private Camera cam;
     
@@ -63,19 +66,69 @@ public class Block : MonoBehaviour, IDragParent
         cam = Camera.main;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Rotate(90);
+        } else if (Input.GetKeyDown(KeyCode.E))
+        {
+            Rotate(-90);
+        }
+        
+    }
+
+    /// <summary>
+    /// Rotates the tiles composing this block, around the mouse if dragging or around
+    /// its center if not dragging
+    /// </summary>
+    /// <param name="degrees">How many degrees counterclockwise you want to rotate</param>
+    private void Rotate(float degrees)
+    {
+        float rad = degrees * Mathf.PI / 180;
+        Matrix4x4 rotMat = Matrix4x4.Rotate(quaternion.RotateZ(rad));
+        Vector3 centerOfGravity = Vector3.zero;
+        /*foreach (ITile tile in Tiles)
+        {
+            centerOfGravity += tile.TileObject.transform.localPosition;
+        }
+        centerOfGravity /= Tiles.Count;*/
+        foreach (ITile tile in Tiles)
+        {
+            Vector3 localSpacePosition = tile.TileObject.transform.localPosition - centerOfGravity;
+            tile.TileObject.transform.localPosition = centerOfGravity + (Vector3)(rotMat *  localSpacePosition);
+        }
+    }
+
     public void OnMouseDown()
     {
         dragOffset = transform.position - GetMousePos();
+        dragOffset.z = 0;
+        dragging = true;
     }
     
     public void OnMouseDrag()
     {
-        transform.position = GridManager.Instance.SnapToGrid( dragOffset + GetMousePos());
+        bool onGrid = true;
+        foreach (ITile tile in Tiles)
+        {
+            onGrid &= GridManager.Instance.OverGrid(tile.Position());
+        }
+
+        if (onGrid)
+        {
+            transform.position = GridManager.Instance.SnapToGrid( dragOffset + GetMousePos());
+        }
+        else
+        {
+            transform.position = dragOffset + GetMousePos();
+        }
     }
 
     public void OnMouseUp()
     {
         GridManager.Instance.PlaceBlock(this);
+        dragging = false;
     }
 
     Vector3 GetMousePos()
@@ -89,7 +142,8 @@ public class Block : MonoBehaviour, IDragParent
     {
         foreach (var tile in Tiles)
         {
-            tile.TileObject.GetComponent<DragChild>().enabled = false;
+            tile.TileObject.GetComponent<SpriteRenderer>().sortingOrder = -200;
+            Destroy(tile.TileObject.GetComponent<DragChild>());
         }
         Destroy(this);
     }

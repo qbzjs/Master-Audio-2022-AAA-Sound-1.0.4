@@ -13,6 +13,7 @@ public class BlockSpawner : MonoBehaviour
         GameObject NewBlock; 
         NewBlock = new GameObject("NewBlock");
         NewBlock.transform.parent = transform;
+        NewBlock.transform.localPosition = Vector3.zero;
         NewBlock.AddComponent<Block>();
         //NewBlock.AddComponent<BoxCollider>();
         int blockSize = Random.Range(1, MaxBlockSize);

@@ -6,6 +6,16 @@ public interface ITile
 {
     public GameObject TileObject { get; set; }
 
+    public Vector3 LocalPosition()
+    {
+        return TileObject.transform.localPosition;
+    }
+
+    public Vector3 Position()
+    {
+        return TileObject.transform.position;
+    }
+    
     public bool Destructible();
     public int CalculateScore();
 }

@@ -81,12 +81,18 @@ public class GridManager : Singleton<GridManager>
         foreach (ITile tile in block.Tiles)
         {
             Vector2Int gridPos = WorldToGridPos(tile.TileObject.transform.position);
+            DestroyTile(gridPos);
             grid[gridPos.x, gridPos.y] = tile;
         }
 
         block.Destroy();
         GameManager.Instance.PlacedBlock();
-        
+    }
+
+    private void DestroyTile(Vector2Int pos)
+    {
+        Destroy(grid[pos.x, pos.y].TileObject);
+        //TODO add more logic here about destroying old tiles;
     }
 
     /// <summary>
@@ -108,6 +114,16 @@ public class GridManager : Singleton<GridManager>
         Vector3 diff = worldPos - bottomLeft.position;
         Vector3 scaled = diff / gridUnit;
         return new Vector2Int(Mathf.FloorToInt(scaled.x), Mathf.FloorToInt(scaled.y));
+    }
+
+    /// <summary>
+    /// Returns true if the position is over the grid, false otherwise
+    /// </summary>
+    /// <param name="position"></param>
+    /// <returns></returns>
+    public bool OverGrid(Vector3 position)
+    {
+        return grid.InRange(WorldToGridPos(position));
     }
 
     public Vector3 GridToWorldPos(Vector2Int gridPos)
