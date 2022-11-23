@@ -11,6 +11,11 @@ public class EmptyTile : ITile
     {
     }
 
+    public bool Placeable()
+    {
+        return false;
+    }
+
     public int CalculateScore()
     {
         return scoreWorth;

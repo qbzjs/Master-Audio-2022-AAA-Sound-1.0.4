@@ -21,6 +21,11 @@ public class Gargoyle : ITile
         this.TileObject.GetComponent<SpriteRenderer>().sprite = options[Random.Range(0, options.Length)];
     }
 
+    public bool Placeable()
+    {
+        return true;
+    }
+
     public int CalculateScore()
     {
         return scoreWorth;

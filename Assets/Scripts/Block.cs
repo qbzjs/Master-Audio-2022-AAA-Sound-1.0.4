@@ -71,10 +71,10 @@ public class Block : MonoBehaviour
         transform.position = GridManager.Instance.SnapToGrid( dragOffset + GetMousePos());
     }
 
-    /*private void OnMouseUp()
+    private void OnMouseUp()
     {
-        throw new NotImplementedException();
-    }*/
+        
+    }
 
     Vector3 GetMousePos()
     {

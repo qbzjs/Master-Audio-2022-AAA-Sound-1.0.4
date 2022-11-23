@@ -6,6 +6,7 @@ public interface ITile
 {
     public GameObject TileObject { get; set; }
 
+    public bool Placeable();
     public int CalculateScore();
 }
 

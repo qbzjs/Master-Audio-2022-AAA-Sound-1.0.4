@@ -63,6 +63,26 @@ public class GridManager : Singleton<GridManager>
         newLine.SetPositions(positions);
     }
 
+    public void PlaceTiles(List<ITile> tiles, Action<string> InvalidPlacement, Action ValidPlacement)
+    {
+        foreach (var tile in tiles)
+        {
+            Vector2Int gridPos = WorldToGridPos(tile.TileObject.transform.position);
+            if (!grid[gridPos.x, gridPos.y].Placeable())
+            {
+                InvalidPlacement("You can't place a block here!");
+            }
+        }
+        foreach (var tile in tiles)
+        {
+            Vector2Int gridPos = WorldToGridPos(tile.TileObject.transform.position);
+            grid[gridPos.x, gridPos.y] = tile;
+        }
+
+        GameManager.Instance.UpdateScore();
+        ValidPlacement();
+    }
+
     /// <summary>
     /// Rounds a Vector3 to the nearest position on the grid, does nothing if not on the grid. For snapping tiles to the grid.
     /// </summary>
@@ -123,6 +143,11 @@ public class Grid
         }
     }
 
+    public bool InRange(Vector2Int pos)
+    {
+        return InRange(pos.x, pos.y);
+    }
+    
     public bool InRange(int x, int y)
     {
         return x < 0 || y < 0 || x >= size || y >= size;
