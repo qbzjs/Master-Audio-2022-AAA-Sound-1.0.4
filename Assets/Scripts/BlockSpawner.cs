@@ -8,13 +8,13 @@ public class BlockSpawner : MonoBehaviour
     public Sprite[] TileOptions;
     public int MaxBlockSize;
     
-    void GenerateBlock()
+    public void GenerateBlock()
     {
         GameObject NewBlock; 
         NewBlock = new GameObject("NewBlock");
         NewBlock.transform.parent = transform;
         NewBlock.AddComponent<Block>();
-        NewBlock.AddComponent<BoxCollider>();
+        //NewBlock.AddComponent<BoxCollider>();
         int blockSize = Random.Range(1, MaxBlockSize);
         NewBlock.GetComponent<Block>().GenerateTiles(NewBlock.transform, blockSize, TileOptions);
     }

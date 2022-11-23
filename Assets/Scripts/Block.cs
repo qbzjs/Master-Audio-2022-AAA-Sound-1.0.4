@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Block : MonoBehaviour
+public class Block : MonoBehaviour, IDragParent
 {
     public List<ITile> Tiles = new List<ITile>();
     
@@ -38,7 +38,9 @@ public class Block : MonoBehaviour
         for(int i = 0; i < blockSize; i++){
             int rand = Random.Range(0, tileOptions.Length);
             ITile myTile = new Gargoyle(tileOptions, transform, currPos);
-           // myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
+            myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
+            myTile.TileObject.AddComponent<BoxCollider>();
+            myTile.TileObject.AddComponent<DragChild>().parent = this;
             Tiles.Add(myTile);
             options.Remove(currPos);
             optionsList.Remove(currPos);
@@ -61,19 +63,19 @@ public class Block : MonoBehaviour
         cam = Camera.main;
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         dragOffset = transform.position - GetMousePos();
     }
     
-    void OnMouseDrag()
+    public void OnMouseDrag()
     {
         transform.position = GridManager.Instance.SnapToGrid( dragOffset + GetMousePos());
     }
 
-    private void OnMouseUp()
+    public void OnMouseUp()
     {
-        
+        GridManager.Instance.PlaceBlock(this);
     }
 
     Vector3 GetMousePos()
@@ -82,4 +84,20 @@ public class Block : MonoBehaviour
         mousePos.z = 0;
         return mousePos;
     }
+
+    public void Destroy()
+    {
+        foreach (var tile in Tiles)
+        {
+            tile.TileObject.GetComponent<DragChild>().enabled = false;
+        }
+        Destroy(this);
+    }
+}
+
+public interface IDragParent
+{
+    public void OnMouseUp();
+    public void OnMouseDown();
+    public void OnMouseDrag();
 }

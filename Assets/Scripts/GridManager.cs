@@ -8,7 +8,6 @@ public class GridManager : Singleton<GridManager>
 {
     [SerializeField]
     private int size;
-    
 
     [SerializeField] private LineRenderer gridLine;
     [SerializeField] private Transform bottomLeft, topRight, gridParent;
@@ -24,7 +23,7 @@ public class GridManager : Singleton<GridManager>
     void Start()
     {
         //TODO make this default Tile value stand for an "empty" tile
-        grid = new Grid(size, new Gargoyle());//new EmptyTile());
+        grid = new Grid(size, new EmptyTile());
         DrawGrid();
     }
 
@@ -63,24 +62,31 @@ public class GridManager : Singleton<GridManager>
         newLine.SetPositions(positions);
     }
 
-    public void PlaceTiles(List<ITile> tiles, Action<string> InvalidPlacement, Action ValidPlacement)
+    public void PlaceBlock(Block block)
     {
-        foreach (var tile in tiles)
+        foreach (ITile tile in block.Tiles)
         {
             Vector2Int gridPos = WorldToGridPos(tile.TileObject.transform.position);
-            if (!grid[gridPos.x, gridPos.y].Placeable())
+            if (!grid.InRange(gridPos))
             {
-                InvalidPlacement("You can't place a block here!");
+                Debug.Log("Out of bounds!"); //TODO replace with user feedback
+                return;
+            }
+            if (!grid[gridPos.x, gridPos.y].Destructible())
+            {
+                Debug.Log("You can't place a block here!");
+                return;
             }
         }
-        foreach (var tile in tiles)
+        foreach (ITile tile in block.Tiles)
         {
             Vector2Int gridPos = WorldToGridPos(tile.TileObject.transform.position);
             grid[gridPos.x, gridPos.y] = tile;
         }
 
-        GameManager.Instance.UpdateScore();
-        ValidPlacement();
+        block.Destroy();
+        GameManager.Instance.PlacedBlock();
+        
     }
 
     /// <summary>
@@ -89,7 +95,7 @@ public class GridManager : Singleton<GridManager>
     public Vector3 SnapToGrid(Vector3 worldPos)
     {
         Vector2Int gridPos = WorldToGridPos(worldPos);
-        return (grid.InRange(gridPos.x, gridPos.y) ? worldPos : GridToWorldPos(gridPos) );
+        return (grid.InRange(gridPos.x, gridPos.y) ? GridToWorldPos(gridPos) : worldPos);
     }
     
     /// <summary>
@@ -150,7 +156,7 @@ public class Grid
     
     public bool InRange(int x, int y)
     {
-        return x < 0 || y < 0 || x >= size || y >= size;
+        return !(x < 0 || y < 0 || x >= size || y >= size);
     }
     
     //This is the syntax for array properties apparently! 
@@ -161,11 +167,11 @@ public class Grid
         {
             if (InRange(x, y))
             {
-                return new EmptyTile(); //TODO should return some "out of range" value
+                return grid[x, y];
             }
             else
             {
-                return grid[x, y];
+                return new EmptyTile();
             }
         }
         set //To call this the syntax is 

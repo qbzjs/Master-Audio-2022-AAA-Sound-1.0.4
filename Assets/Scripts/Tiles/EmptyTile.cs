@@ -11,9 +11,9 @@ public class EmptyTile : ITile
     {
     }
 
-    public bool Placeable()
+    public bool Destructible()
     {
-        return false;
+        return true;
     }
 
     public int CalculateScore()

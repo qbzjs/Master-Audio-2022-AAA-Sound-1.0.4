@@ -16,12 +16,11 @@ public class Gargoyle : ITile
         this.TileObject.AddComponent<SpriteRenderer>();
         this.TileObject.transform.position = pos;
         this.TileObject.transform.rotation = Quaternion.identity;
-        this.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
         this.TileObject.transform.parent = parentTransform;
         this.TileObject.GetComponent<SpriteRenderer>().sprite = options[Random.Range(0, options.Length)];
     }
 
-    public bool Placeable()
+    public bool Destructible()
     {
         return true;
     }
