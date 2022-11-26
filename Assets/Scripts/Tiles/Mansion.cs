@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tenement : ITile
+public class Mansion : ITile
 {
     public GameObject TileObject { get; set; }
     public int xPos { get; set; }
     public int yPos { get; set; }
     [SerializeField] private int scoreWorth = 10;
-    [SerializeField] private int scoreWorthAdjacent = 10;
+    [SerializeField] private int scoreWorthAdjacent = 5;
 
-    public Tenement(int x, int y)
+    public Mansion(int x, int y)
     {
         this.xPos = x;
         this.yPos = y;
     }
 
-    public Tenement(Sprite[] options, Transform parentTransform, Vector3 pos)
+    public Mansion(Sprite[] options, Transform parentTransform, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
         int i = Random.Range(0, options.Length);
@@ -36,31 +36,36 @@ public class Tenement : ITile
     {
         int adjacentTenements = 0;
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type == 'T')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type == 'M')
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type == 'T')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type == 'M')
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type == 'T')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type == 'M')
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type == 'T')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type == 'M')
         {
             adjacentTenements++;
         }
 
-        return scoreWorth + adjacentTenements * scoreWorthAdjacent;
+        if (adjacentTenements == 0)
+        {
+            return scoreWorth;
+        }
+
+        return scoreWorthAdjacent;
     }
 
     public char Type()
     {
-        return 'T';
+        return 'M';
     }
 }
