@@ -145,6 +145,11 @@ public class GridManager : Singleton<GridManager>
         }
         return score;
     }
+
+    public ITile GetTile(int x, int y)
+    {
+        return grid[x, y];
+    }
 }
 
 public class Grid

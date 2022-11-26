@@ -69,13 +69,12 @@ public class GameManager : Singleton<GameManager>
         DecrementTurns();
         spawner.GenerateBlock();
     }
-    
 
+    [NaughtyAttributes.Button]
     public void UpdateScore()
     {
         Score = GridManager.Instance.UpdateScore();
     }
-
 
     public void DecrementTurns()
     {
