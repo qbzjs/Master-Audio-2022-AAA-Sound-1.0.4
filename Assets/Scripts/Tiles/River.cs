@@ -35,22 +35,22 @@ public class River : ITile
 
     public int CalculateScore()
     {
-        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type == 'B' || GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type == 'F')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == 'B' || GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == 'F')
         {
             blood = true;
         }
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type == 'B' || GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type == 'F')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == 'B' || GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == 'F')
         {
             blood = true;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type == 'B' || GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type == 'F')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == 'B' || GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == 'F')
         {
             blood = true;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type == 'B' || GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type == 'F')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == 'B' || GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == 'F')
         {
             blood = true;
         }

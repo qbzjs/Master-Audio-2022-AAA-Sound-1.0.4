@@ -36,22 +36,22 @@ public class Tenement : ITile
     {
         int adjacentTenements = 0;
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type == 'T')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == 'T')
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type == 'T')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == 'T')
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type == 'T')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == 'T')
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type == 'T')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == 'T')
         {
             adjacentTenements++;
         }

@@ -36,22 +36,22 @@ public class Mansion : ITile
     {
         int adjacentTenements = 0;
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type == 'M')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == 'M')
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type == 'M')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == 'M')
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type == 'M')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == 'M')
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type == 'M')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == 'M')
         {
             adjacentTenements++;
         }

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyTile : ITile
+public class Wasteland : ITile
 {
     public GameObject TileObject { get; set; }
     public int xPos { get; set; }
     public int yPos { get; set; }
     [SerializeField] private int scoreWorth = 0;
 
-    public EmptyTile()
+    public Wasteland()
     {
     }
 
@@ -25,6 +25,6 @@ public class EmptyTile : ITile
 
     public char Type()
     {
-        return 'E';
+        return 'W';
     }
 }
