@@ -26,7 +26,7 @@ public class Block : MonoBehaviour, IDragParent
 
     private Camera cam;
     
-    public void GenerateTiles(Transform parentTransform, int blockSize, Sprite[] tileOptions)
+    public void GenerateTiles(Transform parentTransform, int blockSize, Dictionary<string, Sprite> tileOptions)
     {
         Vector3 position = parentTransform.position;
 
@@ -40,8 +40,30 @@ public class Block : MonoBehaviour, IDragParent
         Vector3 tmpPos;
         int tmpIdx;
         for(int i = 0; i < blockSize; i++){
-            int rand = Random.Range(0, tileOptions.Length);
-            ITile myTile = new Gargoyle(tileOptions, transform, currPos);
+            int rand = Random.Range(0, 4); //TODO un-magic-number this
+
+            ITile myTile;
+
+            switch (rand)
+            {
+                case 0:
+                    myTile = new Gargoyle(tileOptions["G"], transform, currPos);
+                    break;
+                case 1:
+                    myTile = new Mansion(tileOptions["M"], transform, currPos);
+                    break;
+                case 2:
+                    myTile = new Tenement(tileOptions["T"], transform, currPos);
+                    break;
+                case 3:
+                    myTile = new River(tileOptions["R"], transform, currPos);
+                    break;
+                default:
+                    myTile = new Gargoyle(tileOptions["G"], transform, currPos);
+                    break;
+            }
+            
+            
             myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
             myTile.TileObject.AddComponent<BoxCollider>();
             myTile.TileObject.AddComponent<DragChild>().parent = this;

@@ -9,7 +9,7 @@ public class Mansion : ITile
     public int xPos { get; set; }
     public int yPos { get; set; }
     [SerializeField] private int scoreWorth = 10;
-    [SerializeField] private int scoreWorthAdjacent = 5;
+    [SerializeField] private int scoreWorthAdjacent = 0;
 
     public Mansion(int x, int y)
     {
@@ -17,15 +17,24 @@ public class Mansion : ITile
         this.yPos = y;
     }
 
-    public Mansion(Sprite[] options, Transform parentTransform, Vector3 pos)
+    public Mansion(Sprite art, Transform parentTransform, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
-        int i = Random.Range(0, options.Length);
         this.TileObject.AddComponent<SpriteRenderer>();
         this.TileObject.transform.position = pos;
         this.TileObject.transform.rotation = Quaternion.identity;
         this.TileObject.transform.parent = parentTransform;
-        this.TileObject.GetComponent<SpriteRenderer>().sprite = options[i];
+        this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
+    }
+
+    public Vector3 LocalPosition()
+    {
+        return TileObject.transform.localPosition;
+    }
+
+    public Vector3 Position()
+    {
+        return TileObject.transform.position;
     }
 
     public bool Destructible()

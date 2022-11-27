@@ -1393,12 +1393,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d08f2163c79642e89a87f5e80bb3a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TileOptions:
-  - {fileID: 21300000, guid: 0eff5a06cef5d420fa58538581861ef5, type: 3}
-  - {fileID: 21300000, guid: 4c6e9f213225e4eda8cc9f89e7a216bf, type: 3}
-  - {fileID: 21300000, guid: 5aee46a2fd6744a259241d1897a391a1, type: 3}
-  - {fileID: 21300000, guid: 0b0e520146bfb4bcb95441ffb114b8df, type: 3}
-  - {fileID: 21300000, guid: ecad06edb8b223e4dae41e16be60ad84, type: 3}
+  gargoyleArt: {fileID: 21300000, guid: 7f9c3157bdc0ac1489767647202b7687, type: 3}
+  mansionArt: {fileID: 21300000, guid: f10ff4a069ad35f42a6c9bd621e8f602, type: 3}
+  tenementArt: {fileID: 21300000, guid: 76e604a82a22fbf4f9ad86d581ea6f47, type: 3}
+  riverArt: {fileID: 21300000, guid: 9e6fb44f97cf86048a2ba4acb5ca5ba0, type: 3}
   MaxBlockSize: 6
 --- !u!4 &835768318
 Transform:
@@ -3275,6 +3273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit

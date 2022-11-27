@@ -1,13 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 public class BlockSpawner : MonoBehaviour
 {
-    public Sprite[] TileOptions;
+    [SerializeField] private Sprite gargoyleArt, mansionArt, tenementArt, riverArt;
+    private Dictionary<string, Sprite> TileArt;
     public int MaxBlockSize;
-    
+
+    private void Awake()
+    {
+        TileArt = new Dictionary<string, Sprite>();
+        
+        TileArt.Add("G", gargoyleArt);
+        TileArt.Add("M", mansionArt);
+        TileArt.Add("T", tenementArt);
+        TileArt.Add("R", riverArt);
+    }
+
     public void GenerateBlock()
     {
         GameObject NewBlock; 
@@ -17,7 +30,7 @@ public class BlockSpawner : MonoBehaviour
         NewBlock.AddComponent<Block>();
         //NewBlock.AddComponent<BoxCollider>();
         int blockSize = Random.Range(1, MaxBlockSize);
-        NewBlock.GetComponent<Block>().GenerateTiles(NewBlock.transform, blockSize, TileOptions);
+        NewBlock.GetComponent<Block>().GenerateTiles(NewBlock.transform, blockSize, TileArt);
     }
     
     void Start()
@@ -25,24 +38,4 @@ public class BlockSpawner : MonoBehaviour
         GenerateBlock();
     }
 
-    // Update is called once per frame
-    void Update()
-   {
-        if (Input.GetKeyDown("space")){
-            GenerateBlock();
-    /*        if (NewBlock != null)
-            {
-                List<GameObject> tmpTiles = NewBlock.Tiles;
-                Debug.Log(tmpTiles.Count);
-                for (int i = 0; i < tmpTiles.Count; i++)
-                {
-                    GameObject.Destroy(tmpTiles[i]);
-                }
-                NewBlock.Tiles.Clear();
-            }
-            Vector3 currPos = transform.position;
-            int blockSize = Random.Range(1, MaxBlockSize);
-            NewBlock = new Block(currPos, blockSize, TileOptions); */
-        }   
-    }
 }
