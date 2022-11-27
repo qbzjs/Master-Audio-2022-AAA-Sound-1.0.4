@@ -7,7 +7,7 @@ public class Gargoyle : ITile
     public GameObject TileObject { get; set; }
     public int xPos { get; set; }
     public int yPos { get; set; }
-    [SerializeField] private int scoreWorth = 10;\
+    [SerializeField] private int scoreWorth = 10;
 
     public Gargoyle(int x, int y)
     {
