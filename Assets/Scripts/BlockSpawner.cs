@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class BlockSpawner : MonoBehaviour
 {
-    [SerializeField] private Sprite gargoyleArt, mansionArt, tenementArt, riverArt;
     private Dictionary<string, Sprite> TileArt;
     public int MaxBlockSize;
 
@@ -15,10 +14,10 @@ public class BlockSpawner : MonoBehaviour
     {
         TileArt = new Dictionary<string, Sprite>();
         
-        TileArt.Add("G", gargoyleArt);
-        TileArt.Add("M", mansionArt);
-        TileArt.Add("T", tenementArt);
-        TileArt.Add("R", riverArt);
+        TileArt.Add("G", ArtManager.Instance.gargoyleArt);
+        TileArt.Add("M", ArtManager.Instance.mansionArt);
+        TileArt.Add("T", ArtManager.Instance.tenementArt);
+        TileArt.Add("R", ArtManager.Instance.riverArt);
     }
 
     public void GenerateBlock()

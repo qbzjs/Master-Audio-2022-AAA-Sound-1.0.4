@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts;
 using UnityEngine;
 
 public class River : ITile
@@ -39,37 +40,30 @@ public class River : ITile
 
     public bool Destructible()
     {
-        return true;
+        return !blood;
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>if it turned</returns>
+    public bool CheckTurn()
+    {
+        if (blood) return false; //can't turn if already made of blood
+        foreach (Vector2Int dir in Directions.Cardinal)
+        {
+            char type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
+            if (type == 'B' || type == 'F')
+            {
+                blood = true;
+                TileObject.GetComponent<SpriteRenderer>().sprite = ArtManager.Instance.bloodRiverArt;
+            }
+        }
+        return blood;
     }
 
     public int CalculateScore()
     {
-        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == 'B' || GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == 'F')
-        {
-            blood = true;
-        }
-
-        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == 'B' || GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == 'F')
-        {
-            blood = true;
-        }
-
-        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == 'B' || GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == 'F')
-        {
-            blood = true;
-        }
-
-        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == 'B' || GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == 'F')
-        {
-            blood = true;
-        }
-
-        if (blood)
-        {
-            return scoreWorth;
-        }
-
-        return 0;
+        return scoreWorth;
     }
 
     public char Type()

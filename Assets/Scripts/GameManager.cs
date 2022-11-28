@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private Image progressBar;
-    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter;
+    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter;
     [SerializeField] private GameObject winButton, winScreen, loseScreen;
     private BlockSpawner spawner;
     public int winningScore;
@@ -28,6 +28,7 @@ public class GameManager : Singleton<GameManager>
                 winButton.SetActive(true);
             }
             progressBar.fillAmount = (float) score / winningScore;
+            progressCounter.text = "Progress: " + score + "/" + winningScore;
         }
     }
     
@@ -66,6 +67,7 @@ public class GameManager : Singleton<GameManager>
 
     public void PlacedBlock()
     {
+        GridManager.Instance.UpdateBlood();
         UpdateScore();
         DecrementTurns();
         spawner.GenerateBlock();

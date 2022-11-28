@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts;
 using UnityEngine;
 
 public class Tenement : ITile
@@ -8,7 +9,7 @@ public class Tenement : ITile
     public int xPos { get; set; }
     public int yPos { get; set; }
     [SerializeField] private int scoreWorth = 0;
-    [SerializeField] private int scoreWorthAdjacent = 1;
+    [SerializeField] private int scoreWorthAdjacent = 2;
 
     public Tenement(int x, int y)
     {
@@ -45,24 +46,13 @@ public class Tenement : ITile
     {
         int adjacentTenements = 0;
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == 'T')
+        foreach (Vector2Int dir in Directions.Compass)
         {
-            adjacentTenements++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == 'T')
-        {
-            adjacentTenements++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == 'T')
-        {
-            adjacentTenements++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == 'T')
-        {
-            adjacentTenements++;
+            char type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
+            if (type == 'T')
+            {
+                adjacentTenements++;
+            }
         }
 
         return scoreWorth + adjacentTenements * scoreWorthAdjacent;

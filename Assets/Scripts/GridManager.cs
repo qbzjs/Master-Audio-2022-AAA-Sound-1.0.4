@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Scripts
 {
@@ -27,6 +28,7 @@ namespace Scripts
             //TODO make this default Tile value stand for an "empty" tile
             grid = new Grid(size, new Wasteland());
             DrawGrid();
+            PlaceFountain();
         }
 
         //Uses copies of the gridLine prefab to draw a grid.
@@ -83,13 +85,31 @@ namespace Scripts
             }
             foreach (ITile tile in block.Tiles)
             {
-                Vector2Int gridPos = WorldToGridPos(tile.TileObject.transform.position);
-                DestroyTile(gridPos);
-                grid[gridPos.x, gridPos.y] = tile;
+                PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
             }
 
             block.Destroy();
             GameManager.Instance.PlacedBlock();
+        }
+
+        private void PlaceFountain()
+        {
+            ITile myTile = new Fountain();
+            myTile.TileObject = new GameObject("Tile");
+            myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
+            myTile.TileObject.AddComponent<BoxCollider>();
+            myTile.TileObject.AddComponent<SpriteRenderer>();
+            myTile.TileObject.GetComponent<SpriteRenderer>().sprite = ArtManager.Instance.fountainArt;
+            PlaceTile(myTile, grid.RandomPosition());
+        }
+
+        private void PlaceTile(ITile tile, Vector2Int gridPos)
+        {
+            DestroyTile(gridPos);
+            tile.xPos = gridPos.x;
+            tile.yPos = gridPos.y;
+            tile.TileObject.transform.position = GridToWorldPos(gridPos);
+            grid[gridPos.x, gridPos.y] = tile;
         }
 
         private void DestroyTile(Vector2Int pos)
@@ -143,10 +163,51 @@ namespace Scripts
             {
                 for (int y = 0; y < size; y++)
                 {
-                    score += grid[x, y].CalculateScore();
+                    int mult = 1;
+                    if (CheckBlood(new Vector2Int(x, y)))
+                    {
+                        grid[x, y].TileObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0f, 0f);
+                        mult = 2;
+                    }
+                    score += mult * grid[x, y].CalculateScore();
                 }
             }
             return score;
+        }
+
+        private bool CheckBlood(Vector2Int gridPos)
+        {
+            char myType = GetTile(gridPos.x, gridPos.y).Type();
+            if( myType == 'W' || myType == 'F' || myType == 'B')
+            {
+                return false; //don't care about wasteland tiles or blood or fountain
+            }
+            foreach (Vector2Int dir in Directions.Cardinal)
+            {
+                char type = GetTile(gridPos.x + dir.x, gridPos.y + dir.y).Type();
+                if (type == 'B' || type == 'F')
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void UpdateBlood()
+        {
+            bool turnedAny = false;
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    ITile tile = grid[x, y];
+                    if (tile.Type() == 'R')
+                    {
+                        turnedAny = turnedAny || ((River) tile).CheckTurn();
+                    }
+                }
+            }
+            if(turnedAny) UpdateBlood();
         }
 
         public ITile GetTile(int x, int y)
@@ -173,6 +234,11 @@ namespace Scripts
             }
         }
 
+        public Vector2Int RandomPosition()
+        {
+            return new Vector2Int(Random.Range(0, size), Random.Range(0, size));
+        }
+
         public bool InRange(Vector2Int pos)
         {
             return InRange(pos.x, pos.y);
@@ -195,7 +261,7 @@ namespace Scripts
                 }
                 else
                 {
-                    return new EmptyTile();
+                    return new Wasteland();
                 }
             }
             set //To call this the syntax is 

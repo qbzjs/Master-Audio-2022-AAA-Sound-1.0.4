@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +8,8 @@ public class Church : ITile
     public GameObject TileObject { get; set; }
     public int xPos { get; set; }
     public int yPos { get; set; }
-    [SerializeField] private int scoreWorth = 10;
-    [SerializeField] private int scoreWorthAdjacent = 10;
+    [SerializeField] private int scoreWorth = 0;
+    [SerializeField] private int scoreWorthAdjacent = 3;
 
     public Church(int x, int y)
     {
@@ -74,3 +75,4 @@ public class Church : ITile
         return 'C';
     }
 }
+*/
