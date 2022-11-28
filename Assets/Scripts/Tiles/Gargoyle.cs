@@ -47,8 +47,8 @@ public class Gargoyle : ITile
         return scoreWorth;
     }
 
-    public char Type()
+    public string Type()
     {
-        return 'G';
+        return "GA";
     }
 }

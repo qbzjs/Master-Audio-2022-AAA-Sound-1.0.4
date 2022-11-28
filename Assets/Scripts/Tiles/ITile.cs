@@ -14,6 +14,6 @@ public interface ITile
 
     public int xPos { get; set; }
     public int yPos { get; set; }
-    public char Type();
+    public string Type();
     public int CalculateScore();
 }

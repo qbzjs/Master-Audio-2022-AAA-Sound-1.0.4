@@ -40,26 +40,35 @@ public class Block : MonoBehaviour, IDragParent
         Vector3 tmpPos;
         int tmpIdx;
         for(int i = 0; i < blockSize; i++){
-            int rand = Random.Range(0, 4); //TODO un-magic-number this
+            int rand = Random.Range(0, 7); //TODO un-magic-number this
 
             ITile myTile;
 
             switch (rand)
             {
                 case 0:
-                    myTile = new Gargoyle(tileOptions["G"], transform, currPos);
+                    myTile = new Gargoyle(tileOptions["GA"], transform, currPos);
                     break;
                 case 1:
-                    myTile = new Mansion(tileOptions["M"], transform, currPos);
+                    myTile = new Mansion(tileOptions["MA"], transform, currPos);
                     break;
                 case 2:
-                    myTile = new Tenement(tileOptions["T"], transform, currPos);
+                    myTile = new Tenement(tileOptions["TE"], transform, currPos);
                     break;
                 case 3:
-                    myTile = new River(tileOptions["R"], transform, currPos);
+                    myTile = new River(tileOptions["RI"], transform, currPos);
+                    break;
+                case 4:
+                    myTile = new Church(tileOptions["CH"], transform, currPos);
+                    break;
+                case 5:
+                    myTile = new Wing(tileOptions["WI"], transform, currPos);
+                    break;
+                case 6:
+                    myTile = new Graveyard(tileOptions["GR"], transform, currPos);
                     break;
                 default:
-                    myTile = new Gargoyle(tileOptions["G"], transform, currPos);
+                    myTile = new Gargoyle(tileOptions["GA"], transform, currPos);
                     break;
             }
             

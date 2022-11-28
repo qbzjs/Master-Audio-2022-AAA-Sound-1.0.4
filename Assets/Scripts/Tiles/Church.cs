@@ -1,6 +1,6 @@
-﻿/*
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts;
 using UnityEngine;
 
 public class Church : ITile
@@ -17,15 +17,14 @@ public class Church : ITile
         this.yPos = y;
     }
 
-    public Church(Sprite[] options, Transform parentTransform, Vector3 pos)
+    public Church(Sprite art, Transform parentTransform, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
-        int i = Random.Range(0, options.Length);
         this.TileObject.AddComponent<SpriteRenderer>();
         this.TileObject.transform.position = pos;
         this.TileObject.transform.rotation = Quaternion.identity;
         this.TileObject.transform.parent = parentTransform;
-        this.TileObject.GetComponent<SpriteRenderer>().sprite = options[i];
+        this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
     public Vector3 LocalPosition()
@@ -47,22 +46,22 @@ public class Church : ITile
     {
         int adjacentTenements = 0;
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == 'I')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == "WI")
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == 'I')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == "WI")
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == 'I')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == "WI")
         {
             adjacentTenements++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == 'I')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == "WI")
         {
             adjacentTenements++;
         }
@@ -70,9 +69,8 @@ public class Church : ITile
         return scoreWorth + adjacentTenements * scoreWorthAdjacent;
     }
 
-    public char Type()
+    public string Type()
     {
-        return 'C';
+        return "CH";
     }
 }
-*/

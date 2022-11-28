@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ArtManager : Singleton<ArtManager>
 {
-    public Sprite gargoyleArt, mansionArt, tenementArt, riverArt, bloodRiverArt, fountainArt;
+    public Sprite gargoyleArt, mansionArt, tenementArt, riverArt, bloodRiverArt, fountainArt, churchArt, churchWingArt, graveyardArt;
 }

@@ -48,8 +48,8 @@ public class Tenement : ITile
 
         foreach (Vector2Int dir in Directions.Compass)
         {
-            char type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
-            if (type == 'T')
+            string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
+            if (type == "TE")
             {
                 adjacentTenements++;
             }
@@ -58,8 +58,8 @@ public class Tenement : ITile
         return scoreWorth + adjacentTenements * scoreWorthAdjacent;
     }
 
-    public char Type()
+    public string Type()
     {
-        return 'T';
+        return "TE";
     }
 }

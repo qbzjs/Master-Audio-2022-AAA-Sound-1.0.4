@@ -51,8 +51,8 @@ public class River : ITile
         if (blood) return false; //can't turn if already made of blood
         foreach (Vector2Int dir in Directions.Cardinal)
         {
-            char type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
-            if (type == 'B' || type == 'F')
+            string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
+            if (type == "BR" || type == "FO")
             {
                 blood = true;
                 TileObject.GetComponent<SpriteRenderer>().sprite = ArtManager.Instance.bloodRiverArt;
@@ -66,12 +66,12 @@ public class River : ITile
         return scoreWorth;
     }
 
-    public char Type()
+    public string Type()
     {
         if (blood)
         {
-            return 'B';
+            return "BR";
         }
-        return 'R';
+        return "RI";
     }
 }

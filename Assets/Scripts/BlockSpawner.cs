@@ -14,10 +14,13 @@ public class BlockSpawner : MonoBehaviour
     {
         TileArt = new Dictionary<string, Sprite>();
         
-        TileArt.Add("G", ArtManager.Instance.gargoyleArt);
-        TileArt.Add("M", ArtManager.Instance.mansionArt);
-        TileArt.Add("T", ArtManager.Instance.tenementArt);
-        TileArt.Add("R", ArtManager.Instance.riverArt);
+        TileArt.Add("GA", ArtManager.Instance.gargoyleArt);
+        TileArt.Add("MA", ArtManager.Instance.mansionArt);
+        TileArt.Add("TE", ArtManager.Instance.tenementArt);
+        TileArt.Add("RI", ArtManager.Instance.riverArt);
+        TileArt.Add("CH", ArtManager.Instance.churchArt);
+        TileArt.Add("WI", ArtManager.Instance.churchWingArt);
+        TileArt.Add("GR", ArtManager.Instance.graveyardArt);
     }
 
     public void GenerateBlock()

@@ -34,8 +34,8 @@ public class Fountain : ITile
         return scoreWorth;
     }
 
-    public char Type()
+    public string Type()
     {
-        return 'F';
+        return "FO";
     }
 }

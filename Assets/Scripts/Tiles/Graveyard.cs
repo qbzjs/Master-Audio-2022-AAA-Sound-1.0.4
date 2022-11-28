@@ -45,22 +45,22 @@ public class Graveyard : ITile
 
     public int CalculateScore()
     {
-        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() != 'W')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() != "W")
         {
             adjacentDestroyed[0]++;
         }
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() != 'W')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() != "W")
         {
             adjacentDestroyed[1]++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() != 'W')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() != "W")
         {
             adjacentDestroyed[2]++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() != 'T')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() != "T")
         {
             adjacentDestroyed[3]++;
         }
@@ -75,8 +75,8 @@ public class Graveyard : ITile
         return scoreWorth + adjacentDestroyedTotal * scoreWorthAdjacent;
     }
 
-    public char Type()
+    public string Type()
     {
-        return 'T';
+        return "GR";
     }
 }

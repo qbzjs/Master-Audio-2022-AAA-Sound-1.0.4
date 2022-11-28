@@ -47,8 +47,8 @@ public class Mansion : ITile
         int adjacentTenements = 0;
         foreach (Vector2Int dir in Directions.Compass)
         {
-            char type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
-            if (type == 'M' || type == 'T')
+            string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
+            if (type == "MA" || type == "TE")
             {
                 adjacentTenements++;
             }
@@ -62,8 +62,8 @@ public class Mansion : ITile
         return scoreWorthAdjacent;
     }
 
-    public char Type()
+    public string Type()
     {
-        return 'M';
+        return "MA";
     }
 }

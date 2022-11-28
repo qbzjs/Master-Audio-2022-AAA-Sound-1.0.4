@@ -33,8 +33,8 @@ public class Wasteland : ITile
         return scoreWorth;
     }
 
-    public char Type()
+    public string Type()
     {
-        return 'W';
+        return "WA";
     }
 }

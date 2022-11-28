@@ -177,15 +177,14 @@ namespace Scripts
 
         private bool CheckBlood(Vector2Int gridPos)
         {
-            char myType = GetTile(gridPos.x, gridPos.y).Type();
-            if( myType == 'W' || myType == 'F' || myType == 'B')
+            if(GetTile(gridPos.x, gridPos.y).CalculateScore() == 0)
             {
-                return false; //don't care about wasteland tiles or blood or fountain
+                return false; //don't set color if not counting for any points
             }
             foreach (Vector2Int dir in Directions.Cardinal)
             {
-                char type = GetTile(gridPos.x + dir.x, gridPos.y + dir.y).Type();
-                if (type == 'B' || type == 'F')
+                string type = GetTile(gridPos.x + dir.x, gridPos.y + dir.y).Type();
+                if (type == "BR" || type == "FO")
                 {
                     return true;
                 }
@@ -201,7 +200,7 @@ namespace Scripts
                 for (int y = 0; y < size; y++)
                 {
                     ITile tile = grid[x, y];
-                    if (tile.Type() == 'R')
+                    if (tile.Type() == "RI")
                     {
                         turnedAny = turnedAny || ((River) tile).CheckTurn();
                     }

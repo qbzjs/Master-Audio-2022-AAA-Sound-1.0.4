@@ -9,8 +9,14 @@ public class Wing : ITile
     public int yPos { get; set; }
     [SerializeField] private int scoreWorth = 0;
 
-    public Wing()
+    public Wing(Sprite art, Transform parentTransform, Vector3 pos)
     {
+        this.TileObject = new GameObject("Tile");
+        this.TileObject.AddComponent<SpriteRenderer>();
+        this.TileObject.transform.position = pos;
+        this.TileObject.transform.rotation = Quaternion.identity;
+        this.TileObject.transform.parent = parentTransform;
+        this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
     public Vector3 LocalPosition()
@@ -33,8 +39,8 @@ public class Wing : ITile
         return scoreWorth;
     }
 
-    public char Type()
+    public string Type()
     {
-        return 'W';
+        return "WI";
     }
 }
