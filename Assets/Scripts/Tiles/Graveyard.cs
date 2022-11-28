@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class River : ITile
+public class Graveyard : ITile
 {
     public GameObject TileObject { get; set; }
     public int xPos { get; set; }
     public int yPos { get; set; }
     [SerializeField] private int scoreWorth = 0;
+    [SerializeField] private int scoreWorthAdjacent = 1;
+    private int[] adjacentDestroyed = new int[4];
 
-    private bool blood = false;
-
-    public River(int x, int y)
+    public Graveyard(int x, int y)
     {
         this.xPos = x;
         this.yPos = y;
     }
 
-    public River(Sprite art, Transform parentTransform, Vector3 pos)
+    public Graveyard(Sprite art, Transform parentTransform, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
         this.TileObject.AddComponent<SpriteRenderer>();
@@ -44,40 +44,38 @@ public class River : ITile
 
     public int CalculateScore()
     {
-        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == 'B' || GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == 'F')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() != 'W')
         {
-            blood = true;
+            adjacentDestroyed[0]++;
         }
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == 'B' || GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == 'F')
+        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() != 'W')
         {
-            blood = true;
+            adjacentDestroyed[1]++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == 'B' || GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == 'F')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() != 'W')
         {
-            blood = true;
+            adjacentDestroyed[2]++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == 'B' || GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == 'F')
+        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() != 'T')
         {
-            blood = true;
+            adjacentDestroyed[3]++;
         }
 
-        if (blood)
+        int adjacentDestroyedTotal = 0;
+
+        foreach (var a in adjacentDestroyed)
         {
-            return scoreWorth;
+            adjacentDestroyedTotal += a;
         }
 
-        return 0;
+        return scoreWorth + adjacentDestroyedTotal * scoreWorthAdjacent;
     }
 
     public char Type()
     {
-        if (blood)
-        {
-            return 'B';
-        }
-        return 'R';
+        return 'T';
     }
 }

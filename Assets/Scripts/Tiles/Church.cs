@@ -27,6 +27,16 @@ public class Church : ITile
         this.TileObject.GetComponent<SpriteRenderer>().sprite = options[i];
     }
 
+    public Vector3 LocalPosition()
+    {
+        return TileObject.transform.localPosition;
+    }
+
+    public Vector3 Position()
+    {
+        return TileObject.transform.position;
+    }
+
     public bool Destructible()
     {
         return true;
