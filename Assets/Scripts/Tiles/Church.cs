@@ -44,29 +44,29 @@ public class Church : ITile
 
     public int CalculateScore()
     {
-        int adjacentTenements = 0;
+        int adjacentWings = 0;
 
         if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == "WI")
         {
-            adjacentTenements++;
+            adjacentWings++;
         }
 
         if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == "WI")
         {
-            adjacentTenements++;
+            adjacentWings++;
         }
 
         if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == "WI")
         {
-            adjacentTenements++;
+            adjacentWings++;
         }
 
         if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == "WI")
         {
-            adjacentTenements++;
+            adjacentWings++;
         }
 
-        return scoreWorth + adjacentTenements * scoreWorthAdjacent;
+        return scoreWorth + adjacentWings * scoreWorthAdjacent;
     }
 
     public string Type()
