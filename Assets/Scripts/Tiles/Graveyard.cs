@@ -10,7 +10,7 @@ public class Graveyard : ITile
     public int yPos { get; set; }
     [SerializeField] private int scoreWorth = 0;
     [SerializeField] private int scoreWorthAdjacent = 1;
-    private int[] adjacentDestroyed = new int[4];
+    public int adjacentDestroyed = 0;
 
     public Graveyard(int x, int y)
     {
@@ -45,34 +45,7 @@ public class Graveyard : ITile
 
     public int CalculateScore()
     {
-        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() != "W")
-        {
-            adjacentDestroyed[0]++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() != "W")
-        {
-            adjacentDestroyed[1]++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() != "W")
-        {
-            adjacentDestroyed[2]++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() != "T")
-        {
-            adjacentDestroyed[3]++;
-        }
-
-        int adjacentDestroyedTotal = 0;
-
-        foreach (var a in adjacentDestroyed)
-        {
-            adjacentDestroyedTotal += a;
-        }
-
-        return scoreWorth + adjacentDestroyedTotal * scoreWorthAdjacent;
+        return scoreWorth + adjacentDestroyed * scoreWorthAdjacent;
     }
 
     public string Type()
