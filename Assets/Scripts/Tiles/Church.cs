@@ -46,22 +46,22 @@ public class Church : ITile
     {
         int adjacentWings = 0;
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos + 1).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos + 1, yPos).Type() == "WI")
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos - 1).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos, yPos - 1).Type() == "WI")
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos + 1).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos - 1, yPos).Type() == "WI")
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos - 1).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos, yPos + 1).Type() == "WI")
         {
             adjacentWings++;
         }
