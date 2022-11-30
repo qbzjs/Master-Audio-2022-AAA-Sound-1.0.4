@@ -23,6 +23,7 @@ public class Block : MonoBehaviour, IDragParent
     private HashSet<Vector3> taken = new HashSet<Vector3>();
     private Vector3 currPos, dragOffset;
     private bool dragging;
+    public bool held = false;
 
     private Camera cam;
     
@@ -160,6 +161,12 @@ public class Block : MonoBehaviour, IDragParent
     public void OnMouseUp()
     {
         GridManager.Instance.PlaceBlock(this);
+        if (!HoldingCell.Instance.holding && HoldingCell.Instance.over)
+        {
+            held = true;
+            HoldingCell.Instance.holding = true;
+            BlockSpawner.Instance.GenerateBlock();
+        }
         dragging = false;
     }
 

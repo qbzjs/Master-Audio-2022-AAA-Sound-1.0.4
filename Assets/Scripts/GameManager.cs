@@ -11,7 +11,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Image progressBar;
     [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter;
     [SerializeField] private GameObject winButton, winScreen, loseScreen;
-    private BlockSpawner spawner;
     public int winningScore;
     public int totalTurns;
 
@@ -54,7 +53,6 @@ public class GameManager : Singleton<GameManager>
         winButton.SetActive(false);
         winScreen.SetActive(false);
         loseScreen.SetActive(false);
-        spawner = FindObjectOfType<BlockSpawner>();
         Score = 0;
         Turns = totalTurns;
     }
@@ -70,7 +68,6 @@ public class GameManager : Singleton<GameManager>
         GridManager.Instance.UpdateBlood();
         UpdateScore();
         DecrementTurns();
-        spawner.GenerateBlock();
     }
 
     [NaughtyAttributes.Button]

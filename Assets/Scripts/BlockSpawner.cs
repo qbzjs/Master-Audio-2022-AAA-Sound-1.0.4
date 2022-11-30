@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-public class BlockSpawner : MonoBehaviour
+public class BlockSpawner : Singleton<BlockSpawner>
 {
     private Dictionary<string, Sprite> TileArt;
     public int MaxBlockSize;

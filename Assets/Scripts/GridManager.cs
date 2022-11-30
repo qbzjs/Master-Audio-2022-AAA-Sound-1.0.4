@@ -88,6 +88,14 @@ namespace Scripts
                 PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
             }
 
+            if (block.held)
+            {
+                HoldingCell.Instance.holding = false;
+            }
+            else
+            {
+                BlockSpawner.Instance.GenerateBlock();
+            }
             block.Destroy();
             GameManager.Instance.PlacedBlock();
         }
