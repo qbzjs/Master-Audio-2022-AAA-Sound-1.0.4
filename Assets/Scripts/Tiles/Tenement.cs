@@ -46,7 +46,7 @@ public class Tenement : ITile
     {
         int adjacentTenements = 0;
 
-        foreach (Vector2Int dir in Directions.Compass)
+        foreach (Vector2Int dir in Directions.Cardinal)
         {
             string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
             if (type == "TE")
