@@ -42,7 +42,14 @@ public class GameManager : Singleton<GameManager>
             turnCounter.text = turns + " turns remaining.";
             if (turns <= 0)
             {
-                Lose();
+                if (score >= winningScore)
+                {
+                    Win();
+                }
+                else
+                {
+                    Lose();
+                }
             }
         } 
     }
