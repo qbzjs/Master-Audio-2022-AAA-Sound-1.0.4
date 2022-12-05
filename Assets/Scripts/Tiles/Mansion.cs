@@ -66,4 +66,24 @@ public class Mansion : ITile
     {
         return "MA";
     }
+    public string ShowCalculation()
+    {
+        int adjacentTenements = 0;
+        string description;
+        foreach (Vector2Int dir in Directions.Compass)
+        {
+            string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
+            if (type == "MA" || type == "TE")
+            {
+                adjacentTenements++;
+            }
+        }
+        if (adjacentTenements == 0)
+        {
+            description = "Point Value: " + scoreWorth;
+        } else {
+            description = "Point Value: " + scoreWorthAdjacent;
+        }
+        return description;
+    }
 }

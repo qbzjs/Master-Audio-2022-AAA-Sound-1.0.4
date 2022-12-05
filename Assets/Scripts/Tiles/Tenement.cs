@@ -62,4 +62,19 @@ public class Tenement : ITile
     {
         return "TE";
     }
+    public string ShowCalculation()
+    {
+        int adjacentTenements = 0;
+
+        foreach (Vector2Int dir in Directions.Cardinal)
+        {
+            string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
+            if (type == "TE")
+            {
+                adjacentTenements++;
+            }
+        }
+        var description = "Point Value: " + scoreWorth + " Points from Adjacent Tenements: " + (adjacentTenements * scoreWorthAdjacent);
+        return description;
+    }
 }

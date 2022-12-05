@@ -74,4 +74,9 @@ public class River : ITile
         }
         return "RI";
     }
+    public string ShowCalculation()
+    {
+        var description = "Point Value: " + scoreWorth;
+        return description;
+    }   
 }

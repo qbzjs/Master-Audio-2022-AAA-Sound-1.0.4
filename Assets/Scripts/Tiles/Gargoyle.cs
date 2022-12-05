@@ -51,4 +51,11 @@ public class Gargoyle : ITile
     {
         return "GA";
     }
+
+    public string ShowCalculation()
+    {
+        var description = "Point Value: " + scoreWorth;
+        return description;
+    }
+    
 }

@@ -244,6 +244,15 @@ namespace Scripts
         {
             return grid[x, y];
         }
+        public string GetTileDescription(int x, int y)
+        {
+            string description = grid[x, y].ShowCalculation();
+            if (CheckBlood(new Vector2Int(x, y)))
+            {
+                description += " Rivers of Blood Multiplier: 2";
+            }
+            return description;  
+        }
     }
 
     public class Grid

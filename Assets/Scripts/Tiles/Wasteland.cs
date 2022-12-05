@@ -37,4 +37,9 @@ public class Wasteland : ITile
     {
         return "WA";
     }
+    public string ShowCalculation()
+    {
+        var description = "Point Value: " + scoreWorth;
+        return description;
+    }
 }
