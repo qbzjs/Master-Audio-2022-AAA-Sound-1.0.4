@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private Image progressBar;
-    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter;
+    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter, pointsDescription;
     [SerializeField] private GameObject winButton, winScreen, loseScreen;
     public int winningScore;
     public int totalTurns;
@@ -67,8 +67,16 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-#if !UNITY_WEBGL
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (GridManager.Instance.OverGrid(mousePos) && Input.GetMouseButtonDown(0))
+        {
+            Vector2Int tilePos = GridManager.Instance.WorldToGridPos(mousePos);
+            string tileDesc = GridManager.Instance.GetTileDescription(tilePos.x, tilePos.y);
+               
+            pointsDescription.text = tileDesc;
+        }
         
+#if !UNITY_WEBGL
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();

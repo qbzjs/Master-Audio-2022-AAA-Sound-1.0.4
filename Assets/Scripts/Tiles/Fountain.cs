@@ -38,4 +38,10 @@ public class Fountain : ITile
     {
         return "FO";
     }
+    
+    public string ShowCalculation()
+    {
+        var description = "Point Value: " + scoreWorth;
+        return description;
+    }
 }

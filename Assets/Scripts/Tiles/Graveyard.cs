@@ -52,4 +52,10 @@ public class Graveyard : ITile
     {
         return "GR";
     }
+    public string ShowCalculation()
+    {
+        var description = "Point Value: " + scoreWorth + " Points from Destroyed Adjacent Tiles: " + (scoreWorthAdjacent * adjacentDestroyed);
+        return description;
+    }
+
 }

@@ -43,4 +43,9 @@ public class Wing : ITile
     {
         return "WI";
     }
+    public string ShowCalculation()
+    {
+        var description = "Point Value: " + scoreWorth;
+        return description;
+    }
 }
