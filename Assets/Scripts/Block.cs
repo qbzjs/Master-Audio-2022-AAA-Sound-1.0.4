@@ -138,6 +138,11 @@ public class Block : MonoBehaviour, IDragParent
         dragOffset = transform.position - GetMousePos();
         dragOffset.z = 0;
         dragging = true;
+        
+        foreach(ITile tile in Tiles)
+        {
+            tile.TileObject.GetComponent<SpriteRenderer>().color = new Color(0.71f, 1f, 0.72f);
+        }
     }
     
     public void OnMouseDrag()
@@ -168,6 +173,10 @@ public class Block : MonoBehaviour, IDragParent
             BlockSpawner.Instance.GenerateBlock();
         }
         dragging = false;
+        foreach(ITile tile in Tiles)
+        {
+            tile.TileObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
 
     Vector3 GetMousePos()

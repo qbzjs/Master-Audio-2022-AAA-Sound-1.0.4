@@ -68,7 +68,7 @@ public class GameManager : Singleton<GameManager>
     void Update()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (GridManager.Instance.OverGrid(mousePos) && Input.GetMouseButtonDown(0))
+        if (GridManager.Instance.OverGrid(mousePos))
         {
             Vector2Int tilePos = GridManager.Instance.WorldToGridPos(mousePos);
             string tileDesc = GridManager.Instance.GetTileDescription(tilePos.x, tilePos.y);
