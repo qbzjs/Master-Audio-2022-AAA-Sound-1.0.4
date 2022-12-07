@@ -1,18 +1,50 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
-public class TweenManager : MonoBehaviour
+public class TweenManager : Singleton<TweenManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    [Range(0, 2)]
+    [SerializeField] private float cameraShakeAmount, cameraShakeTime, blockUpAmount, blockAnimationTime;
+
+    [SerializeField] private AnimationCurve blockCurve;
+    
+    /*
+    [Button()]
+    public void TestPlaceBlock()
     {
-        
+        PlaceBlock(FindObjectOfType<Block>().gameObject);
+    }
+    */
+    
+    
+    public void PlaceBlock(GameObject ob, Action CB)
+    {
+        foreach (var sp in ob.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sp.sortingOrder = 20;
+        }
+
+        LeanTween.moveLocalY(ob, ob.transform.localPosition.y + blockUpAmount, blockAnimationTime)
+            .setEase(blockCurve)
+            .setOnComplete(() =>
+            {
+                Shake();
+                CB();        
+                foreach (var sp in ob.GetComponentsInChildren<SpriteRenderer>())
+                {
+                    sp.sortingOrder = -100;
+                }
+
+            });
     }
 
-    // Update is called once per frame
-    void Update()
+    [Button()]
+    public void Shake()
     {
-        
+        LeanTween.moveX(Camera.main.gameObject, Camera.main.transform.position.x + cameraShakeAmount, cameraShakeTime)
+            .setEase(LeanTweenType.easeShake);
     }
 }

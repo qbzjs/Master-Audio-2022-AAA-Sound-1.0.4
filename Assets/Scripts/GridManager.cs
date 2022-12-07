@@ -69,35 +69,38 @@ namespace Scripts
 
         public void PlaceBlock(Block block)
         {
-            foreach (ITile tile in block.Tiles)
+            TweenManager.Instance.PlaceBlock(block.gameObject, delegate
             {
-                Vector2Int gridPos = WorldToGridPos(tile.TileObject.transform.position);
-                if (!grid.InRange(gridPos))
+                foreach (ITile tile in block.Tiles)
                 {
-                    Debug.Log("Out of bounds!"); //TODO replace with user feedback
-                    return;
+                    Vector2Int gridPos = WorldToGridPos(tile.TileObject.transform.position);
+                    if (!grid.InRange(gridPos))
+                    {
+                        Debug.Log("Out of bounds!"); //TODO replace with user feedback
+                        return;
+                    }
+                    if (!grid[gridPos.x, gridPos.y].Destructible())
+                    {
+                        Debug.Log("You can't place a block here!");
+                        return;
+                    }
                 }
-                if (!grid[gridPos.x, gridPos.y].Destructible())
+                foreach (ITile tile in block.Tiles)
                 {
-                    Debug.Log("You can't place a block here!");
-                    return;
+                    PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
                 }
-            }
-            foreach (ITile tile in block.Tiles)
-            {
-                PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
-            }
 
-            if (block.held)
-            {
-                HoldingCell.Instance.holding = false;
-            }
-            else
-            {
-                BlockSpawner.Instance.GenerateBlock();
-            }
-            block.Destroy();
-            GameManager.Instance.PlacedBlock();
+                if (block.held)
+                {
+                    HoldingCell.Instance.holding = false;
+                }
+                else
+                {
+                    BlockSpawner.Instance.GenerateBlock();
+                }
+                block.Destroy();
+                GameManager.Instance.PlacedBlock();
+            });
         }
 
         private void PlaceFountain()
