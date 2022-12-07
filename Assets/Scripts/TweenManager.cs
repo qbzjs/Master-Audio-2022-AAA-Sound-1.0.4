@@ -31,6 +31,7 @@ public class TweenManager : Singleton<TweenManager>
             .setEase(blockCurve)
             .setOnComplete(() =>
             {
+                ParticleManager.Instance.PlayParticlesAt(ob.transform.position);
                 Shake();
                 CB();        
                 foreach (var sp in ob.GetComponentsInChildren<SpriteRenderer>())
