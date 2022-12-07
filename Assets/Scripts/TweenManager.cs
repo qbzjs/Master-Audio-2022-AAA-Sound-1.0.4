@@ -31,7 +31,6 @@ public class TweenManager : Singleton<TweenManager>
             .setEase(blockCurve)
             .setOnComplete(() =>
             {
-                ParticleManager.Instance.PlayParticlesAt(ob.transform.position);
                 Shake();
                 CB();        
                 foreach (var sp in ob.GetComponentsInChildren<SpriteRenderer>())
@@ -45,7 +44,7 @@ public class TweenManager : Singleton<TweenManager>
     [Button()]
     public void Shake()
     {
-        LeanTween.moveX(Camera.main.gameObject, Camera.main.transform.position.x + cameraShakeAmount, cameraShakeTime)
+        LeanTween.moveY(Camera.main.gameObject, Camera.main.transform.position.x - cameraShakeAmount, cameraShakeTime)
             .setEase(LeanTweenType.easeShake);
     }
 }
