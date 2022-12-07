@@ -27,7 +27,7 @@ public class Block : MonoBehaviour, IDragParent
 
     private Camera cam;
     
-    public void GenerateTiles(Transform parentTransform, int blockSize, Dictionary<string, Sprite> tileOptions)
+    public void GenerateTiles(Transform parentTransform, int blockSize)
     {
         Vector3 position = parentTransform.position;
 
@@ -40,43 +40,12 @@ public class Block : MonoBehaviour, IDragParent
         optionsList.Add(currPos);
         Vector3 tmpPos;
         int tmpIdx;
-        for(int i = 0; i < blockSize; i++){
-            int rand = Random.Range(0, 7); //TODO un-magic-number this
+        for(int i = 0; i < blockSize; i++)
+        {
 
-            ITile myTile;
+            ITile myTile = NewTile(RandomTileType());
+            
 
-            switch (rand)
-            {
-                case 0:
-                    myTile = new Gargoyle(tileOptions["GA"], transform, currPos);
-                    break;
-                case 1:
-                    myTile = new Mansion(tileOptions["MA"], transform, currPos);
-                    break;
-                case 2:
-                    myTile = new Tenement(tileOptions["TE"], transform, currPos);
-                    break;
-                case 3:
-                    myTile = new River(tileOptions["RI"], transform, currPos);
-                    break;
-                case 4:
-                    myTile = new Church(tileOptions["CH"], transform, currPos);
-                    break;
-                case 5:
-                    myTile = new Wing(tileOptions["WI"], transform, currPos);
-                    break;
-                case 6:
-                    myTile = new Graveyard(tileOptions["GR"], transform, currPos);
-                    break;
-                default:
-                    myTile = new Gargoyle(tileOptions["GA"], transform, currPos);
-                    break;
-            }
-            
-            
-            myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
-            myTile.TileObject.AddComponent<BoxCollider>();
-            myTile.TileObject.AddComponent<DragChild>().parent = this;
             Tiles.Add(myTile);
             options.Remove(currPos);
             optionsList.Remove(currPos);
@@ -92,6 +61,78 @@ public class Block : MonoBehaviour, IDragParent
             currPos = optionsList[tmpIdx]; 
         }
         
+    }
+
+    public string RandomTileType()
+    {
+        int rand = Random.Range(0, 7); //TODO un-magic-number this=
+
+        switch (rand)
+        {
+            case 0:
+                return "GA";
+                break;
+            case 1:
+                return "MA";
+                break;
+            case 2:
+                return "TE";
+                break;
+            case 3:
+                return "RI";
+                break;
+            case 4:
+                return "CH";
+                break;
+            case 5:
+                return "WI";
+                break;
+            case 6:
+                return "GR";
+                break;
+            default:
+                return "GA";
+                break;
+        }
+    }
+
+    public ITile NewTile(string type)
+    {
+        ITile myTile;
+
+        switch (type)
+        {
+            case "GA":
+                myTile = new Gargoyle(BlockSpawner.Instance.TileArt["GA"], transform, currPos);
+                break;
+            case "MA":
+                myTile = new Mansion(BlockSpawner.Instance.TileArt["MA"], transform, currPos);
+                break;
+            case "TE":
+                myTile = new Tenement(BlockSpawner.Instance.TileArt["TE"], transform, currPos);
+                break;
+            case "RI":
+                myTile = new River(BlockSpawner.Instance.TileArt["RI"], transform, currPos);
+                break;
+            case "CH":
+                myTile = new Church(BlockSpawner.Instance.TileArt["CH"], transform, currPos);
+                break;
+            case "WI":
+                myTile = new Wing(BlockSpawner.Instance.TileArt["WI"], transform, currPos);
+                break;
+            case "GR":
+                myTile = new Graveyard(BlockSpawner.Instance.TileArt["GR"], transform, currPos);
+                break;
+            default:
+                myTile = new Gargoyle(BlockSpawner.Instance.TileArt["GA"], transform, currPos);
+                break;
+        }
+        
+        myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
+        myTile.TileObject.AddComponent<BoxCollider>();
+        myTile.TileObject.AddComponent<DragChild>().parent = this;
+        
+        return myTile;
     }
 
     void Awake()
@@ -135,13 +176,38 @@ public class Block : MonoBehaviour, IDragParent
 
     public void OnMouseDown()
     {
-        dragOffset = transform.position - GetMousePos();
-        dragOffset.z = 0;
-        dragging = true;
-        
-        foreach(ITile tile in Tiles)
+        if (GameManager.Instance.upgrading != "")
         {
-            tile.TileObject.GetComponent<SpriteRenderer>().color = new Color(0.71f, 1f, 0.72f);
+            Transform clicked = GameManager.Instance.selected.transform;
+            ITile oldTile = Tiles[0];
+            int found = 0;
+            for (int i = 0; i < Tiles.Count; i++)
+            {
+                if ((Tiles[i].TileObject.transform.position - clicked.position).sqrMagnitude < 0.01f)
+                {
+                    Debug.Log("found new tile");
+                    oldTile = Tiles[i];
+                    found = i;
+                }
+            }
+            
+            ITile newTile = NewTile(GameManager.Instance.upgrading);
+            newTile.TileObject.transform.position = oldTile.TileObject.transform.position;
+            Tiles[found] = newTile;
+            Destroy(oldTile.TileObject);
+            
+            GameManager.Instance.Upgraded();
+        }
+        else
+        {
+            dragOffset = transform.position - GetMousePos();
+            dragOffset.z = 0;
+            dragging = true;
+        
+            foreach(ITile tile in Tiles)
+            {
+                tile.TileObject.GetComponent<SpriteRenderer>().color = new Color(0.71f, 1f, 0.72f);
+            }
         }
     }
     
@@ -165,17 +231,21 @@ public class Block : MonoBehaviour, IDragParent
 
     public void OnMouseUp()
     {
-        GridManager.Instance.PlaceBlock(this);
-        if (!HoldingCell.Instance.holding && HoldingCell.Instance.over)
+        if (dragging)
         {
-            held = true;
-            HoldingCell.Instance.holding = true;
-            BlockSpawner.Instance.GenerateBlock();
-        }
-        dragging = false;
-        foreach(ITile tile in Tiles)
-        {
-            tile.TileObject.GetComponent<SpriteRenderer>().color = Color.white;
+            
+            GridManager.Instance.PlaceBlock(this);
+            if (!HoldingCell.Instance.holding && HoldingCell.Instance.over)
+            {
+                held = true;
+                HoldingCell.Instance.holding = true;
+                BlockSpawner.Instance.GenerateBlock();
+            }
+            dragging = false;
+            foreach(ITile tile in Tiles)
+            {
+                tile.TileObject.GetComponent<SpriteRenderer>().color = Color.white;
+            }
         }
     }
 

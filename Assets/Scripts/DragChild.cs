@@ -8,9 +8,17 @@ public class DragChild : MonoBehaviour
 {
     public IDragParent parent;
 
-    private void OnMouseUp() { parent.OnMouseUp(); }
-    private void OnMouseDown() { parent.OnMouseDown(); }
-    private void OnMouseDrag() { parent.OnMouseDrag(); }
+    private void OnMouseUp()
+    {
+        GameManager.Instance.selected = gameObject;
+        parent.OnMouseUp();
+    }
+    private void OnMouseDown() { 
+        GameManager.Instance.selected = gameObject;
+        parent.OnMouseDown(); }
+    private void OnMouseDrag() { 
+        GameManager.Instance.selected = gameObject;
+        parent.OnMouseDrag(); }
     
     
 }
