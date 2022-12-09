@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class BlockSpawner : Singleton<BlockSpawner>
 {
-    public Dictionary<string, Sprite> TileArt;
+    private Dictionary<string, Sprite> TileArt;
     public int MaxBlockSize;
 
     private void Awake()
@@ -32,7 +32,7 @@ public class BlockSpawner : Singleton<BlockSpawner>
         NewBlock.AddComponent<Block>();
         //NewBlock.AddComponent<BoxCollider>();
         int blockSize = Random.Range(1, MaxBlockSize);
-        NewBlock.GetComponent<Block>().GenerateTiles(NewBlock.transform, blockSize);
+        NewBlock.GetComponent<Block>().GenerateTiles(NewBlock.transform, blockSize, TileArt);
     }
     
     void Start()

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Scripts;
@@ -16,8 +15,6 @@ public class GameManager : Singleton<GameManager>
     public int totalTurns;
 
     private int score;
-    [NonSerialized] public string upgrading = "";
-    [NonSerialized] public GameObject selected;
 
     public int Score
     {
@@ -60,7 +57,6 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        upgrading = "RI";
         winButton.SetActive(false);
         winScreen.SetActive(false);
         loseScreen.SetActive(false);
@@ -88,27 +84,11 @@ public class GameManager : Singleton<GameManager>
 #endif
     }
 
-    public void Upgraded()
-    {
-        GameManager.Instance.upgrading = "";
-        RefreshUpgrades();
-        DecrementTurns();
-    }
-
     public void PlacedBlock()
     {
         GridManager.Instance.UpdateBlood();
         UpdateScore();
         DecrementTurns();
-        RefreshUpgrades();
-    }
-
-    public void RefreshUpgrades()
-    {
-        foreach (Upgrade upgrade in FindObjectsOfType<Upgrade>())
-        {
-            upgrade.RefreshUpgrade();
-        }
     }
 
     [NaughtyAttributes.Button]
