@@ -41,31 +41,31 @@ public class Block : MonoBehaviour, IDragParent
         Vector3 tmpPos;
         int tmpIdx;
         for(int i = 0; i < blockSize; i++){
-            int rand = Random.Range(0, 7); //TODO un-magic-number this
-
+            
+            string tileID = DeckManager.Instance.Draw();
             ITile myTile;
 
-            switch (rand)
+            switch (tileID)
             {
-                case 0:
+                case "GA":
                     myTile = new Gargoyle(tileOptions["GA"], transform, currPos);
                     break;
-                case 1:
+                case "MA":
                     myTile = new Mansion(tileOptions["MA"], transform, currPos);
                     break;
-                case 2:
+                case "TE":
                     myTile = new Tenement(tileOptions["TE"], transform, currPos);
                     break;
-                case 3:
+                case "RI":
                     myTile = new River(tileOptions["RI"], transform, currPos);
                     break;
-                case 4:
+                case "CH":
                     myTile = new Church(tileOptions["CH"], transform, currPos);
                     break;
-                case 5:
+                case "WI":
                     myTile = new Wing(tileOptions["WI"], transform, currPos);
                     break;
-                case 6:
+                case "GR":
                     myTile = new Graveyard(tileOptions["GR"], transform, currPos);
                     break;
                 default:

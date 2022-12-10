@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using RotaryHeart.Lib.SerializableDictionary;
 using Scripts;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Image progressBar;
     [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter, pointsDescription;
     [SerializeField] private GameObject winButton, winScreen, loseScreen;
+    [SerializeField] private SerializableDictionaryBase<string, int> startingDeck;
+
     public int winningScore;
     public int totalTurns;
 
@@ -62,6 +65,18 @@ public class GameManager : Singleton<GameManager>
         loseScreen.SetActive(false);
         Score = 0;
         Turns = totalTurns;
+        InitializeDeck();
+    }
+
+    private void InitializeDeck()
+    {
+        foreach (KeyValuePair<string, int> pair in startingDeck)
+        {
+            for (int i = 0; i < pair.Value; i++)
+            {
+                DeckManager.Instance.AddToDeck(pair.Key);
+            }
+        }
     }
 
     // Update is called once per frame
