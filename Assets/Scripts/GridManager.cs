@@ -10,10 +10,12 @@ namespace Scripts
     {
         [SerializeField]
         private int size;
+        private int nextSize = 0;
 
         [SerializeField] private LineRenderer gridLine;
         [SerializeField] private Transform bottomLeft, topRight, gridParent;
         private float gridUnit;
+        private List<GameObject> gridLines;
 
         public float GridUnit
         {
@@ -22,18 +24,47 @@ namespace Scripts
 
         private Grid grid;
 
-        // Start is called before the first frame update
-        void Start()
+        public void Initialize()
         {
-            //TODO make this default Tile value stand for an "empty" tile
+            if (nextSize == 0)
+            {
+                nextSize = size;
+            }
+            else
+            {
+                size = nextSize;
+            }
+            if (grid != null)
+            {
+                ClearGrid();
+            }
             grid = new Grid(size, new Wasteland());
             DrawGrid();
             PlaceFountain();
         }
 
+        public void ChangeSize(int delta)
+        {
+            nextSize += delta;
+        }
+
         //Uses copies of the gridLine prefab to draw a grid.
         private void DrawGrid()
         {
+            if (gridLines == null)
+            {
+                gridLines = new List<GameObject>();
+            }
+            else
+            {
+                foreach (GameObject line in gridLines)
+                {
+                    Destroy(line);
+                }
+
+                gridLines.Clear();
+            }
+            
             gridLine.enabled = true;
 
             Vector2 tr = topRight.position;
@@ -65,6 +96,7 @@ namespace Scripts
             LineRenderer newLine = Instantiate(gridLine, gridParent);
             Vector3[] positions = { new Vector3(x1, y1, 0), new Vector3(x2, y2, 0) };
             newLine.SetPositions(positions);
+            gridLines.Add(newLine.gameObject);
         }
 
         public void PlaceBlock(Block block)
@@ -148,8 +180,10 @@ namespace Scripts
 
         private void DestroyTile(Vector2Int pos)
         {
+            if (grid[pos.x, pos.y].TileObject == null)
+                return;
+            
             Destroy(grid[pos.x, pos.y].TileObject);
-            //TODO add more logic here about destroying old tiles;
         }
 
         /// <summary>
@@ -255,6 +289,17 @@ namespace Scripts
                 description += " Rivers of Blood Multiplier: 2";
             }
             return description;  
+        }
+
+        public void ClearGrid()
+        {
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    DestroyTile(new Vector2Int(x, y));
+                }
+            }
         }
     }
 

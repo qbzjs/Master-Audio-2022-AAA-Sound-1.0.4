@@ -11,10 +11,11 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private Image progressBar;
     [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter, pointsDescription;
-    [SerializeField] private GameObject winButton, winScreen, loseScreen;
+    [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
     [SerializeField] private SerializableDictionaryBase<string, int> startingDeck;
 
-    public int winningScore;
+    private int winningScore;
+    public int startScore, scoreIncrement, upgradeIncrement;
     public int totalTurns;
 
     private int score;
@@ -24,6 +25,13 @@ public class GameManager : Singleton<GameManager>
         get => score;
         set
         {
+            int nextUpgrade = (1 + score / upgradeIncrement) * upgradeIncrement;
+            if (score < nextUpgrade && value > nextUpgrade)
+            {
+                UpgradeManager.Instance.PopulateUpgrades();
+                upgradeScreen.SetActive(true);
+                
+            }
             score = value;
             if (score >= winningScore)
             {
@@ -34,7 +42,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
     
-    private int turns; 
+    private int turns;
 
     public int Turns
     {
@@ -60,12 +68,31 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
+        winningScore = startScore;
+        NewBoard();
+        InitializeDeck();
+    }
+
+    public void NewBoard()
+    {
         winButton.SetActive(false);
         winScreen.SetActive(false);
+        upgradeScreen.SetActive(false);
         loseScreen.SetActive(false);
+        GridManager.Instance.Initialize();
         Score = 0;
         Turns = totalTurns;
-        InitializeDeck();
+    }
+
+    public void ChangeTurns(int delta)
+    {
+        totalTurns += delta;
+    }
+
+    public void ChangeUpgradeTiming(int delta)
+    {
+        upgradeIncrement += delta;
+        if (upgradeIncrement < 5) upgradeIncrement = 5;
     }
 
     private void InitializeDeck()
@@ -122,6 +149,7 @@ public class GameManager : Singleton<GameManager>
         winScreen.SetActive(true);
         winFinalScore.text = "Final Score: " + score + "/" + winningScore;
         winTurnCounter.text = "With " + turns + " turns to spare";
+        winningScore = winningScore + scoreIncrement;
     }
 
     public void Lose()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -9,6 +10,8 @@ public class BlockSpawner : Singleton<BlockSpawner>
 {
     private Dictionary<string, Sprite> TileArt;
     public int MaxBlockSize;
+    [MinMaxSlider(1, 10)]
+    public Vector2 minMaxSize;
 
     private void Awake()
     {
@@ -31,7 +34,7 @@ public class BlockSpawner : Singleton<BlockSpawner>
         NewBlock.transform.localPosition = Vector3.zero;
         NewBlock.AddComponent<Block>();
         //NewBlock.AddComponent<BoxCollider>();
-        int blockSize = Random.Range(1, MaxBlockSize);
+        int blockSize = Random.Range((int)minMaxSize.x, (int)minMaxSize.y);
         NewBlock.GetComponent<Block>().GenerateTiles(NewBlock.transform, blockSize, TileArt);
     }
     
