@@ -142,6 +142,7 @@ public class Block : MonoBehaviour, IDragParent
         foreach(ITile tile in Tiles)
         {
             tile.TileObject.GetComponent<SpriteRenderer>().color = new Color(0.71f, 1f, 0.72f);
+            tile.TileObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
         }
     }
     

@@ -34,7 +34,7 @@ public class BlockSpawner : Singleton<BlockSpawner>
         NewBlock.transform.localPosition = Vector3.zero;
         NewBlock.AddComponent<Block>();
         //NewBlock.AddComponent<BoxCollider>();
-        int blockSize = Random.Range((int)minMaxSize.x, (int)minMaxSize.y);
+        int blockSize = Random.Range((int)minMaxSize.x, (int)(minMaxSize.y + 1));
         NewBlock.GetComponent<Block>().GenerateTiles(NewBlock.transform, blockSize, TileArt);
     }
     
