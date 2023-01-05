@@ -6,9 +6,7 @@ public class Gargoyle : Wasteland
 {
     [SerializeField] protected int scoreWorth = 2;
 
-    public Gargoyle(int x, int y) : base(x, y) { }
-
-    public Gargoyle(Sprite art, Transform parentTransform, Vector3 pos, int x, int y) : base(x, y)
+    public Gargoyle(Sprite art, Transform parentTransform, Vector3 pos)
 
     {
         this.TileObject = new GameObject("Tile");

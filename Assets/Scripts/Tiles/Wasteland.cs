@@ -9,12 +9,6 @@ public class Wasteland : ITile
     public int yPos { get; set; }
     [SerializeField] protected int scoreWorth = 0;
 
-    public Wasteland(int x, int y)
-    {
-        this.xPos = x;
-        this.yPos = y;
-    }
-
     public Vector3 LocalPosition()
     {
         return TileObject.transform.localPosition;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wing : Wasteland
 {
-    public Wing(Sprite art, Transform parentTransform, Vector3 pos, int x, int y) : base(x, y)
+    public Wing(Sprite art, Transform parentTransform, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
         this.TileObject.AddComponent<SpriteRenderer>();

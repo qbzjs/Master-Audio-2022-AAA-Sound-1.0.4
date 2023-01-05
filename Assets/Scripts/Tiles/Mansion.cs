@@ -7,9 +7,7 @@ public class Mansion : Wasteland
     [SerializeField] protected int scoreWorth = 6;
     [SerializeField] protected int scoreWorthAdjacent = 0;
 
-    public Mansion(int x, int y) : base(x, y) { }
-
-    public Mansion(Sprite art, Transform parentTransform, Vector3 pos, int x, int y) : base(x, y)
+    public Mansion(Sprite art, Transform parentTransform, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
         this.TileObject.AddComponent<SpriteRenderer>();

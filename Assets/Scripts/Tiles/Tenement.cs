@@ -6,9 +6,7 @@ public class Tenement : Wasteland
 {
     [SerializeField] protected int scoreWorthAdjacent = 2;
 
-    public Tenement(int x, int y) : base(x, y) { }
-
-    public Tenement(Sprite art, Transform parentTransform, Vector3 pos, int x, int y) : base(x, y)
+    public Tenement(Sprite art, Transform parentTransform, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
         this.TileObject.AddComponent<SpriteRenderer>();

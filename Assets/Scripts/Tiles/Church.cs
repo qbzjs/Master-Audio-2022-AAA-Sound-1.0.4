@@ -7,9 +7,7 @@ public class Church : Wasteland
 {
     [SerializeField] protected int scoreWorthAdjacent = 3;
 
-    public Church(int x, int y) : base(x, y) { }
-
-    public Church(Sprite art, Transform parentTransform, Vector3 pos, int x, int y) : base(x, y)
+    public Church(Sprite art, Transform parentTransform, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
         this.TileObject.AddComponent<SpriteRenderer>();

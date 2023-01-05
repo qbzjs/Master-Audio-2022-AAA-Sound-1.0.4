@@ -7,9 +7,7 @@ public class River : Wasteland
 {
     private bool blood = false;
 
-    public River(int x, int y) : base(x, y) { }
-
-    public River(Sprite art, Transform parentTransform, Vector3 pos, int x, int y) : base(x, y)
+    public River(Sprite art, Transform parentTransform, Vector3 pos)
     {
         this.TileObject = new GameObject("Tile");
         this.TileObject.AddComponent<SpriteRenderer>();
