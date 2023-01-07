@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts;
 using UnityEngine;
 
 public class Fountain : Wasteland
 {
-    public bool Destructible()
+    new public bool Destructible()
     {
         return false;
     }
 
-    public string Type()
+    new public string Type()
     {
         return "FO";
     }

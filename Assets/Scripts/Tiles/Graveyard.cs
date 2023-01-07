@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Scripts;
 using UnityEngine;
 
-public class Graveyard : ITile
+public class Graveyard : Wasteland
 {
     [SerializeField] private int scoreWorthAdjacent = 1;
     public int adjacentDestroyed = 0;
@@ -18,12 +18,12 @@ public class Graveyard : ITile
         this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
-    public int CalculateScore()
+    new public int CalculateScore()
     {
         return scoreWorth + adjacentDestroyed * scoreWorthAdjacent;
     }
 
-    public string Type()
+    new public string Type()
     {
         return "GR";
     }

@@ -17,7 +17,7 @@ public class River : Wasteland
         this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
-    public bool Destructible()
+    new public bool Destructible()
     {
         return !blood;
     }
@@ -40,7 +40,7 @@ public class River : Wasteland
         return blood;
     }
 
-    public string Type()
+    new public string Type()
     {
         if (blood)
         {

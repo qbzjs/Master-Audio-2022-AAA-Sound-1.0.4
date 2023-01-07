@@ -22,7 +22,6 @@ public class Block : MonoBehaviour, IDragParent
     private HashSet<Vector3> options = new HashSet<Vector3>();
     private HashSet<Vector3> taken = new HashSet<Vector3>();
     private Vector3 currPos, dragOffset;
-    private bool dragging;
 
     private Camera cam;
     
@@ -136,7 +135,6 @@ public class Block : MonoBehaviour, IDragParent
     {
         dragOffset = transform.position - GetMousePos();
         dragOffset.z = 0;
-        dragging = true;
     }
     
     public void OnMouseDrag()
@@ -160,7 +158,6 @@ public class Block : MonoBehaviour, IDragParent
     public void OnMouseUp()
     {
         GridManager.Instance.PlaceBlock(this);
-        dragging = false;
     }
 
     Vector3 GetMousePos()

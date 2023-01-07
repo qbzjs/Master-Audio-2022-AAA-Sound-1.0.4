@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts;
 using UnityEngine;
 
 public class Wasteland : ITile
@@ -24,8 +25,6 @@ public class Wasteland : ITile
         return true;
     }
 
-    //nextToGraveYard
-    //graves - count how many times been destroyed since next to graveyard
     public string Type()
     {
         return "WA";
