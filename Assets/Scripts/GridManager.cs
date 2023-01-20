@@ -137,13 +137,9 @@ namespace Scripts
 
         private void PlaceFountain()
         {
-            ITile myTile = new Fountain();
-            myTile.TileObject = new GameObject("Tile");
-            myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
-            myTile.TileObject.AddComponent<BoxCollider>();
-            myTile.TileObject.AddComponent<SpriteRenderer>();
-            myTile.TileObject.GetComponent<SpriteRenderer>().sprite = ArtManager.Instance.fountainArt;
-            PlaceTile(myTile, grid.RandomPosition());
+            Vector2Int gridPos = grid.RandomPosition();
+            ITile myTile = new Fountain(transform, GridToWorldPos(gridPos));
+            PlaceTile(myTile, gridPos);
         }
 
         private void PlaceTile(ITile tile, Vector2Int gridPos)

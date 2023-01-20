@@ -9,6 +9,11 @@ public class Fountain : Wasteland
     {
         return false;
     }
+    
+    public Fountain(Transform parentTransform, Vector3 pos)
+    {
+        ConstructorHelper(parentTransform, pos, "Fountain");
+    }
 
     public override string Type()
     {

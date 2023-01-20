@@ -45,35 +45,6 @@ public class Block : MonoBehaviour, IDragParent
             string tileID = DeckManager.Instance.Draw();
             ITile myTile = TileFactory.CreateTile(System.Type.GetType(tileID), transform, currPos);
 
-            /*switch (tileID)
-            {
-                case "Gargoyle":
-                    myTile = new Gargoyle(tileOptions["Gargoyle"], transform, currPos);
-                    break;
-                case "Mansion":
-                    myTile = new Mansion(tileOptions["Mansion"], transform, currPos);
-                    break;
-                case "Tenement":
-                    myTile = new Tenement(tileOptions["Tenement"], transform, currPos);
-                    break;
-                case "River":
-                    myTile = new River(tileOptions["River"], transform, currPos);
-                    break;
-                case "Church":
-                    myTile = new Church(tileOptions["Church"], transform, currPos);
-                    break;
-                case "ChurchWing":
-                    myTile = new Wing(tileOptions["ChurchWing"], transform, currPos);
-                    break;
-                case "Graveyard":
-                    myTile = new Graveyard(tileOptions["Graveyard"], transform, currPos);
-                    break;
-                default:
-                    myTile = new Gargoyle(tileOptions["Gargoyle"], transform, currPos);
-                    break;
-            }*/
-            
-            
             myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
             myTile.TileObject.AddComponent<BoxCollider>();
             myTile.TileObject.AddComponent<DragChild>().parent = this;
@@ -92,7 +63,6 @@ public class Block : MonoBehaviour, IDragParent
             int tmpIdx = Random.Range(0, optionsList.Count);
             currPos = optionsList[tmpIdx]; 
         }
-        
     }
 
     void Awake()
@@ -122,11 +92,6 @@ public class Block : MonoBehaviour, IDragParent
         float rad = degrees * Mathf.PI / 180;
         Matrix4x4 rotMat = Matrix4x4.Rotate(quaternion.RotateZ(rad));
         Vector3 centerOfGravity = Vector3.zero;
-        /*foreach (ITile tile in Tiles)
-        {
-            centerOfGravity += tile.TileObject.transform.localPosition;
-        }
-        centerOfGravity /= Tiles.Count;*/
         foreach (ITile tile in Tiles)
         {
             Vector3 localSpacePosition = tile.TileObject.transform.localPosition - centerOfGravity;

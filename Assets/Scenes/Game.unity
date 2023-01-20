@@ -1620,7 +1620,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1805033671}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &482919901
 MonoBehaviour:
@@ -2042,7 +2042,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1805033671}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &656023630
 MonoBehaviour:
@@ -2440,7 +2440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d08f2163c79642e89a87f5e80bb3a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxBlockSize: 6
   minMaxSize: {x: 2, y: 3}
 --- !u!4 &835768318
 Transform:
@@ -3787,7 +3786,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1805033671}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1379917940
 MonoBehaviour:
@@ -4091,7 +4090,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1805033671}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1439708722
 MonoBehaviour:
@@ -4788,7 +4787,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1805033671}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1730502297
 MonoBehaviour:
@@ -5103,7 +5102,6 @@ Transform:
   m_Children:
   - {fileID: 40660120}
   - {fileID: 401999802}
-  - {fileID: 1886884077}
   - {fileID: 1379917939}
   - {fileID: 1730502296}
   - {fileID: 482919900}
@@ -5188,59 +5186,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1871131874}
   m_CullTransparentMesh: 1
---- !u!1 &1886884076
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1886884077}
-  - component: {fileID: 1886884078}
-  m_Layer: 0
-  m_Name: ArtManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1886884077
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886884076}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1805033671}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1886884078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886884076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84f25f22eec7bea45b34348a17dc857b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gargoyleArt: {fileID: 21300000, guid: 7f9c3157bdc0ac1489767647202b7687, type: 3}
-  mansionArt: {fileID: 21300000, guid: f10ff4a069ad35f42a6c9bd621e8f602, type: 3}
-  tenementArt: {fileID: 21300000, guid: 76e604a82a22fbf4f9ad86d581ea6f47, type: 3}
-  riverArt: {fileID: 21300000, guid: 9e6fb44f97cf86048a2ba4acb5ca5ba0, type: 3}
-  bloodRiverArt: {fileID: 21300000, guid: e6a48ab9d884d1d4b9dadabe2d5a3a72, type: 3}
-  fountainArt: {fileID: 21300000, guid: d59b8131ae3393d4dba9da792deec698, type: 3}
-  churchArt: {fileID: 21300000, guid: 2f0394494062d764caa70f18de158861, type: 3}
-  churchWingArt: {fileID: 21300000, guid: 6de3ebf56ad543b4fa02ade8d92f2f6d, type: 3}
-  graveyardArt: {fileID: 21300000, guid: ccdcb4b32578d7f428fbcebdd4946f0b, type: 3}
 --- !u!1 &1964360363
 GameObject:
   m_ObjectHideFlags: 0
