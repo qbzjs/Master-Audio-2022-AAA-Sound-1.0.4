@@ -1014,19 +1014,17 @@ MonoBehaviour:
     reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
-    - MA
-    - GA
-    - CH
-    - RI
+    - Mansion
+    - Gargoyle
+    - Church
+    - River
     _keys:
-    - MA
-    - GA
-    - CH
-    - RI
+    - Mansion
+    - Gargoyle
+    - Church
+    - River
     _values: 01000000010000000100000001000000
   winningScore: 100
-  startScore: 0
-  scoreIncrement: 100
   upgradeIncrement: 30
   totalTurns: 20
 --- !u!1 &419167794

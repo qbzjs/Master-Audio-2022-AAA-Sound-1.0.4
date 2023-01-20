@@ -7,16 +7,10 @@ public class River : Wasteland
 {
     private bool blood = false;
 
-    public River(Sprite art, Transform parentTransform, Vector3 pos)
+    public River(Transform parentTransform, Vector3 pos)
     {
-        this.TileObject = new GameObject("Tile");
-        this.TileObject.AddComponent<SpriteRenderer>();
-        this.TileObject.transform.position = pos;
-        this.TileObject.transform.rotation = Quaternion.identity;
-        this.TileObject.transform.parent = parentTransform;
-        this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
+        ConstructorHelper(parentTransform, pos, "River");
     }
-
     public override bool Destructible()
     {
         return !blood;
@@ -31,10 +25,10 @@ public class River : Wasteland
         foreach (Vector2Int dir in Directions.Cardinal)
         {
             string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
-            if (type == "BR" || type == "FO")
+            if (type == "BloodRiver" || type == "Fountain")
             {
                 blood = true;
-                TileObject.GetComponent<SpriteRenderer>().sprite = ArtManager.Instance.bloodRiverArt;
+                TileObject.GetComponent<SpriteRenderer>().sprite = LoadArt("BloodRiver");
             }
         }
         return blood;
@@ -44,9 +38,9 @@ public class River : Wasteland
     {
         if (blood)
         {
-            return "BR";
+            return "BloodRiver";
         }
-        return "RI";
+        return "River";
     }
     public string ShowCalculation()
     {

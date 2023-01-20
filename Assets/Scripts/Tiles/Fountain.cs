@@ -12,7 +12,7 @@ public class Fountain : Wasteland
 
     public override string Type()
     {
-        return "FO";
+        return "Fountain";
     }
     
     public string ShowCalculation()

@@ -152,7 +152,7 @@ namespace Scripts
             tile.xPos = gridPos.x;
             tile.yPos = gridPos.y;
             tile.TileObject.transform.position = GridToWorldPos(gridPos);
-            if (grid[gridPos.x, gridPos.y].Type() != "WA")
+            if (grid[gridPos.x, gridPos.y].Type() != "Wasteland")
             {
                 List<Graveyard> graveyards = FindGraveYards(gridPos.x, gridPos.y);
                 foreach (Graveyard g in graveyards)
@@ -161,7 +161,6 @@ namespace Scripts
                 }
             }
             grid[gridPos.x, gridPos.y] = tile;
-            Debug.Log("placing tile " + tile);
         }
 
         private List<Graveyard> FindGraveYards(int xPos, int yPos)
@@ -170,7 +169,7 @@ namespace Scripts
             foreach (Vector2Int dir in Directions.Cardinal)
             {
                 string type = grid[xPos + dir.x, yPos + dir.y].Type();
-                if (type == "GR")
+                if (type == "Graveyard")
                 {
                     graveyards.Add((Graveyard)grid[xPos + dir.x, yPos + dir.y]);
                 }
@@ -240,7 +239,6 @@ namespace Scripts
                         mult = 2;
                     }
                     score += mult * grid[x, y].CalculateScore();
-                    Debug.Log("score is now: " + score);
                 }
             }
             return score;
@@ -255,7 +253,7 @@ namespace Scripts
             foreach (Vector2Int dir in Directions.Cardinal)
             {
                 string type = GetTile(gridPos.x + dir.x, gridPos.y + dir.y).Type();
-                if (type == "BR" || type == "FO")
+                if (type == "BloodRiver" || type == "Fountain")
                 {
                     return true;
                 }
@@ -271,7 +269,7 @@ namespace Scripts
                 for (int y = 0; y < size; y++)
                 {
                     ITile tile = grid[x, y];
-                    if (tile.Type() == "RI")
+                    if (tile.Type() == "River")
                     {
                         turnedAny = turnedAny || ((River) tile).CheckTurn();
                     }

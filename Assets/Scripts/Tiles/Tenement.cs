@@ -7,14 +7,9 @@ public class Tenement : Wasteland
 {
     [SerializeField] protected int scoreWorthAdjacent = 2;
 
-    public Tenement(Sprite art, Transform parentTransform, Vector3 pos)
+    public Tenement(Transform parentTransform, Vector3 pos)
     {
-        this.TileObject = new GameObject("Tile");
-        this.TileObject.AddComponent<SpriteRenderer>();
-        this.TileObject.transform.position = pos;
-        this.TileObject.transform.rotation = Quaternion.identity;
-        this.TileObject.transform.parent = parentTransform;
-        this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
+        ConstructorHelper(parentTransform, pos, "Tenement");
     }
 
     public override int CalculateScore()
@@ -24,7 +19,7 @@ public class Tenement : Wasteland
         foreach (Vector2Int dir in Directions.Cardinal)
         {
             string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
-            if (type == "TE")
+            if (type == "Tenement")
             {
                 adjacentTenements++;
             }
@@ -35,7 +30,7 @@ public class Tenement : Wasteland
 
     public override string Type()
     {
-        return "TE";
+        return "Tenement";
     }
     public string ShowCalculation()
     {
@@ -44,7 +39,7 @@ public class Tenement : Wasteland
         foreach (Vector2Int dir in Directions.Cardinal)
         {
             string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
-            if (type == "TE")
+            if (type == "Tenement")
             {
                 adjacentTenements++;
             }

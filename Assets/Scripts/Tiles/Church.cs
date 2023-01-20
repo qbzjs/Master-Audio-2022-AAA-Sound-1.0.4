@@ -7,36 +7,31 @@ public class Church : Wasteland
 {
     [SerializeField] protected int scoreWorthAdjacent = 3;
 
-    public Church(Sprite art, Transform parentTransform, Vector3 pos)
+    public Church(Transform parentTransform, Vector3 pos)
     {
-        this.TileObject = new GameObject("Tile");
-        this.TileObject.AddComponent<SpriteRenderer>();
-        this.TileObject.transform.position = pos;
-        this.TileObject.transform.rotation = Quaternion.identity;
-        this.TileObject.transform.parent = parentTransform;
-        this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
+        ConstructorHelper(parentTransform, pos, "Church");
     }
 
     public override int CalculateScore()
     {
         int adjacentWings = 0;
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos + 1, yPos).Type() == "ChurchWing")
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos, yPos - 1).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos, yPos - 1).Type() == "ChurchWing")
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos - 1, yPos).Type() == "ChurchWing")
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos, yPos + 1).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos, yPos + 1).Type() == "ChurchWing")
         {
             adjacentWings++;
         }
@@ -46,29 +41,29 @@ public class Church : Wasteland
 
     public override string Type()
     {
-        return "CH";
+        return "Church";
     }
 
     public string ShowCalculation()
     {
         int adjacentWings = 0;
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos + 1, yPos).Type() == "ChurchWing")
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos, yPos - 1).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos, yPos - 1).Type() == "ChurchWing")
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos - 1, yPos).Type() == "ChurchWing")
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos, yPos + 1).Type() == "WI")
+        if (GridManager.Instance.GetTile(xPos, yPos + 1).Type() == "ChurchWing")
         {
             adjacentWings++;
         }

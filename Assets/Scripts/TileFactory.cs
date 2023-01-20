@@ -1,12 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
-
-public enum TileType
-{
-        Church, Fountain, Gargoyle, Graveyard, Mansion, River, Tenement, Wasteland, Wing
-}
 
 public class TileFactory : MonoBehaviour
 {
@@ -21,5 +17,19 @@ public class TileFactory : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public static ITile CreateTile(System.Type t, Transform newTransform, Vector3 newPosition)
+    {
+        
+        if (!t.IsSubclassOf(typeof(Wasteland)))
+        {
+            Debug.Log(t.Name + " is not a subclass of wasteland");
+            return new Wasteland();
+        }
+
+        ConstructorInfo c = t.GetConstructors()[0];
+
+        return (ITile) c.Invoke(new object[] {newTransform, newPosition});
     }
 }

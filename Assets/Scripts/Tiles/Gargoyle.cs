@@ -6,16 +6,10 @@ using UnityEngine;
 public class Gargoyle : Wasteland
 {
     [SerializeField] new protected int scoreWorth = 2;
-
-    public Gargoyle(Sprite art, Transform parentTransform, Vector3 pos)
-
+    
+    public Gargoyle(Transform parentTransform, Vector3 pos)
     {
-        this.TileObject = new GameObject("Tile");
-        this.TileObject.AddComponent<SpriteRenderer>();
-        this.TileObject.transform.position = pos;
-        this.TileObject.transform.rotation = Quaternion.identity;
-        this.TileObject.transform.parent = parentTransform;
-        this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
+        ConstructorHelper(parentTransform, pos, "Gargoyle");
     }
 
     public override int CalculateScore()
@@ -25,7 +19,7 @@ public class Gargoyle : Wasteland
 
     public override string Type()
     {
-        return "GA";
+        return "Gargoyle";
     }
 
     public string ShowCalculation()

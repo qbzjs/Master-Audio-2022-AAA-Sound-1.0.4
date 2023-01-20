@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Scripts;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -29,10 +30,9 @@ public class Block : MonoBehaviour, IDragParent
 
     private Camera cam;
     
-    public void GenerateTiles(Transform parentTransform, int blockSize, Dictionary<string, Sprite> tileOptions)
+    public void GenerateTiles(Transform parentTransform, int blockSize)
     {
         Vector3 position = parentTransform.position;
-
         Directions[0] = Directions[0] * GridManager.Instance.GridUnit;
         Directions[1] = Directions[1] * GridManager.Instance.GridUnit;
         Directions[2] = Directions[2] * GridManager.Instance.GridUnit;
@@ -40,40 +40,38 @@ public class Block : MonoBehaviour, IDragParent
         currPos = position;
         options.Add(currPos);
         optionsList.Add(currPos);
-        Vector3 tmpPos;
-        int tmpIdx;
         for(int i = 0; i < blockSize; i++){
             
             string tileID = DeckManager.Instance.Draw();
-            ITile myTile;
+            ITile myTile = TileFactory.CreateTile(System.Type.GetType(tileID), transform, currPos);
 
-            switch (tileID)
+            /*switch (tileID)
             {
-                case "GA":
-                    myTile = new Gargoyle(tileOptions["GA"], transform, currPos);
+                case "Gargoyle":
+                    myTile = new Gargoyle(tileOptions["Gargoyle"], transform, currPos);
                     break;
-                case "MA":
-                    myTile = new Mansion(tileOptions["MA"], transform, currPos);
+                case "Mansion":
+                    myTile = new Mansion(tileOptions["Mansion"], transform, currPos);
                     break;
-                case "TE":
-                    myTile = new Tenement(tileOptions["TE"], transform, currPos);
+                case "Tenement":
+                    myTile = new Tenement(tileOptions["Tenement"], transform, currPos);
                     break;
-                case "RI":
-                    myTile = new River(tileOptions["RI"], transform, currPos);
+                case "River":
+                    myTile = new River(tileOptions["River"], transform, currPos);
                     break;
-                case "CH":
-                    myTile = new Church(tileOptions["CH"], transform, currPos);
+                case "Church":
+                    myTile = new Church(tileOptions["Church"], transform, currPos);
                     break;
-                case "WI":
-                    myTile = new Wing(tileOptions["WI"], transform, currPos);
+                case "ChurchWing":
+                    myTile = new Wing(tileOptions["ChurchWing"], transform, currPos);
                     break;
-                case "GR":
-                    myTile = new Graveyard(tileOptions["GR"], transform, currPos);
+                case "Graveyard":
+                    myTile = new Graveyard(tileOptions["Graveyard"], transform, currPos);
                     break;
                 default:
-                    myTile = new Gargoyle(tileOptions["GA"], transform, currPos);
+                    myTile = new Gargoyle(tileOptions["Gargoyle"], transform, currPos);
                     break;
-            }
+            }*/
             
             
             myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
@@ -83,14 +81,15 @@ public class Block : MonoBehaviour, IDragParent
             options.Remove(currPos);
             optionsList.Remove(currPos);
             taken.Add(currPos);
-            for(int j = 0; j < 4; j++){
-                tmpPos = currPos + Directions[j];
+            for(int j = 0; j < 4; j++)
+            {
+                Vector3 tmpPos = currPos + Directions[j];
                 if(!taken.Contains(tmpPos) && !options.Contains(tmpPos)){
                     options.Add(tmpPos);
                     optionsList.Add(tmpPos);
                 }
             }
-            tmpIdx = Random.Range(0, optionsList.Count);
+            int tmpIdx = Random.Range(0, optionsList.Count);
             currPos = optionsList[tmpIdx]; 
         }
         

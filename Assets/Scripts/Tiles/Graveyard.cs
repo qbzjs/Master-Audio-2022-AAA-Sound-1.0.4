@@ -8,14 +8,9 @@ public class Graveyard : Wasteland
     [SerializeField] private int scoreWorthAdjacent = 1;
     public int adjacentDestroyed = 0;
 
-    public Graveyard(Sprite art, Transform parentTransform, Vector3 pos)
+    public Graveyard(Transform parentTransform, Vector3 pos)
     {
-        this.TileObject = new GameObject("Tile");
-        this.TileObject.AddComponent<SpriteRenderer>();
-        this.TileObject.transform.position = pos;
-        this.TileObject.transform.rotation = Quaternion.identity;
-        this.TileObject.transform.parent = parentTransform;
-        this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
+        ConstructorHelper(parentTransform, pos, "Graveyard");
     }
 
     public override int CalculateScore()
@@ -25,7 +20,7 @@ public class Graveyard : Wasteland
 
     public override string Type()
     {
-        return "GR";
+        return "Graveyard";
     }
     public string ShowCalculation()
     {
