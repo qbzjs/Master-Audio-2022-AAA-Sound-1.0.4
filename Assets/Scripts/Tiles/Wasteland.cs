@@ -29,7 +29,6 @@ public class Wasteland : ITile
     {
         return "WA";
     }
-
     public int CalculateScore()
     {
         return scoreWorth;

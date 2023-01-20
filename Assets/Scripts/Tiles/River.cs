@@ -48,4 +48,9 @@ public class River : Wasteland
         }
         return "RI";
     }
+    public string ShowCalculation()
+    {
+        var description = "Point Value: " + scoreWorth;
+        return description;
+    }   
 }

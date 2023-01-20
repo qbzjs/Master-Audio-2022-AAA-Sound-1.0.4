@@ -48,4 +48,32 @@ public class Church : Wasteland
     {
         return "CH";
     }
+
+    public string ShowCalculation()
+    {
+        int adjacentWings = 0;
+
+        if (GridManager.Instance.GetTile(xPos + 1, yPos).Type() == "WI")
+        {
+            adjacentWings++;
+        }
+
+        if (GridManager.Instance.GetTile(xPos, yPos - 1).Type() == "WI")
+        {
+            adjacentWings++;
+        }
+
+        if (GridManager.Instance.GetTile(xPos - 1, yPos).Type() == "WI")
+        {
+            adjacentWings++;
+        }
+
+        if (GridManager.Instance.GetTile(xPos, yPos + 1).Type() == "WI")
+        {
+            adjacentWings++;
+        }
+        var description = "Point Value: " + scoreWorth + " Points from Adjacent Wings: " + (adjacentWings * scoreWorthAdjacent);
+        return description;
+    }
+    
 }

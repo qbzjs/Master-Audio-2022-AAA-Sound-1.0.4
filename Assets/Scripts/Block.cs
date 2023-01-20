@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Scripts;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using Scripts;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -22,6 +23,9 @@ public class Block : MonoBehaviour, IDragParent
     private HashSet<Vector3> options = new HashSet<Vector3>();
     private HashSet<Vector3> taken = new HashSet<Vector3>();
     private Vector3 currPos, dragOffset;
+    
+    private bool dragging;
+    public bool held = false;
 
     private Camera cam;
     
@@ -39,31 +43,31 @@ public class Block : MonoBehaviour, IDragParent
         Vector3 tmpPos;
         int tmpIdx;
         for(int i = 0; i < blockSize; i++){
-            int rand = Random.Range(0, 7); //TODO un-magic-number this
-
+            
+            string tileID = DeckManager.Instance.Draw();
             ITile myTile;
 
-            switch (rand)
+            switch (tileID)
             {
-                case 0:
+                case "GA":
                     myTile = new Gargoyle(tileOptions["GA"], transform, currPos);
                     break;
-                case 1:
+                case "MA":
                     myTile = new Mansion(tileOptions["MA"], transform, currPos);
                     break;
-                case 2:
+                case "TE":
                     myTile = new Tenement(tileOptions["TE"], transform, currPos);
                     break;
-                case 3:
+                case "RI":
                     myTile = new River(tileOptions["RI"], transform, currPos);
                     break;
-                case 4:
+                case "CH":
                     myTile = new Church(tileOptions["CH"], transform, currPos);
                     break;
-                case 5:
+                case "WI":
                     myTile = new Wing(tileOptions["WI"], transform, currPos);
                     break;
-                case 6:
+                case "GR":
                     myTile = new Graveyard(tileOptions["GR"], transform, currPos);
                     break;
                 default:
@@ -135,6 +139,13 @@ public class Block : MonoBehaviour, IDragParent
     {
         dragOffset = transform.position - GetMousePos();
         dragOffset.z = 0;
+        dragging = true;
+        
+        foreach(ITile tile in Tiles)
+        {
+            tile.TileObject.GetComponent<SpriteRenderer>().color = new Color(0.71f, 1f, 0.72f);
+            tile.TileObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        }
     }
     
     public void OnMouseDrag()
@@ -158,6 +169,17 @@ public class Block : MonoBehaviour, IDragParent
     public void OnMouseUp()
     {
         GridManager.Instance.PlaceBlock(this);
+        if (!HoldingCell.Instance.holding && HoldingCell.Instance.over)
+        {
+            held = true;
+            HoldingCell.Instance.holding = true;
+            BlockSpawner.Instance.GenerateBlock();
+        }
+        dragging = false;
+        foreach(ITile tile in Tiles)
+        {
+            tile.TileObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
 
     Vector3 GetMousePos()

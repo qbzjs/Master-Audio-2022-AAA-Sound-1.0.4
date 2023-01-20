@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using RotaryHeart.Lib.SerializableDictionary;
 using Scripts;
 using TMPro;
 using UnityEngine;
@@ -9,10 +10,12 @@ using UnityEngine.UI;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private Image progressBar;
-    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter;
-    [SerializeField] private GameObject winButton, winScreen, loseScreen;
-    private BlockSpawner spawner;
-    public int winningScore;
+    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter, pointsDescription;
+    [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
+    [SerializeField] private SerializableDictionaryBase<string, int> startingDeck;
+
+    private int winningScore;
+    public int startScore, scoreIncrement, upgradeIncrement;
     public int totalTurns;
 
     private int score;
@@ -22,6 +25,13 @@ public class GameManager : Singleton<GameManager>
         get => score;
         set
         {
+            int nextUpgrade = (1 + score / upgradeIncrement) * upgradeIncrement;
+            if (score < nextUpgrade && value > nextUpgrade)
+            {
+                UpgradeManager.Instance.PopulateUpgrades();
+                upgradeScreen.SetActive(true);
+                
+            }
             score = value;
             if (score >= winningScore)
             {
@@ -32,7 +42,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
     
-    private int turns; 
+    private int turns;
 
     public int Turns
     {
@@ -43,7 +53,14 @@ public class GameManager : Singleton<GameManager>
             turnCounter.text = turns + " turns remaining.";
             if (turns <= 0)
             {
-                Lose();
+                if (score >= winningScore)
+                {
+                    Win();
+                }
+                else
+                {
+                    Lose();
+                }
             }
         } 
     }
@@ -51,18 +68,62 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
+        winningScore = startScore;
+        NewBoard();
+        InitializeDeck();
+    }
+
+    public void NewBoard()
+    {
         winButton.SetActive(false);
         winScreen.SetActive(false);
+        upgradeScreen.SetActive(false);
         loseScreen.SetActive(false);
-        spawner = FindObjectOfType<BlockSpawner>();
+        GridManager.Instance.Initialize();
         Score = 0;
         Turns = totalTurns;
+    }
+
+    public void ChangeTurns(int delta)
+    {
+        totalTurns += delta;
+    }
+
+    public void ChangeUpgradeTiming(int delta)
+    {
+        upgradeIncrement += delta;
+        if (upgradeIncrement < 5) upgradeIncrement = 5;
+    }
+
+    private void InitializeDeck()
+    {
+        foreach (KeyValuePair<string, int> pair in startingDeck)
+        {
+            for (int i = 0; i < pair.Value; i++)
+            {
+                DeckManager.Instance.AddToDeck(pair.Key);
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (GridManager.Instance.OverGrid(mousePos))
+        {
+            Vector2Int tilePos = GridManager.Instance.WorldToGridPos(mousePos);
+            string tileDesc = GridManager.Instance.GetTileDescription(tilePos.x, tilePos.y);
+               
+            pointsDescription.text = tileDesc;
+        }
         
+#if !UNITY_WEBGL
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+#endif
     }
 
     public void PlacedBlock()
@@ -70,7 +131,6 @@ public class GameManager : Singleton<GameManager>
         GridManager.Instance.UpdateBlood();
         UpdateScore();
         DecrementTurns();
-        spawner.GenerateBlock();
     }
 
     [NaughtyAttributes.Button]
@@ -89,6 +149,7 @@ public class GameManager : Singleton<GameManager>
         winScreen.SetActive(true);
         winFinalScore.text = "Final Score: " + score + "/" + winningScore;
         winTurnCounter.text = "With " + turns + " turns to spare";
+        winningScore = winningScore + scoreIncrement;
     }
 
     public void Lose()

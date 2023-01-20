@@ -27,4 +27,11 @@ public class Gargoyle : Wasteland
     {
         return "GA";
     }
+
+    public string ShowCalculation()
+    {
+        var description = "Point Value: " + scoreWorth;
+        return description;
+    }
+    
 }
