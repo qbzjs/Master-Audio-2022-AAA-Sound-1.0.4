@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts;
 using UnityEngine;
 
 public class Tenement : Wasteland
@@ -16,7 +17,7 @@ public class Tenement : Wasteland
         this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
-    public int CalculateScore()
+    new public int CalculateScore()
     {
         int adjacentTenements = 0;
 
@@ -32,7 +33,7 @@ public class Tenement : Wasteland
         return scoreWorth + adjacentTenements * scoreWorthAdjacent;
     }
 
-    public string Type()
+    new public string Type()
     {
         return "TE";
     }

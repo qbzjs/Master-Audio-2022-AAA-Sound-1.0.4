@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts;
 using UnityEngine;
 
 public class Mansion : Wasteland
 {
-    [SerializeField] protected int scoreWorth = 6;
+    [SerializeField] new protected int scoreWorth = 6;
     [SerializeField] protected int scoreWorthAdjacent = 0;
 
     public Mansion(Sprite art, Transform parentTransform, Vector3 pos)
@@ -17,7 +18,7 @@ public class Mansion : Wasteland
         this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
-    public int CalculateScore()
+    new public int CalculateScore()
     {
         int adjacentTenements = 0;
         foreach (Vector2Int dir in Directions.Compass)
@@ -37,7 +38,7 @@ public class Mansion : Wasteland
         return scoreWorthAdjacent;
     }
 
-    public string Type()
+    new public string Type()
     {
         return "MA";
     }

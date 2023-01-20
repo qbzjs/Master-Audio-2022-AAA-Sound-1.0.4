@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts;
 using UnityEngine;
 
 public class Gargoyle : Wasteland
 {
-    [SerializeField] protected int scoreWorth = 2;
+    [SerializeField] new protected int scoreWorth = 2;
 
     public Gargoyle(Sprite art, Transform parentTransform, Vector3 pos)
 
@@ -17,12 +18,12 @@ public class Gargoyle : Wasteland
         this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
-    public int CalculateScore()
+    new public int CalculateScore()
     {
         return scoreWorth;
     }
 
-    public string Type()
+    new public string Type()
     {
         return "GA";
     }

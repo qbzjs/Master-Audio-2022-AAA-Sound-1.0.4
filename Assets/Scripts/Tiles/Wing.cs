@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Scripts;
 
 public class Wing : Wasteland
 {
@@ -14,7 +15,7 @@ public class Wing : Wasteland
         this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
-    public string Type()
+    new public string Type()
     {
         return "WI";
     }
