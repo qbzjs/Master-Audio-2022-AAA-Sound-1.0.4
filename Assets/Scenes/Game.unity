@@ -1014,24 +1014,19 @@ MonoBehaviour:
     reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
-    - GR
+    - MA
     - GA
     - CH
-    - WI
-    - MA
-    - TE
     - RI
     _keys:
-    - GR
+    - MA
     - GA
     - CH
-    - WI
-    - MA
-    - TE
     - RI
-    _values: 020000000a0000000300000003000000050000000500000003000000
-  startScore: 100
-  scoreIncrement: 50
+    _values: 01000000010000000100000001000000
+  winningScore: 100
+  startScore: 0
+  scoreIncrement: 100
   upgradeIncrement: 30
   totalTurns: 20
 --- !u!1 &419167794
@@ -2448,7 +2443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxBlockSize: 6
-  minMaxSize: {x: 2, y: 4}
+  minMaxSize: {x: 2, y: 3}
 --- !u!4 &835768318
 Transform:
   m_ObjectHideFlags: 0
@@ -5624,6 +5619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit

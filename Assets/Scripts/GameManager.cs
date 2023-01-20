@@ -14,8 +14,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
     [SerializeField] private SerializableDictionaryBase<string, int> startingDeck;
 
-    private int winningScore;
-    public int startScore, scoreIncrement, upgradeIncrement;
+    [SerializeField] private int winningScore;
+    public int upgradeIncrement;
     public int totalTurns;
 
     private int score;
@@ -68,7 +68,6 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        winningScore = startScore;
         NewBoard();
         InitializeDeck();
     }
@@ -128,6 +127,7 @@ public class GameManager : Singleton<GameManager>
 
     public void PlacedBlock()
     {
+        Debug.Log("placed a block");
         GridManager.Instance.UpdateBlood();
         UpdateScore();
         DecrementTurns();
@@ -149,7 +149,6 @@ public class GameManager : Singleton<GameManager>
         winScreen.SetActive(true);
         winFinalScore.text = "Final Score: " + score + "/" + winningScore;
         winTurnCounter.text = "With " + turns + " turns to spare";
-        winningScore = winningScore + scoreIncrement;
     }
 
     public void Lose()

@@ -10,7 +10,7 @@ public class Fountain : Wasteland
         return false;
     }
 
-    new public string Type()
+    public override string Type()
     {
         return "FO";
     }

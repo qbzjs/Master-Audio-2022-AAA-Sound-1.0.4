@@ -161,6 +161,7 @@ namespace Scripts
                 }
             }
             grid[gridPos.x, gridPos.y] = tile;
+            Debug.Log("placing tile " + tile);
         }
 
         private List<Graveyard> FindGraveYards(int xPos, int yPos)
@@ -226,6 +227,7 @@ namespace Scripts
 
         public int UpdateScore()
         {
+            Debug.Log("updating score");
             int score = 0;
             for (int x = 0; x < size; x++)
             {
@@ -238,6 +240,7 @@ namespace Scripts
                         mult = 2;
                     }
                     score += mult * grid[x, y].CalculateScore();
+                    Debug.Log("score is now: " + score);
                 }
             }
             return score;
@@ -283,7 +286,7 @@ namespace Scripts
         }
         public string GetTileDescription(int x, int y)
         {
-            string description = grid[x, y].ShowCalculation();
+            string description = grid[x, y].CalculateScore().ToString();
             if (CheckBlood(new Vector2Int(x, y)))
             {
                 description += " Rivers of Blood Multiplier: 2";

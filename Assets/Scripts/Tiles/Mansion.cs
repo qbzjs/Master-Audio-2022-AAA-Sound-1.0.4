@@ -18,8 +18,9 @@ public class Mansion : Wasteland
         this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
-    new public int CalculateScore()
+    public override int CalculateScore()
     {
+        Debug.Log("calculating score for mansion " + this);
         int adjacentTenements = 0;
         foreach (Vector2Int dir in Directions.Compass)
         {
@@ -38,7 +39,7 @@ public class Mansion : Wasteland
         return scoreWorthAdjacent;
     }
 
-    new public string Type()
+    public override string Type()
     {
         return "MA";
     }

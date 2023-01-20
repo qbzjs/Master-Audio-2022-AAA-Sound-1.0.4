@@ -15,7 +15,7 @@ public class Wing : Wasteland
         this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
-    new public string Type()
+    public override string Type()
     {
         return "WI";
     }

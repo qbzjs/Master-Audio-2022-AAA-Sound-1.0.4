@@ -20,16 +20,16 @@ public class Wasteland : ITile
         return TileObject.transform.position;
     }
 
-    public bool Destructible()
+    public virtual bool Destructible()
     {
         return true;
     }
 
-    public string Type()
+    public virtual string Type()
     {
         return "WA";
     }
-    public int CalculateScore()
+    public virtual int CalculateScore()
     {
         return scoreWorth;
     }

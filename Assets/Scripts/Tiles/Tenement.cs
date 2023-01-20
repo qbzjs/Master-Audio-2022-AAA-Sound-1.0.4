@@ -17,7 +17,7 @@ public class Tenement : Wasteland
         this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
-    new public int CalculateScore()
+    public override int CalculateScore()
     {
         int adjacentTenements = 0;
 
@@ -33,7 +33,7 @@ public class Tenement : Wasteland
         return scoreWorth + adjacentTenements * scoreWorthAdjacent;
     }
 
-    new public string Type()
+    public override string Type()
     {
         return "TE";
     }

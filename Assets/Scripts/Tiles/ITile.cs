@@ -19,6 +19,4 @@ public interface ITile
     public int yPos { get; set; }
     public string Type();
     public int CalculateScore();
-    
-    public string ShowCalculation();
 }

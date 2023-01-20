@@ -17,7 +17,7 @@ public class Church : Wasteland
         this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
-    new public int CalculateScore()
+    public override int CalculateScore()
     {
         int adjacentWings = 0;
 
@@ -44,7 +44,7 @@ public class Church : Wasteland
         return scoreWorth + adjacentWings * scoreWorthAdjacent;
     }
 
-    new public string Type()
+    public override string Type()
     {
         return "CH";
     }

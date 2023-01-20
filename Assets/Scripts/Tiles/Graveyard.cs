@@ -18,12 +18,12 @@ public class Graveyard : Wasteland
         this.TileObject.GetComponent<SpriteRenderer>().sprite = art;
     }
 
-    new public int CalculateScore()
+    public override int CalculateScore()
     {
         return scoreWorth + adjacentDestroyed * scoreWorthAdjacent;
     }
 
-    new public string Type()
+    public override string Type()
     {
         return "GR";
     }
