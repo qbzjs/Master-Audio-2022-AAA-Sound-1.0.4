@@ -43,6 +43,10 @@ public class Block : MonoBehaviour, IDragParent
         for(int i = 0; i < blockSize; i++){
             
             string tileID = DeckManager.Instance.Draw();
+            
+            //tileID needs to be the exact name of the class to instantiate. (Ezra) this function is a little gross (sorry)
+            //  it was the best way I could find to decouple the subclasses from this file. Open to ideas on 
+            //  how to fix this!
             ITile myTile = TileFactory.CreateTile(System.Type.GetType(tileID), transform, currPos);
 
             myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
