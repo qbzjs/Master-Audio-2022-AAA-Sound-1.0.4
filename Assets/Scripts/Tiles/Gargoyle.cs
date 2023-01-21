@@ -12,9 +12,9 @@ public class Gargoyle : Wasteland
         ConstructorHelper(parentTransform, pos, "Gargoyle");
     }
 
-    public override int CalculateScore()
+    protected override Score CalculateBaseScore()
     {
-        return scoreWorth;
+        return new Score(scoreWorth);
     }
 
     public override string Type()

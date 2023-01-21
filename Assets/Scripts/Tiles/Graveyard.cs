@@ -13,19 +13,14 @@ public class Graveyard : Wasteland
         ConstructorHelper(parentTransform, pos, "Graveyard");
     }
 
-    public override int CalculateScore()
+    protected override Score CalculateBaseScore()
     {
-        return scoreWorth + adjacentDestroyed * scoreWorthAdjacent;
+        return new Score(adjacentDestroyed * scoreWorthAdjacent,
+            $"[{adjacentDestroyed}] * {scoreWorthAdjacent}");
     }
 
     public override string Type()
     {
         return "Graveyard";
     }
-    public string ShowCalculation()
-    {
-        var description = "Point Value: " + scoreWorth + " Points from Destroyed Adjacent Tiles: " + (scoreWorthAdjacent * adjacentDestroyed);
-        return description;
-    }
-
 }

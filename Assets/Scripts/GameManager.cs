@@ -127,7 +127,6 @@ public class GameManager : Singleton<GameManager>
 
     public void PlacedBlock()
     {
-        Debug.Log("placed a block");
         GridManager.Instance.UpdateBlood();
         UpdateScore();
         DecrementTurns();

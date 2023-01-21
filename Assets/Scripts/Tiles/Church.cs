@@ -12,7 +12,7 @@ public class Church : Wasteland
         ConstructorHelper(parentTransform, pos, "Church");
     }
 
-    public override int CalculateScore()
+    protected override Score CalculateBaseScore()
     {
         int adjacentWings = 0;
 
@@ -36,39 +36,13 @@ public class Church : Wasteland
             adjacentWings++;
         }
 
-        return scoreWorth + adjacentWings * scoreWorthAdjacent;
+        
+        return new Score(adjacentWings * scoreWorthAdjacent, 
+            $"[{adjacentWings}] * {scoreWorthAdjacent}");
     }
 
     public override string Type()
     {
         return "Church";
     }
-
-    public string ShowCalculation()
-    {
-        int adjacentWings = 0;
-
-        if (GridManager.Instance.GetTile(xPos + 1, yPos).Type() == "ChurchWing")
-        {
-            adjacentWings++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos, yPos - 1).Type() == "ChurchWing")
-        {
-            adjacentWings++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos - 1, yPos).Type() == "ChurchWing")
-        {
-            adjacentWings++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos, yPos + 1).Type() == "ChurchWing")
-        {
-            adjacentWings++;
-        }
-        var description = "Point Value: " + scoreWorth + " Points from Adjacent Wings: " + (adjacentWings * scoreWorthAdjacent);
-        return description;
-    }
-    
 }

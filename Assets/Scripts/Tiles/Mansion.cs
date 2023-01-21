@@ -13,9 +13,8 @@ public class Mansion : Wasteland
         ConstructorHelper(parentTransform, pos, "Mansion");
     }
 
-    public override int CalculateScore()
+    protected override Score CalculateBaseScore()
     {
-        Debug.Log("calculating score for mansion " + this);
         int adjacentTenements = 0;
         foreach (Vector2Int dir in Directions.Compass)
         {
@@ -28,34 +27,14 @@ public class Mansion : Wasteland
 
         if (adjacentTenements == 0)
         {
-            return scoreWorth;
+            return new Score(scoreWorth);
         }
 
-        return scoreWorthAdjacent;
+        return new Score(scoreWorthAdjacent);;
     }
 
     public override string Type()
     {
         return "Mansion";
-    }
-    public string ShowCalculation()
-    {
-        int adjacentTenements = 0;
-        string description;
-        foreach (Vector2Int dir in Directions.Compass)
-        {
-            string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
-            if (type == "Mansion" || type == "Tenement")
-            {
-                adjacentTenements++;
-            }
-        }
-        if (adjacentTenements == 0)
-        {
-            description = "Point Value: " + scoreWorth;
-        } else {
-            description = "Point Value: " + scoreWorthAdjacent;
-        }
-        return description;
     }
 }

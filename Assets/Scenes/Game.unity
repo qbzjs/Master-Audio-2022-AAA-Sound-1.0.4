@@ -2070,7 +2070,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: TE
+            m_StringArgument: Tenement
             m_BoolArgument: 0
           m_CallState: 2
   - displayText: Fodder (wealthy) - Add 5 Mansions to your deck
@@ -2086,7 +2086,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: MA
+            m_StringArgument: Mansion
             m_BoolArgument: 0
           m_CallState: 2
   - displayText: Flood - add 5 Rivers to your deck
@@ -2135,6 +2135,22 @@ MonoBehaviour:
             m_IntArgument: 3
             m_FloatArgument: 0
             m_StringArgument: RI
+            m_BoolArgument: 0
+          m_CallState: 2
+  - displayText: Add Churches
+    effect:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 482919901}
+          m_TargetAssemblyTypeName: DeckManager, Assembly-CSharp
+          m_MethodName: AddToDeck
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: Church
             m_BoolArgument: 0
           m_CallState: 2
   upgradeTexts:
@@ -5562,7 +5578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit

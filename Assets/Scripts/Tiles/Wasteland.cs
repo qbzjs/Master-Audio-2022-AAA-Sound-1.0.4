@@ -7,6 +7,9 @@ using UnityEngine;
 public class Wasteland : ITile
 {
     public GameObject TileObject { get; set; }
+
+    public List<Effect> ongoingEffects;
+
     public int xPos { get; set; }
     public int yPos { get; set; }
     
@@ -17,7 +20,7 @@ public class Wasteland : ITile
     
     //The prefix we agree on for tile art files
     private static string TILE_ART_PREFIX = "TileArt_";
-    
+
     public Vector3 LocalPosition()
     {
         return TileObject.transform.localPosition;
@@ -28,6 +31,34 @@ public class Wasteland : ITile
         return TileObject.transform.position;
     }
 
+    public Wasteland()
+    {
+        ongoingEffects = new();
+    }
+    
+    /// <summary>
+    /// Most subclasses will need to override this. To be called when the tile
+    ///     is placed on the grid
+    /// </summary>
+    public virtual void WhenPlaced() { }
+    
+    public void AddEffect(Effect toAdd)
+    {
+        ongoingEffects.Add(toAdd);
+        ongoingEffects.Sort((first, second) =>
+        {
+            if (first.order > second.order)
+            {
+                return 1;
+            } else if (first.order == second.order)
+            {
+                return 0;
+            } else //if (first.order < second.order)
+            {
+                return -1;
+            }
+        });
+    }
 
     /// <summary>
     /// Most subclasses will not need to override this, returns true by default
@@ -51,11 +82,26 @@ public class Wasteland : ITile
     /// Override this function!
     /// </summary>
     /// <returns>The score worth of the tile</returns>
-    public virtual int CalculateScore()
+    protected virtual Score CalculateBaseScore()
     {
-        return scoreWorth;
+        return new Score(scoreWorth);
     }
-    
+
+    public Score CalculateScore()
+    {
+        Score toReturn = CalculateBaseScore();
+        if (ongoingEffects == null)
+        {
+            Debug.Log("ongoing effects is null in " + this);
+        }
+        foreach (Effect effect in ongoingEffects)
+        {
+            toReturn = effect.modify(toReturn);
+        }
+
+        return toReturn;
+    }
+
     /// <summary>
     /// Takes care of 99% of what subclass constructors need to worry about. (Ezra) didn't seem like
     /// you could inherit constructors because of obscure C# reasons, if anyone has a cleaner idea about
@@ -66,6 +112,7 @@ public class Wasteland : ITile
     /// <param name="tileName">Name of the art to load (minus prefix). e.g. Gargoyle</param>
     protected void ConstructorHelper(Transform parentTransform, Vector3 pos, string tileName)
     {
+        ongoingEffects = new();
         TileObject = new GameObject("Tile");
         TileObject.AddComponent<SpriteRenderer>();
         TileObject.transform.position = pos;

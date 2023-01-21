@@ -234,7 +234,7 @@ namespace Scripts
                         grid[x, y].TileObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0f, 0f);
                         mult = 2;
                     }
-                    score += mult * grid[x, y].CalculateScore();
+                    score += mult * grid[x, y].CalculateScore().score;
                 }
             }
             return score;
@@ -242,7 +242,7 @@ namespace Scripts
 
         private bool CheckBlood(Vector2Int gridPos)
         {
-            if(GetTile(gridPos.x, gridPos.y).CalculateScore() == 0)
+            if(GetTile(gridPos.x, gridPos.y).CalculateScore().score == 0)
             {
                 return false; //don't set color if not counting for any points
             }
