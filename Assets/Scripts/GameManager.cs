@@ -106,7 +106,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
         rules.Add(newRule);
-        rules.Sort();
+        rules.Sort(); //sort as we add
     }
 
     public void ChangeTurns(int delta)
@@ -156,7 +156,7 @@ public class GameManager : Singleton<GameManager>
 
     public void PlacedBlock()
     {
-        //GridManager.Instance.UpdateBlood();
+        //Rules are sorted as they are added so we can just run through them here
         foreach (Rule rule in rules)
         {
             rule.action.Invoke();
@@ -208,7 +208,7 @@ public struct Rule : IComparable<Rule>
         action = myAction;
     }
     
-    public int CompareTo(Rule other)
+    public int CompareTo(Rule other) //So it can be sorted in a list
     {
         return order.CompareTo(other.order);
     }

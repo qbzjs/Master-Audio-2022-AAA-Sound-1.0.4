@@ -13,7 +13,20 @@ public interface ITile
 
     public bool Destructible();
 
+    /// <summary>
+    /// GameManager calls this when this ITile is placed. A good place to add Rules.
+    /// </summary>
     public void WhenPlaced();
+
+    /// <summary>
+    /// GridManager calls this when any ITile is destroyed. Note: this is NOT when THIS is destroyed, when ANY OTHER
+    ///     ITile is destroyed. This is so, for instance, graveyards can know when their neighbors are destroyed.
+    /// </summary>
+    /// <param name="x">x position of the tile</param>
+    /// <param name="y">y position of the tile</param>
+    /// <param name="aboutToBeDestroyed">The tile about to be destroyed</param>
+    public void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed);
+    
 
     public void AddEffect(Effect toAdd);
 

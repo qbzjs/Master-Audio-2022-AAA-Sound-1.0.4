@@ -42,7 +42,18 @@ public class Wasteland : ITile
     ///     is placed on the grid.
     /// </summary>
     public virtual void WhenPlaced(){ }
-    
+
+    /// <summary>
+    /// Override this if you need
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="aboutToBeDestroyed"></param>
+    public virtual void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)
+    {
+        
+    }
+
     /// <summary>
     /// Adds effect to the list affecting this tile. Will merge stacks with
     ///     identical descriptions and not go above maxStacks.

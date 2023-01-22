@@ -200,6 +200,11 @@ namespace Scripts
             if (grid[pos.x, pos.y].TileObject == null)
                 return;
             
+            ForEach((int x, int y, ITile tile) =>
+            {
+                tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]);
+            });
+            
             Destroy(grid[pos.x, pos.y].TileObject);
         }
 
