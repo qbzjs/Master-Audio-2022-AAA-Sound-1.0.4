@@ -1,24 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using NaughtyAttributes;
 using RotaryHeart.Lib.SerializableDictionary;
 using Scripts;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Foldout("UI")]
     [SerializeField] private Image progressBar;
+    [Foldout("UI")]
     [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter, pointsDescription;
+    [Foldout("UI")]
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
+    [Foldout("UI")]
+    [SerializeField] private Tooltip tooltip;
     [SerializeField] private SerializableDictionaryBase<string, int> startingDeck;
 
     [SerializeField] private int winningScore;
     public int upgradeIncrement;
     public int totalTurns;
-
     private int score;
+
+    private List<Rule> rules;
 
     public int Score
     {
@@ -65,6 +75,11 @@ public class GameManager : Singleton<GameManager>
         } 
     }
 
+    public void Awake()
+    {
+        rules = new();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +96,17 @@ public class GameManager : Singleton<GameManager>
         GridManager.Instance.Initialize();
         Score = 0;
         Turns = totalTurns;
+    }
+
+    public void AddRule(Rule newRule)
+    {
+        if (rules.Any((value) => { return value.description == newRule.description; }))
+        {
+            //no duplicates
+            return;
+        }
+        rules.Add(newRule);
+        rules.Sort();
     }
 
     public void ChangeTurns(int delta)
@@ -112,9 +138,12 @@ public class GameManager : Singleton<GameManager>
         if (GridManager.Instance.OverGrid(mousePos))
         {
             Vector2Int tilePos = GridManager.Instance.WorldToGridPos(mousePos);
-            string tileDesc = GridManager.Instance.GetTileDescription(tilePos.x, tilePos.y);
-               
-            pointsDescription.text = tileDesc;
+            ITile hoveringOver = GridManager.Instance.GetTile(tilePos.x, tilePos.y);
+            tooltip.Show(hoveringOver.Type(), hoveringOver.CalculateScore()); 
+        }
+        else
+        {
+            tooltip.Hide();
         }
         
 #if !UNITY_WEBGL
@@ -127,7 +156,11 @@ public class GameManager : Singleton<GameManager>
 
     public void PlacedBlock()
     {
-        GridManager.Instance.UpdateBlood();
+        //GridManager.Instance.UpdateBlood();
+        foreach (Rule rule in rules)
+        {
+            rule.action.Invoke();
+        }
         UpdateScore();
         DecrementTurns();
     }
@@ -159,5 +192,24 @@ public class GameManager : Singleton<GameManager>
     public void Reset()
     {
         SceneManager.GetActiveScene().Load();
+    }
+}
+
+public struct Rule : IComparable<Rule>
+{
+    public string description;
+    public int order; // 1 happens first. then 2, 3, so on
+    public Action action;
+    
+    public Rule(string myDescription, int myOrder, Action myAction)
+    {
+        description = myDescription;
+        order = myOrder;
+        action = myAction;
+    }
+    
+    public int CompareTo(Rule other)
+    {
+        return order.CompareTo(other.order);
     }
 }

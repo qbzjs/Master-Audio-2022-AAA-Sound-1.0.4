@@ -26,12 +26,40 @@ public interface ITile
     public Score CalculateScore();
 }
 
-public struct Effect
+/// <summary>
+///     public int order;
+///     public int stacks;
+///     public int maxStacks;
+///     public Func<Score, Score> modify;
+/// </summary>
+public struct Effect : IComparable<Effect>
 {
+    public string description;
     public int order;
     public int stacks;
     public int maxStacks;
     public Func<Score, Score> modify;
+
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <param name="myOrder"></param>
+   /// <param name="myStacks"></param>
+   /// <param name="myMaxStacks"></param>
+   /// <param name="myModify"></param>
+    public Effect(string myDescription, int myOrder, int myStacks, int myMaxStacks, Func<Score, Score> myModify)
+    {
+        description = myDescription;
+        order = myOrder;
+        stacks = myStacks;
+        maxStacks = myMaxStacks;
+        modify = myModify;
+    }
+    
+    public int CompareTo(Effect other)
+    {
+        return order.CompareTo(other.order);
+    }
 }
 
 public struct Score

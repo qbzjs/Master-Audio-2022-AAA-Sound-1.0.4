@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Scripts;
 using UnityEngine;
 
@@ -35,29 +36,30 @@ public class Wasteland : ITile
     {
         ongoingEffects = new();
     }
-    
+
     /// <summary>
     /// Most subclasses will need to override this. To be called when the tile
-    ///     is placed on the grid
+    ///     is placed on the grid.
     /// </summary>
-    public virtual void WhenPlaced() { }
+    public virtual void WhenPlaced(){ }
     
+    /// <summary>
+    /// Adds effect to the list affecting this tile. Will merge stacks with
+    ///     identical descriptions and not go above maxStacks.
+    /// </summary>
+    /// <param name="toAdd">effect to add to the list</param>
     public void AddEffect(Effect toAdd)
     {
-        ongoingEffects.Add(toAdd);
-        ongoingEffects.Sort((first, second) =>
+        if (ongoingEffects.Any((value) => { return value.description.Equals(toAdd.description); }))
         {
-            if (first.order > second.order)
-            {
-                return 1;
-            } else if (first.order == second.order)
-            {
-                return 0;
-            } else //if (first.order < second.order)
-            {
-                return -1;
-            }
-        });
+            //If there is already a version of this effect, add it to a stack
+            Effect priorEffect = ongoingEffects.FirstOrDefault((value) => { return value.description.Equals(toAdd.description); });
+            priorEffect.stacks = Mathf.Min(priorEffect.stacks + toAdd.stacks, priorEffect.maxStacks);
+            return;
+        }
+        
+        ongoingEffects.Add(toAdd);
+        ongoingEffects.Sort(); //sorts by effect order
     }
 
     /// <summary>
@@ -90,10 +92,7 @@ public class Wasteland : ITile
     public Score CalculateScore()
     {
         Score toReturn = CalculateBaseScore();
-        if (ongoingEffects == null)
-        {
-            Debug.Log("ongoing effects is null in " + this);
-        }
+        
         foreach (Effect effect in ongoingEffects)
         {
             toReturn = effect.modify(toReturn);

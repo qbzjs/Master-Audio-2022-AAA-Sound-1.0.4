@@ -10,6 +10,12 @@ namespace Scripts
     {
         [SerializeField]
         private int size;
+
+        public int Size
+        {
+            get => size;
+        }
+        
         private int nextSize = 0;
 
         [SerializeField] private LineRenderer gridLine;
@@ -23,6 +29,8 @@ namespace Scripts
         }
 
         private Grid grid;
+
+        public Grid Grid => grid;
 
         public void Initialize()
         {
@@ -41,6 +49,12 @@ namespace Scripts
             grid = new Grid(size, new Wasteland());
             DrawGrid();
             PlaceFountain();
+        }
+
+
+        public int GetSize()
+        {
+            return size;
         }
 
         public void ChangeSize(int delta)
@@ -120,6 +134,7 @@ namespace Scripts
                 foreach (ITile tile in block.Tiles)
                 {
                     PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
+                    tile.WhenPlaced();
                 }
 
                 if (block.held)
@@ -142,6 +157,12 @@ namespace Scripts
             PlaceTile(myTile, gridPos);
         }
 
+        public void PlaceTile(string tileClassName, Vector2Int gridPos)
+        {
+            ITile myTile = TileFactory.CreateTile(System.Type.GetType(tileClassName), transform, Vector3.zero);
+            PlaceTile(myTile, gridPos);
+        }
+        
         private void PlaceTile(ITile tile, Vector2Int gridPos)
         {
             DestroyTile(gridPos);
@@ -222,70 +243,20 @@ namespace Scripts
 
         public int UpdateScore()
         {
-            Debug.Log("updating score");
             int score = 0;
             for (int x = 0; x < size; x++)
             {
                 for (int y = 0; y < size; y++)
                 {
-                    int mult = 1;
-                    if (CheckBlood(new Vector2Int(x, y)))
-                    {
-                        grid[x, y].TileObject.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0f, 0f);
-                        mult = 2;
-                    }
-                    score += mult * grid[x, y].CalculateScore().score;
+                    score += grid[x, y].CalculateScore().score;
                 }
             }
             return score;
         }
 
-        private bool CheckBlood(Vector2Int gridPos)
-        {
-            if(GetTile(gridPos.x, gridPos.y).CalculateScore().score == 0)
-            {
-                return false; //don't set color if not counting for any points
-            }
-            foreach (Vector2Int dir in Directions.Cardinal)
-            {
-                string type = GetTile(gridPos.x + dir.x, gridPos.y + dir.y).Type();
-                if (type == "BloodRiver" || type == "Fountain")
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public void UpdateBlood()
-        {
-            bool turnedAny = false;
-            for (int x = 0; x < size; x++)
-            {
-                for (int y = 0; y < size; y++)
-                {
-                    ITile tile = grid[x, y];
-                    if (tile.Type() == "River")
-                    {
-                        turnedAny = turnedAny || ((River) tile).CheckTurn();
-                    }
-                }
-            }
-            if(turnedAny) UpdateBlood();
-        }
-
         public ITile GetTile(int x, int y)
         {
             return grid[x, y];
-        }
-        public string GetTileDescription(int x, int y)
-        {
-            string description = grid[x, y].CalculateScore().ToString();
-            if (CheckBlood(new Vector2Int(x, y)))
-            {
-                description += " Rivers of Blood Multiplier: 2";
-            }
-            return description;  
         }
 
         public void ClearGrid()
@@ -295,6 +266,17 @@ namespace Scripts
                 for (int y = 0; y < size; y++)
                 {
                     DestroyTile(new Vector2Int(x, y));
+                }
+            }
+        }
+
+        public static void ForEach(Action<int, int, ITile> toApply)
+        {
+            for (int x = 0; x < Instance.Size; x++)
+            {
+                for (int y = 0; y < Instance.Size; y++)
+                {
+                    toApply.Invoke(x, y, Instance.GetTile(x, y));
                 }
             }
         }
