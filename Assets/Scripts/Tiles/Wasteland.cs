@@ -100,6 +100,10 @@ public class Wasteland : ITile
         return new Score(scoreWorth);
     }
 
+    /// <summary>
+    /// Takes CalculateBaseScore (which is overriden by subclasses) and adds Effects to it. 
+    /// </summary>
+    /// <returns></returns>
     public Score CalculateScore()
     {
         Score toReturn = CalculateBaseScore();

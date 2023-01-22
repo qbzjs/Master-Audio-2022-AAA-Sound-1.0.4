@@ -14,9 +14,5 @@ public class Wing : Wasteland
     {
         return "ChurchWing";
     }
-    public string ShowCalculation()
-    {
-        var description = "Point Value: " + scoreWorth;
-        return description;
-    }
+    
 }

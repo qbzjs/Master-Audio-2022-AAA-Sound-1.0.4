@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Fountain : Wasteland
 {
-    new public bool Destructible()
+    public override bool Destructible()
     {
         return false;
     }

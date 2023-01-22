@@ -200,6 +200,7 @@ namespace Scripts
             if (grid[pos.x, pos.y].TileObject == null)
                 return;
             
+            //Notifies all tiles that a tile has been destroyed, if they want to do something with that
             ForEach((int x, int y, ITile tile) =>
             {
                 tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]);
@@ -274,7 +275,11 @@ namespace Scripts
                 }
             }
         }
-
+        
+        /// <summary>
+        /// For convenience to loop through all the tiles on the board
+        /// </summary>
+        /// <param name="toApply">takes int x, int y and ITile tile. This is called for every position on the board</param>
         public static void ForEach(Action<int, int, ITile> toApply)
         {
             for (int x = 0; x < Instance.Size; x++)
