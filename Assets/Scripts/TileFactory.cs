@@ -16,7 +16,6 @@ public class TileFactory : MonoBehaviour
     /// <returns></returns>
     public static ITile CreateTile(System.Type TypeToBeCreated, Transform transformParent, Vector3 newPosition)
     {
-        
         //Enforces that this must be a subclass of Wasteland i.e. an ITile
         if (!TypeToBeCreated.IsSubclassOf(typeof(Wasteland)))
         {
