@@ -139,6 +139,11 @@ namespace Scripts
                     tile.WhenPlaced();
                 }
 
+                foreach (ITile tile in block.Tiles)
+                {
+                    ObserverManager.Instance.AddObserver(tile);
+                }
+
                 if (block.held)
                 {
                     HoldingCell.Instance.holding = false;
@@ -200,7 +205,8 @@ namespace Scripts
 
         private void DestroyTile(Vector2Int pos)
         {
-            if (grid[pos.x, pos.y].TileObject == null)
+            Wasteland tile = (Wasteland) grid[pos.x, pos.y];
+            if (tile.TileObject == null)
                 return;
             
             //Notifies all tiles that a tile has been destroyed, if they want to do something with that
@@ -210,6 +216,10 @@ namespace Scripts
             });
             
             Destroy(grid[pos.x, pos.y].TileObject);
+
+            ObserverManager.Instance.RemoveObserver(tile);
+
+            ObserverManager.Instance.ProcessEvent(new GraveyardEvent(pos.x, pos.y));
         }
 
         /// <summary>
