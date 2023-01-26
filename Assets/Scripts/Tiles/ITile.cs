@@ -13,6 +13,8 @@ public interface ITile
 
     public bool Destructible();
 
+    public void Observe(DefaultEvent e);
+
     /// <summary>
     /// GameManager calls this when this ITile is placed. A good place to add Rules.
     /// </summary>
