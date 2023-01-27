@@ -38,7 +38,6 @@ public class ObserverManager : Singleton<ObserverManager>
 
         foreach (ITile o in Observers)
         {
-            Debug.Log($"bug at {o}");
             o.Observe(e);
         }
     }
