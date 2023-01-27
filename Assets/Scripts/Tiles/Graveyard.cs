@@ -19,20 +19,19 @@ public class Graveyard : Wasteland
             $"[{adjacentDestroyed}] * {scoreWorthAdjacent}");
     }
 
-    public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)
+    public override string Type()
+    {
+        return "Graveyard";
+    }
+
+    public override void Observe(DefaultEvent e)
     {
         foreach (Vector2Int dir in Directions.Cardinal)
         {
-            if (x == xPos + dir.x && x == yPos + dir.y)
+            if (e.xPos == xPos + dir.x && e.yPos == yPos + dir.y)
             {
                 adjacentDestroyed++;
             }
         }
-    }
-    
-
-    public override string Type()
-    {
-        return "Graveyard";
     }
 }

@@ -116,6 +116,11 @@ public class Wasteland : ITile
         return toReturn;
     }
 
+    public virtual void Observe(DefaultEvent e)
+    {
+
+    }
+
     /// <summary>
     /// Takes care of 99% of what subclass constructors need to worry about. (Ezra) didn't seem like
     /// you could inherit constructors because of obscure C# reasons, if anyone has a cleaner idea about
