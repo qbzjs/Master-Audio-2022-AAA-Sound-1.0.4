@@ -8,7 +8,7 @@ public class Mansion : Wasteland
     [SerializeField] new protected int scoreWorth = 6;
     [SerializeField] protected int scoreWorthAdjacent = 0;
     
-    public Mansion(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Mansion).ToString())
+    public Mansion(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }

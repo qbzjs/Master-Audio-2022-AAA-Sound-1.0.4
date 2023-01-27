@@ -35,7 +35,7 @@ public class Rat : Wasteland
         
     });
     
-    public Rat(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Rat).ToString())
+    public Rat(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }

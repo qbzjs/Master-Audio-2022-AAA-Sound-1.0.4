@@ -158,8 +158,7 @@ namespace Scripts
         private void PlaceFountain()
         {
             Vector2Int gridPos = grid.RandomPosition();
-            ITile myTile = new Fountain(transform, GridToWorldPos(gridPos));
-            PlaceTile(myTile, gridPos);
+            PlaceTile("Fountain", gridPos);
         }
 
         public void PlaceTile(string tileClassName, Vector2Int gridPos)
@@ -185,7 +184,7 @@ namespace Scripts
             grid[gridPos.x, gridPos.y] = tile;
         }
 
-        private List<Graveyard> FindGraveYards(int xPos, int yPos)
+        /*private List<Graveyard> FindGraveYards(int xPos, int yPos)
         {
             List<Graveyard> graveyards = new List<Graveyard>();
             foreach (Vector2Int dir in Directions.Cardinal)
@@ -198,7 +197,7 @@ namespace Scripts
 
             }
             return graveyards;
-        }
+        }*/
 
         private void DestroyTile(Vector2Int pos)
         {
