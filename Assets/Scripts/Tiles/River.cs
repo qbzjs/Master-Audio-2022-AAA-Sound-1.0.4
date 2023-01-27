@@ -31,7 +31,7 @@ public class River : Wasteland
         }
         
         GridManager.ForEach((int x, int y, ITile tile) => { 
-            if (tile is Fountain || (tile is River && ((River)tile).blood))
+            if (tile is Fountain || (tile is River river && river.blood))
             {
                 
                 foreach (Vector2Int subdirection in Directions.Cardinal)
@@ -43,7 +43,7 @@ public class River : Wasteland
 
     });
     
-    public River(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(River).ToString())
+    public River(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }
@@ -61,13 +61,14 @@ public class River : Wasteland
         {
             if (blood) continue; //can't turn if already made of blood
             ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
-            if (tile is Fountain || (tile is River && ((River)tile).blood))
+            if (tile is Fountain || (tile is River river && river.blood))
             {
                 blood = true;
                 TileObject.GetComponent<SpriteRenderer>().sprite = LoadArt("BloodRiver");
+                return true;
             }
         }
-        return blood;
+        return false;
     }
 
     public override void WhenPlaced()

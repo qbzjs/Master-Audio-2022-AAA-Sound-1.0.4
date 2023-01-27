@@ -7,7 +7,7 @@ public class Tenement : Wasteland
 {
     [SerializeField] protected int scoreWorthAdjacent = 2;
 
-    public Tenement(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Tenement).ToString())
+    public Tenement(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }

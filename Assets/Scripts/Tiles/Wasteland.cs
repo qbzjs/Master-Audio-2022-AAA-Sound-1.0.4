@@ -36,10 +36,10 @@ public class Wasteland : ITile
 
     public Wasteland()
     {
-
+        ongoingEffects = new();
     }
 
-    public Wasteland(Transform parentTransform, Vector3 pos, string tilename)
+    public Wasteland(Transform parentTransform, Vector3 pos)
     {
         ongoingEffects = new();
         TileObject = new GameObject("Tile");
@@ -47,7 +47,7 @@ public class Wasteland : ITile
         TileObject.transform.position = pos;
         TileObject.transform.rotation = Quaternion.identity;
         TileObject.transform.parent = parentTransform;
-        TileObject.GetComponent<SpriteRenderer>().sprite = LoadArt(tilename);
+        TileObject.GetComponent<SpriteRenderer>().sprite = LoadArt(GetType().ToString());
     }
 
     /// <summary>

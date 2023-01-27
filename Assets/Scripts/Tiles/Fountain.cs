@@ -10,7 +10,7 @@ public class Fountain : Wasteland
         return false;
     }
     
-    public Fountain(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Fountain).ToString())
+    public Fountain(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
     }
     

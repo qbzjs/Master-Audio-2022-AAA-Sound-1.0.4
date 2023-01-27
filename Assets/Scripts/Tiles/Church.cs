@@ -7,7 +7,7 @@ public class Church : Wasteland
 {
     [SerializeField] protected int scoreWorthAdjacent = 3;
 
-    public Church(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Church).ToString())
+    public Church(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
         
     }

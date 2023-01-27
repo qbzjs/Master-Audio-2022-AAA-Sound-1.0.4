@@ -8,7 +8,7 @@ public class Graveyard : Wasteland
     [SerializeField] private int scoreWorthAdjacent = 1;
     public int adjacentDestroyed = 0;
 
-    public Graveyard(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Graveyard).ToString())
+    public Graveyard(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }
