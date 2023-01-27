@@ -10,7 +10,7 @@ public class ObserverManager : Singleton<ObserverManager>
 
     public void AddObserver(ITile tile)
     {
-        if (tile.Type() == "Graveyard")
+        if (tile is Graveyard)
         {
             GraveyardObservers.Add((Wasteland)tile);
         }
@@ -18,7 +18,7 @@ public class ObserverManager : Singleton<ObserverManager>
 
     public void RemoveObserver(ITile tile)
     {
-        if (tile.Type() == "Graveyard")
+        if (tile is Graveyard)
         {
             GraveyardObservers.Remove((Wasteland)tile);
         }

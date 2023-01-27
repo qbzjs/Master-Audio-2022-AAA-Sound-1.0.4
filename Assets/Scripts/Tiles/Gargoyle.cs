@@ -7,19 +7,13 @@ public class Gargoyle : Wasteland
 {
     [SerializeField] new protected int scoreWorth = 2;
     
-    public Gargoyle(Transform parentTransform, Vector3 pos)
+    public Gargoyle(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Gargoyle).ToString())
     {
-        ConstructorHelper(parentTransform, pos, "Gargoyle");
-    }
 
+    }
     protected override Score CalculateBaseScore()
     {
         return new Score(scoreWorth);
-    }
-
-    public override string Type()
-    {
-        return "Gargoyle";
     }
     
 }

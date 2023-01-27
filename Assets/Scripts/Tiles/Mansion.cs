@@ -8,9 +8,9 @@ public class Mansion : Wasteland
     [SerializeField] new protected int scoreWorth = 6;
     [SerializeField] protected int scoreWorthAdjacent = 0;
     
-    public Mansion(Transform parentTransform, Vector3 pos)
+    public Mansion(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Mansion).ToString())
     {
-        ConstructorHelper(parentTransform, pos, "Mansion");
+
     }
 
     protected override Score CalculateBaseScore()
@@ -18,8 +18,8 @@ public class Mansion : Wasteland
         int adjacentTenements = 0;
         foreach (Vector2Int dir in Directions.Compass)
         {
-            string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
-            if (type == "Mansion" || type == "Tenement")
+            ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
+            if (tile is Mansion || tile is Tenement)
             {
                 adjacentTenements++;
             }
@@ -31,10 +31,5 @@ public class Mansion : Wasteland
         }
 
         return new Score(scoreWorthAdjacent);;
-    }
-
-    public override string Type()
-    {
-        return "Mansion";
     }
 }

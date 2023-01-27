@@ -15,11 +15,11 @@ public class Rat : Wasteland
             checkAgain = false;
             GridManager.ForEach((int x, int y, ITile tile) =>
             {
-                if (tile.Type() != "Wasteland") return;
+                if (!(tile.GetType() == typeof(Wasteland))) return;
                 float otherRats = 0;
                 foreach (Vector2Int dir in Directions.Cardinal)
                 {
-                    if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).Type() == "Rat")
+                    if (GridManager.Instance.GetTile(x + dir.x, y + dir.y) is Rat)
                     {
                         otherRats++;
                     }
@@ -35,9 +35,9 @@ public class Rat : Wasteland
         
     });
     
-    public Rat(Transform parentTransform, Vector3 pos)
+    public Rat(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Rat).ToString())
     {
-        ConstructorHelper(parentTransform, pos, "Rat");
+
     }
 
     protected override Score CalculateBaseScore()
@@ -48,11 +48,5 @@ public class Rat : Wasteland
     public override void WhenPlaced()
     {
         GameManager.Instance.AddRule(PropagateRats);
-    }
-
-
-    public override string Type()
-    {
-        return "Rat";
     }
 }

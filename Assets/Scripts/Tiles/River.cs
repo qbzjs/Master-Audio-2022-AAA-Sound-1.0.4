@@ -23,7 +23,7 @@ public class River : Wasteland
         {
             turnMore = false;
             GridManager.ForEach((int x, int y, ITile tile) => { 
-                if (tile.Type() == "River")
+                if (tile is River)
                 {
                     turnMore = turnMore || ((River) tile).CheckTurn();
                 }
@@ -31,8 +31,9 @@ public class River : Wasteland
         }
         
         GridManager.ForEach((int x, int y, ITile tile) => { 
-            if (tile.Type() == "BloodRiver" || tile.Type() == "Fountain")
+            if (tile is Fountain || (tile is River && ((River)tile).blood))
             {
+                
                 foreach (Vector2Int subdirection in Directions.Cardinal)
                 {
                     GridManager.Instance.GetTile(x + subdirection.x, y + subdirection.y).AddEffect(BloodMultiplier);
@@ -42,9 +43,9 @@ public class River : Wasteland
 
     });
     
-    public River(Transform parentTransform, Vector3 pos)
+    public River(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(River).ToString())
     {
-        ConstructorHelper(parentTransform, pos, "River");
+
     }
     public override bool Destructible()
     {
@@ -59,8 +60,8 @@ public class River : Wasteland
         foreach (Vector2Int dir in Directions.Cardinal)
         {
             if (blood) continue; //can't turn if already made of blood
-            string type = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y).Type();
-            if (type == "BloodRiver" || type == "Fountain")
+            ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
+            if (tile is Fountain || (tile is River && ((River)tile).blood))
             {
                 blood = true;
                 TileObject.GetComponent<SpriteRenderer>().sprite = LoadArt("BloodRiver");
@@ -73,18 +74,4 @@ public class River : Wasteland
     {
         GameManager.Instance.AddRule(PropagateBlood);
     }
-
-    public override string Type()
-    {
-        if (blood)
-        {
-            return "BloodRiver";
-        }
-        return "River";
-    }
-    public string ShowCalculation()
-    {
-        var description = "Point Value: " + scoreWorth;
-        return description;
-    }   
 }
