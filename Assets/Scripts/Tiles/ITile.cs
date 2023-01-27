@@ -37,7 +37,6 @@ public interface ITile
 
     public int xPos { get; set; }
     public int yPos { get; set; }
-    public string Type();
     public Score CalculateScore();
 }
 

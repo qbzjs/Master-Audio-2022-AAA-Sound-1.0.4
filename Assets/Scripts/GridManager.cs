@@ -190,8 +190,8 @@ namespace Scripts
             List<Graveyard> graveyards = new List<Graveyard>();
             foreach (Vector2Int dir in Directions.Cardinal)
             {
-                string type = grid[xPos + dir.x, yPos + dir.y].Type();
-                if (type == "Graveyard")
+                ITile tile = grid[xPos + dir.x, yPos + dir.y];
+                if (tile is Graveyard)
                 {
                     graveyards.Add((Graveyard)grid[xPos + dir.x, yPos + dir.y]);
                 }

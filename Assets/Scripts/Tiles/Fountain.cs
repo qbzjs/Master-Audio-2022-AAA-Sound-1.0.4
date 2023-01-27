@@ -10,14 +10,8 @@ public class Fountain : Wasteland
         return false;
     }
     
-    public Fountain(Transform parentTransform, Vector3 pos)
+    public Fountain(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Fountain).ToString())
     {
-        ConstructorHelper(parentTransform, pos, "Fountain");
-    }
-
-    public override string Type()
-    {
-        return "Fountain";
     }
     
     public string ShowCalculation()

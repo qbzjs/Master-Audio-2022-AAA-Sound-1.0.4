@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Scripts;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Wasteland : ITile
 {
@@ -34,7 +35,18 @@ public class Wasteland : ITile
 
     public Wasteland()
     {
+
+    }
+
+    public Wasteland(Transform parentTransform, Vector3 pos, string tilename)
+    {
         ongoingEffects = new();
+        TileObject = new GameObject("Tile");
+        TileObject.AddComponent<SpriteRenderer>();
+        TileObject.transform.position = pos;
+        TileObject.transform.rotation = Quaternion.identity;
+        TileObject.transform.parent = parentTransform;
+        TileObject.GetComponent<SpriteRenderer>().sprite = LoadArt(tilename);
     }
 
     /// <summary>
@@ -81,15 +93,6 @@ public class Wasteland : ITile
     {
         return true;
     }
-
-    /// <summary>
-    /// Override this function!
-    /// </summary>
-    /// <returns>The name of the tile, for other things to refer to it</returns>
-    public virtual string Type()
-    {
-        return "Wasteland";
-    }
     
     /// <summary>
     /// Override this function!
@@ -122,25 +125,6 @@ public class Wasteland : ITile
     }
 
     /// <summary>
-    /// Takes care of 99% of what subclass constructors need to worry about. (Ezra) didn't seem like
-    /// you could inherit constructors because of obscure C# reasons, if anyone has a cleaner idea about
-    /// how to accomplish it, please do!
-    /// </summary>
-    /// <param name="parentTransform">The parent which TileObject will be instantiated under in the hierarchy</param>
-    /// <param name="pos">The 3D position to instantiate the TileObject</param>
-    /// <param name="tileName">Name of the art to load (minus prefix). e.g. Gargoyle</param>
-    protected void ConstructorHelper(Transform parentTransform, Vector3 pos, string tileName)
-    {
-        ongoingEffects = new();
-        TileObject = new GameObject("Tile");
-        TileObject.AddComponent<SpriteRenderer>();
-        TileObject.transform.position = pos;
-        TileObject.transform.rotation = Quaternion.identity;
-        TileObject.transform.parent = parentTransform;
-        TileObject.GetComponent<SpriteRenderer>().sprite = LoadArt(tileName);
-    }
-
-    /// <summary>
     /// For Tiles to easily load sprites
     /// </summary>
     /// <param name="name">name of the art to load (minus prefix) e.g. Gargoyle</param>
@@ -152,4 +136,6 @@ public class Wasteland : ITile
         Texture2D temp = Resources.Load<Texture2D>(loadAt);
         return Sprite.Create(temp, new Rect(0.0f, 0.0f, temp.width, temp.height), new Vector2(0.5f, 0.5f), temp.width);
     }
+
+
 }

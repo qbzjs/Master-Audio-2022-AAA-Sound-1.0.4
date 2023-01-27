@@ -5,14 +5,8 @@ using Scripts;
 
 public class Wing : Wasteland
 {
-    public Wing(Transform parentTransform, Vector3 pos)
+    public Wing(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Wing).ToString())
     {
-        ConstructorHelper(parentTransform, pos, "ChurchWing");
-    }
 
-    public override string Type()
-    {
-        return "ChurchWing";
     }
-    
 }

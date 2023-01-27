@@ -7,31 +7,31 @@ public class Church : Wasteland
 {
     [SerializeField] protected int scoreWorthAdjacent = 3;
 
-    public Church(Transform parentTransform, Vector3 pos)
+    public Church(Transform parentTransform, Vector3 pos) : base(parentTransform, pos, typeof(Church).ToString())
     {
-        ConstructorHelper(parentTransform, pos, "Church");
+        
     }
 
     protected override Score CalculateBaseScore()
     {
         int adjacentWings = 0;
 
-        if (GridManager.Instance.GetTile(xPos + 1, yPos).Type() == "ChurchWing")
+        if (GridManager.Instance.GetTile(xPos + 1, yPos) is Wing)
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos, yPos - 1).Type() == "ChurchWing")
+        if (GridManager.Instance.GetTile(xPos, yPos - 1) is Wing)
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos - 1, yPos).Type() == "ChurchWing")
+        if (GridManager.Instance.GetTile(xPos - 1, yPos) is Wing)
         {
             adjacentWings++;
         }
 
-        if (GridManager.Instance.GetTile(xPos, yPos + 1).Type() == "ChurchWing")
+        if (GridManager.Instance.GetTile(xPos, yPos + 1) is Wing)
         {
             adjacentWings++;
         }
@@ -39,10 +39,5 @@ public class Church : Wasteland
         
         return new Score(adjacentWings * scoreWorthAdjacent, 
             $"[{adjacentWings}] * {scoreWorthAdjacent}");
-    }
-
-    public override string Type()
-    {
-        return "Church";
     }
 }
