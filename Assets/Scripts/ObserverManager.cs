@@ -7,12 +7,30 @@ using Scripts;
 public class ObserverManager : Singleton<ObserverManager>
 {
     public List<ITile> GraveyardObservers = new();
+    public List<ITile> PlacedTileObservers = new();
+    
 
     public void AddObserver(ITile tile)
     {
         if (tile is Graveyard)
         {
             GraveyardObservers.Add((Wasteland)tile);
+        }
+        
+        if (tile is Human)
+        {
+            GraveyardObservers.Add((Wasteland)tile);
+        }
+
+        if (tile is Vampire)
+        {
+            PlacedTileObservers.Add(tile);
+        }
+
+        if (tile is Clocktower)
+        {
+            GraveyardObservers.Add((Wasteland)tile);
+            PlacedTileObservers.Add((Wasteland)tile);
         }
     }
 
@@ -21,6 +39,22 @@ public class ObserverManager : Singleton<ObserverManager>
         if (tile is Graveyard)
         {
             GraveyardObservers.Remove((Wasteland)tile);
+        }
+        
+        if (tile is Human)
+        {
+            GraveyardObservers.Remove((Wasteland)tile);
+        }
+        
+        if (tile is Vampire)
+        {
+            PlacedTileObservers.Remove(tile);
+        }
+        
+        if (tile is Clocktower)
+        {
+            GraveyardObservers.Remove((Wasteland)tile);
+            PlacedTileObservers.Remove((Wasteland)tile);
         }
     }
 
@@ -33,7 +67,9 @@ public class ObserverManager : Singleton<ObserverManager>
             case GraveyardEvent:
                 Observers.AddRange(GraveyardObservers);
                 break;
-
+            case PlacedEvent:
+                Observers.AddRange(PlacedTileObservers);
+                break;
         }
 
         foreach (ITile o in Observers)

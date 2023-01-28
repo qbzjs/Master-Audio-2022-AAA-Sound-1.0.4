@@ -134,7 +134,8 @@ public class Wasteland : ITile
         string loadAt = TILE_ART_FOLDER_PATH + TILE_ART_PREFIX + name;
         //Debug.Log("attempting to load art: " + loadAt);
         Texture2D temp = Resources.Load<Texture2D>(loadAt);
-        return Sprite.Create(temp, new Rect(0.0f, 0.0f, temp.width, temp.height), new Vector2(0.5f, 0.5f), temp.width);
+        float size = Mathf.Min(temp.width, temp.height);
+        return Sprite.Create(temp, new Rect(0.0f, 0.0f, size, size), new Vector2(0.5f, 0.5f), size);
     }
 
 
