@@ -187,21 +187,6 @@ namespace Scripts
             grid[gridPos.x, gridPos.y] = tile;
         }
 
-        /*private List<Graveyard> FindGraveYards(int xPos, int yPos)
-        {
-            List<Graveyard> graveyards = new List<Graveyard>();
-            foreach (Vector2Int dir in Directions.Cardinal)
-            {
-                ITile tile = grid[xPos + dir.x, yPos + dir.y];
-                if (tile is Graveyard)
-                {
-                    graveyards.Add((Graveyard)grid[xPos + dir.x, yPos + dir.y]);
-                }
-
-            }
-            return graveyards;
-        }*/
-
         private void DestroyTile(Vector2Int pos)
         {
             Wasteland tile = (Wasteland) grid[pos.x, pos.y];
