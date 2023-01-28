@@ -173,31 +173,8 @@ namespace Scripts
             tile.xPos = gridPos.x;
             tile.yPos = gridPos.y;
             tile.TileObject.transform.position = GridToWorldPos(gridPos);
-            //if (grid[gridPos.x, gridPos.y].Type() != "Wasteland")
-            //{
-            //    List<Graveyard> graveyards = FindGraveYards(gridPos.x, gridPos.y);
-            //    foreach (Graveyard g in graveyards)
-            //    {
-            //        g.adjacentDestroyed++;
-            //    }
-            //}
             grid[gridPos.x, gridPos.y] = tile;
         }
-
-        /*private List<Graveyard> FindGraveYards(int xPos, int yPos)
-        {
-            List<Graveyard> graveyards = new List<Graveyard>();
-            foreach (Vector2Int dir in Directions.Cardinal)
-            {
-                ITile tile = grid[xPos + dir.x, yPos + dir.y];
-                if (tile is Graveyard)
-                {
-                    graveyards.Add((Graveyard)grid[xPos + dir.x, yPos + dir.y]);
-                }
-
-            }
-            return graveyards;
-        }*/
 
         private void DestroyTile(Vector2Int pos)
         {
