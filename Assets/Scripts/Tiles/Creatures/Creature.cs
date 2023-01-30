@@ -14,7 +14,7 @@ public class Creature : Wasteland
         GroupedCreatures.Add(this);
     }
 
-    private int CountGroupCreatures()
+    protected int CountGroupCreatures()
     {
         foreach (Vector2Int dir in Directions.Cardinal)
         {

@@ -16,4 +16,14 @@ public class Vampire : Monster
     {
         return new Score(0);
     }
+
+    public override void WhenPlaced()
+    {
+        int packCount = CountGroupCreatures();
+
+        if (packCount >= packSize)
+        {
+            ObserverManager.Instance.ProcessEvent(new VampireEvent());
+        }
+    }
 }
