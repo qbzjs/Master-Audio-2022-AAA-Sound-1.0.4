@@ -133,8 +133,12 @@ public class Wasteland : ITile
     protected Sprite LoadArt(string name)
     {
         string loadAt = TILE_ART_FOLDER_PATH + TILE_ART_PREFIX + name;
-        //Debug.Log("attempting to load art: " + loadAt);
         Texture2D temp = Resources.Load<Texture2D>(loadAt);
+        if (temp == null)
+        {
+            loadAt = TILE_ART_FOLDER_PATH + TILE_ART_PREFIX + "Placeholder";
+            temp = Resources.Load<Texture2D>(loadAt);
+        }
         return Sprite.Create(temp, new Rect(0.0f, 0.0f, temp.width, temp.height), new Vector2(0.5f, 0.5f), temp.width);
     }
 
