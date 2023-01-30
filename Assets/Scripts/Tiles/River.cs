@@ -71,6 +71,17 @@ public class River : Wasteland
         return false;
     }
 
+    public override void Observe(DefaultEvent e)
+    {
+        if (blood)
+        {
+            BloodMultiplier.modify = (value) =>
+            {
+                return new Score(value.score * 3, value.explanation + " * 3");
+            };
+        }
+    }
+
     public override void WhenPlaced()
     {
         GameManager.Instance.AddRule(PropagateBlood);
