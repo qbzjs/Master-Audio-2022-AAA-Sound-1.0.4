@@ -80,6 +80,7 @@ public class River : Wasteland
                 return new Score(value.score * 3, value.explanation + " * 3");
             };
         }
+        GameManager.Instance.AddRule(PropagateBlood);
     }
 
     public override void WhenPlaced()

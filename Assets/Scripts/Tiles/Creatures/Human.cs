@@ -30,6 +30,7 @@ public class Human : Creature
         if (adjacentMonsters)
         {
             ghost = true;
+            //gotta add art change here somehow lol
             return new Score(scoreWorth, $"{scoreWorth}");
         }
 
