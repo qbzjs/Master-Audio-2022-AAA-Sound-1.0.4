@@ -42,13 +42,13 @@ public class GameManager : Singleton<GameManager>
                 upgradeScreen.SetActive(true);
                 
             }
+            int oldScore = score;
             score = value;
             if (score >= winningScore)
             {
                 winButton.SetActive(true);
             }
-            progressBar.fillAmount = (float) score / winningScore;
-            progressCounter.text = "Progress: " + score + "/" + winningScore;
+            StartCoroutine(ScoreIncrementEffect(oldScore));
         }
     }
     
@@ -192,6 +192,13 @@ public class GameManager : Singleton<GameManager>
     public void Reset()
     {
         SceneManager.GetActiveScene().Load();
+    }
+    IEnumerator ScoreIncrementEffect(int oldScore){
+        for(float i = oldScore; i <= score; i++){
+             progressCounter.text = "Progress: " + i + "/" + winningScore;
+              progressBar.fillAmount = (float) i / winningScore;
+              yield return new WaitForSeconds(0.2f);
+        }
     }
 }
 
