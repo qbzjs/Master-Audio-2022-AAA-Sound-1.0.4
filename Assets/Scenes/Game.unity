@@ -1059,14 +1059,14 @@ MonoBehaviour:
     reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
-    - Graveyard
-    - Gargoyle
-    - Rat
+    - Human
+    - Vampire
+    - Monster
     - River
     _keys:
-    - Graveyard
-    - Gargoyle
-    - Rat
+    - Human
+    - Vampire
+    - Monster
     - River
     _values: 01000000010000000100000001000000
   winningScore: 100
@@ -6093,7 +6093,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
