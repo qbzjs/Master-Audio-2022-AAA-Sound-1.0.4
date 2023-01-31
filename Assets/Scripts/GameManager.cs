@@ -16,6 +16,8 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private Image progressBar;
     [Foldout("UI")]
+    [SerializeField] private Image ProgressBarShadow;
+    [Foldout("UI")]
     [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter, pointsDescription;
     [Foldout("UI")]
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
@@ -42,7 +44,7 @@ public class GameManager : Singleton<GameManager>
                 upgradeScreen.SetActive(true);
                 
             }
-            float oldScore = score;
+            float oldScore = Score;
             score = value;
             if (score >= winningScore)
             {
@@ -194,15 +196,17 @@ public class GameManager : Singleton<GameManager>
         SceneManager.GetActiveScene().Load();
     }
     public void ScoreIncrementEffect(float oldScore){
-        LeanTween.value(oldScore, score, 1)
+        LeanTween.value(gameObject, oldScore, score, 0.1f)
+        .setEaseOutQuart()
+        .setOnUpdate((val)=>{ProgressBarShadow.fillAmount = val / winningScore;});    
+
+        LeanTween.value(gameObject, oldScore, score, 2f)
         .setEaseInOutSine()
-        .setOnUpdate(
-            (value)=>
-            {
-                progressCounter.text = "Progress: " + (int)value + "/" + winningScore;
-                progressBar.fillAmount = (float) value / winningScore;
-                
-            });
+        .setOnUpdate(setProgress);
+    }
+    public void setProgress(float val){
+        progressCounter.text = "Progress: " + (int)val+ "/" + winningScore;
+        progressBar.fillAmount = val / winningScore;
     }
 }
 
