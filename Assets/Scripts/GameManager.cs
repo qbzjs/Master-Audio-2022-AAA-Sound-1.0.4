@@ -141,7 +141,8 @@ public class GameManager : Singleton<GameManager>
         {
             Vector2Int tilePos = GridManager.Instance.WorldToGridPos(mousePos);
             ITile hoveringOver = GridManager.Instance.GetTile(tilePos.x, tilePos.y);
-            tooltip.Show(hoveringOver.Type(), hoveringOver.CalculateScore()); 
+            //tooltip.Show(hoveringOver.Type(), hoveringOver.CalculateScore()); 
+            tooltip.Hide();
         }
         else
         {
@@ -201,7 +202,7 @@ public class GameManager : Singleton<GameManager>
         .setOnUpdate((val)=>{ProgressBarShadow.fillAmount = val / winningScore;});    
 
         LeanTween.value(gameObject, oldScore, score, 2f)
-        .setEaseInOutSine()
+        .setEaseInOutQuart()
         .setOnUpdate(setProgress);
     }
     public void setProgress(float val){
