@@ -12,6 +12,18 @@ public class Vampire : Monster
 
     }
 
+    private static Rule PackOfVampires = new Rule("Pack Of Vampires", 15, () =>
+    {
+        GridManager.ForEach((int x, int y, ITile tile) => {
+            if (tile is River river)
+            {
+                ((River)tile).VampireBloodMultiplier();
+                tile.WhenPlaced();
+            }
+        });
+
+    });
+
     protected override Score CalculateBaseScore()
     {
         return new Score(0);
@@ -19,11 +31,13 @@ public class Vampire : Monster
 
     public override void WhenPlaced()
     {
-        int packCount = CountGroupCreatures();
+        List<Creature> pack = new();
+        pack.Add(this);
+        int packCount = CountGroupCreatures(this.GetType(), pack);
 
         if (packCount >= packSize)
         {
-            ObserverManager.Instance.ProcessEvent(new VampireEvent());
+            GameManager.Instance.AddRule(PackOfVampires);
         }
     }
 }
