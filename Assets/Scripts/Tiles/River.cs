@@ -94,7 +94,7 @@ public class River : Wasteland
     public void VampireBloodMultiplier()
     {
         BloodMultiplier = new Effect(
-            "Vampire multiplier", 20, 1, 1, (value) =>
+            "Blood multiplier", 20, 1, 1, (value) =>
             {
                 return new Score(value.score * 3, value.explanation + " * 3");
             }
