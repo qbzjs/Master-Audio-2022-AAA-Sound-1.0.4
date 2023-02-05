@@ -7,7 +7,6 @@ using Scripts;
 public class Creature : Wasteland
 {
     [SerializeField] protected int packSize = 5;
-    private bool packActivated = false;
 
     public Creature(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
