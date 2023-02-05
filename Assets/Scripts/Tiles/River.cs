@@ -86,16 +86,19 @@ public class River : Wasteland
         return false;
     }
 
-    public override void Observe(DefaultEvent e)
+    public bool IsBlood()
     {
-        if (blood)
-        {
-            BloodMultiplier.modify = (value) =>
+        return blood;
+    }
+
+    public void VampireBloodMultiplier()
+    {
+        BloodMultiplier = new Effect(
+            "Vampire multiplier", 20, 1, 1, (value) =>
             {
                 return new Score(value.score * 3, value.explanation + " * 3");
-            };
-        }
-        GameManager.Instance.AddRule(PropagateBlood);
+            }
+        );
     }
 
     public override void WhenPlaced()
