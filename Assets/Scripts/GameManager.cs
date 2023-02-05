@@ -16,6 +16,8 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private Image progressBar;
     [Foldout("UI")]
+    [SerializeField] private Image ProgressBarShadow;
+    [Foldout("UI")]
     [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter, pointsDescription;
     [Foldout("UI")]
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
@@ -42,13 +44,13 @@ public class GameManager : Singleton<GameManager>
                 upgradeScreen.SetActive(true);
                 
             }
+            float oldScore = Score;
             score = value;
             if (score >= winningScore)
             {
                 winButton.SetActive(true);
             }
-            progressBar.fillAmount = (float) score / winningScore;
-            progressCounter.text = "Progress: " + score + "/" + winningScore;
+            ScoreIncrementEffect(oldScore);  
         }
     }
     
@@ -140,6 +142,8 @@ public class GameManager : Singleton<GameManager>
             Vector2Int tilePos = GridManager.Instance.WorldToGridPos(mousePos);
             ITile hoveringOver = GridManager.Instance.GetTile(tilePos.x, tilePos.y);
             tooltip.Show(hoveringOver.GetType().ToString(), hoveringOver.CalculateScore()); 
+            //tooltip.Show(hoveringOver.Type(), hoveringOver.CalculateScore()); 
+            //tooltip.Hide();
         }
         else
         {
@@ -192,6 +196,19 @@ public class GameManager : Singleton<GameManager>
     public void Reset()
     {
         SceneManager.GetActiveScene().Load();
+    }
+    public void ScoreIncrementEffect(float oldScore){
+        LeanTween.value(gameObject, oldScore, score, 0.1f)
+        .setEaseOutQuart()
+        .setOnUpdate((val)=>{ProgressBarShadow.fillAmount = val / winningScore;});    
+
+        LeanTween.value(gameObject, oldScore, score, 2f)
+        .setEaseInOutQuart()
+        .setOnUpdate(setProgress);
+    }
+    public void setProgress(float val){
+        progressCounter.text = "Progress: " + (int)val+ "/" + winningScore;
+        progressBar.fillAmount = val / winningScore;
     }
 }
 

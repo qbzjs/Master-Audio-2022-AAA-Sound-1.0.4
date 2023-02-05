@@ -10,6 +10,8 @@ namespace Scripts
     {
         [SerializeField]
         private int size;
+        
+        [SerializeField] private Transform ScorePopup;
 
         public int Size
         {
@@ -129,6 +131,14 @@ namespace Scripts
                     {
                         Debug.Log("You can't place a block here!");
                         return;
+                    } else {
+                        int val = tile.CalculateScore().score;
+                        if (val > 0){
+                            Vector3 worldPos = GridToWorldPos(gridPos);
+                            Transform PopupTransform = Instantiate(ScorePopup, worldPos, Quaternion.identity);
+                            ScorePopup Popup = PopupTransform.GetComponent<ScorePopup>();
+                            Popup.Setup(val);
+                        }  
                     }
                 }
                 foreach (ITile tile in block.Tiles)
@@ -240,7 +250,8 @@ namespace Scripts
             {
                 for (int y = 0; y < size; y++)
                 {
-                    score += grid[x, y].CalculateScore().score;
+                    int val = grid[x, y].CalculateScore().score;
+                    score += val;
                 }
             }
             return score;
