@@ -9,6 +9,21 @@ public class Human : Creature
     [SerializeField] protected int scoreWorth = 5;
     private bool ghost = false;
 
+    public static string Description
+    {
+        get
+        {
+            return "On death: spawns a ghost";
+        }
+    }
+
+    public static string PointDescription
+    {
+        get
+        {
+            return "0";
+        }
+    }
     public Human(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 

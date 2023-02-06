@@ -5,6 +5,9 @@ using UnityEngine;
 
 public interface ITile
 {
+    public static string Description { get; }
+    public static string PointDescription { get; }
+
     public GameObject TileObject { get; set; }
     
     public Vector3 LocalPosition();

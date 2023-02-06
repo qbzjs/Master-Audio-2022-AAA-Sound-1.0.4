@@ -8,6 +8,22 @@ using static UnityEditor.PlayerSettings;
 
 public class Wasteland : ITile
 {
+    public static string Description
+    {
+        get
+        {
+            return "A barren wasteland";
+        }
+    }
+
+    public static string PointDescription
+    {
+        get
+        {
+            return "0";
+        }
+    }
+
     public GameObject TileObject { get; set; }
 
     public List<Effect> ongoingEffects;

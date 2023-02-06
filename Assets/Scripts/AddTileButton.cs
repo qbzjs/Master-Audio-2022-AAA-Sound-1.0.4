@@ -51,10 +51,14 @@ public class AddTileButton : MonoBehaviour
     }
     #endregion
     
-    public void SetValues(string myTileName, string myTileDescription, string myTilePoints, Color myBorderColor)
+    public void SetValues(string myTileName, Color myBorderColor)
     {
+        string myTileDescription= "", myTilePoints = "";
+
+        System.Type ClassType = System.Type.GetType(myTileName);
+        
         TileName = myTileName;
-        TileDescription = myTileDescription;
+        //TileDescription = ClassType.GetField("Description").GetValue(myTileDescription);
         TilePoints = myTilePoints;
         BorderColor = myBorderColor;
     }

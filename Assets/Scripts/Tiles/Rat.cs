@@ -7,6 +7,22 @@ public class Rat : Wasteland
 {
     [SerializeField] new protected int scoreWorth = 1;
 
+    public static string Description
+    {
+        get
+        {
+            return "Rats beget rats";
+        }
+    }
+
+    public static string PointDescription
+    {
+        get
+        {
+            return "1";
+        }
+    }
+    
     public static Rule PropagateRats = new Rule("Propagate Rats", 10, () =>
     {
         bool checkAgain = true;
