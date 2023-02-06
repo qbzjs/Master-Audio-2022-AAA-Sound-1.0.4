@@ -12,46 +12,23 @@ public class Ghoul : Monster
 
     }
 
-    private static Effect GhoulTenement =
-        new Effect(
-            "Ghoul tenement", 30, 1, 1, (value) =>
-            {
-                return new Score(value.score * 2, value.explanation + " * 2");
-            }
-        );
-
-    private static Effect GhoulMansion =
-        new Effect(
-            "Ghoul manion", 30, 1, 1, (value) =>
-            {
-                return new Score(value.score / 2, value.explanation + " / 2");
-            }
-        );
-
-    private static Rule PackOfGhouls = new Rule("Pack Of Ghouls", 15, () =>
+    protected override Score CalculateBaseScore()
     {
-        GridManager.ForEach((int x, int y, ITile tile) => {
-            if (tile is Tenement)
-            {
-                tile.AddEffect(GhoulTenement);
-            }
-            if (tile is Mansion)
-            {
-                tile.AddEffect(GhoulMansion);
-            }
-        });
+        int ghoulStrength = 1;
 
-    });
-
-    public override void WhenPlaced()
-    {
         List<Creature> pack = new();
         pack.Add(this);
         int packCount = CountGroupCreatures(this.GetType(), pack);
 
         if (packCount >= packSize)
         {
-            GameManager.Instance.AddRule(PackOfGhouls);
+            ghoulStrength = 5;
+        } else
+        {
+            ghoulStrength = packCount;
         }
+
+        return new Score(ghoulStrength,
+            $"[{ghoulStrength}]");
     }
 }
