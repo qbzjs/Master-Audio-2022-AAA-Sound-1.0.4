@@ -28,5 +28,10 @@ public class Creature : Wasteland
         return pack.Count;
     }
 
+    protected override Score CalculateBaseScore()
+    {
+        return new Score(0);
+    }
+
 }
 

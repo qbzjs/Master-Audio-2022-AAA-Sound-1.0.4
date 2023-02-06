@@ -17,17 +17,12 @@ public class Vampire : Monster
         GridManager.ForEach((int x, int y, ITile tile) => {
             if (tile is River river)
             {
-                ((River)tile).VampireBloodMultiplier();
-                tile.WhenPlaced();
+                river.VampireBloodMultiplier();
+                river.WhenPlaced();
             }
         });
 
     });
-
-    protected override Score CalculateBaseScore()
-    {
-        return new Score(0);
-    }
 
     public override void WhenPlaced()
     {
