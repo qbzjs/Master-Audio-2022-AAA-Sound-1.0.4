@@ -66,8 +66,8 @@ public class AddTileButton : MonoBehaviour
         Destroy(tile.TileObject);
         
         TileName = myTileName;
-        TileDescription = tile.GetDescription();
-        //TilePoints = myTilePoints;
+        TileDescription = myTileDescription;
+        TilePoints = myTilePoints;
         BorderColor = myBorderColor;
     }
 
