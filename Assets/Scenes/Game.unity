@@ -2547,7 +2547,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 834050987}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2580,7 +2580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d08f2163c79642e89a87f5e80bb3a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minMaxSize: {x: 2, y: 3}
+  minMaxSize: {x: 1, y: 1}
 --- !u!4 &835768318
 Transform:
   m_ObjectHideFlags: 0

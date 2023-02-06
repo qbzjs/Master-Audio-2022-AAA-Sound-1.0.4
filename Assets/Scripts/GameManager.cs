@@ -141,8 +141,7 @@ public class GameManager : Singleton<GameManager>
         {
             Vector2Int tilePos = GridManager.Instance.WorldToGridPos(mousePos);
             ITile hoveringOver = GridManager.Instance.GetTile(tilePos.x, tilePos.y);
-            //tooltip.Show(hoveringOver.Type(), hoveringOver.CalculateScore()); 
-            tooltip.Hide();
+          //  tooltip.Show(hoveringOver.Type(), hoveringOver.CalculateScore()); 
         }
         else
         {

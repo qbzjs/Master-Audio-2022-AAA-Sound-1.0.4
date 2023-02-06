@@ -13,6 +13,7 @@ public class Wasteland : ITile
 
     public int xPos { get; set; }
     public int yPos { get; set; }
+    public Score TileScore {get; set;}
     
     protected int scoreWorth = 0;
     //The file path (within the Resources folder) to the folder
@@ -106,14 +107,14 @@ public class Wasteland : ITile
     /// <returns></returns>
     public Score CalculateScore()
     {
-        Score toReturn = CalculateBaseScore();
+        TileScore = CalculateBaseScore();
         
         foreach (Effect effect in ongoingEffects)
         {
-            toReturn = effect.modify(toReturn);
+            TileScore = effect.modify(TileScore);
         }
 
-        return toReturn;
+        return TileScore;
     }
 
     /// <summary>
