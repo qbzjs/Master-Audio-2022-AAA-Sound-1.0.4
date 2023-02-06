@@ -5,20 +5,9 @@ using UnityEngine;
 
 public class Fountain : Wasteland
 {
-    public static string Description
+    public override string GetDescription()
     {
-        get
-        {
-            return "My blood spilleth over";
-        }
-    }
-
-    public static string PointDescription
-    {
-        get
-        {
-            return "0";
-        }
+        return "My blood spilleth over";
     }
     public override bool Destructible()
     {

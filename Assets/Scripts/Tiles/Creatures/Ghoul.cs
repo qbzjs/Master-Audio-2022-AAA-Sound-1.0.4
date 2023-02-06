@@ -5,8 +5,11 @@ using Scripts;
 
 public class Ghoul : Monster
 {
-    [SerializeField] protected int packSize = 5;
-
+    [SerializeField] protected int packSize = 3;
+    public override string GetDescription()
+    {
+        return "+1 for each ghoul in its pack (up to 3)";
+    }
     public Ghoul(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
@@ -22,7 +25,7 @@ public class Ghoul : Monster
 
         if (packCount >= packSize)
         {
-            ghoulStrength = 5;
+            ghoulStrength = packSize;
         } else
         {
             ghoulStrength = packCount;

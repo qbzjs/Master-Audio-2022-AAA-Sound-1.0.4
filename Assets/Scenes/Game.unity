@@ -1093,20 +1093,18 @@ MonoBehaviour:
     reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
-    - Vampire
+    - Tenement
     - Gargoyle
-    - Rat
+    - Ghoul
     - River
-    - Human
     _keys:
-    - Vampire
+    - Tenement
     - Gargoyle
-    - Rat
+    - Ghoul
     - River
-    - Human
-    _values: 0100000001000000010000000100000001000000
+    _values: 01000000010000000100000001000000
   winningScore: 100
-  upgradeIncrement: 30
+  upgradeIncrement: 10
   totalTurns: 20
 --- !u!1 &419167794
 GameObject:
