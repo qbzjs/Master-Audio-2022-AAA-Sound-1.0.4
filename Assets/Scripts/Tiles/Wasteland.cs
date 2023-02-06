@@ -8,20 +8,9 @@ using static UnityEditor.PlayerSettings;
 
 public class Wasteland : ITile
 {
-    public static string Description
+    public virtual string GetDescription()
     {
-        get
-        {
-            return "A barren wasteland";
-        }
-    }
-
-    public static string PointDescription
-    {
-        get
-        {
-            return "0";
-        }
+        return "<i>A barren wasteland</i>";
     }
 
     public GameObject TileObject { get; set; }

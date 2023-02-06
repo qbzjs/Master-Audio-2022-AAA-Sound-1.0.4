@@ -7,20 +7,9 @@ using UnityEngine;
 public class River : Wasteland
 {
     private bool blood = false;
-    public static string Description
+    public override string GetDescription()
     {
-        get
-        {
-            return "Becomes a blood river if next to Blood.<br>(blood rivers double adjacent tiles)";
-        }
-    }
-
-    public static string PointDescription
-    {
-        get
-        {
-            return "0";
-        }
+        return "Becomes a blood river if next to Blood.<br>(blood rivers double adjacent tiles)";
     }
     
     private static Effect BloodMultiplier = 

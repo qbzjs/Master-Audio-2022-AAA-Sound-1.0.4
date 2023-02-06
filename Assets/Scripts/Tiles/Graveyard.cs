@@ -7,7 +7,10 @@ public class Graveyard : Wasteland
 {
     [SerializeField] private int scoreWorthAdjacent = 1;
     public int adjacentDestroyed = 0;
-
+    public override string GetDescription()
+    {
+        return "+1 when an adjacent tile is destroyed";
+    }
     public Graveyard(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 

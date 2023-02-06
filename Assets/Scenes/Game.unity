@@ -1219,16 +1219,14 @@ MonoBehaviour:
     - Vampire
     - Gargoyle
     - River
-    - Human
     _keys:
     - Human
     - Vampire
     - Gargoyle
     - River
-    - Human
-    _values: 0100000001000000010000000100000001000000
+    _values: 01000000010000000100000001000000
   winningScore: 100
-  upgradeIncrement: 30
+  upgradeIncrement: 10
   totalTurns: 20
 --- !u!1 &419167794
 GameObject:

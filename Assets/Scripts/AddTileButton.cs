@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,10 +57,15 @@ public class AddTileButton : MonoBehaviour
         string myTileDescription= "", myTilePoints = "";
 
         System.Type ClassType = System.Type.GetType(myTileName);
+        Debug.Log("class name is: " + myTileName);
+        Debug.Log("class type: " + ClassType);
+
+        ITile tile = TileFactory.CreateTile(ClassType, transform, Vector3.zero);
+        Destroy(tile.TileObject);
         
         TileName = myTileName;
-        //TileDescription = ClassType.GetField("Description").GetValue(myTileDescription);
-        TilePoints = myTilePoints;
+        TileDescription = tile.GetDescription();
+        //TilePoints = myTilePoints;
         BorderColor = myBorderColor;
     }
 

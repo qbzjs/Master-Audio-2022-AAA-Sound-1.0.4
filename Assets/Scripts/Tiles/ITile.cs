@@ -5,8 +5,10 @@ using UnityEngine;
 
 public interface ITile
 {
-    public static string Description { get; }
-    public static string PointDescription { get; }
+    //public static string Description { get; }
+    //public static string PointDescription { get; }
+
+    public string GetDescription();
 
     public GameObject TileObject { get; set; }
     

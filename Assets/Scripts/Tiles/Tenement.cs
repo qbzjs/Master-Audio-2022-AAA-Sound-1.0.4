@@ -6,20 +6,10 @@ using UnityEngine;
 public class Tenement : Wasteland
 {
     [SerializeField] protected int scoreWorthAdjacent = 1;
-    public static string Description
-    {
-        get
-        {
-            return "1 point for each adjacent tenement";
-        }
-    }
 
-    public static string PointDescription
+    public override string GetDescription()
     {
-        get
-        {
-            return "?";
-        }
+        return "+1 for each adjacent tenement";
     }
     
     public Tenement(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
