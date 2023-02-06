@@ -5,8 +5,23 @@ using UnityEngine;
 
 public class Tenement : Wasteland
 {
-    [SerializeField] protected int scoreWorthAdjacent = 2;
+    [SerializeField] protected int scoreWorthAdjacent = 1;
+    public static string Description
+    {
+        get
+        {
+            return "1 point for each adjacent tenement";
+        }
+    }
 
+    public static string PointDescription
+    {
+        get
+        {
+            return "?";
+        }
+    }
+    
     public Tenement(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
