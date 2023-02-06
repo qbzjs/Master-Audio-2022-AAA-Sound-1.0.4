@@ -22,4 +22,10 @@ public static class Extensions
             (toShuffle[randomIndex], toShuffle[i]) = (toShuffle[i], toShuffle[randomIndex]);
         }
     }
+    
+    public static T PickRandom<T>(this List<T> toPickFrom)
+    {
+        return toPickFrom[Random.Range(0, toPickFrom.Count)];
+    }
+    
 }

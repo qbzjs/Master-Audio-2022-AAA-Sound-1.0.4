@@ -9,35 +9,53 @@ using Random = UnityEngine.Random;
 
 public class UpgradeManager : Singleton<UpgradeManager>
 {
-    private List<int> upgradeIDs;
-    [SerializeField] private List<UpgradeInfo> upgrades;
-    [SerializeField] private List<TextMeshProUGUI> upgradeTexts;
+    [SerializeField] private FullTilePool tilePool;
+    [SerializeField] private List<AddTileButton> addTileButtons;
 
-
-    private void Awake()
-    {
-        upgradeIDs = new();
-    }
     
     public void PopulateUpgrades()
     {
-        upgradeIDs.Clear();
-        for (int i = 0; i < upgradeTexts.Count; i++)
+        
+        for (int i = 0; i < addTileButtons.Count; i++)
         {
-            upgradeIDs.Add(Random.Range(0, upgrades.Count));
-            upgradeTexts[i].text = upgrades[upgradeIDs[i]].displayText;
+            PopulateTileButton(addTileButtons[i]);
         }
         
     }
-    
-    public void Upgrade(int buttonID)
-    {
-        upgrades[upgradeIDs[buttonID]].effect.Invoke();
-    }
-}
 
-[Serializable] struct UpgradeInfo
-{
-    public string displayText;
-    public UnityEvent effect;
+    private void PopulateTileButton(AddTileButton toPopulate)
+    {
+        float spin = Random.Range(0f, 1f);
+        Color borderColor = Color.black;
+        string tileName;
+
+        if (spin < tilePool.CommonWeight) 
+        { 
+            // common
+            borderColor = tilePool.CommonColor;
+            tileName = tilePool.Commons.PickRandom();
+        } 
+        else if (spin < tilePool.CommonWeight + tilePool.UncommonWeight) 
+        { 
+            // uncommon
+            borderColor = tilePool.UncommonColor;
+            tileName = tilePool.Uncommons.PickRandom();
+        } 
+        else if (spin < tilePool.CommonWeight + tilePool.UncommonWeight + tilePool.RareWeight) 
+        { 
+            // rare
+            borderColor = tilePool.RareColor;
+            tileName = tilePool.Rares.PickRandom();          
+        }
+        else 
+        { 
+            // legendary
+            borderColor = tilePool.LegendaryColor;
+            tileName = tilePool.Legendaries.PickRandom();
+        }
+        
+        toPopulate.SetValues(tileName, "temp", "temp", borderColor);
+        
+    }
+    
 }
