@@ -64,7 +64,7 @@ public class River : Wasteland
             if (tile is Fountain || (tile is River river && river.blood))
             {
                 blood = true;
-                TileObject.GetComponent<SpriteRenderer>().sprite = LoadArt("BloodRiver");
+                TileObject.GetComponent<SpriteRenderer>().sprite = ArtManager.LoadTileArt("BloodRiver");
                 return true;
             }
         }
