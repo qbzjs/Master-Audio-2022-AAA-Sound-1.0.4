@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
     [Foldout("UI")]
     [SerializeField] private Tooltip tooltip;
-    [SerializeField] private SerializableDictionaryBase<string, int> startingDeck;
+    [SerializeField] private StartingDeck startingDeck;
 
     [SerializeField] private int winningScore;
     public int upgradeIncrement;
@@ -124,7 +124,7 @@ public class GameManager : Singleton<GameManager>
 
     private void InitializeDeck()
     {
-        foreach (KeyValuePair<string, int> pair in startingDeck)
+        foreach (KeyValuePair<string, int> pair in startingDeck.deck)
         {
             for (int i = 0; i < pair.Value; i++)
             {

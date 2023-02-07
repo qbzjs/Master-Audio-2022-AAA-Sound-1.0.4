@@ -136,7 +136,11 @@ namespace Scripts
                 foreach (ITile tile in block.Tiles)
                 {
                     PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
-                    tile.WhenPlaced(); //TODO change old tiles to work with observers
+                }
+                
+                foreach (ITile tile in block.Tiles)
+                {
+                    tile.WhenPlaced();
                 }
 
                 foreach (ITile tile in block.Tiles)
