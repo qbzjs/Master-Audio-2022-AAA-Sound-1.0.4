@@ -44,7 +44,6 @@ public class Vampire : Monster
 
     protected override Score CalculateBaseScore()
     {
-        Debug.Log("calculating score");
         return new Score(scoreWorth);
     }
 }

@@ -196,6 +196,23 @@ namespace Scripts
             Destroy(grid[pos.x, pos.y].TileObject);
         }
 
+        public void KillTile(Vector2Int pos)
+        {
+            Wasteland tile = (Wasteland)grid[pos.x, pos.y];
+            if (tile.TileObject == null)
+                return;
+
+            //Notifies all tiles that a tile has been destroyed, if they want to do something with that
+            ForEach((int x, int y, ITile tile) =>
+            {
+                tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]);
+            });
+
+            Destroy(grid[pos.x, pos.y].TileObject);
+
+            grid[pos.x, pos.y] = new Wasteland();
+        }
+
         /// <summary>
         /// Rounds a Vector3 to the nearest position on the grid, does nothing if not on the grid. For snapping tiles to the grid.
         /// </summary>

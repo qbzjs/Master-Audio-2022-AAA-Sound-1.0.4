@@ -6,6 +6,7 @@ using UnityEngine;
 public class Church : Building
 {
     [SerializeField] protected int scoreWorthAdjacent = 3;
+    public new string Type = "Chaos";
 
     public Church(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
@@ -37,7 +38,7 @@ public class Church : Building
         }
 
         
-        return new Score(adjacentWings * scoreWorthAdjacent, 
-            $"[{adjacentWings}] * {scoreWorthAdjacent}");
+        return new Score((adjacentWings+1) * scoreWorthAdjacent, 
+            $"[{adjacentWings + 1}] * {scoreWorthAdjacent}");
     }
 }

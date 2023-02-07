@@ -14,6 +14,7 @@ public class Angel : Monument
     {
         return "<i>A holy object, don't get it bloody</i>";
     }
+
     public Angel(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
