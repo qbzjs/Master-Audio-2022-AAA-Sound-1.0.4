@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Fountain : Monument
 {
+
+    public string Type = "Blood";
+
     public override string GetDescription()
     {
         return "My blood spilleth over";
