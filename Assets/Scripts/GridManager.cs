@@ -144,14 +144,19 @@ namespace Scripts
                 foreach (ITile tile in block.Tiles)
                 {
                     PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
-                    tile.WhenPlaced();
+                    tile.WhenPlaced(); //TODO change old tiles to work with observers
                 }
 
                 foreach (ITile tile in block.Tiles)
                 {
                     ObserverManager.Instance.AddObserver(tile);
                 }
-
+                
+                foreach (ITile tile in block.Tiles)
+                {
+                    ObserverManager.Instance.ProcessEvent(new PlacedEvent(tile.xPos, tile.yPos));
+                }
+                
                 if (block.held)
                 {
                     HoldingCell.Instance.holding = false;
@@ -186,7 +191,7 @@ namespace Scripts
             grid[gridPos.x, gridPos.y] = tile;
         }
 
-        private void DestroyTile(Vector2Int pos)
+        public void DestroyTile(Vector2Int pos)
         {
             Wasteland tile = (Wasteland) grid[pos.x, pos.y];
             if (tile.TileObject == null)
@@ -195,14 +200,21 @@ namespace Scripts
             //Notifies all tiles that a tile has been destroyed, if they want to do something with that
             ForEach((int x, int y, ITile tile) =>
             {
-                tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]);
+                tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]); //TODO remove old code that relies on this
             });
-            
-            Destroy(grid[pos.x, pos.y].TileObject);
-
-            ObserverManager.Instance.RemoveObserver(tile);
 
             ObserverManager.Instance.ProcessEvent(new GraveyardEvent(pos.x, pos.y));
+
+            EraseTile(tile);
+        }
+
+        /// <summary>
+        /// Cleans up the references from the tile
+        /// </summary>
+        private void EraseTile(ITile tile)
+        {
+            ObserverManager.Instance.RemoveObserver(tile);
+            Destroy(tile.TileObject);
         }
 
         /// <summary>
@@ -264,13 +276,7 @@ namespace Scripts
 
         public void ClearGrid()
         {
-            for (int x = 0; x < size; x++)
-            {
-                for (int y = 0; y < size; y++)
-                {
-                    DestroyTile(new Vector2Int(x, y));
-                }
-            }
+            ForEach((x, y, tile) => {EraseTile(tile);});
         }
         
         /// <summary>
