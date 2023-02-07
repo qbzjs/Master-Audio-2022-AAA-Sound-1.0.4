@@ -19,7 +19,7 @@ public class Wasteland : ITile
 
     public int xPos { get; set; }
     public int yPos { get; set; }
-    public string Type { get => "Null"; }
+    public string Type = "";
 
     protected int scoreWorth = 0;
 

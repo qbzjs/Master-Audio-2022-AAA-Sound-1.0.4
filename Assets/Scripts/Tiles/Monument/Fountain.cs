@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Scripts;
 using UnityEngine;
 
-public class Fountain : Wasteland
+public class Fountain : Monument
 {
     public override string GetDescription()
     {

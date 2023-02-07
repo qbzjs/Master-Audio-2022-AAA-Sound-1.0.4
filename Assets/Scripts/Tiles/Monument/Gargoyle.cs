@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Scripts;
 using UnityEngine;
 
-public class Gargoyle : Wasteland
+public class Gargoyle : Monument
 {
     [SerializeField] new protected int scoreWorth = 2;
     public override string GetDescription()

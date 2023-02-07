@@ -7,8 +7,6 @@ public interface ITile
 {
     public string GetDescription();
 
-    public string Type { get; }
-
     public GameObject TileObject { get; set; }
     
     public Vector3 LocalPosition();
