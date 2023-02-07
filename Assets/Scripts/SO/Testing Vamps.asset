@@ -9,18 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d6baf7b5b0a27f4e971906b8af00366, type: 3}
-  m_Name: Tile Rarities
+  m_Script: {fileID: 11500000, guid: c890922afe20489087fc27b3887d7028, type: 3}
+  m_Name: Testing Vamps
   m_EditorClassIdentifier: 
-  CommonWeight: 0.7
-  UncommonWeight: 0.2
-  RareWeight: 0.09
-  LegendaryWeight: 0.01
-  CommonColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
-  UncommonColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
-  RareColor: {r: 0.8396226, g: 0.47696444, b: 0.18614274, a: 1}
-  LegendaryColor: {r: 0.64433086, g: 0.14960839, b: 0.7735849, a: 1}
-  startingDeck:
+  deck:
     reorderableList:
       canAdd: 1
       canRemove: 1
@@ -44,27 +36,9 @@ MonoBehaviour:
     reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
-    - Gargoyle
-    - Ghoul
-    - Tenement
-    - River
+    - Vampire
+    - Human
     _keys:
-    - Gargoyle
-    - Ghoul
-    - Tenement
-    - River
-    _values: 03000000030000000300000003000000
-  Commons:
-  - River
-  - Human
-  - Gargoyle
-  - Rat
-  Uncommons:
-  - Clocktower
-  - Ghost
-  - Vampire
-  Rares:
-  - Vampire
-  - Ghost
-  Legendaries:
-  - Vampire
+    - Vampire
+    - Human
+    _values: 0500000002000000
