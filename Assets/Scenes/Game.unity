@@ -1069,40 +1069,7 @@ MonoBehaviour:
   loseScreen: {fileID: 935791074}
   upgradeScreen: {fileID: 323516238}
   tooltip: {fileID: 834050989}
-  startingDeck:
-    reorderableList:
-      canAdd: 1
-      canRemove: 1
-      draggable: 1
-      expandable: 1
-      multipleSelection: 1
-      isExpanded: 1
-      label:
-        m_Text: Keys
-        m_Image: {fileID: 0}
-        m_Tooltip: 
-      headerHeight: 18
-      footerHeight: 13
-      slideEasing: 0.15
-      verticalSpacing: 2
-      showDefaultBackground: 1
-      elementDisplayType: 0
-      elementNameProperty: 
-      elementNameOverride: 
-      elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues:
-    - Tenement
-    - Gargoyle
-    - Ghoul
-    - River
-    _keys:
-    - Tenement
-    - Gargoyle
-    - Ghoul
-    - River
-    _values: 01000000010000000100000001000000
+  startingDeck: {fileID: 11400000, guid: c9a67a51953a6b54db0062f161d1b0f6, type: 2}
   winningScore: 100
   upgradeIncrement: 10
   totalTurns: 20
