@@ -13,7 +13,7 @@ public class Creature : Wasteland
     
     }
 
-    protected int CountGroupCreatures(Type type, List<Creature> pack)
+    public int CountGroupCreatures(Type type, List<Creature> pack)
     {
         foreach (Vector2Int dir in Directions.Cardinal)
         {

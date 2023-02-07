@@ -4,9 +4,12 @@ using Scripts;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class River : Wasteland
+public class River : Building
 {
     private bool blood = false;
+
+    public new string Type { get => "Blood"; }
+
     public override string GetDescription()
     {
         return "Becomes a blood river if next to Blood.<br>(blood rivers double adjacent tiles)";

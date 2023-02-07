@@ -147,11 +147,6 @@ namespace Scripts
                     tile.WhenPlaced();
                 }
 
-                foreach (ITile tile in block.Tiles)
-                {
-                    ObserverManager.Instance.AddObserver(tile);
-                }
-
                 if (block.held)
                 {
                     HoldingCell.Instance.holding = false;
@@ -199,10 +194,6 @@ namespace Scripts
             });
             
             Destroy(grid[pos.x, pos.y].TileObject);
-
-            ObserverManager.Instance.RemoveObserver(tile);
-
-            ObserverManager.Instance.ProcessEvent(new GraveyardEvent(pos.x, pos.y));
         }
 
         /// <summary>

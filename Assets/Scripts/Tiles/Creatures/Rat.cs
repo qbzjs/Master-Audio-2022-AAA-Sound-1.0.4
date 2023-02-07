@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Scripts;
 using UnityEngine;
 
-public class Rat : Wasteland
+public class Rat : Animal
 {
     [SerializeField] new protected int scoreWorth = 1;
 

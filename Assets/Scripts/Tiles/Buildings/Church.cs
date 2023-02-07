@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Scripts;
 using UnityEngine;
 
-public class Church : Wasteland
+public class Church : Building
 {
     [SerializeField] protected int scoreWorthAdjacent = 3;
 

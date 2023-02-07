@@ -1094,13 +1094,13 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - Tenement
-    - Gargoyle
-    - Ghoul
+    - Rat
+    - Vampire
     - River
     _keys:
     - Tenement
-    - Gargoyle
-    - Ghoul
+    - Rat
+    - Vampire
     - River
     _values: 01000000010000000100000001000000
   winningScore: 100
