@@ -15,7 +15,7 @@ public class Tomb : Building
 
     public Tomb(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-
+        Type = "Blood";
     }
 
     protected override Score CalculateBaseScore()
@@ -38,15 +38,7 @@ public class Tomb : Building
             if (adjacentVampirePacks.Count > 0)
             {
                 open = false;
-                GameManager.Instance.ChangeTurns(adjacentVampirePacks.Count);
-                int delta;
-                if (adjacentVampirePacks.Count >= 5)
-                {
-                    delta = 5;
-                } else
-                {
-                    delta = adjacentVampirePacks.Count;
-                }
+                GameManager.Instance.AddTurns(adjacentVampirePacks.Count);
             }
 
         }

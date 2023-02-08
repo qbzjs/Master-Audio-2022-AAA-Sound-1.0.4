@@ -7,7 +7,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Werewolf : Monster
 {
-    public new string Type = "Dark";
+    private int vampiresKilled = 0;
 
     public override string GetDescription()
     {
@@ -16,7 +16,7 @@ public class Werewolf : Monster
 
     public Werewolf(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-
+        Type = "Dark";
     }
 
     protected override Score CalculateBaseScore()
@@ -34,7 +34,7 @@ public class Werewolf : Monster
             }
         }
 
-        int vampiresKilled = adjacentVampirePacks.Count;
+        vampiresKilled += adjacentVampirePacks.Count;
 
         foreach(Vampire vampire in adjacentVampirePacks)
         {

@@ -9,12 +9,9 @@ public class Vampire : Monster
 
     [SerializeField] protected int scoreWorth = 0;
 
-
-    public new string Type = "Blood";
-
     public Vampire(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-
+        Type = "Blood";
     }
 
     private static Rule PackOfVampires = new Rule("Pack Of Vampires", 15, () =>

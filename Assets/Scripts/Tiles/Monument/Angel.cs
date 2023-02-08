@@ -23,7 +23,7 @@ public class Angel : Monument
     {
         foreach (Vector2Int dir in Directions.Cardinal)
         {
-            if (blood) continue; //can't turn if already made of blood
+            if (blood) break; //can't turn if already made of blood
             Wasteland tile = (Wasteland)GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
             if (tile.Type == "Blood")
             {
