@@ -63,8 +63,8 @@ MonoBehaviour:
   - Clocktower
   - Ghost
   - Vampire
+  - Ghost
   Rares:
   - Vampire
-  - Ghost
   Legendaries:
   - Vampire
