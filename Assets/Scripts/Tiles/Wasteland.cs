@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using Scripts;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Wasteland : ITile
 {

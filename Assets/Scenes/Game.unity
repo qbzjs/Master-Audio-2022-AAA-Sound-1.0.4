@@ -1063,7 +1063,6 @@ MonoBehaviour:
   winFinalScore: {fileID: 1416974774}
   winTurnCounter: {fileID: 685443256}
   progressCounter: {fileID: 183517444}
-  pointsDescription: {fileID: 0}
   winButton: {fileID: 1986029110}
   winScreen: {fileID: 430809457}
   loseScreen: {fileID: 935791074}
@@ -4436,7 +4435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1559934566
 RectTransform:
   m_ObjectHideFlags: 0
