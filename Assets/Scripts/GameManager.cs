@@ -18,16 +18,14 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private Image ProgressBarShadow;
     [Foldout("UI")]
-    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter, pointsDescription;
+    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter;
     [Foldout("UI")]
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
     [Foldout("UI")]
     [SerializeField] private Tooltip tooltip;
-    [SerializeField] private SerializableDictionaryBase<string, int> startingDeck;
+    [SerializeField] private FullTilePool tilePool;
 
-    [SerializeField] private int winningScore;
-    public int upgradeIncrement;
-    public int totalTurns;
+    [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
     private int score;
 
     private List<Rule> rules;
@@ -124,7 +122,7 @@ public class GameManager : Singleton<GameManager>
 
     private void InitializeDeck()
     {
-        foreach (KeyValuePair<string, int> pair in startingDeck)
+        foreach (KeyValuePair<string, int> pair in tilePool.startingDeck)
         {
             for (int i = 0; i < pair.Value; i++)
             {
@@ -137,18 +135,17 @@ public class GameManager : Singleton<GameManager>
     void Update()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         if (GridManager.Instance.OverGrid(mousePos))
         {
             Vector2Int tilePos = GridManager.Instance.WorldToGridPos(mousePos);
             ITile hoveringOver = GridManager.Instance.GetTile(tilePos.x, tilePos.y);
-            tooltip.Show(hoveringOver.GetType().ToString(), hoveringOver.CalculateScore()); 
-            //tooltip.Show(hoveringOver.Type(), hoveringOver.CalculateScore()); 
-            //tooltip.Hide();
+            tooltip.Show(hoveringOver.GetDescription(), hoveringOver.CalculateScore()); 
         }
         else
         {
             tooltip.Hide();
-        }
+        } 
         
 #if !UNITY_WEBGL
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -190,6 +187,7 @@ public class GameManager : Singleton<GameManager>
         winScreen.SetActive(true);
         winFinalScore.text = "Final Score: " + score + "/" + winningScore;
         winTurnCounter.text = "With " + turns + " turns to spare";
+        winningScore += winningScoreIncrement;
     }
 
     public void Lose()
@@ -208,8 +206,8 @@ public class GameManager : Singleton<GameManager>
         .setOnUpdate((val)=>{ProgressBarShadow.fillAmount = val / winningScore;});    
 
         LeanTween.value(gameObject, oldScore, score, 2f)
-        .setEaseInOutQuart()
-        .setOnUpdate(setProgress);
+        .setEaseOutSine()
+        .setOnUpdate(setProgress).setDelay(1.1f);
     }
     public void setProgress(float val){
         progressCounter.text = "Progress: " + (int)val+ "/" + winningScore;

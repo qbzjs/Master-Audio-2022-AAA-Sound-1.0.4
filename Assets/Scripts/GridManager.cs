@@ -131,19 +131,15 @@ namespace Scripts
                     {
                         Debug.Log("You can't place a block here!");
                         return;
-                    } else {
-                        int val = tile.CalculateScore().score;
-                        if (val > 0){
-                            Vector3 worldPos = GridToWorldPos(gridPos);
-                            Transform PopupTransform = Instantiate(ScorePopup, worldPos, Quaternion.identity);
-                            ScorePopup Popup = PopupTransform.GetComponent<ScorePopup>();
-                            Popup.Setup(val);
-                        }  
                     }
                 }
                 foreach (ITile tile in block.Tiles)
                 {
                     PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
+                }
+                
+                foreach (ITile tile in block.Tiles)
+                {
                     tile.WhenPlaced();
                 }
 
@@ -178,10 +174,11 @@ namespace Scripts
             tile.xPos = gridPos.x;
             tile.yPos = gridPos.y;
             tile.TileObject.transform.position = GridToWorldPos(gridPos);
+            tile.TileScore = grid[gridPos.x, gridPos.y].TileScore;
             grid[gridPos.x, gridPos.y] = tile;
         }
 
-        private void DestroyTile(Vector2Int pos)
+        public void DestroyTile(Vector2Int pos)
         {
             Wasteland tile = (Wasteland) grid[pos.x, pos.y];
             if (tile.TileObject == null)
@@ -190,7 +187,7 @@ namespace Scripts
             //Notifies all tiles that a tile has been destroyed, if they want to do something with that
             ForEach((int x, int y, ITile tile) =>
             {
-                tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]);
+                tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]); //TODO remove old code that relies on this
             });
             
             Destroy(grid[pos.x, pos.y].TileObject);
@@ -258,7 +255,15 @@ namespace Scripts
             {
                 for (int y = 0; y < size; y++)
                 {
+                    int oldScore = grid[x, y].TileScore.score;
                     int val = grid[x, y].CalculateScore().score;
+                    if ((val - oldScore) != 0){
+                        Vector2Int gridPos  = new Vector2Int(x, y);
+                        Vector3 worldPos = GridToWorldPos(gridPos);
+                        Transform PopupTransform = Instantiate(ScorePopup, worldPos, Quaternion.identity);
+                        ScorePopup Popup = PopupTransform.GetComponent<ScorePopup>();
+                        Popup.Setup((val - oldScore));
+                    }
                     score += val;
                 }
             }
@@ -272,13 +277,7 @@ namespace Scripts
 
         public void ClearGrid()
         {
-            for (int x = 0; x < size; x++)
-            {
-                for (int y = 0; y < size; y++)
-                {
-                    DestroyTile(new Vector2Int(x, y));
-                }
-            }
+            ForEach((x, y, tile) => {EraseTile(tile);});
         }
         
         /// <summary>

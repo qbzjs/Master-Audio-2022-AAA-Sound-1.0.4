@@ -20,6 +20,40 @@ MonoBehaviour:
   UncommonColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
   RareColor: {r: 0.8396226, g: 0.47696444, b: 0.18614274, a: 1}
   LegendaryColor: {r: 0.64433086, g: 0.14960839, b: 0.7735849, a: 1}
+  startingDeck:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues:
+    - Gargoyle
+    - Ghoul
+    - Tenement
+    - River
+    _keys:
+    - Gargoyle
+    - Ghoul
+    - Tenement
+    - River
+    _values: 03000000030000000300000003000000
   Commons:
   - River
   - Human
@@ -27,6 +61,7 @@ MonoBehaviour:
   - Rat
   Uncommons:
   - Vampire
+  - Ghost
   Rares:
   - Vampire
   Legendaries:

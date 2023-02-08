@@ -1063,49 +1063,16 @@ MonoBehaviour:
   winFinalScore: {fileID: 1416974774}
   winTurnCounter: {fileID: 685443256}
   progressCounter: {fileID: 183517444}
-  pointsDescription: {fileID: 0}
   winButton: {fileID: 1986029110}
   winScreen: {fileID: 430809457}
   loseScreen: {fileID: 935791074}
   upgradeScreen: {fileID: 323516238}
   tooltip: {fileID: 834050989}
-  startingDeck:
-    reorderableList:
-      canAdd: 1
-      canRemove: 1
-      draggable: 1
-      expandable: 1
-      multipleSelection: 1
-      isExpanded: 1
-      label:
-        m_Text: Keys
-        m_Image: {fileID: 0}
-        m_Tooltip: 
-      headerHeight: 18
-      footerHeight: 13
-      slideEasing: 0.15
-      verticalSpacing: 2
-      showDefaultBackground: 1
-      elementDisplayType: 0
-      elementNameProperty: 
-      elementNameOverride: 
-      elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues:
-    - Tenement
-    - Rat
-    - Vampire
-    - River
-    _keys:
-    - Tenement
-    - Rat
-    - Vampire
-    - River
-    _values: 01000000010000000100000001000000
+  tilePool: {fileID: 11400000, guid: ca939c862f8cd27479519208f78516d4, type: 2}
   winningScore: 100
-  upgradeIncrement: 10
+  upgradeIncrement: 20
   totalTurns: 20
+  winningScoreIncrement: 20
 --- !u!1 &419167794
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,7 +4435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1559934566
 RectTransform:
   m_ObjectHideFlags: 0

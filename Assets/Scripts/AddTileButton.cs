@@ -57,8 +57,10 @@ public class AddTileButton : MonoBehaviour
         string myTileDescription= "", myTilePoints = "";
 
         System.Type ClassType = System.Type.GetType(myTileName);
+        /*
         Debug.Log("class name is: " + myTileName);
         Debug.Log("class type: " + ClassType);
+        */
 
         ITile tile = TileFactory.CreateTile(ClassType, transform, Vector3.zero);
         Destroy(tile.TileObject);

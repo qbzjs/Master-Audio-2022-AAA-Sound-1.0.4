@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Scripts;
 using UnityEngine;
 
-public class Gargoyle : Monument
+public class Ghost : Wasteland
 {
-    [SerializeField] new protected int scoreWorth = 2;
+    [SerializeField] new protected int scoreWorth = 8;
     public override string GetDescription()
     {
-        return "2 pts - <i>A grotesque face in the darkness</i>";
+        return "<i>6pts - A lost soul</i>";
     }
-    public Gargoyle(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
+    public Ghost(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }
