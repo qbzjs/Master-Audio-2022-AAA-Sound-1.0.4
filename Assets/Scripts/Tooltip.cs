@@ -32,8 +32,8 @@ public class Tooltip : MonoBehaviour
     public void Show(string title, Score body)
     {
         canvasGroup.alpha = 1;
-        titleText.text = title;
-        descriptionText.text = body.explanation + $" = {body.score}";
+        titleText.text =  body.explanation + $" = {body.score}";
+        descriptionText.text = title;
     }
 
     /// <summary>

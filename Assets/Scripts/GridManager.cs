@@ -184,15 +184,7 @@ namespace Scripts
             tile.xPos = gridPos.x;
             tile.yPos = gridPos.y;
             tile.TileObject.transform.position = GridToWorldPos(gridPos);
-            if (grid[gridPos.x, gridPos.y].Type() != "Wasteland")
-            {
-                tile.TileScore = grid[gridPos.x, gridPos.y].TileScore;
-                List<Graveyard> graveyards = FindGraveYards(gridPos.x, gridPos.y);
-                foreach (Graveyard g in graveyards)
-                {
-                    g.adjacentDestroyed++;
-                }
-            }
+            tile.TileScore = grid[gridPos.x, gridPos.y].TileScore;
             grid[gridPos.x, gridPos.y] = tile;
         }
 
@@ -269,12 +261,12 @@ namespace Scripts
                 {
                     int oldScore = grid[x, y].TileScore.score;
                     int val = grid[x, y].CalculateScore().score;
-                    if ((oldScore - val) != 0){
-                        Vector3 worldPos = grid[x,y].TileObject.transform.position;
+                    if ((val - oldScore) != 0){
+                        Vector2Int gridPos  = new Vector2Int(x, y);
+                        Vector3 worldPos = GridToWorldPos(gridPos);
                         Transform PopupTransform = Instantiate(ScorePopup, worldPos, Quaternion.identity);
                         ScorePopup Popup = PopupTransform.GetComponent<ScorePopup>();
                         Popup.Setup((val - oldScore));
-
                     }
                     score += val;
                 }

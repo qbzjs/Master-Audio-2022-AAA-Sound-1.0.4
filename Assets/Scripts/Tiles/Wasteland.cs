@@ -8,6 +8,7 @@ using static UnityEditor.PlayerSettings;
 
 public class Wasteland : ITile
 {
+
     public virtual string GetDescription()
     {
         return "<i>A barren wasteland</i>";
@@ -22,7 +23,6 @@ public class Wasteland : ITile
     public Score TileScore {get; set;}
     
     protected int scoreWorth = 0;
-
 
     public Vector3 LocalPosition()
     {

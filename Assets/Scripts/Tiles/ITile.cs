@@ -44,7 +44,7 @@ public interface ITile
     public int yPos { get; set; }
     public Score TileScore { get; set; }
     
-    public string Type();
+  //  public string Type();
     public Score CalculateScore();
 }
 

@@ -45,14 +45,14 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - Gargoyle
-    - Ghoul
     - Tenement
     - River
+    - Vampire
     _keys:
     - Gargoyle
-    - Ghoul
     - Tenement
     - River
+    - Vampire
     _values: 03000000030000000300000003000000
   Commons:
   - River
@@ -61,7 +61,6 @@ MonoBehaviour:
   Uncommons:
   - Vampire
   Rares:
-  - Vampire
   - Ghost
   Legendaries:
   - Vampire
