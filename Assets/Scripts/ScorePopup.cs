@@ -12,7 +12,12 @@ public class ScorePopup : MonoBehaviour
     private Vector3 moveVector;
 
     public void Setup(int Amount){
-        textMesh.SetText("+" + Amount.ToString());
+        string text = "";
+        if (Amount > 0){
+            text += "+";
+        }
+        text += Amount.ToString();
+        textMesh.SetText(text);
         disappearTimer = DISAPPEAR_TIMER_MAX;
         sortingOrder++;
         textMesh.sortingOrder = sortingOrder;

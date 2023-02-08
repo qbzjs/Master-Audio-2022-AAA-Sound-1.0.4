@@ -42,6 +42,7 @@ public interface ITile
 
     public int xPos { get; set; }
     public int yPos { get; set; }
+    public Score TileScore { get; set; }
     public Score CalculateScore();
 }
 

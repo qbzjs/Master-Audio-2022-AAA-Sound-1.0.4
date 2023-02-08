@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private Image ProgressBarShadow;
     [Foldout("UI")]
-    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter, pointsDescription;
+    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter;
     [Foldout("UI")]
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
     [Foldout("UI")]
@@ -135,18 +135,17 @@ public class GameManager : Singleton<GameManager>
     void Update()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         if (GridManager.Instance.OverGrid(mousePos))
         {
             Vector2Int tilePos = GridManager.Instance.WorldToGridPos(mousePos);
             ITile hoveringOver = GridManager.Instance.GetTile(tilePos.x, tilePos.y);
-            tooltip.Show(hoveringOver.GetType().ToString(), hoveringOver.CalculateScore()); 
-            //tooltip.Show(hoveringOver.Type(), hoveringOver.CalculateScore()); 
-            //tooltip.Hide();
+            tooltip.Show(hoveringOver.GetDescription(), hoveringOver.CalculateScore()); 
         }
         else
         {
             tooltip.Hide();
-        }
+        } 
         
 #if !UNITY_WEBGL
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -202,8 +201,8 @@ public class GameManager : Singleton<GameManager>
         .setOnUpdate((val)=>{ProgressBarShadow.fillAmount = val / winningScore;});    
 
         LeanTween.value(gameObject, oldScore, score, 2f)
-        .setEaseInOutQuart()
-        .setOnUpdate(setProgress);
+        .setEaseOutSine()
+        .setOnUpdate(setProgress).setDelay(1.1f);
     }
     public void setProgress(float val){
         progressCounter.text = "Progress: " + (int)val+ "/" + winningScore;

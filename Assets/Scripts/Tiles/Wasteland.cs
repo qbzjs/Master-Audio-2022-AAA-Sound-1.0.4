@@ -19,9 +19,9 @@ public class Wasteland : ITile
 
     public int xPos { get; set; }
     public int yPos { get; set; }
+    public Score TileScore {get; set;}
     
     protected int scoreWorth = 0;
-
 
     public Vector3 LocalPosition()
     {
@@ -115,13 +115,13 @@ public class Wasteland : ITile
     public Score CalculateScore()
     {
         Score toReturn = CalculateBaseScore();
-
+        TileScore = CalculateBaseScore();
         foreach (Effect effect in ongoingEffects)
         {
-            toReturn = effect.modify(toReturn);
+            TileScore = effect.modify(TileScore);
         }
 
-        return toReturn;
+        return TileScore;
     }
 
     public virtual void Observe(DefaultEvent e)
