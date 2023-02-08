@@ -10,26 +10,13 @@ public class Tomb : Building
 
     public override string GetDescription()
     {
-        return "Starts open, will close once touches a pack of Vampires, grants 1 turn per vampire in pack, harms churche once closed";
+        return "Starts open, will close once touches a pack of Vampires, grants 1 turn per vampire in pack";
     }
 
     public Tomb(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }
-
-    private static Effect ChurchSubtractor;
-
-    private static Rule PropagateTomb = new Rule("Propagate Tomb", 10, () =>
-    {
-        GridManager.ForEach((int x, int y, ITile tile) => { 
-            if (tile is Church)
-            {
-                tile.AddEffect(ChurchSubtractor);
-            }
-        });
-
-    });
 
     protected override Score CalculateBaseScore()
     {
@@ -60,16 +47,6 @@ public class Tomb : Building
                 {
                     delta = adjacentVampirePacks.Count;
                 }
-                
-                ChurchSubtractor =
-                    new Effect(
-                        "Church subtractor", 10, 1, 1, (value) =>
-                        {
-                            return new Score(value.score - delta, value.explanation + " - " + delta);
-                        }
-                    );
-
-                GameManager.Instance.AddRule(PropagateTomb);
             }
 
         }
