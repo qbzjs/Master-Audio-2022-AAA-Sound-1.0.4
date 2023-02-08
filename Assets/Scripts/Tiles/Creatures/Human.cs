@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Human : Creature
 {
-    [SerializeField] protected int scoreWorth = 0;
+    [SerializeField] protected int scoreWorth = 2;
     
     private static List<Vector2Int> toHaunt = new ();
 
@@ -26,7 +26,7 @@ public class Human : Creature
     
     public override string GetDescription()
     {
-        return "On death: spawn a ghost";
+        return "2pts - On death: spawn a ghost worth 6 pts";
     }
     
     

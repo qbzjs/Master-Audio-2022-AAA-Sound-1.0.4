@@ -1071,8 +1071,9 @@ MonoBehaviour:
   tooltip: {fileID: 834050989}
   tilePool: {fileID: 11400000, guid: ca939c862f8cd27479519208f78516d4, type: 2}
   winningScore: 100
-  upgradeIncrement: 10
+  upgradeIncrement: 20
   totalTurns: 20
+  winningScoreIncrement: 20
 --- !u!1 &419167794
 GameObject:
   m_ObjectHideFlags: 0

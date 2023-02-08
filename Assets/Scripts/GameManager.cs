@@ -25,9 +25,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Tooltip tooltip;
     [SerializeField] private FullTilePool tilePool;
 
-    [SerializeField] private int winningScore;
-    public int upgradeIncrement;
-    public int totalTurns;
+    [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
     private int score;
 
     private List<Rule> rules;
@@ -185,6 +183,7 @@ public class GameManager : Singleton<GameManager>
         winScreen.SetActive(true);
         winFinalScore.text = "Final Score: " + score + "/" + winningScore;
         winTurnCounter.text = "With " + turns + " turns to spare";
+        winningScore += winningScoreIncrement;
     }
 
     public void Lose()

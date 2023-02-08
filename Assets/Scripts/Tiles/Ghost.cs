@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Ghost : Wasteland
 {
-    [SerializeField] new protected int scoreWorth = 10;
+    [SerializeField] new protected int scoreWorth = 8;
     public override string GetDescription()
     {
-        return "<i>10pts - A lost soul</i>";
+        return "<i>6pts - A lost soul</i>";
     }
     public Ghost(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
