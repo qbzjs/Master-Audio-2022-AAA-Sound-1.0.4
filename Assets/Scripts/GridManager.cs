@@ -124,15 +124,41 @@ namespace Scripts
                     Vector2Int gridPos = WorldToGridPos(tile.TileObject.transform.position);
                     if (!grid.InRange(gridPos))
                     {
-                        Debug.Log("Out of bounds!"); //TODO replace with user feedback
-                        return;
+                        if(HoldingCell.Instance.over && (!HoldingCell.Instance.holding || block.held))
+                        {   
+                            LeanTween.cancel(block.gameObject);
+                            LeanTween.cancel(Camera.main.gameObject);
+                            return;
+                        } 
+                        if (!HoldingCell.Instance.over && block.held)
+                        {
+                            Vector3 finalPos = HoldingCell.Instance.transform.position;
+                            LeanTween.cancel(block.gameObject);
+                            LeanTween.cancel(Camera.main.gameObject);
+                            LeanTween.move(block.gameObject, finalPos, 0.3f).setEaseInSine();
+                            return;
+                        }
+                        else
+                        {
+                            Vector3 finalPos = BlockSpawner.Instance.transform.position;
+                            LeanTween.cancel(block.gameObject);
+                            LeanTween.cancel(Camera.main.gameObject);
+                            LeanTween.move(block.gameObject, finalPos, 0.3f).setEaseInSine();
+                            return;
+                        } 
                     }
                     if (!grid[gridPos.x, gridPos.y].Destructible())
                     {
-                        Debug.Log("You can't place a block here!");
+                         Vector3 finalPos = BlockSpawner.Instance.transform.position;
+                        if (block.held){
+                            finalPos = HoldingCell.Instance.transform.position;
+                        }
+                        LeanTween.cancel(block.gameObject);
+                        LeanTween.cancel(Camera.main.gameObject);
+                        LeanTween.move(block.gameObject, finalPos, 0.3f).setEaseInSine();
                         return;
                     }
-                }
+                } 
                 foreach (ITile tile in block.Tiles)
                 {
                     PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
@@ -184,8 +210,12 @@ namespace Scripts
             tile.xPos = gridPos.x;
             tile.yPos = gridPos.y;
             tile.TileObject.transform.position = GridToWorldPos(gridPos);
-            tile.TileScore = grid[gridPos.x, gridPos.y].TileScore;
-            grid[gridPos.x, gridPos.y] = tile;
+            if (grid.InRange(gridPos.x, gridPos.y)){
+                tile.TileScore = grid[gridPos.x, gridPos.y].TileScore;
+                grid[gridPos.x, gridPos.y] = tile;
+            }else{
+                 tile.TileScore = new Score(0);
+            }
         }
 
         public void DestroyTile(Vector2Int pos)
@@ -355,4 +385,5 @@ namespace Scripts
             }
         }
     }
+    
 }
