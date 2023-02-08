@@ -203,11 +203,12 @@ public class GameManager : Singleton<GameManager>
 
         LeanTween.value(gameObject, oldScore, score, 2f)
         .setEaseOutSine()
-        .setOnUpdate(setProgress).setDelay(1.1f);
-    }
-    public void setProgress(float val){
-        progressCounter.text = "Progress: " + (int)val+ "/" + winningScore;
-        progressBar.fillAmount = val / winningScore;
+        .setOnUpdate((val)=>{
+            progressCounter.text = "Progress: " + (int)val+ "/" + winningScore; 
+            if (progressBar != null){
+                progressBar.fillAmount = val / winningScore;
+            }
+            }).setDelay(1.1f);
     }
 
 }
