@@ -18,8 +18,8 @@ public class Wasteland : ITile
 
     public int xPos { get; set; }
     public int yPos { get; set; }
+    public string Type = "";
     public Score TileScore {get; set;}
-    
     protected int scoreWorth = 0;
 
     public Vector3 LocalPosition()

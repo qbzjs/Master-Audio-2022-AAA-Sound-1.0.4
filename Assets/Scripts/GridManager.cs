@@ -143,16 +143,6 @@ namespace Scripts
                     tile.WhenPlaced();
                 }
 
-                foreach (ITile tile in block.Tiles)
-                {
-                    ObserverManager.Instance.AddObserver(tile);
-                }
-                
-                foreach (ITile tile in block.Tiles)
-                {
-                    ObserverManager.Instance.ProcessEvent(new PlacedEvent(tile.xPos, tile.yPos));
-                }
-                
                 if (block.held)
                 {
                     HoldingCell.Instance.holding = false;
@@ -199,19 +189,25 @@ namespace Scripts
             {
                 tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]); //TODO remove old code that relies on this
             });
-
-            ObserverManager.Instance.ProcessEvent(new GraveyardEvent(pos.x, pos.y));
-
-            EraseTile(tile);
+            
+            Destroy(grid[pos.x, pos.y].TileObject);
         }
 
-        /// <summary>
-        /// Cleans up the references from the tile
-        /// </summary>
-        private void EraseTile(ITile tile)
+        public void KillTile(Vector2Int pos)
         {
-            ObserverManager.Instance.RemoveObserver(tile);
-            Destroy(tile.TileObject);
+            Wasteland tile = (Wasteland)grid[pos.x, pos.y];
+            if (tile.TileObject == null)
+                return;
+
+            //Notifies all tiles that a tile has been destroyed, if they want to do something with that
+            ForEach((int x, int y, ITile tile) =>
+            {
+                tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]);
+            });
+
+            Destroy(grid[pos.x, pos.y].TileObject);
+
+            grid[pos.x, pos.y] = new Wasteland();
         }
 
         /// <summary>

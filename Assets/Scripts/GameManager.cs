@@ -177,6 +177,11 @@ public class GameManager : Singleton<GameManager>
         Turns--;
     }
 
+    public void AddTurns(int numTurns)
+    {
+        Turns += numTurns;
+    }
+
     public void Win()
     {
         winScreen.SetActive(true);

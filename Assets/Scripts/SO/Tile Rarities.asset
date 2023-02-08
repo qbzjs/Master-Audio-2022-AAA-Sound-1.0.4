@@ -58,6 +58,7 @@ MonoBehaviour:
   - River
   - Human
   - Gargoyle
+  - Rat
   Uncommons:
   - Vampire
   - Ghost

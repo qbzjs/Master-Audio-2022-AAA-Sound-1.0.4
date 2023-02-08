@@ -4,9 +4,10 @@ using Scripts;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class River : Wasteland
+public class River : Building
 {
     private bool blood = false;
+
     public override string GetDescription()
     {
         return "Becomes a blood river if next to Blood.<br>(blood rivers double adjacent tiles)";
@@ -68,6 +69,7 @@ public class River : Wasteland
             if (tile is Fountain || (tile is River river && river.blood))
             {
                 blood = true;
+                Type = "Blood";
                 TileObject.GetComponent<SpriteRenderer>().sprite = ArtManager.LoadTileArt("BloodRiver");
                 return true;
             }

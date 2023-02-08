@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Scripts;
 using UnityEngine;
 
-public class Tenement : Wasteland
+public class Tenement : Building
 {
     [SerializeField] protected int scoreWorthAdjacent = 1;
 
