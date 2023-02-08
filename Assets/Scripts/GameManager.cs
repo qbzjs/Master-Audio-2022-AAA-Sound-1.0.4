@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
     [Foldout("UI")]
-    [SerializeField] private Tooltip tooltip;
+    [SerializeField] public Tooltip tooltip;
      [SerializeField] private FullTilePool tilePool;
 
     [SerializeField] private int winningScore;
@@ -136,7 +136,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+     /*   var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (GridManager.Instance.OverGrid(mousePos))
         {
@@ -147,7 +147,7 @@ public class GameManager : Singleton<GameManager>
         else
         {
             tooltip.Hide();
-        } 
+        }   */
         
 #if !UNITY_WEBGL
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -209,6 +209,7 @@ public class GameManager : Singleton<GameManager>
         progressCounter.text = "Progress: " + (int)val+ "/" + winningScore;
         progressBar.fillAmount = val / winningScore;
     }
+
 }
 
 
