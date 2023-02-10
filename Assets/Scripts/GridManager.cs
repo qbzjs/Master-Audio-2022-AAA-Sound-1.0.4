@@ -280,6 +280,12 @@ namespace Scripts
             ForEach((x, y, tile) => {EraseTile(tile);});
         }
         
+        public void EraseTile(ITile tile)
+        {
+            DestroyTile(new Vector2Int(tile.xPos, tile.yPos));
+        }
+
+        
         /// <summary>
         /// For convenience to loop through all the tiles on the board
         /// </summary>
