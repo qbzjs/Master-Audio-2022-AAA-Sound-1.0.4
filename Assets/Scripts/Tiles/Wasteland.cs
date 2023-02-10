@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,11 +8,6 @@ using UnityEngine;
 
 public class Wasteland : ITile
 {
-    public virtual string GetDescription()
-    {
-        return "<i>A barren wasteland</i>";
-    }
-
     public GameObject TileObject { get; set; }
 
     public List<Effect> ongoingEffects;
@@ -22,6 +18,15 @@ public class Wasteland : ITile
     public Score TileScore {get; set;}
     protected int scoreWorth = 0;
 
+    public virtual string GetDescription()
+    {
+        return "<i>A barren wasteland</i>";
+    }
+
+    public virtual Tag[] GetTags()
+    {
+        return new []{Tag.Null};
+    }
     public Vector3 LocalPosition()
     {
         return TileObject.transform.localPosition;
@@ -45,6 +50,8 @@ public class Wasteland : ITile
         TileObject.transform.position = pos;
         TileObject.transform.rotation = Quaternion.identity;
         TileObject.transform.parent = parentTransform;
+        TileObject.AddComponent<BoxCollider>();
+        TileObject.AddComponent<MouseOverTile>().Tile = this;
         TileObject.GetComponent<SpriteRenderer>().sprite = ArtManager.LoadTileArt(GetType().ToString());
     }
 

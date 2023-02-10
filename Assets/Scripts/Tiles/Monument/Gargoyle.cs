@@ -8,8 +8,9 @@ public class Gargoyle : Monument
     [SerializeField] new protected int scoreWorth = 2;
     public override string GetDescription()
     {
-        return "2 pts - <i>A grotesque face in the darkness</i>";
+        return scoreWorth + " pts";
     }
+    
     public Gargoyle(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 

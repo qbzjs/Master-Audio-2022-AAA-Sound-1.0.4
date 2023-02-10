@@ -23,7 +23,7 @@ public class DeckManager : Singleton<DeckManager>
     public void AddToDeck(string s)
     {
         deck.Add(s);
-        deck.Shuffle();
+        //deck.Shuffle();
     }
 
     public string Draw()

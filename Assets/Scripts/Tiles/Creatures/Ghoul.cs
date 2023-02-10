@@ -6,6 +6,12 @@ using Scripts;
 public class Ghoul : Monster
 {
     [SerializeField] protected int packSize = 3;
+
+    public override Tag[] GetTags()
+    {
+        return new [] {Tag.Monster};
+    }
+
     public override string GetDescription()
     {
         return "+1 for each ghoul in its pack (up to 3)";
@@ -18,6 +24,7 @@ public class Ghoul : Monster
     protected override Score CalculateBaseScore()
     {
         int ghoulStrength = 1;
+        Debug.Log("ghoul has tags: " + GetTags()[0]);
 
         List<Creature> pack = new();
         pack.Add(this);

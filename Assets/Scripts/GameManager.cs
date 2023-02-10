@@ -28,7 +28,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
     private int score;
 
-    private List<Rule> rules;
+    private List<Rule> rules = new List<Rule>();
+
+    public List<GameObject> SetOffInEditor;
 
     public int Score
     {
@@ -77,7 +79,12 @@ public class GameManager : Singleton<GameManager>
 
     public void Awake()
     {
-        rules = new();
+        #if UNITY_EDITOR
+        foreach (var GO in SetOffInEditor)
+        {
+            GO.SetActive(false);
+        }
+        #endif
     }
 
     // Start is called before the first frame update

@@ -8,11 +8,13 @@ public class Vampire : Monster
     [SerializeField] protected int packSize = 5;
 
     private int timesFeasted = 0;
+
+    protected new Tag[] tags = {Tag.Blood, Tag.Monster};
+    
     
     public override string GetDescription()
     {
-        return "2pts - When placed: kill all adjacent humans." +
-               "<br>In a pack of 5, blood rivers become x3";
+        return "3pts - In a pack of 5, blood rivers become x3";
     }
     
     public Vampire(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
@@ -65,6 +67,6 @@ public class Vampire : Monster
     
     protected override Score CalculateBaseScore()
     {
-        return new Score(2, $"2");
+        return new Score(3);
     }
 }
