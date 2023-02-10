@@ -10,6 +10,7 @@ public class TweenManager : Singleton<TweenManager>
     [SerializeField] private float cameraShakeAmount, cameraShakeTime, blockUpAmount, blockAnimationTime;
 
     [SerializeField] private AnimationCurve blockCurve;
+
     
     /*
     [Button()]
@@ -27,24 +28,25 @@ public class TweenManager : Singleton<TweenManager>
             sp.sortingOrder = 20;
         }
 
-        LeanTween.moveLocalY(ob, ob.transform.localPosition.y + blockUpAmount, blockAnimationTime)
-            .setEase(blockCurve)
-            .setOnComplete(() =>
-            {
-                Shake();
-                CB();        
-                foreach (var sp in ob.GetComponentsInChildren<SpriteRenderer>())
-                {
-                    sp.sortingOrder = -100;
-                }
-
-            });
+        Move(ob);
+        Shake();
+        CB();        
+        foreach (var sp in ob.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sp.sortingOrder = -100;
+        }
     }
 
     [Button()]
     public void Shake()
     {
         LeanTween.moveY(Camera.main.gameObject, Camera.main.transform.position.x - cameraShakeAmount, cameraShakeTime)
-            .setEase(LeanTweenType.easeShake);
+            .setEase(LeanTweenType.easeShake).setDelay(0.1f);
+    }
+
+    public void Move(GameObject ob)
+    {
+        LeanTween.moveLocalY(ob, ob.transform.localPosition.y + blockUpAmount, blockAnimationTime)
+        .setEase(blockCurve);   
     }
 }

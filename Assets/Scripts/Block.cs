@@ -52,6 +52,8 @@ public class Block : MonoBehaviour, IDragParent
             myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
             myTile.TileObject.AddComponent<BoxCollider>();
             myTile.TileObject.AddComponent<DragChild>().parent = this;
+            myTile.TileObject.AddComponent<MouseOverTile>().Tile = myTile;
+
             Tiles.Add(myTile);
             options.Remove(currPos);
             optionsList.Remove(currPos);

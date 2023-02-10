@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
     [Foldout("UI")]
-    [SerializeField] private Tooltip tooltip;
+    [SerializeField] public Tooltip tooltip;
     [SerializeField] private FullTilePool tilePool;
 
     [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
@@ -134,7 +134,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+     /*   var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (GridManager.Instance.OverGrid(mousePos))
         {
@@ -145,7 +145,7 @@ public class GameManager : Singleton<GameManager>
         else
         {
             tooltip.Hide();
-        } 
+        }   */
         
 #if !UNITY_WEBGL
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -207,12 +207,14 @@ public class GameManager : Singleton<GameManager>
 
         LeanTween.value(gameObject, oldScore, score, 2f)
         .setEaseOutSine()
-        .setOnUpdate(setProgress).setDelay(1.1f);
+        .setOnUpdate((val)=>{
+            progressCounter.text = "Progress: " + (int)val+ "/" + winningScore; 
+            if (progressBar != null){
+                progressBar.fillAmount = val / winningScore;
+            }
+            }).setDelay(1.1f);
     }
-    public void setProgress(float val){
-        progressCounter.text = "Progress: " + (int)val+ "/" + winningScore;
-        progressBar.fillAmount = val / winningScore;
-    }
+
 }
 
 
