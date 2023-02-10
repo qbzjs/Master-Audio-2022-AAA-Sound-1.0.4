@@ -1,25 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class River : Building
 {
-    private bool blood = false;
 
     public override string GetDescription()
     {
-        return "Becomes a blood river if next to Blood.<br>(blood rivers double adjacent tiles)";
+        return "Becomes a blood river if next to #blood.<br>(blood rivers double adjacent tiles)";
     }
-    
-    private static Effect BloodMultiplier = 
-        new Effect(
-            "Blood multiplier", 20, 1, 1, (value) =>
-            {
-                return new Score(value.score * 2, value.explanation + " * 2");
-            }
-        );
 
     private static Rule PropagateBlood = new Rule("Propagate Blood", 10, () =>
     {
@@ -28,34 +20,19 @@ public class River : Building
         {
             turnMore = false;
             GridManager.ForEach((int x, int y, ITile tile) => { 
-                if (tile is River)
+                if (tile is River river)
                 {
-                    turnMore = turnMore || ((River) tile).CheckTurn();
+                    turnMore = turnMore || river.CheckTurn();
                 }
             });
         }
-        
-        GridManager.ForEach((int x, int y, ITile tile) => { 
-            if (tile is Fountain || (tile is River river && river.blood))
-            {
-                
-                foreach (Vector2Int subdirection in Directions.Cardinal)
-                {
-                    GridManager.Instance.GetTile(x + subdirection.x, y + subdirection.y).AddEffect(BloodMultiplier);
-                }
-            }
-        });
-
     });
     
     public River(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }
-    public override bool Destructible()
-    {
-        return !blood;
-    }
+    
     /// <summary>
     /// 
     /// </summary>
@@ -64,32 +41,15 @@ public class River : Building
     {
         foreach (Vector2Int dir in Directions.Cardinal)
         {
-            if (blood) continue; //can't turn if already made of blood
             ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
-            if (tile is Fountain || (tile is River river && river.blood))
+            if (tile.GetTags().Contains(Tag.Blood))
             {
-                blood = true;
-                Type = "Blood";
-                TileObject.GetComponent<SpriteRenderer>().sprite = ArtManager.LoadTileArt("BloodRiver");
+                //Debug.Log("going to turn: " + tile);
+                GridManager.Instance.PlaceTile("BloodRiver", new Vector2Int(xPos, yPos));
                 return true;
             }
         }
         return false;
-    }
-
-    public bool IsBlood()
-    {
-        return blood;
-    }
-
-    public void VampireBloodMultiplier()
-    {
-        BloodMultiplier = new Effect(
-            "Blood multiplier", 20, 1, 1, (value) =>
-            {
-                return new Score(value.score * 3, value.explanation + " * 3");
-            }
-        );
     }
 
     public override void WhenPlaced()

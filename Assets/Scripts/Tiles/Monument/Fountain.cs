@@ -6,8 +6,6 @@ using UnityEngine;
 public class Fountain : Monument
 {
 
-    public string Type = "Blood";
-
     public override string GetDescription()
     {
         return "My blood spilleth over";
@@ -16,7 +14,12 @@ public class Fountain : Monument
     {
         return false;
     }
-    
+
+    public override Tag[] GetTags()
+    {
+        return new[] {Tag.Blood};
+    }
+
     public Fountain(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
     }

@@ -4,23 +4,25 @@ public class Clocktower : Wasteland
 {
     public Clocktower(Transform parentTransform, Vector3 pos) : base(parentTransform, pos) { }
 
-    public override void Observe(DefaultEvent e)
+    public override string GetDescription()
     {
-        if (xPos != e.xPos || yPos != e.yPos)
+        return "While on the board, gives +1 turn";
+    }
+
+    public override void WhenPlaced()
+    {
+        GameManager.Instance.Turns++;
+    }
+
+    public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)
+    {
+        if (this != aboutToBeDestroyed)
         {
             //If we're not referencing this object, don't do anything
             return;
         }
         
-        switch (e)
-        {
-            case GraveyardEvent: //being removed
-                GameManager.Instance.Turns--;
-                break;
-            case PlacedEvent: //being placed
-                GameManager.Instance.Turns++;
-                break;
-        }
+        GameManager.Instance.Turns--;
     }
 
     protected override Score CalculateBaseScore()

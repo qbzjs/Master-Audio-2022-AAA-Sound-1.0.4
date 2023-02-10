@@ -9,7 +9,7 @@ public class Tenement : Building
 
     public override string GetDescription()
     {
-        return "+1 for each adjacent tenement";
+        return "1 + 1 for each adjacent tenement";
     }
     
     public Tenement(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
@@ -30,7 +30,7 @@ public class Tenement : Building
             }
         }
 
-        return new Score(adjacentTenements * scoreWorthAdjacent, 
-            $"[{adjacentTenements}] * {scoreWorthAdjacent}");
+        return new Score(1 + adjacentTenements * scoreWorthAdjacent, 
+            $"1 + [{adjacentTenements}] * {scoreWorthAdjacent}");
     }
 }

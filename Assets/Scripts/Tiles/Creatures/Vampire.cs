@@ -9,25 +9,28 @@ public class Vampire : Monster
 
     private int timesFeasted = 0;
 
-    protected new Tag[] tags = {Tag.Blood, Tag.Monster};
-    
-    
+
     public override string GetDescription()
     {
-        return "3pts - In a pack of 5, blood rivers become x3";
+        return "5pts - In a pack of 5, blood rivers become x3";
+    }
+    
+    public override Tag[] GetTags()
+    {
+        return new []{Tag.Blood, Tag.Monster};
     }
     
     public Vampire(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-        Type = "Blood";
+        
     }
 
     private static Rule PackOfVampires = new Rule("Pack Of Vampires", 9, () =>
     {
         GridManager.ForEach((int x, int y, ITile tile) => {
-            if (tile is River river)
+            if (tile is BloodRiver bloodRiver)
             {
-                river.VampireBloodMultiplier();
+                bloodRiver.VampireBloodMultiplier();
             }
         });
 
@@ -36,21 +39,6 @@ public class Vampire : Monster
     public override void WhenPlaced()
     {
         CalculatePack();
-        KillAdjacentHumans();
-    }
-
-    private void KillAdjacentHumans()
-    {
-        foreach (Vector2Int dir in Directions.Cardinal)
-        {
-            Vector2Int lookingAt = new Vector2Int(xPos + dir.x, yPos + dir.y);
-            ITile potentialKill = GridManager.Instance.GetTile(lookingAt.x, lookingAt.y);
-            if (potentialKill is Human)
-            {
-                GridManager.Instance.DestroyTile(lookingAt);
-                timesFeasted++;
-            }
-        }
     }
 
     private void CalculatePack()
@@ -67,6 +55,6 @@ public class Vampire : Monster
     
     protected override Score CalculateBaseScore()
     {
-        return new Score(3);
+        return new Score(5);
     }
 }

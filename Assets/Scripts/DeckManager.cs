@@ -17,23 +17,27 @@ public class DeckManager : Singleton<DeckManager>
     public void ShuffleBack()
     {
         deck.AddRange(discard);
+        Shuffle();
+    }
+
+    public void Shuffle()
+    {
         deck.Shuffle();
     }
     
     public void AddToDeck(string s)
     {
         deck.Add(s);
-        //deck.Shuffle();
     }
 
     public string Draw()
     {
         if(deck.Count == 0) ShuffleBack();
         
-        string toReturn = deck[0];
+        string toReturn = deck[^1]; //index from end expression
 
         discard.Add(toReturn);
-        deck.RemoveAt(0);
+        deck.RemoveAt(deck.Count - 1);
         return toReturn;
     }
 

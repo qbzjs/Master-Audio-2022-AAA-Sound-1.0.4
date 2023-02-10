@@ -24,7 +24,6 @@ public class Ghoul : Monster
     protected override Score CalculateBaseScore()
     {
         int ghoulStrength = 1;
-        Debug.Log("ghoul has tags: " + GetTags()[0]);
 
         List<Creature> pack = new();
         pack.Add(this);

@@ -136,6 +136,7 @@ public class GameManager : Singleton<GameManager>
                 DeckManager.Instance.AddToDeck(pair.Key);
             }
         }
+        DeckManager.Instance.Shuffle();
     }
 
     // Update is called once per frame
