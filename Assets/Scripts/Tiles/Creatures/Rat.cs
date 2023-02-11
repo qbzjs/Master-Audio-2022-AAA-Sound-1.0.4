@@ -5,22 +5,11 @@ using UnityEngine;
 
 public class Rat : Animal
 {
-    [SerializeField] new protected int scoreWorth = 1;
+    [SerializeField] new protected int scoreWorth = 2;
 
-    public static string Description
+    public string GetDescription()
     {
-        get
-        {
-            return "Rats beget rats";
-        }
-    }
-
-    public static string PointDescription
-    {
-        get
-        {
-            return "1";
-        }
+        return $"{scoreWorth}pts - Rats beget rats";
     }
     
     public static Rule PropagateRats = new Rule("Propagate Rats", 10, () =>
