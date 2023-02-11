@@ -13,16 +13,13 @@ public class Human : Creature
 
     private Rule CheckForMonsters = new Rule("Humans checking for monsters", 2, () =>
     {
-        GridManager.ForEach((int x, int y, ITile tile) =>
+        GridManager.ForEach((int x, int y, Human human) =>
         {
-            if (tile is Human human)
+            foreach (var dir in Directions.Cardinal)
             {
-                foreach (var dir in Directions.Cardinal)
+                if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Monster))
                 {
-                    if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Monster))
-                    {
-                        toHaunt.Add(new Vector2Int(x, y));
-                    }
+                    toHaunt.Add(new Vector2Int(x, y));
                 }
             }
         });

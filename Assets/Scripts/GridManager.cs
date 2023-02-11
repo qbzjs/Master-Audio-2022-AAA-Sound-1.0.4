@@ -270,6 +270,16 @@ namespace Scripts
         {
             return grid.InRange(WorldToGridPos(position));
         }
+        
+        /// <summary>
+        /// Returns true if the point is in the grid, false otherwise
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public bool OverGrid(Vector2Int position)
+        {
+            return grid.InRange(position);
+        }
 
         public Vector3 GridToWorldPos(Vector2Int gridPos)
         {
@@ -330,6 +340,25 @@ namespace Scripts
                 }
             }
         }
+        
+        /// <summary>
+        /// For convenience to loop through all the tiles of a certain type
+        /// </summary>
+        /// <param name="toApply">takes int x, int y and T (ITile) tile. This is called for every position on the board</param>
+        public static void ForEach<T>(Action<int, int, T> toApply)
+        {
+            for (int x = 0; x < Instance.Size; x++)
+            {
+                for (int y = 0; y < Instance.Size; y++)
+                {
+                    if (Instance.GetTile(x, y) is T t)
+                    {
+                        toApply.Invoke(x, y, t);   
+                    }
+                }
+            }
+        }
+        
     }
 
     public class Grid
