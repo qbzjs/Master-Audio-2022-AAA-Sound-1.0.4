@@ -7,7 +7,7 @@ public class MouseOverTile: MonoBehaviour
     [SerializeField] public ITile Tile;
     public void OnMouseOver()
     {
-        GameManager.Instance.tooltip.Show(Tile.GetDescription(), Tile.CalculateScore());   
+        GameManager.Instance.tooltip.Show(Tile);   
     }
     public void OnMouseExit()
     {

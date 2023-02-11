@@ -5,7 +5,9 @@ using UnityEngine;
 
 public interface ITile
 {
+
     public string GetDescription();
+
 
     public Tag[] GetTags();
 
