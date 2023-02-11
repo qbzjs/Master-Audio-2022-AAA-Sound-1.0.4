@@ -59,6 +59,9 @@ MonoBehaviour:
   - Human
   - Gargoyle
   - Rat
+  - Spider
+  - OilSlick
+  - HellFire
   Uncommons:
   - Clocktower
   - Ghost

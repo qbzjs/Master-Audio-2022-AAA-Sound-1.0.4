@@ -28,9 +28,9 @@ public class Vampire : Monster
     private static Rule PackOfVampires = new Rule("Pack Of Vampires", 9, () =>
     {
         GridManager.ForEach((int x, int y, ITile tile) => {
-            if (tile is BloodRiver bloodRiver)
+            if (tile is Fountain fountain)
             {
-                bloodRiver.VampireBloodMultiplier();
+                fountain.VampireBloodMultiplier();
             }
         });
 
