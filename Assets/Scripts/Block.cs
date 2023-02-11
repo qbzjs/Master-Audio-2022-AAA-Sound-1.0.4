@@ -27,6 +27,7 @@ public class Block : MonoBehaviour, IDragParent
     
     private bool dragging;
     public bool held = false;
+    public bool isMaw = false;
 
     private Camera cam;
     

@@ -147,7 +147,7 @@ namespace Scripts
                             return;
                         } 
                     }
-                    if (!grid[gridPos.x, gridPos.y].Destructible())
+                    if (grid[gridPos.x, gridPos.y].GetType().Name != "Wasteland")
                     {
                          Vector3 finalPos = BlockSpawner.Instance.transform.position;
                         if (block.held){
@@ -221,6 +221,7 @@ namespace Scripts
             });
             
             Destroy(grid[pos.x, pos.y].TileObject);
+            grid[pos.x, pos.y] = new Wasteland();
         }
 
         public void KillTile(Vector2Int pos)

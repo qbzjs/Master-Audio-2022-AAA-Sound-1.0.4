@@ -10,10 +10,6 @@ public class Fountain : Monument
     {
         return "My blood spilleth over";
     }
-    public override bool Destructible()
-    {
-        return false;
-    }
 
     public override Tag[] GetTags()
     {
