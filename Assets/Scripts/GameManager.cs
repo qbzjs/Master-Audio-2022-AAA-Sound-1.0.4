@@ -23,6 +23,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
     [Foldout("UI")]
     [SerializeField] public Tooltip tooltip;
+    [Foldout("UI")]
+    [SerializeField] public ScoreTip scoretip;
     [SerializeField] private FullTilePool tilePool;
 
     [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
