@@ -13,17 +13,18 @@ public class Block : MonoBehaviour, IDragParent
 {
     public List<ITile> Tiles = new List<ITile>();
     
-    private List<Vector3> Directions = new List<Vector3>()
+    /*private List<Vector3> Directions = new List<Vector3>()
     {
         new Vector3(1, 0, 0),
         new Vector3(-1, 0, 0),
         new Vector3(0, 1, 0),
         new Vector3(0, -1, 0),
-    };
-    private List<Vector3> optionsList = new List<Vector3>();
-    private HashSet<Vector3> options = new HashSet<Vector3>();
-    private HashSet<Vector3> taken = new HashSet<Vector3>();
-    private Vector3 currPos, dragOffset;
+    };*/
+    private List<Vector2Int> optionsList = new List<Vector2Int>();
+    private HashSet<Vector2Int> options = new HashSet<Vector2Int>();
+    private HashSet<Vector2Int> taken = new HashSet<Vector2Int>();
+    private Vector2Int currPos;
+    private Vector3 dragOffset;
     
     private bool dragging;
     public bool held = false;
@@ -34,11 +35,11 @@ public class Block : MonoBehaviour, IDragParent
     public void GenerateTiles(Transform parentTransform, int blockSize)
     {
         Vector3 position = parentTransform.position;
-        Directions[0] = Directions[0] * GridManager.Instance.GridUnit;
+        /*Directions[0] = Directions[0] * GridManager.Instance.GridUnit;
         Directions[1] = Directions[1] * GridManager.Instance.GridUnit;
         Directions[2] = Directions[2] * GridManager.Instance.GridUnit;
         Directions[3] = Directions[3] * GridManager.Instance.GridUnit;
-        currPos = position;
+        currPos = Vector2Int.zero;*/
         options.Add(currPos);
         optionsList.Add(currPos);
         for(int i = 0; i < blockSize; i++){
@@ -48,7 +49,7 @@ public class Block : MonoBehaviour, IDragParent
             //tileID needs to be the exact name of the class to instantiate. (Ezra) this function is a little gross (sorry)
             //  it was the best way I could find to decouple the subclasses from this file. Open to ideas on 
             //  how to fix this!
-            ITile myTile = TileFactory.CreateTile(System.Type.GetType(tileID), transform, currPos);
+            ITile myTile = TileFactory.CreateTile(Type.GetType(tileID), transform, Vector2IntToWorldPosition(currPos, position));
 
             myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
             myTile.TileObject.AddComponent<DragChild>().parent = this;
@@ -59,15 +60,21 @@ public class Block : MonoBehaviour, IDragParent
             taken.Add(currPos);
             for(int j = 0; j < 4; j++)
             {
-                Vector3 tmpPos = currPos + Directions[j];
+                Vector2Int tmpPos = currPos + Directions.Cardinal[j];
                 if(!taken.Contains(tmpPos) && !options.Contains(tmpPos)){
                     options.Add(tmpPos);
                     optionsList.Add(tmpPos);
                 }
             }
             int tmpIdx = Random.Range(0, optionsList.Count);
-            currPos = optionsList[tmpIdx]; 
+            currPos = optionsList[tmpIdx];
         }
+    }
+
+    private Vector3 Vector2IntToWorldPosition(Vector2Int offset, Vector3 origin)
+    {
+        float unit = GridManager.Instance.GridUnit;
+        return new Vector3(offset.x * unit, offset.y * unit, 0) + origin;
     }
 
     void Awake()
