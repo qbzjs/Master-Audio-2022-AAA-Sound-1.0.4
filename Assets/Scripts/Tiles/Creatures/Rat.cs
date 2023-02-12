@@ -7,7 +7,7 @@ public class Rat : Animal
 {
     [SerializeField] new protected int scoreWorth = 2;
 
-    public string GetDescription()
+    public override string GetDescription()
     {
         return $"{scoreWorth}pts - Rats beget rats";
     }
