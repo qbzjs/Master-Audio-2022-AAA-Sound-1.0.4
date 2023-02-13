@@ -25,22 +25,7 @@ public class Vampire : Monster
         
     }
 
-<<<<<<< HEAD
     private static Rule PackOfVampires = new Rule("Pack Of Vampires", 9, () =>
-=======
-    private static Rule PackOfVampires = new Rule("Pack Of Vampires", 15, () =>
-    {
-        GridManager.ForEach((int x, int y, ITile tile) => {
-            if (tile is BloodRiver bloodRiver)
-            {
-                bloodRiver.VampireBloodMultiplier();
-            }
-        });
-
-    });
-
-    protected override Score CalculateBaseScore()
->>>>>>> 3381f9f (fixed creature summation)
     {
         GridManager.ForEach((int x, int y, ITile tile) => {
             if (tile is BloodRiver bloodRiver)
