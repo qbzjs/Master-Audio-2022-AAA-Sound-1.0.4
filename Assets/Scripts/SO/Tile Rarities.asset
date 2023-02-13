@@ -62,12 +62,13 @@ MonoBehaviour:
   - Spider
   - OilSlick
   - HellFire
+  - YagaHut
   Uncommons:
   - Clocktower
   - Ghost
   - Vampire
   - Ghost
   Rares:
-  - Vampire
+  - RatKing
   Legendaries:
-  - Vampire
+  - Cerberus
