@@ -37,10 +37,10 @@ public class Tooltip : MonoBehaviour
         string title = tile.GetType().FullName;
 
         canvasGroup.alpha = 1;
-        string tags_string = "";
+        string tags_string = "<br>";
         foreach (Tag tag in tags){
             if (tag != Tag.Null){
-                string t_str =  "#";
+                string t_str =  " #";
                 t_str += tag.ToString();
                 tags_string += t_str;
             }

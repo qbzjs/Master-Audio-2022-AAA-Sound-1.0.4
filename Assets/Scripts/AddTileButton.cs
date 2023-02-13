@@ -65,8 +65,17 @@ public class AddTileButton : MonoBehaviour
         ITile tile = TileFactory.CreateTile(ClassType, transform, Vector3.zero);
         Destroy(tile.TileObject);
         
+        string tags_string = "";
+        foreach (Tag tag in tile.GetTags()){
+            if (tag != Tag.Null){
+                string t_str =  "#";
+                t_str += tag.ToString();
+                tags_string += t_str;
+            }
+        }
+        
         TileName = myTileName;
-        TileDescription = tile.GetDescription();;
+        TileDescription = tile.GetDescription() + tags_string;
         TilePoints = myTilePoints;
         BorderColor = myBorderColor;
     }
