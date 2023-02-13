@@ -1,16 +1,14 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(RectTransform)),RequireComponent(typeof(CanvasGroup))]
-public class Tooltip : MonoBehaviour
+public class ScoreTip : MonoBehaviour
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-    [SerializeField] private TextMeshProUGUI titleText, descriptionText, calculationText, tagsText;
-    
+    [SerializeField] private TextMeshProUGUI titleText;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -23,7 +21,7 @@ public class Tooltip : MonoBehaviour
         temp.z = 0;
         transform.position = temp;
     }
-    
+
     /// <summary>
     /// Makes tooltip visible, sets the title and body (form will be scoreCalculation = scoreValue)
     /// </summary>
@@ -31,24 +29,9 @@ public class Tooltip : MonoBehaviour
     /// <param name="body">Score to display in the body</param>
     public void Show(ITile tile)
     {
-        Tag[] tags = tile.GetTags();
         Score body = tile.CalculateScore();
-        string description = tile.GetDescription();
-        string title = tile.GetType().FullName;
-
         canvasGroup.alpha = 1;
-        string tags_string = "";
-        foreach (Tag tag in tags){
-            if (tag != Tag.Null){
-                string t_str =  "#";
-                t_str += tag.ToString();
-                tags_string += t_str;
-            }
-        }
-        titleText.text = title;
-        descriptionText.text = description;
-        calculationText.text =  body.explanation + $" = {body.score}";
-        tagsText.text = tags_string;
+        titleText.text =  body.score.ToString();
     }
 
     /// <summary>

@@ -6,7 +6,7 @@ using TMPro;
 public class ScorePopup : MonoBehaviour
 {
     private static int sortingOrder;
-    private const float DISAPPEAR_TIMER_MAX = 1.25f;
+    private const float DISAPPEAR_TIMER_MAX = 1.5f;
     private TextMeshPro textMesh;
     private float disappearTimer;
     private Vector3 moveVector;
@@ -21,7 +21,7 @@ public class ScorePopup : MonoBehaviour
         disappearTimer = DISAPPEAR_TIMER_MAX;
         sortingOrder++;
         textMesh.sortingOrder = sortingOrder;
-        moveVector = new Vector3(-0.4f, 1f);
+        moveVector = new Vector3(-0.6f, 1.2f);
     }
 
     private void Awake (){

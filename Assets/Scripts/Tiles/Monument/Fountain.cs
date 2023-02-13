@@ -6,9 +6,15 @@ using UnityEngine;
 public class Fountain : Monument
 {
 
+    public string Type = "Blood";
+
     public override string GetDescription()
     {
         return "My blood spilleth over";
+    }
+    public override bool Destructible()
+    {
+        return false;
     }
 
     public override Tag[] GetTags()
@@ -27,11 +33,14 @@ public class Fountain : Monument
 
     private Rule SetBloodMultiplier = new Rule("Setting Blood Multiplier", 11, () =>
     {
+        Debug.Log("setting blood multiplier");
         GridManager.ForEach((int x, int y, ITile tile) => { 
             if (tile is Fountain || tile is BloodRiver)
             {
+                Debug.Log("found blood river or fountain");
                 foreach (Vector2Int subdirection in Directions.Cardinal)
                 {
+                    Debug.Log($"Setting blood multiplier at: ({x + subdirection.x}, {y + subdirection.y})");
                     GridManager.Instance.GetTile(x + subdirection.x, y + subdirection.y).AddEffect(BloodMultiplier);
                 }
             }

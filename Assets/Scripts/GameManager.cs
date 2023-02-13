@@ -23,6 +23,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
     [Foldout("UI")]
     [SerializeField] public Tooltip tooltip;
+    [Foldout("UI")]
+    [SerializeField] public ScoreTip scoretip;
     [SerializeField] private FullTilePool tilePool;
 
     [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
@@ -142,18 +144,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-     /*   var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (GridManager.Instance.OverGrid(mousePos))
-        {
-            Vector2Int tilePos = GridManager.Instance.WorldToGridPos(mousePos);
-            ITile hoveringOver = GridManager.Instance.GetTile(tilePos.x, tilePos.y);
-            tooltip.Show(hoveringOver.GetDescription(), hoveringOver.CalculateScore()); 
-        }
-        else
-        {
-            tooltip.Hide();
-        }   */
         
 #if !UNITY_WEBGL
         if (Input.GetKeyDown(KeyCode.Escape))

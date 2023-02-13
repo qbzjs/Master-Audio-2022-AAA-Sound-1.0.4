@@ -8,6 +8,11 @@ using UnityEngine;
 
 public class Wasteland : ITile
 {
+    public virtual string GetDescription()
+    {
+        return "<i>A barren wasteland</i>";
+    }
+
     public GameObject TileObject { get; set; }
 
     public List<Effect> ongoingEffects;
@@ -18,10 +23,6 @@ public class Wasteland : ITile
     public Score TileScore {get; set;}
     protected int scoreWorth = 0;
 
-    public virtual string GetDescription()
-    {
-        return "<i>A barren wasteland</i>";
-    }
 
     public virtual Tag[] GetTags()
     {

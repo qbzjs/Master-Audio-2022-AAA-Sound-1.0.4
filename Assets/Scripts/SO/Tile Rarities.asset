@@ -57,17 +57,17 @@ MonoBehaviour:
   Commons:
   - River
   - Human
+  - Gargoyle
   - Rat
   - Spider
   - OilSlick
   - HellFire
-  - YagaHut
   Uncommons:
   - Clocktower
   - Ghost
   - Vampire
-  - FireSprite
+  - Ghost
   Rares:
-  - RatKing
+  - Vampire
   Legendaries:
-  - Cerberus
+  - Vampire
