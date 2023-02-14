@@ -14,9 +14,9 @@ public class AddTileButton : MonoBehaviour
     public void SetValues(string myTileName, Color newColor)
     {
         tileName = myTileName;
-        Image cardImage = card.GetComponent<Image>();
+        Image cardImage = card.transform.GetChild(0).gameObject.GetComponent<Image>();
         cardImage.color = newColor;
-        Image tileImage = card.transform.GetChild(0).gameObject.GetComponent<Image>();
+        Image tileImage = card.transform.GetChild(1).gameObject.GetComponent<Image>();
         tileImage.color = newColor;
         card.CreateCardNewTile(myTileName);
     }
