@@ -64,6 +64,7 @@ MonoBehaviour:
   - HellFire
   - YagaHut
   - Cave
+  - Graveyard
   Uncommons:
   - Clocktower
   - Ghost
@@ -71,6 +72,7 @@ MonoBehaviour:
   - Ghost
   - Doppelganger
   - Void
+  - Campfire
   Rares:
   - RatKing
   Legendaries:

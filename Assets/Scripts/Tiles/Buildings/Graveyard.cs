@@ -11,6 +11,12 @@ public class Graveyard : Wasteland
     {
         return "+1 when an adjacent tile is destroyed";
     }
+
+    public override Tag[] GetTags()
+    {
+        return new[] {Tag.Death};
+    }
+
     public Graveyard(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
