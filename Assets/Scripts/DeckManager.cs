@@ -1,12 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Scripts;
 using UnityEngine;
 
 public class DeckManager : Singleton<DeckManager>
 {
-    private List<string> discard;
-    private List<string> deck;
+    [SerializeField] private Card template;
+    [SerializeField] private GameObject parent;
+
+    private List<KeyValuePair<string, Card>> discard;
+    private List<KeyValuePair<string, Card>> deck;
 
     private void Awake()
     {
@@ -27,23 +31,25 @@ public class DeckManager : Singleton<DeckManager>
     
     public void AddToDeck(string s)
     {
-        deck.Add(s);
+        Card newCard = Instantiate(template, parent.transform);
+        newCard.CreateCardNewTile(s);
+        deck.Add(new KeyValuePair<string, Card>(s, newCard));
     }
 
     public string Draw()
     {
         if(deck.Count == 0) ShuffleBack();
         
-        string toReturn = deck[^1]; //index from end expression
+        KeyValuePair<string, Card> toReturn = deck[^1]; //index from end expression
 
         discard.Add(toReturn);
         deck.RemoveAt(deck.Count - 1);
-        return toReturn;
+        return toReturn.Key;
     }
 
     public void Print()
     {
-        Debug.Log("deck: \n");
+ /*       Debug.Log("deck: \n");
         foreach (string card in deck)
         {
             Debug.Log(card);
@@ -53,7 +59,7 @@ public class DeckManager : Singleton<DeckManager>
         foreach (string card in discard)
         {
             Debug.Log(card);
-        }
+        }*/
     }
 
 }
