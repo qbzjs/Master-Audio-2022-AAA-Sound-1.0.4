@@ -48,12 +48,14 @@ MonoBehaviour:
     - Ghoul
     - Tenement
     - River
+    - Void
     _keys:
     - Gargoyle
     - Ghoul
     - Tenement
     - River
-    _values: 03000000030000000300000003000000
+    - Void
+    _values: 0300000003000000030000000300000003000000
   Commons:
   - River
   - Human
@@ -63,12 +65,16 @@ MonoBehaviour:
   - OilSlick
   - HellFire
   - YagaHut
+  - Cave
   Uncommons:
   - Clocktower
   - Ghost
   - Vampire
   - Ghost
+  - Doppelganger
+  - Void
   Rares:
   - RatKing
   Legendaries:
   - Cerberus
+  - Legion
