@@ -29,6 +29,7 @@ public class MouseOverTile: MonoBehaviour
     }
     public void OnMouseExit()
     {
-         GameManager.Instance.scoretip.Hide();
+        GameManager.Instance.tooltip.Hide();
+        GameManager.Instance.scoretip.Hide();
     }
 }

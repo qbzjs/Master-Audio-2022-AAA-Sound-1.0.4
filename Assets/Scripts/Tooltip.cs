@@ -49,8 +49,13 @@ public class Tooltip : MonoBehaviour
             }
         }
         titleText.text = title;
+        description += "<br><br>";
+        description += "Score: ";
+        description += body.explanation;
+        description += $" = {body.score}";
         descriptionText.text = description;
         scoreText.text = body.score.ToString();
+    
        // calculationText.text =  body.explanation + $" = {body.score}";
         tagsText.text = tags_string;
     }
