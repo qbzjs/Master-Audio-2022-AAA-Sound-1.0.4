@@ -10,8 +10,8 @@ public class Tooltip : MonoBehaviour
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-    [SerializeField] private TextMeshProUGUI titleText, descriptionText, tagsText, scoreText;
-    [SerializeField] private Image tileArt; 
+
+    public Card card;
     
     private void Awake()
     {
@@ -33,31 +33,8 @@ public class Tooltip : MonoBehaviour
     /// <param name="body">Score to display in the body</param>
     public void Show(ITile tile)
     {
-        Tag[] tags = tile.GetTags();
-        Score body = tile.CalculateScore();
-        string description = tile.GetDescription();
-        string title = tile.GetType().FullName;
-        tileArt.sprite = ArtManager.LoadTileArt(title);
-
         canvasGroup.alpha = 1;
-        string tags_string = "";
-        foreach (Tag tag in tags){
-            if (tag != Tag.Null){
-                string t_str =  "#";
-                t_str += tag.ToString();
-                tags_string += t_str;
-            }
-        }
-        titleText.text = title;
-        description += "<br><br>";
-        description += "Score: ";
-        description += body.explanation;
-        description += $" = {body.score}";
-        descriptionText.text = description;
-        scoreText.text = body.score.ToString();
-    
-       // calculationText.text =  body.explanation + $" = {body.score}";
-        tagsText.text = tags_string;
+        card.CreateCardFromTile(tile);
     }
 
     /// <summary>

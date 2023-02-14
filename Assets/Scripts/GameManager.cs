@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>
         set
         {
             int nextUpgrade = (1 + score / upgradeIncrement) * upgradeIncrement;
-            if (score < nextUpgrade && value > nextUpgrade)
+            if (Score < nextUpgrade && value >= nextUpgrade)
             {
                 UpgradeManager.Instance.PopulateUpgrades();
                 upgradeScreen.SetActive(true);
@@ -67,7 +67,7 @@ public class GameManager : Singleton<GameManager>
             turnCounter.text = turns + " turns remaining.";
             if (turns <= 0)
             {
-                if (score >= winningScore)
+                if (Score >= winningScore)
                 {
                     Win();
                 }

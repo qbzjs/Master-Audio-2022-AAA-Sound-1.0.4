@@ -54,7 +54,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
             tileName = tilePool.Legendaries.PickRandom();
         }
         
-        toPopulate.SetValues(tileName, borderColor);
+        toPopulate.SetValues(tileName);
         
     }
     
