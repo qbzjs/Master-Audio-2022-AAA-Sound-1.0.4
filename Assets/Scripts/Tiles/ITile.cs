@@ -17,8 +17,6 @@ public interface ITile
 
     public Vector3 Position();
 
-    public bool Destructible();
-
     public void Observe(DefaultEvent e);
 
     /// <summary>

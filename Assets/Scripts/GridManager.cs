@@ -140,16 +140,18 @@ namespace Scripts
                         }
                         else
                         {
-                            Vector3 finalPos = BlockSpawner.Instance.transform.position;
+                            Vector3 finalPos = block.isMaw ? BlockSpawner.Instance.mawSpawner.position : 
+                                BlockSpawner.Instance.transform.position  ;
                             LeanTween.cancel(block.gameObject);
                             LeanTween.cancel(Camera.main.gameObject);
                             LeanTween.move(block.gameObject, finalPos, 0.3f).setEaseInSine();
                             return;
                         } 
                     }
-                    if (!grid[gridPos.x, gridPos.y].Destructible())
+                    if (grid[gridPos.x, gridPos.y].GetType().Name != "Wasteland")
                     {
-                         Vector3 finalPos = BlockSpawner.Instance.transform.position;
+                        Vector3 finalPos = block.isMaw ? BlockSpawner.Instance.mawSpawner.position : 
+                                                         BlockSpawner.Instance.transform.position  ;
                         if (block.held){
                             finalPos = HoldingCell.Instance.transform.position;
                         }
@@ -175,7 +177,14 @@ namespace Scripts
                 }
                 else
                 {
-                    BlockSpawner.Instance.GenerateBlock();
+                    if (block.isMaw)
+                    {
+                        BlockSpawner.Instance.GenerateMaw();
+                    }
+                    else
+                    {
+                        BlockSpawner.Instance.GenerateBlock();
+                    }
                 }
                 block.Destroy();
                 GameManager.Instance.PlacedBlock();
@@ -221,6 +230,7 @@ namespace Scripts
             });
             
             Destroy(grid[pos.x, pos.y].TileObject);
+            grid[pos.x, pos.y] = new Wasteland();
         }
 
         public void KillTile(Vector2Int pos)

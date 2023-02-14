@@ -96,15 +96,6 @@ public class Wasteland : ITile
         ongoingEffects.Add(toAdd);
         ongoingEffects.Sort(); //sorts by effect order
     }
-
-    /// <summary>
-    /// Most subclasses will not need to override this, returns true by default
-    /// </summary>
-    /// <returns>Whether or not this will be able to be built on top of</returns>
-    public virtual bool Destructible()
-    {
-        return true;
-    }
     
     /// <summary>
     /// Override this function!
