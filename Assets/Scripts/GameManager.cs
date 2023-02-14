@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter;
     [Foldout("UI")]
-    [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen;
+    [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen, deckScreen;
     [Foldout("UI")]
     [SerializeField] public Tooltip tooltip;
     [Foldout("UI")]
@@ -101,6 +101,7 @@ public class GameManager : Singleton<GameManager>
         winButton.SetActive(false);
         winScreen.SetActive(false);
         upgradeScreen.SetActive(false);
+        deckScreen.SetActive(false);
         loseScreen.SetActive(false);
         GridManager.Instance.Initialize();
         Score = 0;

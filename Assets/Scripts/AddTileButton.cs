@@ -14,12 +14,7 @@ public class AddTileButton : MonoBehaviour
     public void SetValues(string myTileName)
     {
         tileName = myTileName;
-        System.Type ClassType = System.Type.GetType(myTileName);
-
-        ITile tile = TileFactory.CreateTile(ClassType, transform, Vector3.zero);
-        Destroy(tile.TileObject);
-        
-        card.CreateCardFromTile(tile);
+        card.CreateCardNewTile(myTileName);
     }
 
     public void AddMyTile()

@@ -34,7 +34,7 @@ public class Tooltip : MonoBehaviour
     public void Show(ITile tile)
     {
         canvasGroup.alpha = 1;
-        card.CreateCardFromTile(tile);
+        card.CreateCardExistingTile(tile);
     }
 
     /// <summary>

@@ -46,7 +46,7 @@ public class Card : MonoBehaviour
             scoreText.text = value;
         }
     }
-    public void CreateCardFromTile(ITile tile)
+    public void CreateCardExistingTile(ITile tile)
     {
         Score body = tile.CalculateScore();
     
@@ -72,5 +72,14 @@ public class Card : MonoBehaviour
         }
         CardTags = tags_string;  
 
+    }
+    public void CreateCardNewTile(string myTileName)
+    {
+        System.Type ClassType = System.Type.GetType(myTileName);
+
+        ITile tile = TileFactory.CreateTile(ClassType, transform, Vector3.zero);
+        Destroy(tile.TileObject);
+        CreateCardExistingTile(tile);
+        
     }
 }
