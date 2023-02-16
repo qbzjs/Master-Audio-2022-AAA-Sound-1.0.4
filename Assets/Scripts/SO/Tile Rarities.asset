@@ -48,16 +48,12 @@ MonoBehaviour:
     - Ghoul
     - Tenement
     - River
-    - Cinders
-    - HellFire
     _keys:
     - Gargoyle
     - Ghoul
     - Tenement
     - River
-    - Cinders
-    - HellFire
-    _values: 030000000300000003000000030000000300000003000000
+    _values: 03000000030000000300000003000000
   Commons:
   - River
   - Human
