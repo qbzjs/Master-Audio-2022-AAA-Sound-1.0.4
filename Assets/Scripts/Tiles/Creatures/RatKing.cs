@@ -9,7 +9,7 @@ public class RatKing : Rat
 
     public override string GetDescription()
     {
-        return $"COMBINES ALL RATS";
+        return $"Destroy all other rats and gain their points.";
     }
     
     public RatKing(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

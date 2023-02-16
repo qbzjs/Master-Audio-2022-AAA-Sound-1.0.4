@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Graveyard : Wasteland
 {
-    [SerializeField] private int scoreWorthAdjacent = 1;
+    [SerializeField] private int scoreWorthAdjacent = 2;
     public int adjacentDestroyed = 0;
     public override string GetDescription()
     {
-        return "+1 when an adjacent tile is destroyed";
+        return "+2 when an adjacent tile is destroyed";
     }
 
     public override Tag[] GetTags()

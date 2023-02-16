@@ -9,7 +9,7 @@ public class Rat : Animal
 
     public override string GetDescription()
     {
-        return $"{scoreWorth}pts - Rats beget rats";
+        return $"{scoreWorth}pts - A wasteland adjacent to 2 rats becomes a rat.";
     }
     
     public static Rule PropagateRats = new Rule("Propagate Rats", 10, () =>

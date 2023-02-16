@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Spider : Animal
 {
-    [SerializeField] new protected int scoreWorth = 8;
+    [SerializeField] new protected int scoreWorth = 6;
 
     public override string GetDescription()
     {

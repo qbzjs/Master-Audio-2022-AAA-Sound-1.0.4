@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using Scripts;
 using UnityEngine;
 
-public class Ghost : Wasteland
+public class CinderDemon : Wasteland
 {
-    [SerializeField] new protected int scoreWorth = 5;
+    [SerializeField] new protected int scoreWorth = 12;
 
     public override Tag[] GetTags()
     {
-        return new[] {Tag.Death};
+        return new[] {Tag.Fire};
     }
     
     public override string GetDescription()
     {
         return scoreWorth + " pts";
     }
-    public Ghost(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
+    public CinderDemon(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }

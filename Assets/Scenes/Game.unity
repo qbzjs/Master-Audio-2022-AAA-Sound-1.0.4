@@ -954,7 +954,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &373795313
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1286,9 +1286,9 @@ MonoBehaviour:
   scoretip: {fileID: 1599612522}
   tilePool: {fileID: 11400000, guid: ca939c862f8cd27479519208f78516d4, type: 2}
   winningScore: 80
-  upgradeIncrement: 5
+  upgradeIncrement: 30
   totalTurns: 20
-  winningScoreIncrement: 20
+  winningScoreIncrement: 25
   SetOffInEditor:
   - {fileID: 323516238}
   - {fileID: 1559934565}
@@ -5086,7 +5086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1559934566
 RectTransform:
   m_ObjectHideFlags: 0

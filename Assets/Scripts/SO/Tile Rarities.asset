@@ -16,10 +16,10 @@ MonoBehaviour:
   UncommonWeight: 0.2
   RareWeight: 0.09
   LegendaryWeight: 0.01
-  CommonColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
-  UncommonColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
-  RareColor: {r: 0.8396226, g: 0.47696444, b: 0.18614274, a: 1}
-  LegendaryColor: {r: 0.64433086, g: 0.14960839, b: 0.7735849, a: 1}
+  CommonColor: {r: 1, g: 1, b: 1, a: 1}
+  UncommonColor: {r: 0.69855815, g: 0.8867924, b: 0.72160727, a: 1}
+  RareColor: {r: 0.8962264, g: 0.63865036, b: 0.37624598, a: 1}
+  LegendaryColor: {r: 0.7448069, g: 0.27612138, b: 0.8018868, a: 1}
   startingDeck:
     reorderableList:
       canAdd: 1
@@ -48,16 +48,19 @@ MonoBehaviour:
     - Ghoul
     - Tenement
     - River
+    - Cinders
+    - HellFire
     _keys:
     - Gargoyle
     - Ghoul
     - Tenement
     - River
-    _values: 03000000030000000300000003000000
+    - Cinders
+    - HellFire
+    _values: 030000000300000003000000030000000300000003000000
   Commons:
   - River
   - Human
-  - Gargoyle
   - Rat
   - Spider
   - OilSlick
@@ -65,6 +68,7 @@ MonoBehaviour:
   - YagaHut
   - Cave
   - Graveyard
+  - Cinders
   Uncommons:
   - Clocktower
   - Ghost

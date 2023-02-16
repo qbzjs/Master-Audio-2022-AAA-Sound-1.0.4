@@ -6,9 +6,14 @@ public class Void : Wasteland
     
     public Void(Transform parentTransform, Vector3 pos) : base(parentTransform, pos) { }
 
+    public override Tag[] GetTags()
+    {
+        return new[] {Tag.Darkness};
+    }
+    
     public override string GetDescription()
     {
-        return $"Destroyed - All voids are worth +1, forever (currently {voidsDestroyed})";
+        return $"When destroyed - All voids are worth +1, forever (currently {voidsDestroyed})";
     }
 
     public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)

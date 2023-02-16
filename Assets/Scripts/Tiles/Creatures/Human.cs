@@ -7,7 +7,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Human : Creature
 {
-    [SerializeField] protected int scoreWorth = 2;
+    [SerializeField] protected int scoreWorth = 3;
     
     private static List<Vector2Int> toHaunt = new ();
 
@@ -41,8 +41,8 @@ public class Human : Creature
     
     public override string GetDescription()
     {
-        return $"{scoreWorth}pts - On death: spawn a ghost worth 6 pts" +
-                "<br> On Turn: dies if next to a tile with #monster";
+        return $"{scoreWorth}pts - When Destroyed: spawn a ghost worth 5 pts" +
+                "<br> Each Turn: dies if next to a tile with #monster";
     }
     
     
