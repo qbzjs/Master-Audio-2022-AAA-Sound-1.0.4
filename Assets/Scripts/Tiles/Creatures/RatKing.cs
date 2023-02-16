@@ -6,6 +6,7 @@ using UnityEngine;
 public class RatKing : Rat
 {
     [SerializeField] new protected int scoreWorth = 0;
+    protected bool justPlaced = true;
 
     public override string GetDescription()
     {
@@ -28,8 +29,13 @@ public class RatKing : Rat
         {
             if (x == xPos && y == yPos) return; //if it's me, return
 
+            if (rat is RatKing ratKing && ratKing.justPlaced)
+            {
+                return;
+            }
             scoreWorth += rat.CalculateScore().score;
-            GridManager.Instance.DestroyTile(new Vector2Int(x, y));            
+            GridManager.Instance.DestroyTile(new Vector2Int(x, y));
+            justPlaced = false;
         });
     }
 }
