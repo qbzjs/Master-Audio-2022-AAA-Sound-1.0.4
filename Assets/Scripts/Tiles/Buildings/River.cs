@@ -7,6 +7,10 @@ using UnityEngine;
 
 public class River : Building
 {
+    public override bool HighlightPredicate(ITile otherTile)
+    {
+        return base.HighlightPredicate(otherTile) || otherTile.GetTags().Contains(Tag.Blood);
+    }
 
     public override string GetDescription()
     {

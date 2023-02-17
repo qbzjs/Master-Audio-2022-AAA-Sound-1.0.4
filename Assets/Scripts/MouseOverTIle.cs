@@ -30,8 +30,10 @@ public class MouseOverTile: MonoBehaviour
     private void turnGrey()
     {
         Color grey = new Color(0.5f, 0.5f, 0.5f, 1f);
-        GridManager.ForEach((int x, int y, ITile tile) => {
-            if (tile.GetType().Name == Tile.GetType().Name && tile.GetType().Name != "Wasteland")
+        GridManager.ForEach((int x, int y, ITile tile) =>
+        {
+            if (tile.GetType() == typeof(Wasteland)) return;
+            if (!(Tile.HighlightPredicate(tile) || tile.HighlightPredicate(Tile)))
             {
                 LeanTween.color(tile.TileObject, grey, 0f);
             }
@@ -40,7 +42,7 @@ public class MouseOverTile: MonoBehaviour
     private void turnWhite()
     {
         GridManager.ForEach((int x, int y, ITile tile) => {
-            if (tile.GetType().Name == Tile.GetType().Name && tile.GetType().Name != "Wasteland")
+            if (tile.GetType().Name != "Wasteland")
             {
                 LeanTween.color(tile.TileObject, Color.white, 0f);
             }

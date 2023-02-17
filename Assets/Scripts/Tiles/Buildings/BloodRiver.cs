@@ -8,7 +8,10 @@ using UnityEngine;
 public class BloodRiver : Building
 {
     private bool blood = false;
-
+    public override bool HighlightPredicate(ITile otherTile)
+    {
+        return base.HighlightPredicate(otherTile) || otherTile.GetTags().Contains(Tag.Blood);
+    }
     public override string GetDescription()
     {
         return "Adjacent tiles become Bloody (Double score)";

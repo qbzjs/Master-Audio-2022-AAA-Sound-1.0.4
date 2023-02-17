@@ -8,11 +8,11 @@ public interface ITile
 
     public string GetDescription();
 
-
+    public bool HighlightPredicate(ITile otherTile);
     public Tag[] GetTags();
 
     public GameObject TileObject { get; set; }
-    
+
     public Vector3 LocalPosition();
 
     public Vector3 Position();

@@ -23,6 +23,10 @@ public class Wasteland : ITile
     public Score TileScore {get; set;}
     protected int scoreWorth = 0;
 
+    public virtual bool HighlightPredicate(ITile otherTile)
+    {
+        return otherTile.GetType() == this.GetType();
+    }
 
     public virtual Tag[] GetTags()
     {
