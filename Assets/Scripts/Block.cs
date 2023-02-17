@@ -19,7 +19,7 @@ public class Block : MonoBehaviour, IDragParent
     private Vector2Int currPos;
     private Vector3 dragOffset;
     
-    private bool dragging;
+    public bool dragging;
     public bool held = false;
     public bool isMaw = false;
 
