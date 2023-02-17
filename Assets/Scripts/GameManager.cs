@@ -146,7 +146,6 @@ public class GameManager : Singleton<GameManager>
     void Update()
     {
 
-        
 #if !UNITY_WEBGL
         if (Input.GetKeyDown(KeyCode.Escape))
         {
