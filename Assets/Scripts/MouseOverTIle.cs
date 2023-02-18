@@ -9,7 +9,7 @@ public class MouseOverTile: MonoBehaviour
     public void OnMouseOver()
     {
         turnGrey();
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0))
         {
             GameManager.Instance.scoretip.Hide();
             GameManager.Instance.tooltip.Show(Tile);

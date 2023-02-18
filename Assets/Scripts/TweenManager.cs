@@ -7,7 +7,7 @@ using UnityEngine;
 public class TweenManager : Singleton<TweenManager>
 {
     [Range(0, 2)]
-    [SerializeField] private float cameraShakeAmount, cameraShakeTime, blockUpAmount, blockAnimationTime;
+    [SerializeField] private float cameraShakeAmount, cameraShakeTime, blockUpAmount, blockAnimationTime, emphasizeAmount, emphasizeTime;
 
     [SerializeField] private AnimationCurve blockCurve;
 
@@ -42,6 +42,12 @@ public class TweenManager : Singleton<TweenManager>
     {
         LeanTween.moveY(Camera.main.gameObject, Camera.main.transform.position.x - cameraShakeAmount, cameraShakeTime)
             .setEase(LeanTweenType.easeShake).setDelay(0.1f);
+    }
+
+    public void Emphasize(GameObject ob)
+    {
+        LeanTween.moveLocalY(ob, ob.transform.localPosition.y + 100*emphasizeAmount, emphasizeTime)
+            .setEasePunch();
     }
 
     public void Move(GameObject ob)

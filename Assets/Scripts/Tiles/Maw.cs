@@ -7,7 +7,7 @@ public class Maw : Monument
 {
     public override string GetDescription()
     {
-        return "If the board is completely filled, you lose. MAW CAN HELP";
+        return "When placed: destroys all surrounding tiles and itself";
     }
 
     public override Tag[] GetTags()

@@ -4488,6 +4488,8 @@ MonoBehaviour:
   cameraShakeTime: 0.16
   blockUpAmount: 0.19
   blockAnimationTime: 0.19
+  emphasizeAmount: 0.1
+  emphasizeTime: 0.2
   blockCurve:
     serializedVersion: 2
     m_Curve:
@@ -6283,7 +6285,7 @@ MonoBehaviour:
     to see how many points it is worth.
 
 
-    Right click while hovering to see an
+    Left click while hovering to see an
     expanded explanation.
 
 

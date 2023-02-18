@@ -52,7 +52,7 @@ public class GameManager : Singleton<GameManager>
             {
                 winButton.SetActive(true);
             }
-            ScoreIncrementEffect(oldScore);  
+            ScoreIncrementEffect(oldScore, nextUpgrade);  
         }
     }
     
@@ -63,6 +63,10 @@ public class GameManager : Singleton<GameManager>
         get => turns;
         set
         {
+            if (turns != value)
+            {
+                TweenManager.Instance.Emphasize(turnCounter.GameObject());
+            }
             turns = value;
             turnCounter.text = turns + " turns remaining.";
             if (turns <= 0)
@@ -199,7 +203,7 @@ public class GameManager : Singleton<GameManager>
     {
         SceneManager.GetActiveScene().Load();
     }
-    public void ScoreIncrementEffect(float oldScore){
+    public void ScoreIncrementEffect(float oldScore, float nextUpgrade){
         LeanTween.value(gameObject, oldScore, score, 0.1f)
         .setEaseOutQuart()
         .setOnUpdate((val)=>{ProgressBarShadow.fillAmount = val / winningScore;});    
@@ -207,7 +211,7 @@ public class GameManager : Singleton<GameManager>
         LeanTween.value(gameObject, oldScore, score, 2f)
         .setEaseOutSine()
         .setOnUpdate((val)=>{
-            progressCounter.text = "Progress: " + (int)val+ "/" + winningScore; 
+            progressCounter.text = $"Progress: {(int) val}/{winningScore} ({nextUpgrade - (int) val} until next boon)"; 
             if (progressBar != null){
                 progressBar.fillAmount = val / winningScore;
             }

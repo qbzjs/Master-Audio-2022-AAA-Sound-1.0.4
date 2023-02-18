@@ -53,10 +53,10 @@ public class Card : MonoBehaviour
         CardName = tile.GetType().FullName;
 
         string description = tile.GetDescription();
-        description += "<br><br>";
-        description += "Score: ";
-        description += body.explanation;
-        description += $" = {body.score}";
+        //description += "<br><br>";
+        //description += "Score: ";
+        //description += body.explanation;
+        //description += $" = {body.score}";
         CardDescription = description;
 
         CardPoints = body.score.ToString();
