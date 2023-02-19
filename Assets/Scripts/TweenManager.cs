@@ -7,9 +7,10 @@ using UnityEngine;
 public class TweenManager : Singleton<TweenManager>
 {
     [Range(0, 2)]
-    [SerializeField] private float cameraShakeAmount, cameraShakeTime, blockUpAmount, blockAnimationTime, emphasizeAmount, emphasizeTime;
+    [SerializeField] private float cameraShakeAmount, cameraShakeTime, blockUpAmount, blockAnimationTime, emphasizeAmount, emphasizeTime, slideOnTime;
 
     [SerializeField] private AnimationCurve blockCurve;
+    [SerializeField] private Vector3 slideOnDiff;
 
     
     /*
@@ -19,7 +20,21 @@ public class TweenManager : Singleton<TweenManager>
         PlaceBlock(FindObjectOfType<Block>().gameObject);
     }
     */
-    
+    public void SlideOnLocal(GameObject ob)
+    {
+        //LTSeq seq = new LTSeq();
+        Vector3 endPos = ob.transform.localPosition;
+        ob.transform.localPosition = endPos + slideOnDiff;
+        LeanTween.moveLocal(ob, endPos, slideOnTime);
+        CanvasGroup canvas = ob.GetComponent<CanvasGroup>();
+        if (canvas == null)
+        {
+            canvas = ob.AddComponent<CanvasGroup>();
+        }
+
+        canvas.alpha = 0.5f;
+        LeanTween.alphaCanvas(canvas, 1, slideOnTime);
+    }
     
     public void PlaceBlock(GameObject ob, Action CB)
     {

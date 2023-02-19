@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter;
     [Foldout("UI")]
-    [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen, deckScreen;
+    [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen, deckScreen, tempBlocker;
     [Foldout("UI")]
     [SerializeField] public Tooltip tooltip;
     [Foldout("UI")]
@@ -43,7 +43,9 @@ public class GameManager : Singleton<GameManager>
             if (Score < nextUpgrade && value >= nextUpgrade)
             {
                 UpgradeManager.Instance.FirstTimeUpgrade();
-                upgradeScreen.SetActive(true);
+                TweenManager.Instance.Emphasize(progressBar.transform.parent.gameObject);
+                tempBlocker.SetActive(true);
+                //upgradeScreen.SetActive(true);
                 
             }
             float oldScore = Score;
@@ -210,12 +212,21 @@ public class GameManager : Singleton<GameManager>
 
         LeanTween.value(gameObject, oldScore, score, 2f)
         .setEaseOutSine()
-        .setOnUpdate((val)=>{
+        .setOnUpdate((val)=>
+        {
+            int untilNext = (int)nextUpgrade - (int) val;
+            if (untilNext <= 0)
+            {
+                nextUpgrade += upgradeIncrement;
+                tempBlocker.SetActive(false);
+                upgradeScreen.SetActive(true);
+                TweenManager.Instance.SlideOnLocal(upgradeScreen);
+            }
             progressCounter.text = $"Progress: {(int) val}/{winningScore} ({nextUpgrade - (int) val} until next boon)"; 
             if (progressBar != null){
                 progressBar.fillAmount = val / winningScore;
             }
-            }).setDelay(1.1f);
+            }).setDelay(0.5f);
     }
 
 }
