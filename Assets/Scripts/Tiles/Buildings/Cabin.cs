@@ -20,16 +20,14 @@ public class Cabin : Building
 
     public override void WhenPlaced()
     {
-        GridManager.ForEach((int x, int y, Wasteland wasteland) =>
+        foreach (var dir in Directions.Cardinal)
         {
-            if (x == xPos && y == yPos) return; //if it's me, return
-            ITile tile = GridManager.Instance.GetTile(x, y);
-            if (tile is Wasteland)
+            ITile tile = GridManager.Instance.GetTile(dir.x + xPos, dir.y + yPos);
+            if (tile.GetType() == typeof(Wasteland))
             {
-                scoreWorth++;
-                return;
+                scoreWorth += 2;
             }
-        });
+        }
     }
 
     protected override Score CalculateBaseScore()
