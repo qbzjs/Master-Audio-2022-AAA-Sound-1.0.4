@@ -16,13 +16,22 @@ public class BlockSpawner : Singleton<BlockSpawner>
 
     public void GenerateBlock()
     {
-        GameObject NewBlock; 
-        NewBlock = new GameObject("NewBlock");
-        NewBlock.transform.parent = transform;
-        NewBlock.transform.localPosition = Vector3.zero;
-        NewBlock.AddComponent<Block>();
         int blockSize = Random.Range((int)minMaxSize.x, (int)(minMaxSize.y + 1));
-        NewBlock.GetComponent<Block>().GenerateTiles(NewBlock.transform, blockSize);
+        for (int i = 0; i < blockSize - 1; i++)
+        {
+            TweenManager.Instance.DrawCard();
+        }
+        
+        TweenManager.Instance.DrawCard(() =>
+        {
+            GameObject NewBlock; 
+            NewBlock = new GameObject("NewBlock");
+            NewBlock.transform.parent = transform;
+            NewBlock.transform.localPosition = Vector3.zero;
+            NewBlock.AddComponent<Block>();
+            NewBlock.GetComponent<Block>().GenerateTiles(NewBlock.transform, blockSize);
+        });
+
     }
 
     public void GenerateMaw()

@@ -145,7 +145,7 @@ public class Block : MonoBehaviour, IDragParent
     public void OnMouseUp()
     {
         GridManager.Instance.PlaceBlock(this);
-        if (!HoldingCell.Instance.holding && HoldingCell.Instance.over)
+        if (!HoldingCell.Instance.holding && HoldingCell.Instance.over && !isMaw)
         {
             held = true;
             HoldingCell.Instance.holding = true;
