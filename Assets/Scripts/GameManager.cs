@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager>
             int nextUpgrade = (1 + score / upgradeIncrement) * upgradeIncrement;
             if (Score < nextUpgrade && value >= nextUpgrade)
             {
-                UpgradeManager.Instance.PopulateUpgrades();
+                UpgradeManager.Instance.FirstTimeUpgrade();
                 upgradeScreen.SetActive(true);
                 
             }

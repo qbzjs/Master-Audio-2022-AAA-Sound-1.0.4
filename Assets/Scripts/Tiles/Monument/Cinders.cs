@@ -28,7 +28,12 @@ public class Cinders : Wasteland
             }
         });
     });
-    
+
+    public override bool HighlightPredicate(ITile otherTile)
+    {
+        return otherTile.GetTags().Contains(Tag.Fire);
+    }
+
     public override string GetDescription()
     {
         return $"If surrounded by #fire, become Cinder Demon";

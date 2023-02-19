@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6baf7b5b0a27f4e971906b8af00366, type: 3}
   m_Name: Tile Rarities
   m_EditorClassIdentifier: 
-  CommonWeight: 0.7
-  UncommonWeight: 0.2
-  RareWeight: 0.09
-  LegendaryWeight: 0.01
+  CommonWeight: 0.8
+  UncommonWeight: 0.15
+  RareWeight: 0.045
+  LegendaryWeight: 0.005
   CommonColor: {r: 1, g: 1, b: 1, a: 1}
   UncommonColor: {r: 0.69855815, g: 0.8867924, b: 0.72160727, a: 1}
   RareColor: {r: 0.8962264, g: 0.63865036, b: 0.37624598, a: 1}
@@ -53,7 +53,7 @@ MonoBehaviour:
     - Ghoul
     - Tenement
     - River
-    _values: 03000000030000000300000003000000
+    _values: 03000000040000000400000004000000
   Commons:
   - River
   - Human
