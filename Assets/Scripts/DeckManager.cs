@@ -10,81 +10,81 @@ public class DeckManager : Singleton<DeckManager>
     [SerializeField] private Card template;
     [SerializeField] private GameObject parent;
 
-    private List<KeyValuePair<string, Card>> discard;
-    private List<KeyValuePair<string, Card>> deck;
-
-    private void Awake()
-    {
-        discard = new();
-        deck = new();
-    }
-
+    private List<string> discard = new(), deck = new(), drawPile = new();
+    private List<Card> cards = new();
+    
     public void ShuffleBack()
     {
-        deck.AddRange(discard);
+        drawPile.AddRange(discard);
+        discard.Clear();
         Shuffle();
     }
 
     public void Shuffle()
     {
-        deck.Shuffle();
+        drawPile.Shuffle();
     }
     
     public void AddToDeck(string s)
     {
-        Card newCard = Instantiate(template, parent.transform);
-        newCard.CreateCardNewTile(s);
-        deck.Add(new KeyValuePair<string, Card>(s, newCard));
+        drawPile.Add(s);
+        deck.Add(s);
     }
 
     public void LoadDeck()
     {
-        
+        foreach (var card in cards)
+        {
+            Destroy(card.gameObject);
+        }
+        cards.Clear();
+        foreach (var name in deck)
+        {
+            Card newCard = Instantiate(template, parent.transform);
+            newCard.CreateCardNewTile(name);
+            cards.Add(newCard);
+        }
     }
 
     public string Draw()
     {
-        if(deck.Count == 0) ShuffleBack();
+        if(drawPile.Count == 0) ShuffleBack();
         
-        KeyValuePair<string, Card> toReturn = deck[^1]; //index from end expression
+        string toReturn = drawPile[^1]; //index from end expression
 
         discard.Add(toReturn);
-        deck.RemoveAt(deck.Count - 1);
-        return toReturn.Key;
+        drawPile.RemoveAt(drawPile.Count - 1);
+        return toReturn;
     }
 
     public string GetRandomCard()
     {
-        List<KeyValuePair<string, Card>> temp = discard;
-        temp.AddRange(deck);
-        temp.Shuffle();
-        return temp[0].Key;
+        deck.Shuffle();
+        return deck[0];
     }
 
     public void Remove(string toRemove)
     {
-        if (deck.Exists((pair) => pair.Key == toRemove))
+        if (deck.Exists((pair) => pair == toRemove))
         {
             for (int i = 0; i < deck.Count; i++)
             {
-                if (deck[i].Key == toRemove)
+                if (deck[i] == toRemove)
                 {
-                    Debug.Log($"i is: {i} and ");
-                    Debug.Log($"gameobject is: {deck[i].Value.gameObject}");
-                    Destroy(deck[i].Value.gameObject);
-                    deck.Remove(deck[i]);
+                    deck.Remove(toRemove);
+                    drawPile.Remove(toRemove);
                     break;
                 }
             }
         } else
-        if (discard.Exists((pair) => pair.Key == toRemove))
+        if (discard.Exists((pair) => pair == toRemove))
         {
             for (int i = 0; i < deck.Count; i++)
             {
-                if (deck[i].Key == toRemove)
+                if (deck[i] == toRemove)
                 {
-                    Destroy(deck[i].Value.gameObject);
-                    deck.RemoveAt(i);
+                    deck.Remove(toRemove);
+                    discard.RemoveAt(i);
                     break;
                 }
             }
@@ -93,21 +93,6 @@ public class DeckManager : Singleton<DeckManager>
         {
             Debug.Log($"no card found in deck with name \"{toRemove}\"");
         }
-    }
-
-    public void Print()
-    {
- /*       Debug.Log("deck: \n");
-        foreach (string card in deck)
-        {
-            Debug.Log(card);
-        }
-        
-        Debug.Log("discard: \n");
-        foreach (string card in discard)
-        {
-            Debug.Log(card);
-        }*/
     }
 
 }
