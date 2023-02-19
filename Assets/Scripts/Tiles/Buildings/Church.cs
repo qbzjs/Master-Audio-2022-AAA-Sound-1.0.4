@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class Church : Building
 {
-    [SerializeField] protected int scoreWorthAdjacent = 3;
+    [SerializeField] protected int scoreWorth = 3;
     public new string Type = "Chaos";
+
+    public override string GetDescription()
+    {
+        return "<i>A satanic church, worth 3 points</i>";
+    }
 
     public Church(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
@@ -15,30 +20,6 @@ public class Church : Building
 
     protected override Score CalculateBaseScore()
     {
-        int adjacentWings = 0;
-
-        if (GridManager.Instance.GetTile(xPos + 1, yPos) is Wing)
-        {
-            adjacentWings++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos, yPos - 1) is Wing)
-        {
-            adjacentWings++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos - 1, yPos) is Wing)
-        {
-            adjacentWings++;
-        }
-
-        if (GridManager.Instance.GetTile(xPos, yPos + 1) is Wing)
-        {
-            adjacentWings++;
-        }
-
-        
-        return new Score((adjacentWings+1) * scoreWorthAdjacent, 
-            $"[{adjacentWings + 1}] * {scoreWorthAdjacent}");
+        return new Score(scoreWorth);
     }
 }
