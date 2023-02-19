@@ -15,7 +15,7 @@ public class Cabin : Building
 
     public override string GetDescription()
     {
-        return "<i>The haunted temple! Absorbs all ghosts and their points, with a base value of 6</i>";
+        return "When placed: gets +2 for each adjacent Wasteland";
     }
 
     public override void WhenPlaced()
