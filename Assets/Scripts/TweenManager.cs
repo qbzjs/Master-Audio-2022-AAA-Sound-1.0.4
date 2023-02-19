@@ -46,7 +46,7 @@ public class TweenManager : Singleton<TweenManager>
 
     public void Emphasize(GameObject ob)
     {
-        LeanTween.moveLocalY(ob, ob.transform.localPosition.y + 100*emphasizeAmount, emphasizeTime)
+        LeanTween.scale(ob, Vector3.one * emphasizeAmount, emphasizeTime)
             .setEasePunch();
     }
 

@@ -23,7 +23,7 @@ public class Cabin : Building
         GridManager.ForEach((int x, int y, Wasteland wasteland) =>
         {
             if (x == xPos && y == yPos) return; //if it's me, return
-            ITile tile = GridManager.Instance.GetTile(x, y)
+            ITile tile = GridManager.Instance.GetTile(x, y);
             if (tile is Wasteland)
             {
                 scoreWorth++;

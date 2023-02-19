@@ -65,6 +65,7 @@ MonoBehaviour:
   - Cave
   - Graveyard
   - Cinders
+  - Cabin
   Uncommons:
   - Clocktower
   - Ghost
@@ -75,6 +76,7 @@ MonoBehaviour:
   - Campfire
   Rares:
   - RatKing
-  Legendaries:
+  - Temple
   - Cerberus
+  Legendaries:
   - Legion
