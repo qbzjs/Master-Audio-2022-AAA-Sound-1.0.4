@@ -13,6 +13,7 @@ public class Card : MonoBehaviour
 
     public string CardName
     {
+        get => cardName;
         set
         {
             cardName = value;

@@ -9,15 +9,28 @@ using UnityEngine.UI;
 public class AddTileButton : MonoBehaviour
 {
     public Card card;
+    public GameObject highlight;
+    public Image border;
+    private bool selected;
+
+    public bool Selected
+    {
+        get
+        {
+            return selected;
+        }
+        set
+        {
+            selected = value;
+            highlight.SetActive(selected);
+        }
+    }
     private string tileName;
 
     public void SetValues(string myTileName, Color newColor)
     {
         tileName = myTileName;
-        Image cardImage = card.transform.GetChild(0).gameObject.GetComponent<Image>();
-        cardImage.color = newColor;
-        Image tileImage = card.transform.GetChild(1).gameObject.GetComponent<Image>();
-        tileImage.color = newColor;
+        border.color = newColor;
         card.CreateCardNewTile(myTileName);
     }
 
@@ -25,5 +38,7 @@ public class AddTileButton : MonoBehaviour
     {
         DeckManager.Instance.AddToDeck(tileName);
     }
+    
+    
 
 }

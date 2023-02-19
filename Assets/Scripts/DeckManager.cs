@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts;
 using UnityEngine;
 
@@ -36,6 +37,11 @@ public class DeckManager : Singleton<DeckManager>
         deck.Add(new KeyValuePair<string, Card>(s, newCard));
     }
 
+    public void LoadDeck()
+    {
+        
+    }
+
     public string Draw()
     {
         if(deck.Count == 0) ShuffleBack();
@@ -45,6 +51,48 @@ public class DeckManager : Singleton<DeckManager>
         discard.Add(toReturn);
         deck.RemoveAt(deck.Count - 1);
         return toReturn.Key;
+    }
+
+    public string GetRandomCard()
+    {
+        List<KeyValuePair<string, Card>> temp = discard;
+        temp.AddRange(deck);
+        temp.Shuffle();
+        return temp[0].Key;
+    }
+
+    public void Remove(string toRemove)
+    {
+        if (deck.Exists((pair) => pair.Key == toRemove))
+        {
+            for (int i = 0; i < deck.Count; i++)
+            {
+                if (deck[i].Key == toRemove)
+                {
+                    Debug.Log($"i is: {i} and ");
+                    Debug.Log($"gameobject is: {deck[i].Value.gameObject}");
+                    Destroy(deck[i].Value.gameObject);
+                    deck.Remove(deck[i]);
+                    break;
+                }
+            }
+        } else
+        if (discard.Exists((pair) => pair.Key == toRemove))
+        {
+            for (int i = 0; i < deck.Count; i++)
+            {
+                if (deck[i].Key == toRemove)
+                {
+                    Destroy(deck[i].Value.gameObject);
+                    deck.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+        else
+        {
+            Debug.Log($"no card found in deck with name \"{toRemove}\"");
+        }
     }
 
     public void Print()
