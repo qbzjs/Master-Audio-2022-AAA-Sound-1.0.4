@@ -34,6 +34,8 @@ public class GameManager : Singleton<GameManager>
 
     public List<GameObject> SetOffInEditor;
 
+    public bool dragging;
+
     public int Score
     {
         get => score;

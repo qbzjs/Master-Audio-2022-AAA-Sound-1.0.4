@@ -19,7 +19,6 @@ public class Block : MonoBehaviour, IDragParent
     private Vector2Int currPos;
     private Vector3 dragOffset;
     
-    public bool dragging;
     public bool held = false;
     public bool isMaw = false;
 
@@ -115,7 +114,7 @@ public class Block : MonoBehaviour, IDragParent
     {
         dragOffset = transform.position - GetMousePos();
         dragOffset.z = 0;
-        dragging = true;
+        GameManager.Instance.dragging = true;
         
         foreach(ITile tile in Tiles)
         {
@@ -127,6 +126,7 @@ public class Block : MonoBehaviour, IDragParent
     public void OnMouseDrag()
     {
         bool onGrid = true;
+        GameManager.Instance.dragging = true;
         foreach (ITile tile in Tiles)
         {
             onGrid &= GridManager.Instance.OverGrid(tile.Position());
@@ -151,7 +151,7 @@ public class Block : MonoBehaviour, IDragParent
             HoldingCell.Instance.holding = true;
             BlockSpawner.Instance.GenerateBlock();
         }
-        dragging = false;
+        GameManager.Instance.dragging = false;
         foreach(ITile tile in Tiles)
         {
             tile.TileObject.GetComponent<SpriteRenderer>().color = Color.white;

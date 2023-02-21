@@ -8,8 +8,14 @@ public class MouseOverTile: MonoBehaviour
     [SerializeField] public ITile Tile;
     public void OnMouseOver()
     {
+        if (GameManager.Instance.dragging)
+        {
+            GameManager.Instance.tooltip.Hide();
+            GameManager.Instance.scoretip.Hide();
+            return;
+        }
         turnGrey();
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             GameManager.Instance.scoretip.Hide();
             GameManager.Instance.tooltip.Show(Tile);
