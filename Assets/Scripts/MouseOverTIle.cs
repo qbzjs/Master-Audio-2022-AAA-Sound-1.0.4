@@ -14,8 +14,10 @@ public class MouseOverTile: MonoBehaviour
             GameManager.Instance.scoretip.Hide();
             return;
         }
-        turnGrey();
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0)){
+            turnGrey();
+        }
+        else if (Input.GetMouseButton(1))
         {
             GameManager.Instance.scoretip.Hide();
             GameManager.Instance.tooltip.Show(Tile);
@@ -30,6 +32,10 @@ public class MouseOverTile: MonoBehaviour
     {
         GameManager.Instance.tooltip.Hide();
         GameManager.Instance.scoretip.Hide();
+        turnWhite();
+    }
+    public void OnMouseUp()
+    {
         turnWhite();
     }
 
