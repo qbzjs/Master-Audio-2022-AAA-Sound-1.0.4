@@ -307,7 +307,6 @@ namespace Scripts
                 for (int y = 0; y < size; y++)
                 {
                     int oldScore = grid[x, y].TileScore.score;
-                    Debug.Log(oldScore);
                     int val = grid[x, y].CalculateScore().score;
                     if ((val - oldScore) != 0){
                         Vector2Int gridPos  = new Vector2Int(x, y);
@@ -315,7 +314,6 @@ namespace Scripts
                         Transform PopupTransform = Instantiate(ScorePopup, worldPos, Quaternion.identity);
                         ScorePopup Popup = PopupTransform.GetComponent<ScorePopup>();
                         Popup.Setup((val - oldScore));
-                        Debug.Log(val-oldScore);
                     }
                     score += val;
                 }
