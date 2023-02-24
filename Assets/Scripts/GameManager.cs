@@ -13,9 +13,6 @@ using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
-    [Foldout("Tutorial")]
-    [SerializeField] public GameObject BlockSpawner, HoldingCell, MawSpawner;
-
     [Foldout("UI")]
     [SerializeField] private Image progressBar;
     [Foldout("UI")]
@@ -91,7 +88,7 @@ public class GameManager : Singleton<GameManager>
         } 
     }
 
-    private bool tutorialMode;
+ /*   private bool tutorialMode;
 
     public bool TutorialMode
     {
@@ -122,7 +119,7 @@ public class GameManager : Singleton<GameManager>
                 
             }
         }
-    }
+    } */
 
 
     public void Awake()
