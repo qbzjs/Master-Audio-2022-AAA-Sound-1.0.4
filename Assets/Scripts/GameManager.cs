@@ -88,7 +88,7 @@ public class GameManager : Singleton<GameManager>
         } 
     }
 
- /*   private bool tutorialMode;
+    private bool tutorialMode;
 
     public bool TutorialMode
     {
@@ -96,30 +96,8 @@ public class GameManager : Singleton<GameManager>
         set
         {
             tutorialMode = value;
-            if (value)
-            {
-                BlockSpawner.SetActive(false);
-                HoldingCell.SetActive(false);
-                MawSpawner.SetActive(false);
-
-                List<GameObject> FakeBlocks;
-                GameObject NewBlock; 
-                NewBlock = new GameObject("NewBlock");
-                Transform blockTransform = BlockSpawner.transform;
-                NewBlock.transform.parent = transform;
-                NewBlock.transform.localPosition = blockTransform.position;
-                NewBlock.AddComponent<Block>();
-                List<string> cardTypes = new List<string>() {"Tenement", "Gargoyle"};
-                List<Vector2Int> positions = new List<Vector2Int>() {Vector2Int.zero, Vector2Int.right};
-                 NewBlock.GetComponent<Block>().GenerateFakeTiles(blockTransform, 2, cardTypes, positions);
-
-
-            } else
-            {
-                
-            }
         }
-    } */
+    } 
 
 
     public void Awake()
