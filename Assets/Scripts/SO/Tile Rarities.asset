@@ -45,13 +45,13 @@ MonoBehaviour:
     isExpanded: 1
     _keyValues:
     - Gargoyle
-    - RatKing
-    - Rat
+    - Ghoul
+    - Tenement
     - River
     _keys:
     - Gargoyle
-    - RatKing
-    - Rat
+    - Ghoul
+    - Tenement
     - River
     _values: 03000000040000000400000004000000
   Commons:
