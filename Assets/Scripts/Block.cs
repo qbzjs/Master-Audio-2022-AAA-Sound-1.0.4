@@ -47,7 +47,9 @@ public class Block : MonoBehaviour, IDragParent
             options.Remove(currPos);
             optionsList.Remove(currPos);
             taken.Add(currPos);
-            for(int j = 0; j < 4; j++)
+            for(int j = 0; j < 2; j++) //Note, this only goes right and up. This 
+                                       // is a horrible hack to make it not go off the left
+                                       // side of the screen. Yay! Programming!
             {
                 Vector2Int tmpPos = currPos + Directions.Cardinal[j];
                 if(!taken.Contains(tmpPos) && !options.Contains(tmpPos)){
