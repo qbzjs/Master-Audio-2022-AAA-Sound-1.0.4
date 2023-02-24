@@ -14,6 +14,11 @@ public class BlockSpawner : Singleton<BlockSpawner>
 
     public Transform mawSpawner;
 
+    public void GenerateFakeBlock()
+    {
+        
+    }
+
     public void GenerateBlock()
     {
         int blockSize = Random.Range((int)minMaxSize.x, (int)(minMaxSize.y + 1));

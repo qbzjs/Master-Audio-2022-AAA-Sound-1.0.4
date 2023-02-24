@@ -13,6 +13,9 @@ using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Foldout("Tutorial")]
+    [SerializeField] public GameObject BlockSpawner, HoldingCell, MawSpawner;
+
     [Foldout("UI")]
     [SerializeField] private Image progressBar;
     [Foldout("UI")]
@@ -28,6 +31,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private FullTilePool tilePool;
 
     [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
+
     private int score;
 
     private List<Rule> rules = new List<Rule>();
@@ -86,6 +90,40 @@ public class GameManager : Singleton<GameManager>
             }
         } 
     }
+
+    private bool tutorialMode;
+
+    public bool TutorialMode
+    {
+        get =>  tutorialMode;
+        set
+        {
+            tutorialMode = value;
+            if (value)
+            {
+                BlockSpawner.SetActive(false);
+                HoldingCell.SetActive(false);
+                MawSpawner.SetActive(false);
+
+                List<GameObject> FakeBlocks;
+                GameObject NewBlock; 
+                NewBlock = new GameObject("NewBlock");
+                Transform blockTransform = BlockSpawner.transform;
+                NewBlock.transform.parent = transform;
+                NewBlock.transform.localPosition = blockTransform.position;
+                NewBlock.AddComponent<Block>();
+                List<string> cardTypes = new List<string>() {"Tenement", "Gargoyle"};
+                List<Vector2Int> positions = new List<Vector2Int>() {Vector2Int.zero, Vector2Int.right};
+                 NewBlock.GetComponent<Block>().GenerateFakeTiles(blockTransform, 2, cardTypes, positions);
+
+
+            } else
+            {
+                
+            }
+        }
+    }
+
 
     public void Awake()
     {
