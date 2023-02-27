@@ -13,6 +13,11 @@ using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Foldout("Tutorial")]
+    [SerializeField] public List<GameObject> TutorialScreens;
+    private int tutorialIndex;
+
+
     [Foldout("UI")]
     [SerializeField] private Image progressBar;
     [Foldout("UI")]
@@ -115,6 +120,7 @@ public class GameManager : Singleton<GameManager>
     {
         NewBoard();
         InitializeDeck();
+        tutorialIndex = 0;
     }
 
     public void NewBoard()
@@ -220,6 +226,7 @@ public class GameManager : Singleton<GameManager>
     {
         SceneManager.GetActiveScene().Load();
     }
+    
     public void ScoreIncrementEffect(float oldScore, float nextUpgrade){
         LeanTween.value(gameObject, oldScore, score, 0.1f)
         .setEaseOutQuart()
@@ -241,7 +248,21 @@ public class GameManager : Singleton<GameManager>
             if (progressBar != null){
                 progressBar.fillAmount = val / winningScore;
             }
-            }).setDelay(0.5f);
+            }).setDelay(0.5f)
+                .setOnComplete(() =>
+                {
+                    if(TutorialMode)
+                    {
+                        TutorialScreens[tutorialIndex].SetActive(true);
+                        if(HoldingCell.Instance.holding)
+                        {
+                            TutorialScreens[tutorialIndex].SetActive(true);
+                        }
+                        tutorialIndex += 1;
+                    }
+                }
+
+            );
     }
 
 }

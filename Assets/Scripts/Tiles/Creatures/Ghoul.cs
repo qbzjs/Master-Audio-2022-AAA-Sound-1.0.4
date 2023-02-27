@@ -14,7 +14,7 @@ public class Ghoul : Monster
 
     public override string GetDescription()
     {
-        return "+1 for each ghoul in its pack (up to 3)";
+        return "+1 point for each ghoul in its pack (up to 3)";
     }
     public Ghoul(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {

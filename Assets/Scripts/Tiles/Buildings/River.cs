@@ -14,7 +14,7 @@ public class River : Building
 
     public override string GetDescription()
     {
-        return "Becomes a blood river if next to #blood.<br>(blood rivers double adjacent tiles)";
+        return "Becomes a blood river if next to a tile with #blood.<br>Place a tile next to a blood river to double it's score!";
     }
 
     private static Rule PropagateBlood = new Rule("Propagate Blood", 10, () =>
