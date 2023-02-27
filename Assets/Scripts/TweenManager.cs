@@ -53,7 +53,7 @@ public class TweenManager : Singleton<TweenManager>
     
     public void SlideOnLocal(GameObject ob)
     {
-        //LTSeq seq = new LTSeq();
+        if (LeanTween.isTweening(ob)) return;
         Vector3 endPos = ob.transform.localPosition;
         ob.transform.localPosition = endPos + slideOnDiff;
         LeanTween.moveLocal(ob, endPos, slideOnTime);

@@ -49,6 +49,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
         rerolls--;
         if (rerolls == 0)
         {
+            reroll.GetComponentInChildren<TextMeshProUGUI>().text = $"No rerolls left";
             reroll.interactable = false;
         }
         else

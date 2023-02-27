@@ -31,7 +31,12 @@ public class OilSlick : Creature
             }
         });
     });
-    
+
+    public override bool HighlightPredicate(ITile otherTile)
+    {
+        return otherTile.GetTags().Contains(Tag.Fire);
+    }
+
     public override string GetDescription()
     {
         return $"{scoreWorth}pts - When adjacent to Fire, becomes Roaring Hellfire.";
