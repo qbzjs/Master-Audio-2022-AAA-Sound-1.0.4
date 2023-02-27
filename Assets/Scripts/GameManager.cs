@@ -125,7 +125,6 @@ public class GameManager : Singleton<GameManager>
     {
         NewBoard();
         InitializeDeck();
-        tutorialIndex = 0;
     }
 
     public void NewBoard()
@@ -138,6 +137,7 @@ public class GameManager : Singleton<GameManager>
         GridManager.Instance.Initialize();
         Score = 0;
         Turns = totalTurns;
+        tutorialIndex = 0;
     }
 
     public void AddRule(Rule newRule)
@@ -200,7 +200,7 @@ public class GameManager : Singleton<GameManager>
             CanvasGroup canvas = TutorialScreens[tutorialIndex].AddComponent<CanvasGroup>();
             canvas.alpha = 0f;
             TutorialScreens[tutorialIndex].SetActive(true);
-            LeanTween.alphaCanvas(canvas, 1, 0.5f).setDelay(3f);
+            LeanTween.alphaCanvas(canvas, 1f, 0.5f).setDelay(2f);
             tutorialIndex += 1;
         }
     }
