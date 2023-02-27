@@ -190,6 +190,14 @@ public class GameManager : Singleton<GameManager>
         }
         UpdateScore();
         DecrementTurns();
+        if(TutorialMode)
+        {
+            CanvasGroup canvas = TutorialScreens[tutorialIndex].AddComponent<CanvasGroup>();
+            canvas.alpha = 0f;
+            TutorialScreens[tutorialIndex].SetActive(true);
+            LeanTween.alphaCanvas(canvas, 1, 0.5f).setDelay(3f);
+            tutorialIndex += 1;
+        }
     }
 
     [NaughtyAttributes.Button]
@@ -248,21 +256,7 @@ public class GameManager : Singleton<GameManager>
             if (progressBar != null){
                 progressBar.fillAmount = val / winningScore;
             }
-            }).setDelay(0.5f)
-                .setOnComplete(() =>
-                {
-                    if(TutorialMode)
-                    {
-                        TutorialScreens[tutorialIndex].SetActive(true);
-                        if(HoldingCell.Instance.holding)
-                        {
-                            TutorialScreens[tutorialIndex].SetActive(true);
-                        }
-                        tutorialIndex += 1;
-                    }
-                }
-
-            );
+            }).setDelay(0.5f);
     }
 
 }
