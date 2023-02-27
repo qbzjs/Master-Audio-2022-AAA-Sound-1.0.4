@@ -2226,10 +2226,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Hover over a tile to see how many points it is worth.
+  m_text: 'Hover over a tile to see it''s score.
 
-    <br>Right click
-    on a tile to find out more about it.<br>'
+    <br>Right click on a tile to
+    find out more.<br>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -3295,9 +3295,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialScreens:
+  - {fileID: 141717859}
   - {fileID: 1026760990}
   - {fileID: 1520284258}
-  - {fileID: 141717859}
   - {fileID: 940868540}
   - {fileID: 507474860}
   - {fileID: 434426469}
@@ -5736,7 +5736,7 @@ RectTransform:
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24, y: 0.06}
-  m_AnchorMax: {x: 0.76, y: 0.43}
+  m_AnchorMax: {x: 0.75, y: 0.43}
   m_AnchoredPosition: {x: -421.00018, y: 278.00003}
   m_SizeDelta: {x: 0, y: -0.000015258789}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6108,8 +6108,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.15, y: 0.3}
   m_AnchorMax: {x: 0.85, y: 0.6}
-  m_AnchoredPosition: {x: -0.00002670288, y: 52.999996}
-  m_SizeDelta: {x: 875.1803, y: 298.73605}
+  m_AnchoredPosition: {x: -0.000015258789, y: 52.999996}
+  m_SizeDelta: {x: 1001.1802, y: 298.73605}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &748708011
 MonoBehaviour:
@@ -6131,7 +6131,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "You have unlocked the deck! \nClick on the deck to see all your tiles."
+  m_text: "You have unlocked <size=120%><b><color=red>The Deck</b></size></color>!
+    \nClick on <size=120%><b><color=red>The Deck</b></size></color> to see all your
+    tiles."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -6570,7 +6572,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835768315}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.41, y: 0.88, z: 100}
+  m_LocalPosition: {x: -7, y: 0.88, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7542,7 +7544,7 @@ RectTransform:
   m_Father: {fileID: 323516239}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.24, y: 0.06}
+  m_AnchorMin: {x: 0.25, y: 0.06}
   m_AnchorMax: {x: 0.76, y: 0.43}
   m_AnchoredPosition: {x: 608, y: 296.00003}
   m_SizeDelta: {x: 0, y: 0}
@@ -19122,8 +19124,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.15, y: 0.3}
   m_AnchorMax: {x: 0.85, y: 0.6}
-  m_AnchoredPosition: {x: 0.0000038146973, y: 96}
-  m_SizeDelta: {x: 875.1803, y: 298.73605}
+  m_AnchoredPosition: {x: -0.8100128, y: 96}
+  m_SizeDelta: {x: 1000.11, y: 298.74}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &1989868571
 MonoBehaviour:
@@ -19145,8 +19147,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "You have unlocked the Holding Cell! \n<br> Drag your block to the holding
-    cell to save it for later. <br>"
+  m_text: "You have unlocked the <size=120%><b><color=red>Holding Cell</b></size></color>!
+    \n<br> Drag your block to the <size=120%><b><color=red>Holding Cell</b></size></color>
+    to save it for later. <br>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
