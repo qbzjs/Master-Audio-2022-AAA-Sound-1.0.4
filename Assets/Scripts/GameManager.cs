@@ -200,7 +200,7 @@ public class GameManager : Singleton<GameManager>
             CanvasGroup canvas = TutorialScreens[tutorialIndex].AddComponent<CanvasGroup>();
             canvas.alpha = 0f;
             TutorialScreens[tutorialIndex].SetActive(true);
-            LeanTween.alphaCanvas(canvas, 1, 0.5f).setDelay(3f);
+            LeanTween.alphaCanvas(canvas, 1f, 0.5f).setDelay(2f);
             tutorialIndex += 1;
         }
     }
