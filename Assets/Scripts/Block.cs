@@ -17,14 +17,30 @@ public class Block : MonoBehaviour, IDragParent
     private HashSet<Vector2Int> options = new HashSet<Vector2Int>();
     private HashSet<Vector2Int> taken = new HashSet<Vector2Int>();
     private Vector2Int currPos;
-    private Vector3 dragOffset;
+    public Vector3 dragOffset;
     
-    public bool dragging;
     public bool held = false;
     public bool isMaw = false;
 
     private Camera cam;
     
+    public void GenerateFakeTiles(Transform parentTransform, int blockSize, List<string> names, List<Vector2Int> positions)
+    {
+        Vector3 position = parentTransform.position;
+        for(int i = 0; i < blockSize; i++)
+        {
+            string tileID = names[i];
+            ITile myTile = TileFactory.CreateTile(Type.GetType(tileID), transform, Vector2IntToWorldPosition(positions[i], position));
+           
+            myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
+            myTile.TileObject.AddComponent<DragChild>().parent = this;
+            myTile.TileObject.AddComponent<MouseOverTile>().Tile = myTile;
+
+            Tiles.Add(myTile);
+        }
+
+    }
+
     public void GenerateTiles(Transform parentTransform, int blockSize)
     {
         Vector3 position = parentTransform.position;
@@ -73,7 +89,7 @@ public class Block : MonoBehaviour, IDragParent
         Tiles.Add(myTile);
     }
 
-    private Vector3 Vector2IntToWorldPosition(Vector2Int offset, Vector3 origin)
+    public Vector3 Vector2IntToWorldPosition(Vector2Int offset, Vector3 origin)
     {
         float unit = GridManager.Instance.GridUnit;
         return new Vector3(offset.x * unit, offset.y * unit, 0) + origin;
@@ -117,7 +133,7 @@ public class Block : MonoBehaviour, IDragParent
     {
         dragOffset = transform.position - GetMousePos();
         dragOffset.z = 0;
-        dragging = true;
+        GameManager.Instance.dragging = true;
         
         foreach(ITile tile in Tiles)
         {
@@ -129,6 +145,7 @@ public class Block : MonoBehaviour, IDragParent
     public void OnMouseDrag()
     {
         bool onGrid = true;
+        GameManager.Instance.dragging = true;
         foreach (ITile tile in Tiles)
         {
             onGrid &= GridManager.Instance.OverGrid(tile.Position());
@@ -153,14 +170,14 @@ public class Block : MonoBehaviour, IDragParent
             HoldingCell.Instance.holding = true;
             BlockSpawner.Instance.GenerateBlock();
         }
-        dragging = false;
+        GameManager.Instance.dragging = false;
         foreach(ITile tile in Tiles)
         {
             tile.TileObject.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 
-    Vector3 GetMousePos()
+    public Vector3 GetMousePos()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
         mousePos.z = 0;

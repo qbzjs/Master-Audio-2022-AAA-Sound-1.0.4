@@ -13,6 +13,11 @@ using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Foldout("Tutorial")]
+    [SerializeField] public List<GameObject> TutorialScreens;
+    private int tutorialIndex;
+
+
     [Foldout("UI")]
     [SerializeField] private Image progressBar;
     [Foldout("UI")]
@@ -28,11 +33,14 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private FullTilePool tilePool;
 
     [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
+
     private int score;
 
     private List<Rule> rules = new List<Rule>();
 
     public List<GameObject> SetOffInEditor;
+
+    public bool dragging;
 
     public int Score
     {
@@ -90,6 +98,18 @@ public class GameManager : Singleton<GameManager>
         } 
     }
 
+    private bool tutorialMode;
+
+    public bool TutorialMode
+    {
+        get =>  tutorialMode;
+        set
+        {
+            tutorialMode = value;
+        }
+    } 
+
+
     public void Awake()
     {
         #if UNITY_EDITOR
@@ -105,6 +125,7 @@ public class GameManager : Singleton<GameManager>
     {
         NewBoard();
         InitializeDeck();
+        tutorialIndex = 0;
     }
 
     public void NewBoard()
@@ -174,6 +195,14 @@ public class GameManager : Singleton<GameManager>
         }
         UpdateScore();
         DecrementTurns();
+        if(TutorialMode)
+        {
+            CanvasGroup canvas = TutorialScreens[tutorialIndex].AddComponent<CanvasGroup>();
+            canvas.alpha = 0f;
+            TutorialScreens[tutorialIndex].SetActive(true);
+            LeanTween.alphaCanvas(canvas, 1, 0.5f).setDelay(3f);
+            tutorialIndex += 1;
+        }
     }
 
     [NaughtyAttributes.Button]
@@ -210,7 +239,8 @@ public class GameManager : Singleton<GameManager>
     {
         SceneManager.GetActiveScene().Load();
     }
-    public void ScoreIncrementEffect(float oldScore, int nextUpgrade){
+    
+    public void ScoreIncrementEffect(float oldScore, float nextUpgrade){
         LeanTween.value(gameObject, oldScore, score, 0.1f)
         .setEaseOutQuart()
         .setOnUpdate((val)=>{ProgressBarShadow.fillAmount = val / winningScore;});    

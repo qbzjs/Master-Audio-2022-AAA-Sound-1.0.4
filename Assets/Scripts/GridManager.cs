@@ -231,6 +231,7 @@ namespace Scripts
             
             Destroy(grid[pos.x, pos.y].TileObject);
             grid[pos.x, pos.y] = new Wasteland();
+            grid[pos.x, pos.y].TileScore = tile.TileScore;
         }
 
         public void KillTile(Vector2Int pos)
