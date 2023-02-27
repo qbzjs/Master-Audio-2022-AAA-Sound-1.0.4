@@ -125,7 +125,6 @@ public class GameManager : Singleton<GameManager>
     {
         NewBoard();
         InitializeDeck();
-        tutorialIndex = 0;
     }
 
     public void NewBoard()
@@ -138,6 +137,7 @@ public class GameManager : Singleton<GameManager>
         GridManager.Instance.Initialize();
         Score = 0;
         Turns = totalTurns;
+        tutorialIndex = 0;
     }
 
     public void AddRule(Rule newRule)
