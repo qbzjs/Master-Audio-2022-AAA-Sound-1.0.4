@@ -67,6 +67,7 @@ public class Priest : Creature
 
     protected override Score CalculateBaseScore()
     {
+
         return new Score(5);
     }
 }

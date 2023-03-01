@@ -11,13 +11,32 @@ public class Werewolf : Monster
 
     public override string GetDescription()
     {
-        return "<i>Kills adjacent vampires</i>";
+        return "<i>Kills adjacent vampires, in pack of 5 all werewolf scores double</i>";
     }
 
     public Werewolf(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
         Type = "Dark";
     }
+
+    private static Effect WolfMultiplier =
+        new Effect(
+            "Wolf multiplier", 20, 1, 1, (value) =>
+            {
+                return new Score(value.score * 2, value.explanation + " * 2");
+            }
+        );
+
+    private static Rule PackOfWolves = new Rule("Pack Of Wolves", 9, () =>
+    {
+        GridManager.ForEach((int x, int y, ITile tile) => {
+            if (tile is Werewolf werewolf)
+            {
+                werewolf.AddEffect(WolfMultiplier);
+            }
+        });
+
+    });
 
     protected override Score CalculateBaseScore()
     {
