@@ -18,6 +18,11 @@ public class Tomb : Building
         Type = "Blood";
     }
 
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Blood };
+    }
+
     protected override Score CalculateBaseScore()
     {
         if (open)

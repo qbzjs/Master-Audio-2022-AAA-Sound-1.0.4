@@ -44,13 +44,13 @@ MonoBehaviour:
     reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
-    - Gargoyle
-    - Ghoul
+    - Werewolf
+    - Den
     - Tenement
     - River
     _keys:
-    - Gargoyle
-    - Ghoul
+    - Werewolf
+    - Den
     - Tenement
     - River
     _values: 03000000040000000400000004000000

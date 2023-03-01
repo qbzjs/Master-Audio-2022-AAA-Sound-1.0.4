@@ -19,6 +19,12 @@ public class Werewolf : Monster
         Type = "Dark";
     }
 
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Darkness };
+    }
+
+
     private static Effect WolfMultiplier =
         new Effect(
             "Wolf multiplier", 20, 1, 1, (value) =>
@@ -37,6 +43,23 @@ public class Werewolf : Monster
         });
 
     });
+
+    public override void WhenPlaced()
+    {
+        CalculatePack();
+    }
+
+    private void CalculatePack()
+    {
+        List<Creature> pack = new();
+        pack.Add(this);
+        int packCount = CountGroupCreatures(this.GetType(), pack);
+
+        if (packCount >= packSize)
+        {
+            GameManager.Instance.AddRule(PackOfWolves);
+        }
+    }
 
     protected override Score CalculateBaseScore()
     {
