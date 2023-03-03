@@ -2229,7 +2229,7 @@ MonoBehaviour:
   m_text: 'Hover over a tile to see it''s score.
 
     <br>Right click on a tile to
-    find out more.<br>'
+    find out how to use it.<br>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -3295,8 +3295,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TutorialScreens:
-  - {fileID: 141717859}
   - {fileID: 1026760990}
+  - {fileID: 141717859}
   - {fileID: 1520284258}
   - {fileID: 940868540}
   - {fileID: 507474860}
@@ -6132,8 +6132,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "You have unlocked <size=120%><b><color=red>The Deck</b></size></color>!
-    \nClick on <size=120%><b><color=red>The Deck</b></size></color> to see all your
-    tiles."
+    \nClick on <size=120%><b><color=red>The Deck</b></size></color> to view  all
+    your tiles."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -18227,7 +18227,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rotate pieces with the Q and E keys.
+  m_text: 'Rotate a block before you place it with the Q and E keys.
 
 '
   m_isRightToLeft: 0

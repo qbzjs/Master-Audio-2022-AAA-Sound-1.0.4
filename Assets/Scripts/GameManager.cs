@@ -86,7 +86,7 @@ public class GameManager : Singleton<GameManager>
             turnCounter.text = turns + " turns remaining.";
             if (turns <= 0)
             {
-                if (Score >= winningScore)
+                if (score >= winningScore)
                 {
                     Win();
                 }
@@ -254,10 +254,19 @@ public class GameManager : Singleton<GameManager>
             {
                 nextUpgrade += upgradeIncrement;
                 tempBlocker.SetActive(false);
-                upgradeScreen.SetActive(true);
-                TweenManager.Instance.SlideOnLocal(upgradeScreen);
+                if (!TutorialMode){
+                    upgradeScreen.SetActive(true);
+                    TweenManager.Instance.SlideOnLocal(upgradeScreen);
+                }
             }
-            progressCounter.text = $"Progress: {(int) val}/{winningScore} ({untilNext} until next boon)"; 
+            if(TutorialMode)
+            {
+                progressCounter.text = $"Progress: {(int) val}/{winningScore}"; 
+            }
+            else 
+            {
+                 progressCounter.text = $"Progress: {(int) val}/{winningScore} ({untilNext} until next boon)"; 
+            }
             if (progressBar != null){
                 progressBar.fillAmount = val / winningScore;
             }
@@ -265,7 +274,15 @@ public class GameManager : Singleton<GameManager>
         .setDelay(0.5f).
         setOnComplete(() =>
         {
-            progressCounter.text = $"Progress: {score}/{winningScore} ({CalculateNextUpgrade() - score} until next boon)";
+
+            if(TutorialMode)
+            { 
+                progressCounter.text = $"Progress: {score}/{winningScore}";
+            }
+            else
+            {
+                progressCounter.text = $"Progress: {score}/{winningScore} ({CalculateNextUpgrade() - score} until next boon)";               
+            }
         });
     }
 
