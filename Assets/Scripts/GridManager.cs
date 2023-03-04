@@ -200,6 +200,7 @@ namespace Scripts
         public void PlaceTile(string tileClassName, Vector2Int gridPos)
         {
             ITile myTile = TileFactory.CreateTile(System.Type.GetType(tileClassName), transform, Vector3.zero);
+            myTile.TileObject.AddComponent<MouseOverTile>().Tile = myTile;
             PlaceTile(myTile, gridPos);
         }
         
