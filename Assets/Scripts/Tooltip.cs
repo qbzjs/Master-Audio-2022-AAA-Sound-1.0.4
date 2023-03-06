@@ -10,6 +10,7 @@ public class Tooltip : MonoBehaviour
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+    [SerializeField] private RectTransform topRightBoundary;
 
     public Card card;
     
@@ -24,6 +25,21 @@ public class Tooltip : MonoBehaviour
         Vector3 temp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         temp.z = 0;
         transform.position = temp;
+
+        Vector2 topRightCorner = rectTransform.GetCorners().topRight;
+        Vector2 topRightBoundaryPoint = topRightBoundary.GetCorners().topRight;
+        Vector3 worldPosition = rectTransform.TransformPoint(rectTransform.rect.position);
+        
+        if (topRightCorner.x > topRightBoundaryPoint.x)
+        {
+            worldPosition.x += topRightBoundaryPoint.x - topRightCorner.x;
+        }
+        if (topRightCorner.y > topRightBoundaryPoint.y)
+        {
+            worldPosition.y += topRightBoundaryPoint.y - topRightCorner.y;
+        }
+
+        transform.position = worldPosition;
     }
     
     /// <summary>

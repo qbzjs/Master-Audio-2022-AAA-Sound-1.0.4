@@ -28,4 +28,30 @@ public static class Extensions
         return toPickFrom[Random.Range(0, toPickFrom.Count)];
     }
     
+//
+    public static Corners GetCorners(this RectTransform rectTransform, bool localCoords = false)
+    {
+        Vector3[] corners = new Vector3[4];
+        if (localCoords)
+        {
+            rectTransform.GetLocalCorners(corners);
+        }
+        else
+        {
+            rectTransform.GetWorldCorners(corners);
+        }
+        Corners toReturn = new Corners();
+        toReturn.bottomRight = corners[1];
+        toReturn.topRight = corners[2];
+        toReturn.topLeft = corners[3];
+        toReturn.bottomLeft = corners[0];
+        
+        return toReturn;
+    }
+
+    public struct Corners
+    {
+        public Vector3 bottomRight, topRight, topLeft, bottomLeft;
+    }
+    
 }
