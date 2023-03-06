@@ -7,12 +7,16 @@ public class Temple : Monument
 {
     [SerializeField] protected int scoreWorth = 6;
     [SerializeField] protected int ghostsAbsorbed = 0;
-    public new string Type = "Chaos";
 
     public Temple(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Chaos };
+    }
+
 
     public override string GetDescription()
     {
