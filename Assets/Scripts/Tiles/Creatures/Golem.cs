@@ -13,7 +13,8 @@ public class Golem : Creature
     
     public override string GetDescription()
     {
-        return $"{scoreWorth}pts - When Placed: Gains Tags of all adjacent Tiles";
+        return $"{scoreWorth}pts - When Placed: Gains Tags of all adjacent Tiles" +
+               $"<br>+1 for each tag";
     }
     
     public override Tag[] GetTags()
@@ -36,7 +37,7 @@ public class Golem : Creature
                 }
             }
         }
-        return new Score(scoreWorth);
+        return new Score(newTags.Count - 1);
     }
     public Golem(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {

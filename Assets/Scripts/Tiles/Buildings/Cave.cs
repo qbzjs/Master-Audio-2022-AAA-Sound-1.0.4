@@ -12,7 +12,12 @@ public class Cave : Building
     {
         return $"+{scoreWorthAdjacent} for each adjacent #darkness";
     }
-    
+
+    public override Tag[] GetTags()
+    {
+        return new[] {Tag.Darkness};
+    }
+
     public Cave(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
@@ -21,6 +26,7 @@ public class Cave : Building
     protected override Score CalculateBaseScore()
     {
         int adjacentDarkness = 0;
+        
 
         foreach (Vector2Int dir in Directions.Cardinal)
         {

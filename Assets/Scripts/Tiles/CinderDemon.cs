@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CinderDemon : Wasteland
 {
-    [SerializeField] new protected int scoreWorth = 12;
+    [SerializeField] new protected int scoreWorth = 16;
 
     public override Tag[] GetTags()
     {

@@ -12,7 +12,7 @@ public class Vampire : Monster
 
     public override string GetDescription()
     {
-        return "5pts - In a pack of 5, blood rivers become x3";
+        return "2pts - In a pack of 5, blood rivers become x3";
     }
     
     public override Tag[] GetTags()
@@ -55,6 +55,6 @@ public class Vampire : Monster
     
     protected override Score CalculateBaseScore()
     {
-        return new Score(5);
+        return new Score(2);
     }
 }

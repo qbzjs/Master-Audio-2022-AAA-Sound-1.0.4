@@ -15,8 +15,9 @@ public class DeckManager : Singleton<DeckManager>
     
     public void ShuffleBack()
     {
-        drawPile.AddRange(discard);
+        drawPile.Clear();
         discard.Clear();
+        drawPile.AddRange(deck);
         Shuffle();
     }
 

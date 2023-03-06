@@ -32,6 +32,12 @@ public class OilSlick : Creature
         });
     });
 
+    public override Tag[] GetTags()
+    {
+        return new[] {Tag.Darkness};
+    }
+
+
     public override bool HighlightPredicate(ITile otherTile)
     {
         return otherTile.GetTags().Contains(Tag.Fire);

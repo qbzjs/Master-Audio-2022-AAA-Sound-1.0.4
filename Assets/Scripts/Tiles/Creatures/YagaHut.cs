@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class YagaHut : Creature
 {
-    [SerializeField] new protected int scoreWorth = 4;
+    [SerializeField] new protected int scoreWorth = 3;
     public override string GetDescription()
     {
         return scoreWorth + " pts";

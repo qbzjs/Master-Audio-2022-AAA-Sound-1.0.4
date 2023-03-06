@@ -28,11 +28,11 @@ public class Graveyard : Wasteland
             $"[{adjacentDestroyed}] * {scoreWorthAdjacent}");
     }
 
-    public override void Observe(DefaultEvent e)
+    public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)
     {
         foreach (Vector2Int dir in Directions.Cardinal)
         {
-            if (e.xPos == xPos + dir.x && e.yPos == yPos + dir.y)
+            if (x == xPos + dir.x && y == yPos + dir.y)
             {
                 adjacentDestroyed++;
             }

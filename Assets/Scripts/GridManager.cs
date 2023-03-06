@@ -218,17 +218,20 @@ namespace Scripts
             }
         }
 
-        public void DestroyTile(Vector2Int pos)
+        public void DestroyTile(Vector2Int pos, bool triggerEffects = true)
         {
             Wasteland tile = (Wasteland) grid[pos.x, pos.y];
             if (tile.TileObject == null)
                 return;
-            
-            //Notifies all tiles that a tile has been destroyed, if they want to do something with that
-            ForEach((int x, int y, ITile tile) =>
+
+            if (triggerEffects)
             {
-                tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]); //TODO remove old code that relies on this
-            });
+                //Notifies all tiles that a tile has been destroyed, if they want to do something with that
+                ForEach((int x, int y, ITile tile) =>
+                {
+                    tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]); //TODO remove old code that relies on this
+                });
+            }
             
             Destroy(grid[pos.x, pos.y].TileObject);
             grid[pos.x, pos.y] = new Wasteland();
@@ -334,7 +337,7 @@ namespace Scripts
         
         public void EraseTile(ITile tile)
         {
-            DestroyTile(new Vector2Int(tile.xPos, tile.yPos));
+            DestroyTile(new Vector2Int(tile.xPos, tile.yPos), false);
         }
 
         

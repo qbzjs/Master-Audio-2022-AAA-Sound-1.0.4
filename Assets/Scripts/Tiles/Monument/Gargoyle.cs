@@ -6,6 +6,12 @@ using UnityEngine;
 public class Gargoyle : Monument
 {
     [SerializeField] new protected int scoreWorth = 2;
+
+    public override Tag[] GetTags()
+    {
+        return new[] {Tag.Darkness};
+    }
+
     public override string GetDescription()
     {
         return scoreWorth + " pts";
