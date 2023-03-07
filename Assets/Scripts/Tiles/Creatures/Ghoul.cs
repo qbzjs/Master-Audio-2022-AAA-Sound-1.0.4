@@ -9,7 +9,7 @@ public class Ghoul : Monster
 
     public override Tag[] GetTags()
     {
-        return new [] {Tag.Monster};
+        return new [] {Tag.Monster, Tag.Death};
     }
 
     public override string GetDescription()

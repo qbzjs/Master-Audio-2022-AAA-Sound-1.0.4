@@ -20,7 +20,7 @@ public class Crypt : Building
 
     public override string GetDescription()
     {
-        return "Consumes all adjacent death, doubles score, adds turn for each tile consumed.";
+        return "Consumes all adjacent death when placed, doubles score, adds turn for each tile consumed.";
     }
 
     public override void WhenPlaced()
@@ -28,9 +28,10 @@ public class Crypt : Building
         foreach (Vector2Int dir in Directions.Cardinal)
         {
             ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
-            if (tile.GetTags().Contains(Tag.Death))
+            if (tile.GetTags().Contains(Tag.Death) && !(tile.GetType() == typeof(Crypt)))
             {
                 scoreWorth += (tile.CalculateScore().score * 2);
+                GridManager.Instance.DestroyTile(new Vector2Int(xPos + dir.x, yPos + dir.y));
             }
             GameManager.Instance.Turns++;
         }

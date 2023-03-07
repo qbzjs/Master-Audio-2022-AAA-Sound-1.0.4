@@ -26,7 +26,7 @@ public class Cultist : Creature
 
     private Rule Worship = new Rule("cultists check for totem to worship", 80, () =>
     {
-        GridManager.ForEach((int x, int y, OilSlick oil) =>
+        GridManager.ForEach((int x, int y, Cultist oil) =>
         {
             foreach (var dir in Directions.Cardinal)
             {
