@@ -5,18 +5,18 @@ using UnityEngine;
 
 public class Temple : Monument
 {
-    [SerializeField] protected int scoreWorth = 2;
+    [SerializeField] protected int scoreWorth = 6;
     [SerializeField] protected int ghostsAbsorbed = 0;
-
-    public override Tag[] GetTags()
-    {
-        return new[] {Tag.Death};
-    }
 
     public Temple(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Chaos };
+    }
+
 
     public override string GetDescription()
     {

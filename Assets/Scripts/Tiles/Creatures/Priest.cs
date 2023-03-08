@@ -17,7 +17,7 @@ public class Priest : Creature
 
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Chaos };
+        return new[] { Tag.Chaos, Tag.Monster };
     }
 
     public Priest(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

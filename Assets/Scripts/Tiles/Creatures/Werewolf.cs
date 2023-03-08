@@ -21,7 +21,7 @@ public class Werewolf : Monster
 
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Darkness };
+        return new[] { Tag.Darkness, Tag.Monster };
     }
 
 
