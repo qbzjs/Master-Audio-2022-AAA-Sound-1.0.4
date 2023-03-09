@@ -9943,6 +9943,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   slideOnDiff: {x: 0, y: -150, z: 0}
+  calloutTime: 1
+  calloutMoveAmount: 1
+  calloutStartSize: {x: 0.7, y: 2}
+  calloutEndSize: {x: 1.5, y: 1.5}
+  calloutScaleEase: 30
+  calloutMoveEase: 9
+  calloutPrefab: {fileID: 2970830189847727310, guid: 17f7d73cc6bb21f4aa69e376df703f9d, type: 3}
   cardBack: {fileID: 1725695019205160315, guid: 103529051ee827c42af3c3af3a222473, type: 3}
   cardParticles: {fileID: 1525307412341285429, guid: 82be5f9073d10104b8ec461b8b065aab, type: 3}
   cardStart: {fileID: 1477121584}
