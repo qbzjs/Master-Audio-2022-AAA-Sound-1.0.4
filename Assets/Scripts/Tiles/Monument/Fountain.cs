@@ -34,7 +34,15 @@ public class Fountain : Monument
             {
                 foreach (Vector2Int subdirection in Directions.Cardinal)
                 {
-                    GridManager.Instance.GetTile(x + subdirection.x, y + subdirection.y).AddEffect(BloodMultiplier);
+                    ITile bloodyTile = GridManager.Instance.GetTile(x + subdirection.x, y + subdirection.y);
+                    if (bloodyTile.TileObject != null && !bloodyTile.HasEffect(BloodMultiplier)
+                                                      /*&& bloodyTile.GetType() != typeof(BloodRiver)
+                                                      && bloodyTile.GetType() != typeof(Fountain)*/)
+                    {
+                        
+                        ParticleManager.Instance.InstantiateBloodParticles(bloodyTile.TileObject.transform);
+                        bloodyTile.AddEffect(BloodMultiplier);
+                    }
                 }
             }
         });
@@ -53,5 +61,6 @@ public class Fountain : Monument
     public Fountain(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
         GameManager.Instance.AddRule(SetBloodMultiplier);
+        ParticleManager.Instance.InstantiateBloodGlow(TileObject.transform);
     }
 }

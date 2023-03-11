@@ -5,11 +5,18 @@ using UnityEngine;
 
 public class ParticleManager : Singleton<ParticleManager>
 {
-    public GameObject particles;
+    public GameObject bloodParticles, bloodGlow;
 
-
-    public void PlayParticlesAt(Vector3 position)
+    public void InstantiateBloodParticles(Transform parent)
     {
-        Instantiate(particles, position, quaternion.identity);
+        Instantiate(bloodParticles, parent);
+        bloodParticles.transform.localPosition = Vector3.zero;
     }
+    
+    public void InstantiateBloodGlow(Transform parent)
+    {
+        Instantiate(bloodGlow, parent);
+        bloodParticles.transform.localPosition = Vector3.zero;
+    }
+
 }

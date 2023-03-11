@@ -39,6 +39,8 @@ public interface ITile
     /// <param name="toAdd">Effect to add</param>
     public void AddEffect(Effect toAdd);
 
+    public bool HasEffect(Effect toCheck);
+
     public int xPos { get; set; }
     public int yPos { get; set; }
     public Score TileScore { get; set; }

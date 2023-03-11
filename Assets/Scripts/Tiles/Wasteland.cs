@@ -17,6 +17,19 @@ public class Wasteland : ITile
 
     public List<Effect> ongoingEffects;
 
+    public bool HasEffect(Effect toCheck)
+    {
+        foreach (var effect in ongoingEffects)
+        {
+            if (effect.description == toCheck.description)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public int xPos { get; set; }
     public int yPos { get; set; }
     public string Type = "";

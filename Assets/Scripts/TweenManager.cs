@@ -51,7 +51,6 @@ public class TweenManager : Singleton<TweenManager>
         Action toInvoke;
         if (tweenQueue.TryDequeue(out toInvoke))
         {
-            Debug.Log("about to invoke!");
             toInvoke.Invoke();
         }
 
