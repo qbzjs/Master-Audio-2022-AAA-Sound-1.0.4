@@ -8,7 +8,6 @@ public class AudioManager : MonoBehaviour
 {
     public List<AudioClip> trackList;
     private AudioSource musicSource;
-    private int currMusic = 0;
     
     private void Awake()
     {
@@ -20,8 +19,7 @@ public class AudioManager : MonoBehaviour
     {
         if (musicSource.isPlaying == false)
         {
-            musicSource.clip = trackList[currMusic];
-            currMusic = (currMusic + 1) % trackList.Count;
+            musicSource.clip = trackList.PickRandom();
             musicSource.volume = 0;
             LeanTween.value(gameObject, 0, 1, 10)
                 .setEaseInOutQuad()

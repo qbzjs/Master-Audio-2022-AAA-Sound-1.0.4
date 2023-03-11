@@ -21,6 +21,7 @@ public class Web : Monument
                 ITile tile = GridManager.Instance.GetTile(dir.x + x, dir.y + y);
                 if (tile.GetTags().Contains(Tag.Fire))
                 {
+                    TweenManager.Instance.Callout("Web burns!", new Vector2Int(web.xPos, web.yPos));
                     GridManager.Instance.DestroyTile(new Vector2Int(web.xPos, web.yPos));
                 }
             }

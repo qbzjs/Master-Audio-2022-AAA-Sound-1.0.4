@@ -5737,7 +5737,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24, y: 0.06}
   m_AnchorMax: {x: 0.75, y: 0.43}
-  m_AnchoredPosition: {x: -421.00012, y: 278.00006}
+  m_AnchoredPosition: {x: -421.00015, y: 278.00006}
   m_SizeDelta: {x: 0, y: -0.000015258789}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708671904
@@ -7396,17 +7396,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackList:
-  - {fileID: 8300000, guid: 16b1c21a687fd3544aa62fd376715126, type: 3}
-  - {fileID: 8300000, guid: 16b1c21a687fd3544aa62fd376715126, type: 3}
-  - {fileID: 8300000, guid: 16b1c21a687fd3544aa62fd376715126, type: 3}
   - {fileID: 8300000, guid: db9d393d5b0bc734cb751db760faefba, type: 3}
-  - {fileID: 8300000, guid: 16b1c21a687fd3544aa62fd376715126, type: 3}
-  - {fileID: 8300000, guid: 16b1c21a687fd3544aa62fd376715126, type: 3}
-  - {fileID: 8300000, guid: 16b1c21a687fd3544aa62fd376715126, type: 3}
   - {fileID: 8300000, guid: d8d76ccff96b2c54888c40678a22df32, type: 3}
-  - {fileID: 8300000, guid: 16b1c21a687fd3544aa62fd376715126, type: 3}
-  - {fileID: 8300000, guid: 16b1c21a687fd3544aa62fd376715126, type: 3}
-  - {fileID: 8300000, guid: 16b1c21a687fd3544aa62fd376715126, type: 3}
   - {fileID: 8300000, guid: 16b1c21a687fd3544aa62fd376715126, type: 3}
   - {fileID: 8300000, guid: 16b1c21a687fd3544aa62fd376715126, type: 3}
   - {fileID: 8300000, guid: bfabd71fa743cee4da7cb0a4bfbfef95, type: 3}

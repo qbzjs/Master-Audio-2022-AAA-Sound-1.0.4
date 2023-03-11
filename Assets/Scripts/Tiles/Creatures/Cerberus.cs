@@ -8,6 +8,7 @@ public class Cerberus : Monster
     [SerializeField] protected int packSize = 3;
 
     private int bigScore = 10, smallScore = 0;
+    private bool called = false;
 
     public override Tag[] GetTags()
     {
@@ -32,6 +33,11 @@ public class Cerberus : Monster
         if (packCount == packSize)
         {
             scoreWorth = bigScore;
+            if (!called)
+            {
+                called = true;
+                TweenManager.Instance.Callout("Guard dog of hell!", Position());
+            }
         } else
         {
             scoreWorth = smallScore;

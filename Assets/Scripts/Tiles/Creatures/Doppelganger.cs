@@ -38,6 +38,7 @@ public class Doppelganger : Creature
         if (copyList.Count > 0)
         {
             copyName = copyList.PickRandom();
+            TweenManager.Instance.Callout($"Copied {copyName}!", Position());
             GridManager.Instance.PlaceTile(copyName, new Vector2Int(xPos, yPos));
         }
         

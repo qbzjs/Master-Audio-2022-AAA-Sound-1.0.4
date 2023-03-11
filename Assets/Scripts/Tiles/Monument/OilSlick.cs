@@ -19,17 +19,25 @@ public class OilSlick : Creature
     
     private Rule BurnOil = new Rule("Oil checks for #fire", 80, () =>
     {
-        GridManager.ForEach((int x, int y, OilSlick oil) =>
+        bool goAgain = true;
+        while (goAgain)
         {
-            foreach (var dir in Directions.Cardinal)
+            goAgain = false;
+            GridManager.ForEach((int x, int y, OilSlick oil) =>
             {
-                if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Fire))
+                foreach (var dir in Directions.Cardinal)
                 {
-                    GridManager.Instance.PlaceTile("HellFire", new Vector2Int(x, y));
-                    GridManager.Instance.GetTile(x, y).AddEffect(Roaring);
+                    if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Fire))
+                    {
+                        TweenManager.Instance.Callout("Oil to Hellfire!", new Vector2Int(x, y));
+                        GridManager.Instance.PlaceTile("HellFire", new Vector2Int(x, y));
+                        GridManager.Instance.GetTile(x, y).AddEffect(Roaring);
+                        goAgain = true;
+                    }
                 }
-            }
-        });
+            });           
+        }
+
     });
 
     public override Tag[] GetTags()

@@ -25,6 +25,7 @@ public class RatKing : Rat
 
     public override void WhenPlaced()
     {
+        int rats = 0;
         GridManager.ForEach((int x, int y, Rat rat) =>
         {
             if (x == xPos && y == yPos) return; //if it's me, return
@@ -33,9 +34,11 @@ public class RatKing : Rat
             {
                 return;
             }
+            rats++;
             scoreWorth += rat.CalculateScore().score;
             GridManager.Instance.DestroyTile(new Vector2Int(x, y));
             justPlaced = false;
         });
+        TweenManager.Instance.Callout($"Rat King eats {rats} rats!", Position());
     }
 }

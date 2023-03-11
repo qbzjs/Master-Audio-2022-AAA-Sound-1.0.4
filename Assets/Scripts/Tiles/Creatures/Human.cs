@@ -32,7 +32,8 @@ public class Human : Creature
             var spot = Human.toHaunt[index];
             if (GridManager.Instance.GetTile(spot.x, spot.y) is Wasteland)
             {
-                GridManager.Instance.PlaceTile("Ghost", new Vector2Int(spot.x, spot.y));
+                TweenManager.Instance.Callout("Haunted!", spot);
+                GridManager.Instance.PlaceTile("Ghost", spot);
             }
         }
 

@@ -11,6 +11,7 @@ public class Clocktower : Wasteland
 
     public override void WhenPlaced()
     {
+        TweenManager.Instance.Callout("Extra Turn!", Position());
         GameManager.Instance.Turns++;
     }
 
@@ -22,6 +23,7 @@ public class Clocktower : Wasteland
             return;
         }
         
+        TweenManager.Instance.Callout("Lost Turn!", Position());
         GameManager.Instance.Turns--;
     }
 

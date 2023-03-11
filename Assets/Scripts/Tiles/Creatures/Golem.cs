@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Scripts;
+using Unity.VisualScripting;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class Golem : Creature
@@ -32,6 +33,7 @@ public class Golem : Creature
                 Tag[] neighborTags = tile.GetTags();
                 foreach(Tag tag in neighborTags){
                     if (!newTags.Contains(tag)){
+                        TweenManager.Instance.Callout($"Golem gains {tag.ToString()}", Position());
                         newTags.Add(tag);
                     }
                 }
