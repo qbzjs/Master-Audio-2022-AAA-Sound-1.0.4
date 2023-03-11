@@ -10,7 +10,7 @@ public class Tomb : Building
 
     public override string GetDescription()
     {
-        return "Starts open, will close once touches a pack of Vampires, grants 1 turn per vampire in pack";
+        return "Starts open, will close once touches a pack of Vampires, grants 1 turn per werewolf in pack";
     }
 
     public Tomb(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
@@ -31,11 +31,11 @@ public class Tomb : Building
             foreach (Vector2Int dir in Directions.Cardinal)
             {
                 ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
-                if (tile is Vampire vampire)
+                if (tile is Vampire werewolf)
                 {
                     List<Creature> pack = new();
-                    pack.Add(vampire);
-                    vampire.CountGroupCreatures(vampire.GetType(), pack);
+                    pack.Add(werewolf);
+                    werewolf.CountGroupCreatures(werewolf.GetType(), pack);
                     adjacentVampirePacks.AddRange(pack);
                 }
             }

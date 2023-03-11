@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Mono.Cecil.Cil;
 using Scripts;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Church : Building
 {
     [SerializeField] protected int scoreWorth = 3;
-    public new string Type = "Chaos";
+
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Chaos };
+    }
 
     public override string GetDescription()
     {
