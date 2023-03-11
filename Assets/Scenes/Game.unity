@@ -9943,6 +9943,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   slideOnDiff: {x: 0, y: -150, z: 0}
+  calloutTime: 1
+  calloutMoveAmount: 1
+  calloutStartSize: {x: 0.7, y: 2}
+  calloutEndSize: {x: 1.5, y: 1.5}
+  calloutScaleEase: 30
+  calloutMoveEase: 9
+  calloutPrefab: {fileID: 2970830189847727310, guid: 17f7d73cc6bb21f4aa69e376df703f9d, type: 3}
   cardBack: {fileID: 1725695019205160315, guid: 103529051ee827c42af3c3af3a222473, type: 3}
   cardParticles: {fileID: 1525307412341285429, guid: 82be5f9073d10104b8ec461b8b065aab, type: 3}
   cardStart: {fileID: 1477121584}
@@ -9950,6 +9957,8 @@ MonoBehaviour:
   cardMiddle1: {fileID: 812316403}
   cardMiddle2: {fileID: 1889146653}
   cardRandomness: 1
+  waitTime: 0.2
+  waitRandomNoise: 0.05
 --- !u!1 &1382127336
 GameObject:
   m_ObjectHideFlags: 0
@@ -12647,7 +12656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5918c4bb80644f4cbc6b880c85b9f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: {fileID: 2708784368893327029, guid: 2aa2c1dfe98807747be89babdfe67bfc, type: 3}
+  bloodParticles: {fileID: 2025277169817453880, guid: 841a2e49bee4ca64d9dfe33360141ae5, type: 3}
+  bloodGlow: {fileID: 3180638715234235195, guid: b96695f94f12fa04b8ba07f02ea5e419, type: 3}
 --- !u!1 &1741551678
 GameObject:
   m_ObjectHideFlags: 0

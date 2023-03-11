@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using Scripts;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,11 +14,29 @@ public class TweenManager : Singleton<TweenManager>
 
     [SerializeField] private AnimationCurve blockCurve;
     [SerializeField] private Vector3 slideOnDiff;
-
+    
+    [SerializeField, BoxGroup("callout")] private float calloutTime, calloutMoveAmount;
+    [SerializeField, BoxGroup("callout")] private Vector2 calloutStartSize, calloutEndSize;
+    [SerializeField, BoxGroup("callout")] private LeanTweenType calloutScaleEase, calloutMoveEase;
+    [SerializeField, BoxGroup("callout")] private GameObject calloutPrefab;
+    
     public GameObject cardBack, cardParticles;
     public Transform cardStart, cardStop, cardMiddle1, cardMiddle2;
     public float cardRandomness;
-    
+
+    [SerializeField, BoxGroup("waiting")] private float waitTime = 0.2f, waitRandomNoise = 0.05f;
+
+
+    private GameObject mainCanvas;
+
+    private Queue<Action> tweenQueue = new();
+
+    private void Awake()
+    {
+        mainCanvas = FindObjectOfType<Canvas>().gameObject;
+        StartCoroutine(CheckNextRecursive());
+    }
+
     /*
     [Button()]
     public void TestPlaceBlock()
@@ -24,6 +44,18 @@ public class TweenManager : Singleton<TweenManager>
         PlaceBlock(FindObjectOfType<Block>().gameObject);
     }
     */
+
+    private IEnumerator CheckNextRecursive()
+    {
+        yield return new WaitForSeconds(waitTime + Random.Range(-waitRandomNoise, waitRandomNoise));
+        Action toInvoke;
+        if (tweenQueue.TryDequeue(out toInvoke))
+        {
+            toInvoke.Invoke();
+        }
+
+        StartCoroutine(CheckNextRecursive());
+    }
 
     public void DrawCard(Action callback = null)
     {
@@ -81,6 +113,34 @@ public class TweenManager : Singleton<TweenManager>
         {
             sp.sortingOrder = -100;
         }
+    }
+
+    public void Callout(string displayText, Vector2Int location)
+    {
+        tweenQueue.Enqueue(() => CalloutHelper(displayText, GridManager.Instance.GridToWorldPos(location)));
+    }
+    
+    public void Callout(string displayText, Vector3 location)
+    {
+        tweenQueue.Enqueue(() => CalloutHelper(displayText, location));
+    }
+
+    public void CalloutHelper(string displayText, Vector3 location)
+    {
+        GameObject newOb = Instantiate(calloutPrefab, location, Quaternion.identity, mainCanvas.transform);
+        TextMeshProUGUI newTextMesh = newOb.GetComponentInChildren<TextMeshProUGUI>();
+        newTextMesh.text = displayText;
+        newOb.transform.localScale = calloutStartSize;
+        LeanTween.scale(newOb, calloutEndSize, calloutTime)
+            .setEase(calloutScaleEase);
+        LeanTween.moveY(newOb, location.y + calloutMoveAmount, calloutTime)
+            .setEase(calloutMoveEase)
+            .setOnComplete(() =>
+            {
+                LeanTween.alphaCanvas(newOb.GetComponent<CanvasGroup>(), 0, 1)
+                    .setEaseOutCubic()
+                    .setOnComplete(() => Destroy(newOb, 0.1f));
+            });
     }
 
     [Button()]

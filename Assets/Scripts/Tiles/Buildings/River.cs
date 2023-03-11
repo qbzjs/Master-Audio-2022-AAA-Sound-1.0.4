@@ -49,7 +49,9 @@ public class River : Building
             if (tile.GetTags().Contains(Tag.Blood))
             {
                 //Debug.Log("going to turn: " + tile);
-                GridManager.Instance.PlaceTile("BloodRiver", new Vector2Int(xPos, yPos));
+                Vector2Int location = new Vector2Int(xPos, yPos);
+                TweenManager.Instance.Callout("Blood River Flows!", Position());
+                GridManager.Instance.PlaceTile("BloodRiver", location);
                 return true;
             }
         }

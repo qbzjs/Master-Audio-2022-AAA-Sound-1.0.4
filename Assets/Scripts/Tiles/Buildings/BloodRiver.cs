@@ -21,9 +21,13 @@ public class BloodRiver : Building
     {
         return new []{Tag.Blood};
     }
-    
+
+    public override void WhenPlaced()
+    {
+    }
+
     public BloodRiver(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-
+        ParticleManager.Instance.InstantiateBloodGlow(TileObject.transform);
     }
 }
