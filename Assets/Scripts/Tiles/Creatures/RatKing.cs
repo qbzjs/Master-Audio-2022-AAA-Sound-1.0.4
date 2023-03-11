@@ -29,7 +29,7 @@ public class RatKing : Rat
         {
             if (x == xPos && y == yPos) return; //if it's me, return
 
-            if (rat is RatKing ratKing && ratKing.justPlaced)
+            if (rat is RatKing)
             {
                 return;
             }
