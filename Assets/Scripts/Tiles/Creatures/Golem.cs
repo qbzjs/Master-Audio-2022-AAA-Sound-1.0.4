@@ -25,6 +25,11 @@ public class Golem : Creature
 
     protected override Score CalculateBaseScore() 
     {
+        return new Score(newTags.Count - 1);
+    }
+
+    public override void WhenPlaced()
+    {
         foreach (Vector2Int dir in Directions.Cardinal)
         {
             ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
@@ -39,11 +44,11 @@ public class Golem : Creature
                 }
             }
         }
-        return new Score(newTags.Count - 1);
     }
+
     public Golem(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-
+        newTags = new[] { Tag.Null }.ToList();
     }
 
 }

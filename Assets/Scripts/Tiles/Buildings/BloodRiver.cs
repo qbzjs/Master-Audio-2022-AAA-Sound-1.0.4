@@ -14,7 +14,7 @@ public class BloodRiver : Building
     }
     public override string GetDescription()
     {
-        return "Adjacent tiles become Bloody (Double score)";
+        return "Double adjacent tiles";
     }
 
     public override Tag[] GetTags()

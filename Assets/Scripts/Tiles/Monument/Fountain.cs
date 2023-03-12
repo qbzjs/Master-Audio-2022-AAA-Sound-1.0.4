@@ -10,7 +10,7 @@ public class Fountain : Monument
 
     public override string GetDescription()
     {
-        return "My blood spilleth over";
+        return "Double adjacent tiles";
     }
 
     public override Tag[] GetTags()
