@@ -23,8 +23,8 @@ public class Void : Wasteland
             //If we're not referencing this object, don't do anything
             return;
         }
-        TweenManager.Instance.Callout($"Voids now worth {voidsDestroyed}!", Position());
         voidsDestroyed++;
+        TweenManager.Instance.Callout($"Voids now worth {voidsDestroyed}!", Position());
     }
 
     protected override Score CalculateBaseScore()

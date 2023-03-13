@@ -567,8 +567,8 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Standalone: RH_SerializedDictionary
-    WebGL: RH_SerializedDictionary
+    Standalone: RH_SerializedDictionary;DISABLE_3D_SOUND
+    WebGL: RH_SerializedDictionary;DISABLE_3D_SOUND
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

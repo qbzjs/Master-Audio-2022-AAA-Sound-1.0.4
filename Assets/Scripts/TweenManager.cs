@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using NaughtyAttributes;
 using Scripts;
 using TMPro;
@@ -18,7 +19,7 @@ public class TweenManager : Singleton<TweenManager>
     [SerializeField, BoxGroup("callout")] private float calloutTime, calloutMoveAmount;
     [SerializeField, BoxGroup("callout")] private Vector2 calloutStartSize, calloutEndSize;
     [SerializeField, BoxGroup("callout")] private LeanTweenType calloutScaleEase, calloutMoveEase;
-    [SerializeField, BoxGroup("callout")] private GameObject calloutPrefab;
+    [SerializeField, BoxGroup("callout")] private GameObject calloutPrefab, calloutParent;
     
     public GameObject cardBack, cardParticles;
     public Transform cardStart, cardStop, cardMiddle1, cardMiddle2;
@@ -78,6 +79,8 @@ public class TweenManager : Singleton<TweenManager>
                 {
                     callback.Invoke();
                 }
+
+                MasterAudio.PlaySound("Poof");
                 Instantiate(cardParticles, card.transform.position, Quaternion.identity);
                 Destroy(card, 0.01f);
             });
@@ -88,7 +91,8 @@ public class TweenManager : Singleton<TweenManager>
         if (LeanTween.isTweening(ob)) return;
         Vector3 endPos = ob.transform.localPosition;
         ob.transform.localPosition = endPos + slideOnDiff;
-        LeanTween.moveLocal(ob, endPos, slideOnTime);
+        LeanTween.moveLocal(ob, endPos, slideOnTime)
+            .setEaseOutBounce();
         CanvasGroup canvas = ob.GetComponent<CanvasGroup>();
         if (canvas == null)
         {
@@ -108,7 +112,7 @@ public class TweenManager : Singleton<TweenManager>
 
         Move(ob);
         Shake();
-        CB();        
+        CB();
         foreach (var sp in ob.GetComponentsInChildren<SpriteRenderer>())
         {
             sp.sortingOrder = -100;
@@ -127,7 +131,7 @@ public class TweenManager : Singleton<TweenManager>
 
     public void CalloutHelper(string displayText, Vector3 location)
     {
-        GameObject newOb = Instantiate(calloutPrefab, location, Quaternion.identity, mainCanvas.transform);
+        GameObject newOb = Instantiate(calloutPrefab, location, Quaternion.identity, calloutParent.transform);
         TextMeshProUGUI newTextMesh = newOb.GetComponentInChildren<TextMeshProUGUI>();
         newTextMesh.text = displayText;
         newOb.transform.localScale = calloutStartSize;
@@ -160,5 +164,6 @@ public class TweenManager : Singleton<TweenManager>
     {
         LeanTween.moveLocalY(ob, ob.transform.localPosition.y + blockUpAmount, blockAnimationTime)
         .setEase(blockCurve);   
+        
     }
 }

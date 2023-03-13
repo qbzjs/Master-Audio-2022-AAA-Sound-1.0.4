@@ -44,3 +44,12 @@ TagManager:
   - name: UI
     uniqueID: 1888838289
     locked: 0
+  - name: UpgradeBackgroundUI
+    uniqueID: 207378337
+    locked: 0
+  - name: UpgradeParticleUI
+    uniqueID: 1788538477
+    locked: 0
+  - name: UpgradeFrontUI
+    uniqueID: 4240289313
+    locked: 0

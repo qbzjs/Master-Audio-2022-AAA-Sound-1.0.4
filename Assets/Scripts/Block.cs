@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using DarkTonic.MasterAudio;
 using Scripts;
 using Unity.Mathematics;
 using Unity.VisualScripting;
@@ -147,6 +148,7 @@ public class Block : MonoBehaviour, IDragParent
     {
         bool onGrid = true;
         GameManager.Instance.dragging = true;
+            
         foreach (ITile tile in Tiles)
         {
             onGrid &= GridManager.Instance.OverGrid(tile.Position());
@@ -154,7 +156,13 @@ public class Block : MonoBehaviour, IDragParent
 
         if (onGrid)
         {
-            transform.position = GridManager.Instance.SnapToGrid( dragOffset + GetMousePos());
+            Vector2Int prevPosition = GridManager.Instance.WorldToGridPos(transform.position);
+            Vector2Int newPosition = GridManager.Instance.WorldToGridPos(dragOffset + GetMousePos());
+            if (prevPosition != newPosition)
+            {
+                MasterAudio.PlaySound("Click");
+            }
+            transform.position = GridManager.Instance.GridToWorldPos(newPosition);
         }
         else
         {

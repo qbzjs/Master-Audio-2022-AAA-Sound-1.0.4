@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DarkTonic.MasterAudio;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -188,6 +189,7 @@ namespace Scripts
                 }
                 block.Destroy();
                 GameManager.Instance.PlacedBlock();
+                MasterAudio.PlaySound("Placed");
             });
         }
 
