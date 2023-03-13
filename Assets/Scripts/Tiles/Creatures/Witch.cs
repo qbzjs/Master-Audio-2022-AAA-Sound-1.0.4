@@ -11,7 +11,7 @@ public class Witch : Monster
 
     public override string GetDescription()
     {
-        return "<i>Worth 2 points, in pack of 5 increases score of best tile on board.</i>";
+        return $"{scoreWorth} pts, in pack of 5 increases score of best tile on board.";
     }
 
     public Witch(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

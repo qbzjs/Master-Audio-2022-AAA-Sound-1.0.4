@@ -11,7 +11,7 @@ public class Werewolf : Monster
 
     public override string GetDescription()
     {
-        return "<i>Kills adjacent vampires, in pack of 5 all werewolf scores double</i>";
+        return "Kills adjacent vampires and steals their points, in pack of 5 all werewolf scores double";
     }
 
     public Werewolf(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
@@ -63,25 +63,27 @@ public class Werewolf : Monster
 
     protected override Score CalculateBaseScore()
     {
-        List<Creature> adjacentVampirePacks = new();
+        //List<Creature> adjacentVampirePacks = new();
         foreach (Vector2Int dir in Directions.Cardinal)
         {
             ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
             if (tile is Vampire vampire)
             {
-                List<Creature> pack = new();
+                vampiresKilled += vampire.CalculateScore().score;
+                GridManager.Instance.KillTile(new Vector2Int(vampire.xPos, vampire.yPos));
+                /*List<Creature> pack = new();
                 pack.Add(vampire);
                 vampire.CountGroupCreatures(vampire.GetType(), pack);
-                adjacentVampirePacks.AddRange(pack);
+                adjacentVampirePacks.AddRange(pack);*/
             }
         }
 
-        vampiresKilled += adjacentVampirePacks.Count;
+        /*vampiresKilled += adjacentVampirePacks.Count;
 
         foreach(Vampire vampire in adjacentVampirePacks)
         {
             GridManager.Instance.KillTile(new Vector2Int(vampire.xPos, vampire.yPos));
-        }
+        }*/
 
         return new Score(vampiresKilled);
     }

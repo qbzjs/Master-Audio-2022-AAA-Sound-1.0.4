@@ -12,13 +12,15 @@ public class Angel : Monument
 
     public override string GetDescription()
     {
-        return "<i>A holy object, don't get it bloody</i>";
+        return "If adjacent to #Blood, becomes Corrupted Angel (6 pts)";
     }
 
     public Angel(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 
     }
+    
+    //TODO turn this into a rule, and make a corrupted angel tile to go with it
     protected override Score CalculateBaseScore()
     {
         foreach (Vector2Int dir in Directions.Cardinal)
