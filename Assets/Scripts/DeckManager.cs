@@ -7,44 +7,64 @@ using UnityEngine;
 
 public class DeckManager : Singleton<DeckManager>
 {
+    [SerializeField] public GameObject DiscardButton, DrawButton, DeckButton;
     [SerializeField] private Card template;
-    [SerializeField] private GameObject parent;
+    [SerializeField] private GameObject deckParent, discardParent, drawParent;
 
     private List<string> discard = new(), deck = new(), drawPile = new();
-    private List<Card> cards = new();
+    private List<Card> cardDeck = new();
+    private List<Card> discardDeck = new();
+    private List<Card> drawDeck = new();
     
     public void ShuffleBack()
     {
-        drawPile.Clear();
+        TweenManager.Instance.MoveCard(DiscardButton.transform, DrawButton.transform, discard.Count);
+        drawPile.AddRange(discard);
         discard.Clear();
-        drawPile.AddRange(deck);
         Shuffle();
     }
 
     public void Shuffle()
     {
         drawPile.Shuffle();
+
     }
     
     public void AddToDeck(string s)
     {
         drawPile.Add(s);
         deck.Add(s);
+
     }
 
-    public void LoadDeck()
+    public void LoadCardDeck()
     {
-        foreach (var card in cards)
+        foreach (var card in cardDeck)
         {
             Destroy(card.gameObject);
         }
-        cards.Clear();
-        foreach (var name in deck)
+        cardDeck.Clear();
+        cardDeck = createCardDeckFromDeck(deck, deckParent.transform);
+    }
+
+    public void LoadDiscardDeck()
+    {
+        foreach (var card in discardDeck)
         {
-            Card newCard = Instantiate(template, parent.transform);
-            newCard.CreateCardNewTile(name);
-            cards.Add(newCard);
+            Destroy(card.gameObject);
         }
+        discardDeck.Clear();
+        discardDeck = createCardDeckFromDeck(discard, discardParent.transform);
+    }
+
+    public void LoadDrawDeck()
+    {
+        foreach (var card in drawDeck)
+        {
+            Destroy(card.gameObject);
+        }
+        drawDeck.Clear();
+        drawDeck = createCardDeckFromDeck(drawPile, drawParent.transform);
     }
 
     public string Draw()
@@ -52,12 +72,16 @@ public class DeckManager : Singleton<DeckManager>
         if(drawPile.Count == 0) ShuffleBack();
         
         string toReturn = drawPile[^1]; //index from end expression
-
-        discard.Add(toReturn);
-        drawPile.RemoveAt(drawPile.Count - 1);
+        
+        drawPile.RemoveAt(drawPile.Count-1);
         return toReturn;
     }
 
+    public void Place(string name)
+    {
+        discard.Add(name);
+
+    }
     public string GetRandomCard()
     {
         deck.Shuffle();
@@ -85,7 +109,7 @@ public class DeckManager : Singleton<DeckManager>
                 if (deck[i] == toRemove)
                 {
                     deck.Remove(toRemove);
-                    discard.RemoveAt(i);
+                    discard.Remove(toRemove);
                     break;
                 }
             }
@@ -96,4 +120,24 @@ public class DeckManager : Singleton<DeckManager>
         }
     }
 
+    private List<Card> createCardDeckFromDeck(List<string> deck, Transform parent)
+    {
+        List<Card> newDeck = new();
+        foreach (var name in deck)
+        {
+            Card newCard = createCardFromTile(name, parent);
+            newDeck.Add(newCard);
+        }
+        return newDeck;
+    }
+    private Card createCardFromTile(string name, Transform parent)
+    {
+        Card newCard = Instantiate(template, parent.transform);
+        newCard.CreateCardNewTile(name);
+        return newCard;
+    }
+    public void moveBlockCards(int blockSize)
+    {
+        TweenManager.Instance.MoveCard(DrawButton.transform, DiscardButton.transform, blockSize);
+    }
 }

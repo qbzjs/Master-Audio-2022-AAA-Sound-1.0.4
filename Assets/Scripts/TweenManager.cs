@@ -166,4 +166,54 @@ public class TweenManager : Singleton<TweenManager>
         .setEase(blockCurve);   
         
     }
+
+    public Transform moveStop, moveMiddle;
+    
+    public void PlaceBlockCards(Block block)
+    {
+        Transform moveStart = block.gameObject.transform;
+
+        for (int j = 0; j < block.Tiles.Count; j++) {
+            GameObject card = Instantiate(cardBack, moveMiddle);
+            card.SetActive(false);
+            LeanTween.move(card, moveStart.position, 0.000001f);
+            card.SetActive(true);
+
+            Vector3 mid = (moveStart.position + moveStop.position)/2 ;
+            Vector3[] positions = new []{moveStart.position, mid, moveMiddle.position, moveStop.position};
+            for (int i = 1; i < positions.Length; i++)
+            {
+                positions[i] = positions[i] +
+                            new Vector3(Random.Range(0, 2), Random.Range(0, 2), 0);
+            } 
+            LTSpline spline = new LTSpline(new[]{positions[0], positions[0], positions[1], positions[2], positions[3], positions[3]});
+            card.transform.localPosition = Vector3.zero;
+            LeanTween.moveSpline(card, spline, 1.25f).setEaseInSine();
+            LeanTween.scale(card, Vector3.one, 1.25f).setEaseInSine()
+                .setOnComplete(() =>
+                {
+                    Destroy(card, 0.01f);
+                }); 
+        }
+
+    }
+    public void MoveCard(Transform startPos, Transform endPos, int size)
+    {
+
+        List<GameObject> cards = new();
+        for (int i = 0; i < size; i++){
+            GameObject card = Instantiate(cardBack, startPos);
+            card.transform.localPosition = Vector3.zero;
+            cards.Add(card);
+        }
+        for (int i = 0; i < size; i++){
+            float f = 1 - (i * 0.3f);
+            LeanTween.move(cards[i], endPos, 0.6f).setEaseInCirc().setDelay(f);
+        }   
+        for (int i = 0; i < size; i++){
+            Destroy(cards[i], 2);
+        }
+
+    }
+
 }
