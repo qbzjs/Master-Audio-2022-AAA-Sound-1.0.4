@@ -165,6 +165,7 @@ namespace Scripts
                 foreach (ITile tile in block.Tiles)
                 {
                     PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
+                    DeckManager.Instance.Place(tile.GetType().FullName);
                 }
                 
                 foreach (ITile tile in block.Tiles)
@@ -186,6 +187,10 @@ namespace Scripts
                     {
                         BlockSpawner.Instance.GenerateBlock();
                     }
+                }
+                if (!block.isMaw)
+                {
+                    TweenManager.Instance.PlaceBlockCards(block);
                 }
                 block.Destroy();
                 GameManager.Instance.PlacedBlock();

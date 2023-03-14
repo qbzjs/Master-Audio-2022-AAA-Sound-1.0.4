@@ -265,7 +265,7 @@ public class GameManager : Singleton<GameManager>
             }
             else 
             {
-                 progressCounter.text = $"Progress: {(int) val}/{winningScore} ({untilNext} until next boon)"; 
+                 progressCounter.text = $"Progress: {(int) val}/{winningScore} ({untilNext} until next deal)"; 
             }
             if (progressBar != null){
                 progressBar.fillAmount = val / winningScore;
@@ -281,7 +281,7 @@ public class GameManager : Singleton<GameManager>
             }
             else
             {
-                progressCounter.text = $"Progress: {score}/{winningScore} ({CalculateNextUpgrade() - score} until next boon)";               
+                progressCounter.text = $"Progress: {score}/{winningScore} ({CalculateNextUpgrade() - score} until next deal)";               
             }
         });
     }
