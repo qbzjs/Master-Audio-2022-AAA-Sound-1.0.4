@@ -165,7 +165,10 @@ namespace Scripts
                 foreach (ITile tile in block.Tiles)
                 {
                     PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
-                    DeckManager.Instance.Place(tile.GetType().FullName);
+                    if(!block.isMaw) 
+                    {
+                        DeckManager.Instance.Place(tile.GetType().FullName);
+                    }
                 }
                 
                 foreach (ITile tile in block.Tiles)
