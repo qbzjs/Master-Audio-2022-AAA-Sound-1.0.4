@@ -27,7 +27,12 @@ public class Web : Monument
             }
         });
     });
-    
+
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Monument };
+    }
+
     public Web(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
         GameManager.Instance.AddRule(BurnWebs);

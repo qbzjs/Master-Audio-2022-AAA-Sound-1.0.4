@@ -24,7 +24,8 @@ public class Castle : Building
 
     public Castle(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-
+        newTags.Add(Tag.Building);
+        newTags.Add(Tag.Royal);
     }
 
     protected override Score CalculateBaseScore()

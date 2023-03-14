@@ -13,6 +13,11 @@ public class Cabin : Building
 
     }
 
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Building };
+    }
+
     public override string GetDescription()
     {
         return "When placed: gets +2 for each adjacent Empty tile";

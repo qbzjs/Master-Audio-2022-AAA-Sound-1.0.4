@@ -17,7 +17,7 @@ public class Den : Building
 
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Darkness};
+        return new[] { Tag.Darkness, Tag.Building};
     }
 
     public Den(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

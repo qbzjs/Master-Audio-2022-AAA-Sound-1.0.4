@@ -11,7 +11,7 @@ public class Church : Building
 
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Chaos };
+        return new[] { Tag.Chaos, Tag.Building};
     }
 
     public override string GetDescription()

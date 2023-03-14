@@ -36,7 +36,7 @@ public class FireSprite : Monument
 
     public override Tag[] GetTags()
     {
-        return new[] {Tag.Fire};
+        return new[] {Tag.Fire, Tag.Monument};
     }
 
     public FireSprite(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

@@ -15,6 +15,11 @@ public class Angel : Monument
         return "If adjacent to #Blood, becomes Corrupted Angel (6 pts)";
     }
 
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Monument };
+    }
+
     public Angel(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 

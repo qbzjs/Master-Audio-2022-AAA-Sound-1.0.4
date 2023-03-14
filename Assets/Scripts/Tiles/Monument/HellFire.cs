@@ -13,7 +13,7 @@ public class HellFire : Monument
 
     public override Tag[] GetTags()
     {
-        return new[] {Tag.Fire, Tag.Darkness};
+        return new[] {Tag.Fire, Tag.Darkness, Tag.Monument};
     }
 
     public HellFire(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

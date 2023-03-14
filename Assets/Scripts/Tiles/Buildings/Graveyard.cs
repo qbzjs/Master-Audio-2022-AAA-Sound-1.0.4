@@ -14,7 +14,7 @@ public class Graveyard : Wasteland
 
     public override Tag[] GetTags()
     {
-        return new[] {Tag.Death};
+        return new[] {Tag.Death, Tag.Building};
     }
 
     public Graveyard(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

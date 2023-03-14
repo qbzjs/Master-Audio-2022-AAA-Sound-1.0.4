@@ -1,5 +1,5 @@
 ﻿
 public enum Tag
 {
-    Null, Blood, Chaos, Darkness, Death, Fire, Monster, Royal, Maw
+    Null, Blood, Building, Chaos, Darkness, Death, Fire, Monster, Monument, Royal, Maw
 }

@@ -10,4 +10,9 @@ public class Monument : Wasteland
     {
 
     }
+
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Monument };
+    }
 }

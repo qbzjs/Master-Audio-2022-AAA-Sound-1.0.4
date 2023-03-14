@@ -14,7 +14,7 @@ public class Crypt : Building
 
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Death };
+        return new[] { Tag.Death, Tag.Building };
     }
 
 

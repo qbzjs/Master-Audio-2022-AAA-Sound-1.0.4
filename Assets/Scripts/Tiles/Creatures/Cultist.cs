@@ -10,7 +10,7 @@ public class Cultist : Creature
     [SerializeField] new protected int scoreWorth = 2;
     public override string GetDescription()
     {
-        return scoreWorth + " pts, gives adjacent Totems the worshipped effect (+2 pts, stacks).";
+        return scoreWorth + " pts, gives adjacent #Monuments the worshipped effect (+2 pts, stacks).";
     }
 
     public override Tag[] GetTags()
@@ -31,7 +31,7 @@ public class Cultist : Creature
             foreach (var dir in Directions.Cardinal)
             {
                 ITile tile = GridManager.Instance.GetTile(x + dir.x, y + dir.y);
-                if (tile.GetType() == typeof(Totem))
+                if (tile.GetTags().Contains(Tag.Monument))
                 {
                     tile.AddEffect(Worshipped);
                 }

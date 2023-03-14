@@ -17,6 +17,11 @@ public class Tenement : Building
 
     }
 
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Building };
+    }
+
     protected override Score CalculateBaseScore()
     {
         int adjacentTenements = 0;

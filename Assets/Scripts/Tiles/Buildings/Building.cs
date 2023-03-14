@@ -10,5 +10,10 @@ public class Building : Wasteland
     {
 
     }
+
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Building };
+    }
 }
 

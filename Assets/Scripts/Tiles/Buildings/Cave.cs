@@ -15,7 +15,7 @@ public class Cave : Building
 
     public override Tag[] GetTags()
     {
-        return new[] {Tag.Darkness};
+        return new[] {Tag.Darkness, Tag.Building};
     }
 
     public Cave(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

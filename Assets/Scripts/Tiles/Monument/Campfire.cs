@@ -12,7 +12,7 @@ public class Campfire : Wasteland
     
     public override Tag[] GetTags()
     {
-        return new []{Tag.Fire};
+        return new []{Tag.Fire, Tag.Monument};
     }
     
     public Campfire(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

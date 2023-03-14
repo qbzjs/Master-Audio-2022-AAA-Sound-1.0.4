@@ -19,7 +19,7 @@ public class BloodRiver : Building
 
     public override Tag[] GetTags()
     {
-        return new []{Tag.Blood};
+        return new []{Tag.Blood, Tag.Building};
     }
 
     public override void WhenPlaced()

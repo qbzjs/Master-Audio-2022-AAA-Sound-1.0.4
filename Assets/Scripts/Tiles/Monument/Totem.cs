@@ -15,7 +15,7 @@ public class Totem : Monument
 
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Darkness };
+        return new[] { Tag.Darkness, Tag.Monument };
     }
 
     public Totem(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

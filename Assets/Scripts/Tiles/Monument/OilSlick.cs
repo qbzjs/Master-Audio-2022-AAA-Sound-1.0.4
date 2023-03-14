@@ -42,7 +42,7 @@ public class OilSlick : Creature
 
     public override Tag[] GetTags()
     {
-        return new[] {Tag.Darkness};
+        return new[] {Tag.Darkness, Tag.Monument};
     }
 
 

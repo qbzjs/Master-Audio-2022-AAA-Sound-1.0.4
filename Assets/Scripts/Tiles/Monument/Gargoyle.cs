@@ -9,7 +9,7 @@ public class Gargoyle : Monument
 
     public override Tag[] GetTags()
     {
-        return new[] {Tag.Darkness};
+        return new[] {Tag.Darkness, Tag.Monument};
     }
 
     public override string GetDescription()

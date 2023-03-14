@@ -20,7 +20,7 @@ public class Tomb : Building
 
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Blood };
+        return new[] { Tag.Blood, Tag.Building };
     }
 
     protected override Score CalculateBaseScore()

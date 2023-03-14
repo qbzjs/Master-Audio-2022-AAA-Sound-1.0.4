@@ -15,7 +15,7 @@ public class Relic : Monument
     }
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Chaos };
+        return new[] { Tag.Chaos, Tag.Monument };
     }
 
 

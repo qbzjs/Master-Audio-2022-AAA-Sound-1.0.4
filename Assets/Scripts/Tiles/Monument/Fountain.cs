@@ -15,7 +15,7 @@ public class Fountain : Monument
 
     public override Tag[] GetTags()
     {
-        return new[] {Tag.Blood};
+        return new[] {Tag.Blood, Tag.Monument};
     }
 
 

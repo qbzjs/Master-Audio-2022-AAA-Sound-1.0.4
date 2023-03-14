@@ -12,6 +12,11 @@ public class River : Building
         return base.HighlightPredicate(otherTile) || otherTile.GetTags().Contains(Tag.Blood);
     }
 
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Building };
+    }
+
     public override string GetDescription()
     {
         return "If adjacent to #Blood, becomes Blood River";

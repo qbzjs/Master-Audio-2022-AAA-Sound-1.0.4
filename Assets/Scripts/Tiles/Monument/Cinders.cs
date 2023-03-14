@@ -48,7 +48,7 @@ public class Cinders : Wasteland
 
     public override Tag[] GetTags()
     {
-        return new[] {Tag.Fire};
+        return new[] {Tag.Fire, Tag.Monument};
     }
 
     protected override Score CalculateBaseScore()
