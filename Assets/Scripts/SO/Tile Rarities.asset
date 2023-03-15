@@ -47,12 +47,12 @@ MonoBehaviour:
     - Ghoul
     - Gargoyle
     - River
-    - Cultist
+    - Tenement
     _keys:
     - Ghoul
     - Gargoyle
     - River
-    - Cultist
+    - Tenement
     _values: 04000000040000000400000004000000
   Commons:
   - River
