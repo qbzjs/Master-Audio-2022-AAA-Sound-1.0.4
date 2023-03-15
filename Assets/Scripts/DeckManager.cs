@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Scripts;
 using UnityEngine;
+ using UnityEngine.UI;
 
 public class DeckManager : Singleton<DeckManager>
 {
@@ -126,6 +127,8 @@ public class DeckManager : Singleton<DeckManager>
         foreach (var name in deck)
         {
             Card newCard = createCardFromTile(name, parent);
+            //sorry for this line
+            newCard.gameObject.transform.GetChild(1).gameObject.GetComponent<Image>().color = UpgradeManager.Instance.FindColor(name);
             newDeck.Add(newCard);
         }
         return newDeck;
