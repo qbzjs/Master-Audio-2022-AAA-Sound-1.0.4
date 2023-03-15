@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Scripts;
 using UnityEngine;
- using UnityEngine.UI;
+using UnityEngine.UI;
+using TMPro;
 
 public class DeckManager : Singleton<DeckManager>
 {
     [SerializeField] public GameObject DiscardButton, DrawButton, DeckButton;
+    [SerializeField] private TextMeshProUGUI DiscardText, DrawText;
     [SerializeField] private Card template;
     [SerializeField] private GameObject deckParent, discardParent, drawParent;
 
@@ -20,6 +22,7 @@ public class DeckManager : Singleton<DeckManager>
     public void ShuffleBack()
     {
         TweenManager.Instance.MoveCard(DiscardButton.transform, DrawButton.transform, discard.Count);
+        UpdateDecks();
         drawPile.AddRange(discard);
         discard.Clear();
         Shuffle();
@@ -75,6 +78,7 @@ public class DeckManager : Singleton<DeckManager>
         string toReturn = drawPile[^1]; //index from end expression
         
         drawPile.RemoveAt(drawPile.Count-1);
+        UpdateDecks();
         return toReturn;
     }
 
@@ -142,5 +146,26 @@ public class DeckManager : Singleton<DeckManager>
     public void moveBlockCards(int blockSize)
     {
         TweenManager.Instance.MoveCard(DrawButton.transform, DiscardButton.transform, blockSize);
+    }
+    private void UpdateDecks()
+    {
+        float discardNum = float.Parse(DiscardText.text);
+        float newDiscardNum = (float)discard.Count;
+        LeanTween.value(gameObject, discardNum, newDiscardNum, 1.5f)
+        .setEaseOutSine()
+        .setOnUpdate(
+            (val)=>
+            { 
+                DiscardText.text = $"{(int)val}"; 
+            });  
+        float drawNum = float.Parse(DrawText.text);
+        float newDrawNum = (float)drawPile.Count;
+        LeanTween.value(gameObject, drawNum, newDrawNum, 1.5f)
+        .setEaseOutSine()
+        .setOnUpdate(
+            (val)=>
+            { 
+                DrawText.text = $"{(int)val}"; 
+            });  
     }
 }
