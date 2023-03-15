@@ -101,12 +101,9 @@ public class Wasteland : ITile
         {
             //If there is already a version of this effect, add it to a stack (or maybe overwrite)
             Effect priorEffect = ongoingEffects.FirstOrDefault((value) => { return value.description.Equals(toAdd.description); });
-            if (priorEffect.maxStacks == 1)
-            {
-                ongoingEffects.Remove(priorEffect);
-                ongoingEffects.Add(toAdd);
-            }
+            ongoingEffects.Remove(priorEffect);
             priorEffect.stacks = Mathf.Min(priorEffect.stacks + toAdd.stacks, priorEffect.maxStacks);
+            ongoingEffects.Add(priorEffect);
             return;
         }
         
@@ -133,7 +130,10 @@ public class Wasteland : ITile
         TileScore = CalculateBaseScore();
         foreach (Effect effect in ongoingEffects)
         {
-            TileScore = effect.modify(TileScore);
+            for (int i = 0; i < effect.stacks; i++)
+            {
+                TileScore = effect.modify(TileScore);
+            }
         }
 
         return TileScore;
