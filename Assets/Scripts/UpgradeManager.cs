@@ -168,4 +168,24 @@ public class UpgradeManager : Singleton<UpgradeManager>
         DeckManager.Instance.Remove(toRemove);
     }
     
+    public Color FindColor(string name)
+    {
+        if (tilePool.Commons.Contains(name))
+        {
+            return tilePool.CommonColor;
+        }
+       else if (tilePool.Uncommons.Contains(name))
+       {
+            return tilePool.UncommonColor;
+       }
+       else if (tilePool.Rares.Contains(name))
+       {
+            return tilePool.RareColor;
+       }
+        else if (tilePool.Legendaries.Contains(name))
+       {
+            return tilePool.LegendaryColor;
+       }
+       return Color.white;
+    }
 }

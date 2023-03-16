@@ -323,11 +323,8 @@ namespace Scripts
                     int oldScore = grid[x, y].TileScore.score;
                     int val = grid[x, y].CalculateScore().score;
                     if ((val - oldScore) != 0){
-                        Vector2Int gridPos  = new Vector2Int(x, y);
-                        Vector3 worldPos = GridToWorldPos(gridPos);
-                        Transform PopupTransform = Instantiate(ScorePopup, worldPos, Quaternion.identity);
-                        ScorePopup Popup = PopupTransform.GetComponent<ScorePopup>();
-                        Popup.Setup((val - oldScore));
+                        string scorePopup  = "+" + (val - oldScore).ToString();
+                        TweenManager.Instance.Callout(scorePopup, new Vector2Int(x,y));
                     }
                     score += val;
                 }

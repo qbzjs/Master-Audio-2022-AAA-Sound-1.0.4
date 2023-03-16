@@ -9,7 +9,7 @@ public class Card : MonoBehaviour
 {
     private string cardName, cardDescription, cardPoints, cardTags;
     [SerializeField] private TextMeshProUGUI titleText, descriptionText, tagsText, scoreText;
-    [SerializeField] private Image cardArt; 
+    [SerializeField] public Image cardArt; 
 
     public string CardName
     {
