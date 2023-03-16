@@ -48,7 +48,7 @@ public class DeckManager : Singleton<DeckManager>
             Destroy(card.gameObject);
         }
         cardDeck.Clear();
-        cardDeck = createCardDeckFromDeck(deck, deckParent.transform);
+        cardDeck = createCardDictFromList(deck, deckParent.transform);
     }
 
     public void LoadDiscardDeck()
@@ -58,7 +58,7 @@ public class DeckManager : Singleton<DeckManager>
             Destroy(card.gameObject);
         }
         discardDeck.Clear();
-        discardDeck = createCardDeckFromDeck(discard, discardParent.transform);
+        discardDeck = createCardDictFromList(discard, discardParent.transform);
     }
 
     public void LoadDrawDeck()
@@ -68,7 +68,7 @@ public class DeckManager : Singleton<DeckManager>
             Destroy(card.gameObject);
         }
         drawDeck.Clear();
-        drawDeck = createCardDeckFromDeck(drawPile, drawParent.transform);
+        drawDeck = createCardDictFromList(drawPile, drawParent.transform);
     }
 
     public string Draw()
@@ -125,14 +125,39 @@ public class DeckManager : Singleton<DeckManager>
         }
     }
 
+    private List<Card> createCardDictFromList(List<string> deck, Transform parent)
+    {
+        Dictionary<string, int> newDeck = new Dictionary<string, int>();
+        List<Card> returnCards = new();
+        foreach(var cardName in deck)
+        {
+            if(!newDeck.ContainsKey(cardName))
+            {  
+                newDeck.Add(cardName, 0);
+            }
+            newDeck[cardName]++;
+        }
+        foreach(var cardName in newDeck.Keys)
+        {
+            Card newCard = createCardFromTile(cardName, parent);
+            returnCards.Add(newCard);
+            for (int i = 1; i < newDeck[cardName]; i++)
+            {
+                Card innerCard = createCardFromTile(cardName, newCard.gameObject.transform);
+                returnCards.Add(innerCard);
+                RectTransform rt = innerCard.gameObject.GetComponent<RectTransform>();
+                SetCardAnchoredSize(rt);
+                LeanTween.moveLocalY(innerCard.gameObject, -(i*15f), 0.75f);
+            } 
+        }
+        return returnCards;
+    }
     private List<Card> createCardDeckFromDeck(List<string> deck, Transform parent)
     {
         List<Card> newDeck = new();
         foreach (var name in deck)
         {
             Card newCard = createCardFromTile(name, parent);
-            //sorry for this line
-            newCard.gameObject.transform.GetChild(1).gameObject.GetComponent<Image>().color = UpgradeManager.Instance.FindColor(name);
             newDeck.Add(newCard);
         }
         return newDeck;
@@ -141,6 +166,8 @@ public class DeckManager : Singleton<DeckManager>
     {
         Card newCard = Instantiate(template, parent.transform);
         newCard.CreateCardNewTile(name);
+        //sorry for this line
+        newCard.gameObject.transform.GetChild(1).gameObject.GetComponent<Image>().color = UpgradeManager.Instance.FindColor(name);
         return newCard;
     }
     public void moveBlockCards(int blockSize)
@@ -168,4 +195,13 @@ public class DeckManager : Singleton<DeckManager>
                 DrawText.text = $"{(int)val}"; 
             });  
     }
+
+      public void SetCardAnchoredSize(RectTransform _mRect)
+         {
+            _mRect.sizeDelta = new Vector2(0f, 0f);
+            _mRect.anchoredPosition = new Vector2(0f, 0f);
+            _mRect.anchorMin = new Vector2(0, 0);
+            _mRect.anchorMax = new Vector2(1, 1);
+            _mRect.pivot = new Vector2(0.5f, 0.5f);
+         }
 }
