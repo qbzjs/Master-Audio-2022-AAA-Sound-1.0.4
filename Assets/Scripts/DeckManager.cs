@@ -22,7 +22,7 @@ public class DeckManager : Singleton<DeckManager>
     public void ShuffleBack()
     {
         TweenManager.Instance.MoveCard(DiscardButton.transform, DrawButton.transform, discard.Count);
-        UpdateDecks();
+        UpdateDeckCounts();
         drawPile.AddRange(discard);
         discard.Clear();
         Shuffle();
@@ -78,13 +78,14 @@ public class DeckManager : Singleton<DeckManager>
         string toReturn = drawPile[^1]; //index from end expression
         
         drawPile.RemoveAt(drawPile.Count-1);
-        UpdateDecks();
+        UpdateDeckCounts();
         return toReturn;
     }
 
     public void Place(string name)
     {
         discard.Add(name);
+        UpdateDeckCounts();
 
     }
     public string GetRandomCard()
@@ -174,7 +175,7 @@ public class DeckManager : Singleton<DeckManager>
     {
         TweenManager.Instance.MoveCard(DrawButton.transform, DiscardButton.transform, blockSize);
     }
-    private void UpdateDecks()
+    private void UpdateDeckCounts()
     {
         float discardNum = float.Parse(DiscardText.text);
         float newDiscardNum = (float)discard.Count;
