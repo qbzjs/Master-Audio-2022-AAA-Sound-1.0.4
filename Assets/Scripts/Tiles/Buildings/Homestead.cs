@@ -29,7 +29,7 @@ public class Homestead : Building
         foreach (Vector2Int dir in Directions.Cardinal)
         {
             ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
-            if (tile is Tenement)
+            if (tile is Homestead)
             {
                 adjacentHomes++;
             }
