@@ -112,6 +112,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Awake()
     {
+        upgradeIncrement = winningScore / 2;
         #if UNITY_EDITOR
         foreach (var GO in SetOffInEditor)
         {
@@ -227,6 +228,7 @@ public class GameManager : Singleton<GameManager>
         winFinalScore.text = "Final Score: " + score + "/" + winningScore;
         winTurnCounter.text = "With " + turns + " turns to spare";
         winningScore += winningScoreIncrement;
+        upgradeIncrement = winningScore / 2;
     }
 
     public void Lose()
