@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Mono.Cecil.Cil;
 using Scripts;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -14,7 +13,7 @@ public class Edifice : Monument
         return "Worth 6 points, increases adjacent buildings' score by 2";
     }
 
-    private static Effect Edifice = new Effect("Edifice", 4, 1, 1,
+    private static Effect EdificeEffect = new Effect("Edifice", 4, 1, 1,
         (score) =>
         {
             return new Score(score.score + 2, $"{score.explanation} + 2");
@@ -28,7 +27,7 @@ public class Edifice : Monument
             {
                 if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Building))
                 {
-                    GridManager.Instance.GetTile(x + dir.x, y + dir.y).AddEffect(Edifice);
+                    GridManager.Instance.GetTile(x + dir.x, y + dir.y).AddEffect(EdificeEffect);
                 }
             }
         });
