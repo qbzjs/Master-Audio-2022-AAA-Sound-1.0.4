@@ -20,7 +20,7 @@ public class Deer : Animal
         GridManager.ForEach((int x, int y, Deer deer) =>
         {
             deerCount++;
-            GridManager.Instance.DestroyTile(new Vector2Int(x, y));
+            GameManager.Instance.DestroyTile(new Vector2Int(x, y));
         });
         GridManager.ForEach((int x, int y, ITile tile) =>
         {

@@ -24,7 +24,7 @@ public class FireSprite : Monument
             if (!hasFire)
             {
                 TweenManager.Instance.Callout("FireSprite went out :(", new Vector2Int(x, y));
-                GridManager.Instance.DestroyTile(new Vector2Int(x, y));
+                GameManager.Instance.DestroyTile(new Vector2Int(x, y));
             }
         });
     });

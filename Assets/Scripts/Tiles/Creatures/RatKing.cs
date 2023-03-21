@@ -36,7 +36,7 @@ public class RatKing : Rat
             }
             rats++;
             scoreWorth += rat.CalculateScore().score;
-            GridManager.Instance.DestroyTile(new Vector2Int(x, y));
+            GameManager.Instance.DestroyTile(new Vector2Int(x, y));
             justPlaced = false;
         });
         TweenManager.Instance.Callout($"Rat King eats {rats} rats!", Position());

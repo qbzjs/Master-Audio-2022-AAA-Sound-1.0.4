@@ -207,14 +207,15 @@ namespace Scripts
             PlaceTile("Fountain", gridPos);
         }
 
-        public void PlaceTile(string tileClassName, Vector2Int gridPos)
+        //returns a copy of the TileObject
+        public GameObject PlaceTile(string tileClassName, Vector2Int gridPos)
         {
-            ITile myTile = TileFactory.CreateTile(System.Type.GetType(tileClassName), transform, Vector3.zero);
+            ITile myTile = TileFactory.CreateTile(Type.GetType(tileClassName), transform, Vector3.zero);
             myTile.TileObject.AddComponent<MouseOverTile>().Tile = myTile;
-            PlaceTile(myTile, gridPos);
+            return PlaceTile(myTile, gridPos);
         }
         
-        private void PlaceTile(ITile tile, Vector2Int gridPos)
+        private GameObject PlaceTile(ITile tile, Vector2Int gridPos)
         {
             DestroyTile(gridPos);
             tile.xPos = gridPos.x;
@@ -226,26 +227,37 @@ namespace Scripts
             }else{
                  tile.TileScore = new Score(0);
             }
+
+            return tile.TileObject;
         }
 
-        public void DestroyTile(Vector2Int pos, bool triggerEffects = true)
+        //Destroys the data version of a tile at location pos, returns the TileObject,
+        //so the caller can deal with the visuals
+        public GameObject DestroyTile(Vector2Int pos, bool triggerEffects = true)
         {
             Wasteland tile = (Wasteland) grid[pos.x, pos.y];
+            Action toInvoke = null;
             if (tile.TileObject == null)
-                return;
+                return null;
 
             if (triggerEffects)
             {
                 //Notifies all tiles that a tile has been destroyed, if they want to do something with that
                 ForEach((int x, int y, ITile tile) =>
                 {
-                    tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]); //TODO remove old code that relies on this
+                    tile.WhenAnyDestroyed(pos.x, pos.y, grid[pos.x, pos.y]);
                 });
+                if (tile is IEffectOnDestroyed effectTile)
+                {
+                    toInvoke = effectTile.GetInvokeAfterDestroyed();
+                }
             }
-            
-            Destroy(grid[pos.x, pos.y].TileObject);
+
+            GameObject toReturn = grid[pos.x, pos.y].TileObject;
             grid[pos.x, pos.y] = new Wasteland();
             grid[pos.x, pos.y].TileScore = tile.TileScore;
+            toInvoke?.Invoke();
+            return toReturn;
         }
 
         public void KillTile(Vector2Int pos)
@@ -344,7 +356,7 @@ namespace Scripts
         
         public void EraseTile(ITile tile)
         {
-            DestroyTile(new Vector2Int(tile.xPos, tile.yPos), false);
+            Destroy(DestroyTile(new Vector2Int(tile.xPos, tile.yPos), false));
         }
 
         

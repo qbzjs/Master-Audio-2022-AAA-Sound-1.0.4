@@ -7892,6 +7892,8 @@ GameObject:
   - component: {fileID: 430809458}
   - component: {fileID: 430809460}
   - component: {fileID: 430809459}
+  - component: {fileID: 430809462}
+  - component: {fileID: 430809461}
   m_Layer: 5
   m_Name: WinScreen
   m_TagString: Untagged
@@ -7961,6 +7963,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 430809457}
   m_CullTransparentMesh: 1
+--- !u!114 &430809461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430809457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &430809462
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430809457}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 207378337
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &434426469
 GameObject:
   m_ObjectHideFlags: 0
@@ -12406,7 +12446,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24, y: 0.06}
   m_AnchorMax: {x: 0.75, y: 0.43}
-  m_AnchoredPosition: {x: -538.5, y: -142}
+  m_AnchoredPosition: {x: -538.5, y: -142.00006}
   m_SizeDelta: {x: -234.99, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708671904
@@ -15269,6 +15309,8 @@ GameObject:
   - component: {fileID: 935791075}
   - component: {fileID: 935791077}
   - component: {fileID: 935791076}
+  - component: {fileID: 935791079}
+  - component: {fileID: 935791078}
   m_Layer: 5
   m_Name: LoseScreen
   m_TagString: Untagged
@@ -15337,6 +15379,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935791074}
   m_CullTransparentMesh: 1
+--- !u!114 &935791078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935791074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!223 &935791079
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935791074}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &940868540
 GameObject:
   m_ObjectHideFlags: 0
@@ -19253,6 +19333,13 @@ MonoBehaviour:
   cardRandomness: 1
   waitTime: 0.2
   waitRandomNoise: 0.05
+  destroyEffectPrefab: {fileID: 1434004093379032780, guid: ec76d73ba9430624288665c0b619a7f1, type: 3}
+  createEffectPrefab: {fileID: 4532087258603003220, guid: b35a085eaa6c6f9438b1366f884a351c, type: 3}
+  transformEffectPrefab: {fileID: 3155976889536248767, guid: aa641511892266848ac94faf2b3c859f, type: 3}
+  bigSize: 1.5
+  smallSize: 1.1
+  effectTweenTime: 1
+  effectEase: 13
   moveStop: {fileID: 642311767}
   moveMiddle: {fileID: 474134070}
 --- !u!1 &1382127336
