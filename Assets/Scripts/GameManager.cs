@@ -288,6 +288,53 @@ public class GameManager : Singleton<GameManager>
         });
     }
 
+    public void DestroyTile(Vector2Int location)
+    {
+        if (GridManager.Instance.GetTile(location.x, location.y).GetType().ToString() == "Wasteland")
+        {
+            return; //no effect if it's a wasteland
+        }
+
+        GameObject tileObject = GridManager.Instance.DestroyTile(location);
+        TweenManager.Instance.DestroyEffect(location, () =>
+        {
+            Destroy(tileObject);
+        });
+        
+    }
+
+    public void TransformTile(Vector2Int location, string newTileType)
+    {
+        string calloutText =
+            $"{GridManager.Instance.GetTile(location.x, location.y).GetType().ToString()} becomes {newTileType}!";
+        GameObject oldTileObject = GridManager.Instance.DestroyTile(location, false);
+        GameObject newTileObject = GridManager.Instance.PlaceTile(newTileType, location);
+        
+        newTileObject.transform.position = Vector3.one * 1000;
+        TweenManager.Instance.TransformEffect(location, () =>
+        {
+            TweenManager.Instance.Callout(calloutText, location);
+            Destroy(oldTileObject);
+            newTileObject.transform.position = GridManager.Instance.GridToWorldPos(location);
+        });
+    }
+
+    public void PlaceTile(string newTileType, Vector2Int location)
+    {
+        if (GridManager.Instance.GetTile(location.x, location.y).GetType().ToString() != "Wasteland")
+        {
+            Debug.Log("This tile is not a wasteland");
+            return; //can't create a tile unless it's on a wasteland!
+        }
+        
+        GameObject tileObject = GridManager.Instance.PlaceTile(newTileType, location);
+        tileObject.transform.position = Vector3.one * 1000;
+        TweenManager.Instance.CreateEffect(location, () =>
+        {
+            tileObject.transform.position = GridManager.Instance.GridToWorldPos(location);
+        });
+    }
+
 }
 
 

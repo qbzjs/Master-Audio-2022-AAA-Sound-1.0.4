@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class Clocktower : Wasteland
+public class Clocktower : Wasteland, IEffectOnDestroyed
 {
     public Clocktower(Transform parentTransform, Vector3 pos) : base(parentTransform, pos) { }
 
@@ -15,20 +16,18 @@ public class Clocktower : Wasteland
         GameManager.Instance.Turns++;
     }
 
-    public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)
-    {
-        if (this != aboutToBeDestroyed)
-        {
-            //If we're not referencing this object, don't do anything
-            return;
-        }
-        
-        TweenManager.Instance.Callout("Lost Turn!", Position());
-        GameManager.Instance.Turns--;
-    }
-
     protected override Score CalculateBaseScore()
     {
         return new Score(0);
+    }
+
+    public Action GetInvokeAfterDestroyed()
+    {
+        Vector3 position = Position();
+        return () =>
+        {
+            TweenManager.Instance.Callout("Lost Turn!", position);
+            GameManager.Instance.Turns--;
+        };
     }
 }

@@ -33,7 +33,7 @@ public class Rat : Animal
                 if (otherRats >= 2)
                 {
                     TweenManager.Instance.Callout("Rats!", new Vector2Int(x, y));
-                    GridManager.Instance.PlaceTile("Rat", new Vector2Int(x, y));
+                    GameManager.Instance.PlaceTile("Rat", new Vector2Int(x, y));
                     checkAgain = true;
                 }
             });

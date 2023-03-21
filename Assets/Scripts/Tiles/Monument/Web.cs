@@ -22,7 +22,7 @@ public class Web : Monument
                 if (tile.GetTags().Contains(Tag.Fire))
                 {
                     TweenManager.Instance.Callout("Web burns!", new Vector2Int(web.xPos, web.yPos));
-                    GridManager.Instance.DestroyTile(new Vector2Int(web.xPos, web.yPos));
+                    GameManager.Instance.DestroyTile(new Vector2Int(web.xPos, web.yPos));
                 }
             }
         });

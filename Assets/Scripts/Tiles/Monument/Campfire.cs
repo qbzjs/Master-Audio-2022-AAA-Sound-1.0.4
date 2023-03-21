@@ -27,7 +27,7 @@ public class Campfire : Wasteland
             campfire.scoreWorth = campfire.scoreWorth - 2;
             if (campfire.scoreWorth <= 0)
             {
-                GridManager.Instance.DestroyTile(new Vector2Int(x, y));
+                GameManager.Instance.DestroyTile(new Vector2Int(x, y));
             }
         });
 

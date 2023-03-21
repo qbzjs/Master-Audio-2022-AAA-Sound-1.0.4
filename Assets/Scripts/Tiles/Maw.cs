@@ -24,9 +24,9 @@ public class Maw : Monument
     {
         foreach (Vector2Int dir in Directions.Compass)
         {
-            GridManager.Instance.DestroyTile(new Vector2Int(dir.x + xPos, dir.y + yPos));
+            GameManager.Instance.DestroyTile(new Vector2Int(dir.x + xPos, dir.y + yPos));
         }
-        GridManager.Instance.DestroyTile(new Vector2Int(xPos, yPos));
+        GameManager.Instance.DestroyTile(new Vector2Int(xPos, yPos));
     }
 
     protected override Score CalculateBaseScore()

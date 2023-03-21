@@ -31,7 +31,7 @@ public class Crypt : Building
             if (tile.GetTags().Contains(Tag.Death) && !(tile.GetType() == typeof(Crypt)))
             {
                 scoreWorth += (tile.CalculateScore().score * 2);
-                GridManager.Instance.DestroyTile(new Vector2Int(xPos + dir.x, yPos + dir.y));
+                GameManager.Instance.DestroyTile(new Vector2Int(xPos + dir.x, yPos + dir.y));
             }
             GameManager.Instance.Turns++;
         }
