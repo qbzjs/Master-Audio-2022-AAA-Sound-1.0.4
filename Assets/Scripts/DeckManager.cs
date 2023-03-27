@@ -161,6 +161,7 @@ public class DeckManager : Singleton<DeckManager>
             Card newCard = createCardFromTile(name, parent);
             newDeck.Add(newCard);
         }
+
         return newDeck;
     }
     private Card createCardFromTile(string name, Transform parent)

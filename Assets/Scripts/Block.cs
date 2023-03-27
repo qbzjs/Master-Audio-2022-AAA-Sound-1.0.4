@@ -22,6 +22,7 @@ public class Block : MonoBehaviour, IDragParent
     public bool held = false;
     public bool isMaw = false;
     public bool clicked = false;
+    public bool clicked = false;
 
     private Camera cam;
     
@@ -107,9 +108,13 @@ public class Block : MonoBehaviour, IDragParent
         if (this.clicked == true)
         {
             FollowMousePos();
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetMouseButtonDown(1))
             {
                 Rotate(-90);
+            }
+            if(Input.GetMouseButtonDown(0))
+            {
+                OnMouseUp();
             }
         }
         
@@ -141,7 +146,6 @@ public class Block : MonoBehaviour, IDragParent
         GameManager.Instance.dragging = true;
         if(clicked == true){
             clicked = false;
-            OnMouseUp();
         }else{
             clicked = true;
         }
@@ -170,6 +174,7 @@ public class Block : MonoBehaviour, IDragParent
             Vector2Int prevPosition = GridManager.Instance.WorldToGridPos(transform.position);
             Vector2Int newPosition = GridManager.Instance.WorldToGridPos(dragOffset + GetMousePos());
            /* if (prevPosition != newPosition)
+           /* if (prevPosition != newPosition)
             {
                 MasterAudio.PlaySound("Click");
             } */
@@ -191,7 +196,7 @@ public class Block : MonoBehaviour, IDragParent
             clicked = false;
             BlockSpawner.Instance.GenerateBlock();
         }
-      //  GameManager.Instance.dragging = false;
+
         foreach(ITile tile in Tiles)
         {
             tile.TileObject.GetComponent<SpriteRenderer>().color = Color.white;
@@ -220,5 +225,4 @@ public interface IDragParent
 {
     public void OnMouseUp();
     public void OnMouseDown();
-//    public void OnMouseDrag();
 }
