@@ -112,7 +112,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Awake()
     {
-      //  upgradeIncrement = winningScore / 2;
+        upgradeIncrement = winningScore / 2;
         #if UNITY_EDITOR
         foreach (var GO in SetOffInEditor)
         {

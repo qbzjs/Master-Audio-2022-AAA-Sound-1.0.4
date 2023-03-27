@@ -11,7 +11,6 @@ public class MouseOverTile: MonoBehaviour
         if (GameManager.Instance.dragging)
         {
             GameManager.Instance.tooltip.Hide();
-            return;
         }
         else 
         {

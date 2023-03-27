@@ -22,7 +22,6 @@ public class Block : MonoBehaviour, IDragParent
     public bool held = false;
     public bool isMaw = false;
     public bool clicked = false;
-    public bool clicked = false;
 
     private Camera cam;
     
@@ -115,6 +114,7 @@ public class Block : MonoBehaviour, IDragParent
             if(Input.GetMouseButtonDown(0))
             {
                 OnMouseUp();
+                GameManager.Instance.dragging = false;
             }
         }
         
@@ -146,6 +146,7 @@ public class Block : MonoBehaviour, IDragParent
         GameManager.Instance.dragging = true;
         if(clicked == true){
             clicked = false;
+            GameManager.Instance.dragging = false;
         }else{
             clicked = true;
         }

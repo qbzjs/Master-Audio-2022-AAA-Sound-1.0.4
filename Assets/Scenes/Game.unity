@@ -6151,7 +6151,7 @@ MonoBehaviour:
   tooltip: {fileID: 834050994}
   tilePool: {fileID: 11400000, guid: ca939c862f8cd27479519208f78516d4, type: 2}
   winningScore: 80
-  upgradeIncrement: 10
+  upgradeIncrement: 20
   totalTurns: 20
   winningScoreIncrement: 25
   SetOffInEditor:
@@ -11880,7 +11880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24, y: 0.06}
   m_AnchorMax: {x: 0.75, y: 0.43}
-  m_AnchoredPosition: {x: -538.5, y: -142.00012}
+  m_AnchoredPosition: {x: -538.50006, y: -142.00012}
   m_SizeDelta: {x: -234.99, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708671904
