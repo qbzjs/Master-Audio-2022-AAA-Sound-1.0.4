@@ -153,17 +153,6 @@ public class DeckManager : Singleton<DeckManager>
         }
         return returnCards;
     }
-    private List<Card> createCardDeckFromDeck(List<string> deck, Transform parent)
-    {
-        List<Card> newDeck = new();
-        foreach (var name in deck)
-        {
-            Card newCard = createCardFromTile(name, parent);
-            newDeck.Add(newCard);
-        }
-
-        return newDeck;
-    }
     private Card createCardFromTile(string name, Transform parent)
     {
         Card newCard = Instantiate(template, parent.transform);
