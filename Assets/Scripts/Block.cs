@@ -21,8 +21,12 @@ public class Block : MonoBehaviour, IDragParent
     
     public bool held = false;
     public bool isMaw = false;
+    public bool clicked = false;
 
     private Camera cam;
+
+    Vector2Int prevPosition = new Vector2Int(0,0);
+    Vector2Int newPosition = new Vector2Int(0,0);
     
     public void GenerateFakeTiles(Transform parentTransform, int blockSize, List<string> names, List<Vector2Int> positions)
     {
@@ -103,12 +107,20 @@ public class Block : MonoBehaviour, IDragParent
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (this.clicked == true)
         {
-            Rotate(90);
-        } else if (Input.GetKeyDown(KeyCode.E))
-        {
-            Rotate(-90);
+            GameManager.Instance.dragging = true;
+            FollowMousePos();
+            if (Input.GetMouseButtonDown(1))
+            {
+                Rotate(-90);
+            }
+            if(Input.GetMouseButtonDown(0))
+            {
+                OnMouseUp();
+            }
+        }else{
+            GameManager.Instance.dragging = false;
         }
         
     }
@@ -123,8 +135,10 @@ public class Block : MonoBehaviour, IDragParent
         float rad = degrees * Mathf.PI / 180;
         Matrix4x4 rotMat = Matrix4x4.Rotate(quaternion.RotateZ(rad));
         Vector3 centerOfGravity = Vector3.zero;
+        Vector3 lastTile = Vector3.zero;
         foreach (ITile tile in Tiles)
         {
+            lastTile = tile.TileObject.transform.position;
             Vector3 localSpacePosition = tile.TileObject.transform.localPosition - centerOfGravity;
             tile.TileObject.transform.localPosition = centerOfGravity + (Vector3)(rotMat *  localSpacePosition);
         }
@@ -134,8 +148,11 @@ public class Block : MonoBehaviour, IDragParent
     {
         dragOffset = transform.position - GetMousePos();
         dragOffset.z = 0;
-        GameManager.Instance.dragging = true;
-        
+        if(clicked == true){
+            clicked = false;
+        }else{
+            clicked = true;
+        }
         foreach(ITile tile in Tiles)
         {
             tile.TileObject.GetComponent<SpriteRenderer>().color = new Color(0.71f, 1f, 0.72f);
@@ -143,10 +160,12 @@ public class Block : MonoBehaviour, IDragParent
         }
     }
     
-    public void OnMouseDrag()
+    public void FollowMousePos()
     {
         bool onGrid = true;
-        GameManager.Instance.dragging = true;
+
+        Vector3 mousePos = GetMousePos();
+        this.gameObject.transform.position = mousePos;
             
         foreach (ITile tile in Tiles)
         {
@@ -155,18 +174,17 @@ public class Block : MonoBehaviour, IDragParent
 
         if (onGrid)
         {
-            Vector2Int prevPosition = GridManager.Instance.WorldToGridPos(transform.position);
-            Vector2Int newPosition = GridManager.Instance.WorldToGridPos(dragOffset + GetMousePos());
+            newPosition = GridManager.Instance.WorldToGridPos(transform.position);
             if (prevPosition != newPosition)
             {
                 MasterAudio.PlaySound("Click");
-            }
+            } 
             transform.position = GridManager.Instance.GridToWorldPos(newPosition);
-        }
-        else
+        } else
         {
             transform.position = dragOffset + GetMousePos();
         }
+        prevPosition = GridManager.Instance.WorldToGridPos(transform.position);
     }
 
     public void OnMouseUp()
@@ -176,9 +194,10 @@ public class Block : MonoBehaviour, IDragParent
         {
             held = true;
             HoldingCell.Instance.holding = true;
+            clicked = false;
             BlockSpawner.Instance.GenerateBlock();
         }
-        GameManager.Instance.dragging = false;
+
         foreach(ITile tile in Tiles)
         {
             tile.TileObject.GetComponent<SpriteRenderer>().color = Color.white;
@@ -207,5 +226,4 @@ public interface IDragParent
 {
     public void OnMouseUp();
     public void OnMouseDown();
-    public void OnMouseDrag();
 }
