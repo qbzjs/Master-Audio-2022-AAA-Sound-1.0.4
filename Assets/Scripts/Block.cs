@@ -107,20 +107,21 @@ public class Block : MonoBehaviour, IDragParent
 
     private void Update()
     {
-        if (this.clicked == true)
+        if (clicked == true)
         {
-            GameManager.Instance.dragging = true;
             FollowMousePos();
             if (Input.GetMouseButtonDown(1))
             {
                 Rotate(-90);
             }
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0) && GameManager.Instance.dragging)
             {
+                OnMouseDown();
                 OnMouseUp();
             }
-        }else{
-            GameManager.Instance.dragging = false;
+            else{
+                GameManager.Instance.dragging = true;
+            }
         }
         
     }
@@ -153,16 +154,17 @@ public class Block : MonoBehaviour, IDragParent
         }else{
             clicked = true;
         }
-        foreach(ITile tile in Tiles)
-        {
-            tile.TileObject.GetComponent<SpriteRenderer>().color = new Color(0.71f, 1f, 0.72f);
-            tile.TileObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
-        }
     }
     
     public void FollowMousePos()
     {
         bool onGrid = true;
+
+        foreach(ITile tile in Tiles)
+        {
+            tile.TileObject.GetComponent<SpriteRenderer>().color = new Color(0.71f, 1f, 0.72f);
+            tile.TileObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        }
 
         Vector3 mousePos = GetMousePos();
         this.gameObject.transform.position = mousePos;
@@ -201,6 +203,9 @@ public class Block : MonoBehaviour, IDragParent
         foreach(ITile tile in Tiles)
         {
             tile.TileObject.GetComponent<SpriteRenderer>().color = Color.white;
+        } 
+        if (clicked == false){
+            GameManager.Instance.dragging = false;
         }
     }
 
