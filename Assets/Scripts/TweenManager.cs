@@ -26,6 +26,11 @@ public class TweenManager : Singleton<TweenManager>
     public float cardRandomness;
 
     [SerializeField, BoxGroup("waiting")] private float waitTime = 0.2f, waitRandomNoise = 0.05f;
+    
+    [SerializeField, BoxGroup("tileEffects")] private GameObject destroyEffectPrefab, createEffectPrefab, transformEffectPrefab;
+    [SerializeField, BoxGroup("tileEffects")] private float bigSize, smallSize, effectTweenTime;
+    [SerializeField, BoxGroup("tileEffects")] private LeanTweenType effectEase;
+
 
 
     private GameObject mainCanvas;
@@ -216,4 +221,59 @@ public class TweenManager : Singleton<TweenManager>
 
     }
 
+    public void DestroyEffect(Vector2Int location, Action CB)
+    {
+        tweenQueue.Enqueue(() => DestroyEffectHelper(GridManager.Instance.GridToWorldPos(location), CB));
+    }
+
+    public void DestroyEffectHelper(Vector3 location, Action CB)
+    {
+        GameObject newOb =  Instantiate(destroyEffectPrefab, location, Quaternion.identity);
+        newOb.transform.localScale = GridManager.Instance.GridUnit * Vector3.one * bigSize;
+        LeanTween.scale(newOb, Vector3.one * smallSize, effectTweenTime)
+            .setEase(effectEase)
+            .setOnComplete(()=>
+            {
+                CB.Invoke();
+                Destroy(newOb, 0.3f);
+            });
+    }
+    
+    public void CreateEffect(Vector2Int location, Action CB)
+    {
+        tweenQueue.Enqueue(() => CreateEffectHelper(GridManager.Instance.GridToWorldPos(location), CB));
+    }
+
+    public void CreateEffectHelper(Vector3 location, Action CB)
+    {
+        GameObject newOb =  Instantiate(createEffectPrefab, location, Quaternion.identity);
+        newOb.transform.localScale = GridManager.Instance.GridUnit * Vector3.one * bigSize;
+        LeanTween.rotateAround(newOb, Vector3.forward, 360, effectTweenTime)
+            .setEase(effectEase);
+        LeanTween.scale(newOb, Vector3.one * smallSize, effectTweenTime)
+            .setEase(effectEase)
+            .setOnComplete(()=>
+            {
+                CB.Invoke();
+                Destroy(newOb, 0.3f);
+            });
+    }
+    
+    public void TransformEffect(Vector2Int location, Action CB)
+    {
+        tweenQueue.Enqueue(() => TransformEffectHelper(GridManager.Instance.GridToWorldPos(location), CB));
+    }
+
+    public void TransformEffectHelper(Vector3 location, Action CB)
+    {
+        GameObject newOb =  Instantiate(transformEffectPrefab, location, Quaternion.identity);
+        newOb.transform.localScale = GridManager.Instance.GridUnit * Vector3.one * smallSize;
+        LeanTween.scale(newOb, Vector3.one * bigSize, effectTweenTime)
+            .setEaseOutElastic()
+            .setOnComplete(()=>
+            {
+                CB.Invoke();
+                Destroy(newOb, 0.3f);
+            });
+    }
 }

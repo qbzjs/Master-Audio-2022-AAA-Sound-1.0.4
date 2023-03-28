@@ -30,7 +30,7 @@ public class Temple : Monument
             if (x == xPos && y == yPos) return; //if it's me, return
 
             ghostsAbsorbed += ghost.CalculateScore().score;
-            GridManager.Instance.DestroyTile(new Vector2Int(x, y));
+            GameManager.Instance.DestroyTile(new Vector2Int(x, y));
         });
     }
 

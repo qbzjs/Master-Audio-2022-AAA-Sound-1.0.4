@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Scripts;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class Human : Creature
+public class Human : Creature, IEffectOnDestroyed
 {
     [SerializeField] protected int scoreWorth = 3;
     
@@ -19,13 +20,14 @@ public class Human : Creature
             {
                 if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Monster))
                 {
-                    toHaunt.Add(new Vector2Int(x, y));
+                    GameManager.Instance.DestroyTile(new Vector2Int(x, y));
+                    //toHaunt.Add(new Vector2Int(x, y));
                 }
             }
         });
     });
     
-    private Rule Haunting = new Rule("A human died here", 1000, () =>
+    /*private Rule Haunting = new Rule("A human died here", 1000, () =>
     {
         for (var index = 0; index < Human.toHaunt.Count; index++)
         {
@@ -33,12 +35,12 @@ public class Human : Creature
             if (GridManager.Instance.GetTile(spot.x, spot.y) is Wasteland)
             {
                 TweenManager.Instance.Callout("Haunted!", spot);
-                GridManager.Instance.PlaceTile("Ghost", spot);
+                GameManager.Instance.PlaceTile("Ghost", spot);
             }
         }
 
         Human.toHaunt.Clear();
-    });
+    });*/
     
     public override string GetDescription()
     {
@@ -50,10 +52,10 @@ public class Human : Creature
     public Human(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
         GameManager.Instance.AddRule(CheckForMonsters);
-        GameManager.Instance.AddRule(Haunting);
+        //GameManager.Instance.AddRule(Haunting);
     }
 
-    /*
+    
     public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)
     {
         if (aboutToBeDestroyed != this)
@@ -62,11 +64,23 @@ public class Human : Creature
             return;
         }
 
-        toHaunt.Add(new Vector2Int(xPos, yPos));
-    }*/
+
+        //toHaunt.Add(new Vector2Int(xPos, yPos));
+    }
 
     protected override Score CalculateBaseScore()
     {
         return new Score(scoreWorth);
     }
+
+    public Action GetInvokeAfterDestroyed()
+    {
+        Vector2Int spot = new Vector2Int(xPos, yPos);
+        return () =>
+        {
+            TweenManager.Instance.Callout("Haunted!", spot);
+            GameManager.Instance.PlaceTile("Ghost", spot);
+        };
+    }
 }
+

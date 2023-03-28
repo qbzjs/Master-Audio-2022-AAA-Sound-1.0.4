@@ -14,6 +14,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
     [SerializeField] private List<AddTileButton> addTileButtons, removeTileButtons;
     [SerializeField] private Color ownedColor;
     [SerializeField] private Button accept, reroll, decline;
+    private List<string> lastOffered = new List<string>();
     private int rerolls;
 
     /// <summary>
@@ -76,10 +77,10 @@ public class UpgradeManager : Singleton<UpgradeManager>
         
         for (int i = 0; i < addTileButtons.Count; i++)
         {
-            for (int j = 0; j < 10; j++) //try to prevent duplicates 10 times
+            for (int j = 0; j < 20; j++) //try to prevent duplicates 20 times
             {
                 tileName = GetAddName(ref borderColor);
-                if (!allTiles.Contains(tileName))
+                if (!allTiles.Contains(tileName) && !lastOffered.Contains(tileName))
                 {
                     break;
                 }
@@ -87,10 +88,12 @@ public class UpgradeManager : Singleton<UpgradeManager>
             allTiles.Add(tileName);
             addTileButtons[i].SetValues(tileName, borderColor);
         }
+        lastOffered.Clear();
+        lastOffered.AddRange(allTiles);
         
         for (int i = 0; i < removeTileButtons.Count; i++)
         {
-            for (int j = 0; j < 10; j++) //try to prevent duplicates 10 times
+            for (int j = 0; j < 20; j++) //try to prevent duplicates 20 times
             {
                 tileName = GetRemoveName();
                 if (!allTiles.Contains(tileName))

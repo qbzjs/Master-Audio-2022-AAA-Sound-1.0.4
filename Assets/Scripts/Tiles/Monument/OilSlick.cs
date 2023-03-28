@@ -29,8 +29,7 @@ public class OilSlick : Creature
                 {
                     if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Fire))
                     {
-                        TweenManager.Instance.Callout("Oil to Hellfire!", new Vector2Int(x, y));
-                        GridManager.Instance.PlaceTile("HellFire", new Vector2Int(x, y));
+                        GameManager.Instance.TransformTile(new Vector2Int(x, y), "HellFire");
                         GridManager.Instance.GetTile(x, y).AddEffect(Roaring);
                         goAgain = true;
                     }
