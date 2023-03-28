@@ -24,6 +24,9 @@ public class Block : MonoBehaviour, IDragParent
     public bool clicked = false;
 
     private Camera cam;
+
+    Vector2Int prevPosition = new Vector2Int(0,0);
+    Vector2Int newPosition = new Vector2Int(0,0);
     
     public void GenerateFakeTiles(Transform parentTransform, int blockSize, List<string> names, List<Vector2Int> positions)
     {
@@ -106,6 +109,7 @@ public class Block : MonoBehaviour, IDragParent
     {
         if (this.clicked == true)
         {
+            GameManager.Instance.dragging = true;
             FollowMousePos();
             if (Input.GetMouseButtonDown(1))
             {
@@ -114,8 +118,9 @@ public class Block : MonoBehaviour, IDragParent
             if(Input.GetMouseButtonDown(0))
             {
                 OnMouseUp();
-                GameManager.Instance.dragging = false;
             }
+        }else{
+            GameManager.Instance.dragging = false;
         }
         
     }
@@ -143,10 +148,8 @@ public class Block : MonoBehaviour, IDragParent
     {
         dragOffset = transform.position - GetMousePos();
         dragOffset.z = 0;
-        GameManager.Instance.dragging = true;
         if(clicked == true){
             clicked = false;
-            GameManager.Instance.dragging = false;
         }else{
             clicked = true;
         }
@@ -160,8 +163,7 @@ public class Block : MonoBehaviour, IDragParent
     public void FollowMousePos()
     {
         bool onGrid = true;
-        GameManager.Instance.dragging = true;
-        
+
         Vector3 mousePos = GetMousePos();
         this.gameObject.transform.position = mousePos;
             
@@ -172,19 +174,17 @@ public class Block : MonoBehaviour, IDragParent
 
         if (onGrid)
         {
-            Vector2Int prevPosition = GridManager.Instance.WorldToGridPos(transform.position);
-            Vector2Int newPosition = GridManager.Instance.WorldToGridPos(dragOffset + GetMousePos());
-           /* if (prevPosition != newPosition)
-           /* if (prevPosition != newPosition)
+            newPosition = GridManager.Instance.WorldToGridPos(transform.position);
+            if (prevPosition != newPosition)
             {
                 MasterAudio.PlaySound("Click");
-            } */
+            } 
             transform.position = GridManager.Instance.GridToWorldPos(newPosition);
-        }
-        else
+        } else
         {
             transform.position = dragOffset + GetMousePos();
-        } 
+        }
+        prevPosition = GridManager.Instance.WorldToGridPos(transform.position);
     }
 
     public void OnMouseUp()

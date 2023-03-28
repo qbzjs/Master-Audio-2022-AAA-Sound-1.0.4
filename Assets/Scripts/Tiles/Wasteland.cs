@@ -69,7 +69,6 @@ public class Wasteland : ITile
         TileObject.transform.rotation = Quaternion.identity;
         TileObject.transform.parent = parentTransform;
         TileObject.AddComponent<BoxCollider>();
-       // TileObject.AddComponent<MouseOverTile>().Tile = this;
         TileObject.GetComponent<SpriteRenderer>().sprite = ArtManager.LoadTileArt(GetType().ToString());
     }
 

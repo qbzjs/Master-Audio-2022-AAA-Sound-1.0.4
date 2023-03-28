@@ -13,7 +13,7 @@ public class Castle : Building
 
     public override string GetDescription()
     {
-        return "+2 point for each adjacent castle. If next to a monster, score is 6 but cannot be increased (eat the rich).";
+        return "6 if adjacent to #monster. Else, +2 for each adjacent castle";
     }
 
     public override Tag[] GetTags()
