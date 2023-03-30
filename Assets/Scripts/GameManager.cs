@@ -315,7 +315,10 @@ public class GameManager : Singleton<GameManager>
         {
             TweenManager.Instance.Callout(calloutText, location);
             Destroy(oldTileObject);
-            newTileObject.transform.position = GridManager.Instance.GridToWorldPos(location);
+            if (newTileObject != null)
+            {
+                newTileObject.transform.position = GridManager.Instance.GridToWorldPos(location);
+            }
         });
     }
 
