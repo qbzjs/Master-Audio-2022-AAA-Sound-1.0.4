@@ -10,5 +10,4 @@ public class DragChild : MonoBehaviour
 
     private void OnMouseUp() { parent.OnMouseUp(); }
     private void OnMouseDown() { parent.OnMouseDown(); }
-    private void OnMouseDrag() { parent.OnMouseDrag(); }
 }

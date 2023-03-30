@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] public Tooltip tooltip;
     [Foldout("UI")]
-    [SerializeField] public ScoreTip scoretip;
+   // [SerializeField] public ScoreTip scoretip;
     [SerializeField] private FullTilePool tilePool;
 
     [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;

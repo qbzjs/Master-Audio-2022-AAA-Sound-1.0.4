@@ -13,7 +13,7 @@ public class Edifice : Monument
         return "Worth 6 points, increases adjacent buildings' score by 2";
     }
 
-    private static Effect EdificeEffect = new Effect("Edifice", 4, 1, 1,
+    private static Effect EdificeEffect = new Effect("Edifice", 3, 1, 1,
         (score) =>
         {
             return new Score(score.score + 2, $"{score.explanation} + 2");
@@ -41,7 +41,7 @@ public class Edifice : Monument
 
     public Edifice(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-
+        GameManager.Instance.AddRule(Edificed);
     }
     protected override Score CalculateBaseScore()
     {

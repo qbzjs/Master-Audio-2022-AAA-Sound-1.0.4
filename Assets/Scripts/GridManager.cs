@@ -334,8 +334,16 @@ namespace Scripts
                 {
                     int oldScore = grid[x, y].TileScore.score;
                     int val = grid[x, y].CalculateScore().score;
-                    if ((val - oldScore) != 0){
-                        string scorePopup  = "+" + (val - oldScore).ToString();
+                    int popupScore = val - oldScore;
+                    string scorePopup = "";
+                    if (popupScore != 0){
+                        if (popupScore > 0) 
+                        {
+                            scorePopup  = "+" + popupScore.ToString();
+                        }else 
+                        {
+                            scorePopup  = popupScore.ToString();
+                        }
                         TweenManager.Instance.Callout(scorePopup, new Vector2Int(x,y));
                     }
                     score += val;

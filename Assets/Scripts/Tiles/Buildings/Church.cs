@@ -16,7 +16,7 @@ public class Church : Building
 
     public override string GetDescription()
     {
-        return "<i>A satanic church, worth 3 points</i>";
+        return "3. A Satanic Church.";
     }
 
     public Church(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
