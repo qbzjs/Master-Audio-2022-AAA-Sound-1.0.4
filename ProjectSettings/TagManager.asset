@@ -44,6 +44,12 @@ TagManager:
   - name: UI
     uniqueID: 1888838289
     locked: 0
+  - name: Blockers
+    uniqueID: 1203218603
+    locked: 0
+  - name: Tiles
+    uniqueID: 3405345391
+    locked: 0
   - name: UpgradeBackgroundUI
     uniqueID: 207378337
     locked: 0
