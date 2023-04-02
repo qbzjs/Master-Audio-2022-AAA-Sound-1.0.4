@@ -32,6 +32,8 @@ public class AddTileButton : MonoBehaviour
         tileName = myTileName;
         border.color = newColor;
         card.CreateCardNewTile(myTileName);
+        card.GetComponent<Image>().raycastTarget=true;
+        DeckManager.Instance.CreateCardToolTips(card, card.transform);
     }
 
     public void AddMyTile()

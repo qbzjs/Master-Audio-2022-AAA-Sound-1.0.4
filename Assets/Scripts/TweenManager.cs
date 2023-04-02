@@ -6,6 +6,7 @@ using NaughtyAttributes;
 using Scripts;
 using TMPro;
 using UnityEngine;
+ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class TweenManager : Singleton<TweenManager>
@@ -215,9 +216,6 @@ public class TweenManager : Singleton<TweenManager>
             float f = 1 - (i * 0.3f);
             LeanTween.move(cards[i], endPos, 0.6f).setEaseInCirc().setDelay(f);
         }   
-        for (int i = 0; i < size; i++){
-            Destroy(cards[i], 2);
-        }
 
     }
 
@@ -275,5 +273,10 @@ public class TweenManager : Singleton<TweenManager>
                 CB.Invoke();
                 Destroy(newOb, 0.3f);
             });
+    }
+
+    public void ToolTipHelper(Transform location)
+    {
+
     }
 }

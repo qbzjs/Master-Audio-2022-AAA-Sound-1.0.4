@@ -27,10 +27,14 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen, deckScreen, tempBlocker;
     [Foldout("UI")]
-    [SerializeField] public Tooltip tooltip;
-    [Foldout("UI")]
-   // [SerializeField] public ScoreTip scoretip;
     [SerializeField] private FullTilePool tilePool;
+
+    [Foldout("Tooltip")]
+    [SerializeField] public SerializableDictionaryBase<string, string> Keywords;
+    [Foldout("Tooltip")]
+    [SerializeField] public GameObject tooltipPrefab;
+    [Foldout("Tooltip")]
+    [SerializeField] public Transform tooltipParent;
 
     [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
 

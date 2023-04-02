@@ -9,6 +9,7 @@ using TMPro;
 
 public class DeckManager : Singleton<DeckManager>
 {
+     [SerializeField] private FullTilePool tilePool;
     [SerializeField] public GameObject DiscardButton, DrawButton, DeckButton;
     [SerializeField] private TextMeshProUGUI DiscardText, DrawText;
     [SerializeField] private Card template;
@@ -142,6 +143,7 @@ public class DeckManager : Singleton<DeckManager>
         {
             Card newCard = createCardFromTile(cardName, parent);
             returnCards.Add(newCard);
+            newCard.GetComponent<Image>().raycastTarget=true;
             for (int i = 1; i < newDeck[cardName]; i++)
             {
                 Card innerCard = createCardFromTile(cardName, newCard.gameObject.transform);
@@ -150,6 +152,8 @@ public class DeckManager : Singleton<DeckManager>
                 SetCardAnchoredSize(rt);
                 LeanTween.moveLocalY(innerCard.gameObject, -(i*15f), 0.75f);
             } 
+            CreateCardToolTips(newCard, newCard.transform);
+            
         }
         return returnCards;
     }
@@ -157,7 +161,6 @@ public class DeckManager : Singleton<DeckManager>
     {
         Card newCard = Instantiate(template, parent.transform);
         newCard.CreateCardNewTile(name);
-        //sorry for this line
         newCard.gameObject.transform.GetChild(1).gameObject.GetComponent<Image>().color = UpgradeManager.Instance.FindColor(name);
         return newCard;
     }
@@ -187,12 +190,42 @@ public class DeckManager : Singleton<DeckManager>
             });  
     }
 
-      public void SetCardAnchoredSize(RectTransform _mRect)
-         {
-            _mRect.sizeDelta = new Vector2(0f, 0f);
-            _mRect.anchoredPosition = new Vector2(0f, 0f);
-            _mRect.anchorMin = new Vector2(0, 0);
-            _mRect.anchorMax = new Vector2(1, 1);
-            _mRect.pivot = new Vector2(0.5f, 0.5f);
-         }
+    public void SetCardAnchoredSize(RectTransform _mRect)
+    {
+        _mRect.sizeDelta = new Vector2(0f, 0f);
+        _mRect.anchoredPosition = new Vector2(0f, 0f);
+        _mRect.anchorMin = new Vector2(0, 0);
+        _mRect.anchorMax = new Vector2(1, 1);
+        _mRect.pivot = new Vector2(0.5f, 0.5f);
+    }
+
+    public void CreateCardToolTips(Card card, Transform parent)
+    {
+        string description = card.descriptionText.text;
+        List<string> keys = new List<string>(GameManager.Instance.Keywords.Keys);
+        foreach(string key in keys)
+        {
+            if (description.Contains(key))
+            {
+                GameObject newOb = Instantiate(GameManager.Instance.tooltipPrefab, parent);
+                TextMeshProUGUI newTextMesh = newOb.GetComponentInChildren<TextMeshProUGUI>();
+                newTextMesh.text = key + ": " + GameManager.Instance.Keywords[key];
+                card.toolTips.Add(newOb);
+                newOb.SetActive(false);
+
+            }
+        }
+        TMP_TextInfo textInfo = card.descriptionText.GetTextInfo(description);
+        int linkCount = textInfo.linkCount;
+        for(int i = 0; i < linkCount; i++)
+        {
+            string cardName = textInfo.linkInfo[i].GetLinkText();
+            Card newCard = createCardFromTile(cardName, parent);
+            newCard.gameObject.SetActive(false);
+            RectTransform rt = newCard.gameObject.GetComponent<RectTransform>();
+            SetCardAnchoredSize(rt);
+            rt.anchoredPosition = new Vector2(0f, 350f);
+            card.toolTips.Add(newCard.gameObject);
+        }
+    }
 }

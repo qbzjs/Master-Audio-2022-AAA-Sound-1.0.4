@@ -1879,7 +1879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2732505027625050476, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2732505027625050476, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2037,6 +2037,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButtonButton
       objectReference: {fileID: 0}
+    - target: {fileID: 8915672477375476745, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.486496
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915672477375476745, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.3089905
+      objectReference: {fileID: 0}
     - target: {fileID: 8915672477543379918, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.000009536743
@@ -2181,7 +2189,7 @@ RectTransform:
   m_Children:
   - {fileID: 2065079395}
   m_Father: {fileID: 323516239}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3999,12 +4007,12 @@ RectTransform:
   - {fileID: 2102760330}
   - {fileID: 679799185}
   - {fileID: 1584052818}
-  - {fileID: 708671903}
-  - {fileID: 951310917}
   - {fileID: 229266362}
   - {fileID: 566454040}
   - {fileID: 710640164}
   - {fileID: 1755176319}
+  - {fileID: 708671903}
+  - {fileID: 951310917}
   m_Father: {fileID: 2111703289}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6060,8 +6068,50 @@ MonoBehaviour:
   upgradeScreen: {fileID: 323516238}
   deckScreen: {fileID: 373795312}
   tempBlocker: {fileID: 1221950031}
-  tooltip: {fileID: 834050994}
   tilePool: {fileID: 11400000, guid: ca939c862f8cd27479519208f78516d4, type: 2}
+  Keywords:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues:
+    - Adjacent
+    - Pack
+    - Spawn
+    - Destroy
+    - Absorb
+    _keys:
+    - Adjacent
+    - Pack
+    - Spawn
+    - Destroy
+    - Absorb
+    _values:
+    - up, down, left and right of this tile.
+    - A group of tiles of the same type adjacent to each other.
+    - Create a new tile on the board.
+    - Remove a tile and its points from the board.
+    - This tile destroys other tiles and gains their points.
+  tooltipPrefab: {fileID: 7213472055447351774, guid: 2229341d1e5c9443ea253fc91f2c00fa, type: 3}
+  tooltipParent: {fileID: 2111703289}
   winningScore: 80
   upgradeIncrement: 10
   totalTurns: 20
@@ -8264,6 +8314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51cea52b522039041a53ec6788380c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilePool: {fileID: 11400000, guid: ca939c862f8cd27479519208f78516d4, type: 2}
   DiscardButton: {fileID: 642311766}
   DrawButton: {fileID: 1297936818}
   DeckButton: {fileID: 1477121583}
@@ -9071,7 +9122,7 @@ RectTransform:
   m_Children:
   - {fileID: 2052491096}
   m_Father: {fileID: 323516239}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11860,15 +11911,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 84845248}
-  - {fileID: 2139012282}
   - {fileID: 1152059503}
+  - {fileID: 2139012282}
+  - {fileID: 84845248}
   m_Father: {fileID: 323516239}
-  m_RootOrder: 7
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24, y: 0.06}
   m_AnchorMax: {x: 0.75, y: 0.43}
-  m_AnchoredPosition: {x: -538.50006, y: -142.00006}
+  m_AnchoredPosition: {x: -538.5, y: -142.0001}
   m_SizeDelta: {x: -234.99, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708671904
@@ -11888,7 +11939,7 @@ MonoBehaviour:
     m_Right: 50
     m_Top: 50
     m_Bottom: 50
-  m_ChildAlignment: 7
+  m_ChildAlignment: 6
   m_Spacing: 125
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -11968,7 +12019,7 @@ RectTransform:
   m_Children:
   - {fileID: 718145582}
   m_Father: {fileID: 323516239}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13589,6 +13640,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButtonButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8915672477375476745, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.486496
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915672477375476745, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.3089905
+      objectReference: {fileID: 0}
     - target: {fileID: 8915672477477962507, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -14378,7 +14437,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 951310917}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14672,15 +14731,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1526226146}
-  - {fileID: 1660613591}
   - {fileID: 932903404}
+  - {fileID: 1660613591}
+  - {fileID: 1526226146}
   m_Father: {fileID: 323516239}
-  m_RootOrder: 8
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.06}
   m_AnchorMax: {x: 0.76, y: 0.43}
-  m_AnchoredPosition: {x: 608, y: -124.00037}
+  m_AnchoredPosition: {x: 608, y: -124.00084}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &951310918
@@ -16693,6 +16752,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButtonButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8915672477375476745, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.4865112
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915672477375476745, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.3089905
+      objectReference: {fileID: 0}
     - target: {fileID: 8915672477477962507, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -16734,7 +16801,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 708671903}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -20798,7 +20865,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 323516239}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -27009,6 +27076,14 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 28.35
       objectReference: {fileID: 0}
+    - target: {fileID: 7681030474294937037, guid: 716cda9c7e2a4411aa6c620c00de02e3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.4864502
+      objectReference: {fileID: 0}
+    - target: {fileID: 7681030474294937037, guid: 716cda9c7e2a4411aa6c620c00de02e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.309021
+      objectReference: {fileID: 0}
     - target: {fileID: 7681030474460885696, guid: 716cda9c7e2a4411aa6c620c00de02e3, type: 3}
       propertyPath: m_Name
       value: Card
@@ -29804,7 +29879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2732505027625050476, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2732505027625050476, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -29961,6 +30036,14 @@ PrefabInstance:
     - target: {fileID: 2732505027625050479, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
       propertyPath: m_Name
       value: ButtonButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915672477375476745, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.4865112
+      objectReference: {fileID: 0}
+    - target: {fileID: 8915672477375476745, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 4.3089905
       objectReference: {fileID: 0}
     - target: {fileID: 8915672477543379918, guid: 75aaf37a9bcf60e41bb4ed5d6b6f772c, type: 3}
       propertyPath: m_AnchoredPosition.y

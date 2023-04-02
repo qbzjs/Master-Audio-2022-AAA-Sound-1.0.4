@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Scripts;
+using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private string cardName, cardDescription, cardPoints, cardTags;
-    [SerializeField] private TextMeshProUGUI titleText, descriptionText, tagsText, scoreText;
+    [SerializeField] public TextMeshProUGUI titleText, descriptionText, tagsText, scoreText;
     [SerializeField] public Image cardArt; 
+    public List<GameObject> toolTips;
  
     public string CardName
     {
@@ -56,10 +58,6 @@ public class Card : MonoBehaviour
         string description = tile.GetDescription();
         descriptionText.text = description;
 
-        //description += "<br><br>";
-        //description += "Score: ";
-        //description += body.explanation;
-        //description += $" = {body.score}";
         CardPoints = body.score.ToString();
 
         Tag[] tags = tile.GetTags();
@@ -83,5 +81,27 @@ public class Card : MonoBehaviour
         CreateCardExistingTile(tile);
         
     }
+    public void OnPointerEnter(PointerEventData pointerEventData)
+    {
+       if (toolTips == null){
+            return;
+        }
+        foreach(var ob in toolTips)
+        {
+
+            ob.SetActive(true);
+        } 
+    }
+    
+    public void OnPointerExit(PointerEventData pointerEventData)
+    {
+        if (toolTips == null){
+            return;
+        }
+        foreach(var ob in toolTips)
+        {
+            ob.SetActive(false);
+        } 
+    }  
 
 }
