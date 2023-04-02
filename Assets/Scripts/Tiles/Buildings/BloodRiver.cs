@@ -14,7 +14,7 @@ public class BloodRiver : Building
     }
     public override string GetDescription()
     {
-        return "x2 each adjacent tile";
+        return "<b><color=\"red\">x2</color></b> each <b>Adjacent</b> tile";
     }
 
     public override Tag[] GetTags()

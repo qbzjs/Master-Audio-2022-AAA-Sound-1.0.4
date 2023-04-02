@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Scripts;
 using UnityEngine;
+using TMPro;
 
 public class Tenement : Building
 {
@@ -9,7 +10,7 @@ public class Tenement : Building
 
     public override string GetDescription()
     {
-        return "+1 for each adjacent tenement";
+        return "<color=\"red\"><b>+1</b></color> for each <b>Adjacent</b> <b>Tenement</b>";
     }
     
     public Tenement(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

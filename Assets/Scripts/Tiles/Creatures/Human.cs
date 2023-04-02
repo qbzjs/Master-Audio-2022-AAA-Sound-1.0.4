@@ -27,25 +27,10 @@ public class Human : Creature, IEffectOnDestroyed
         });
     });
     
-    /*private Rule Haunting = new Rule("A human died here", 1000, () =>
-    {
-        for (var index = 0; index < Human.toHaunt.Count; index++)
-        {
-            var spot = Human.toHaunt[index];
-            if (GridManager.Instance.GetTile(spot.x, spot.y) is Wasteland)
-            {
-                TweenManager.Instance.Callout("Haunted!", spot);
-                GameManager.Instance.PlaceTile("Ghost", spot);
-            }
-        }
-
-        Human.toHaunt.Clear();
-    });*/
     
     public override string GetDescription()
     {
-        return $"{scoreWorth}pts - When Destroyed: spawn a ghost worth 5 pts" +
-                "<br> Each Turn: dies if next to a tile with #monster";
+        return "If <b>Adjacent</b> to #monster, is <b>Destroyed</b> and <b>Spawns</b> a <b>Ghost</b>.";
     }
     
     

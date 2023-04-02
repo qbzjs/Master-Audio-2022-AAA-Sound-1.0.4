@@ -7,7 +7,7 @@ public class Clocktower : Wasteland, IEffectOnDestroyed
 
     public override string GetDescription()
     {
-        return "While on the board, gives +1 turn";
+        return "While on the board, gives <b><color=\"red\">+1</color></b> turn";
     }
 
     public override void WhenPlaced()

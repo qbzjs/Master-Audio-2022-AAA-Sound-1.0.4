@@ -7,7 +7,7 @@ public class Campfire : Wasteland
 {
     public override string GetDescription()
     {
-        return "-2 points each turn. Destroyed when it reaches 0.";
+        return "<b><color=\"red\">-2</color></b> each turn. <b>Destroyed</b> When it reaches 0.";
     }
     
     public override Tag[] GetTags()

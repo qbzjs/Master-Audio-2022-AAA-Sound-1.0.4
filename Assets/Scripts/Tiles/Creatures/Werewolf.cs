@@ -11,7 +11,7 @@ public class Werewolf : Monster
 
     public override string GetDescription()
     {
-        return "Kills adjacent vampires and steals their points, in pack of 5 all werewolf scores double";
+        return "<b>Absorbs</b> <b>Adjacent</b> <b>Vampires</b>. <b>Pack</b> of 5 worth <b><color=\"red\">x2</color></b>.";
     }
 
     public Werewolf(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

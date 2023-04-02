@@ -20,7 +20,7 @@ public class Temple : Monument
 
     public override string GetDescription()
     {
-        return "The haunted temple! Absorbs all ghosts and their points";
+        return "<b>Absorbs</b> all <b>Ghosts</b>";
     }
 
     public override void WhenPlaced()

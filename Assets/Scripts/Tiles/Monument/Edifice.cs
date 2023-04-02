@@ -10,7 +10,7 @@ public class Edifice : Monument
 {
     public override string GetDescription()
     {
-        return "Worth 6 points, increases adjacent buildings' score by 2";
+        return "Surround: +2 each adjacent #building's score";
     }
 
     private static Effect EdificeEffect = new Effect("Edifice", 3, 1, 1,

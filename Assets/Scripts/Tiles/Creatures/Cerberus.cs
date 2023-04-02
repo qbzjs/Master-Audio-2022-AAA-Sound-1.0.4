@@ -17,7 +17,7 @@ public class Cerberus : Monster
 
     public override string GetDescription()
     {
-        return "+10 if in a pack of exactly 3, 0 otherwise.";
+        return "Worth <b><color=\"red\">10</color></b> if in a <b>Pack</b> of <b><color=\"red\">3</color></b>.";
     }
     public Cerberus(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {

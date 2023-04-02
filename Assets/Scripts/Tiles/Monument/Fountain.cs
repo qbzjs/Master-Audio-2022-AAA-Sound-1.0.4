@@ -10,7 +10,7 @@ public class Fountain : Monument
 
     public override string GetDescription()
     {
-        return "x2 each adjacent tile";
+        return "Surround: double the score of each adjacent tile";
     }
 
     public override Tag[] GetTags()

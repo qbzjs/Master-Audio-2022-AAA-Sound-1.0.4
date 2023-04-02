@@ -9,7 +9,7 @@ public class Spider : Animal
 
     public override string GetDescription()
     {
-        return $"{scoreWorth}pts - Surrounds itself with Webs";
+        return $"<b>Spawns</b> <b>Webs</b> at each <b>Adjacent</b> empty tile.";
     }
     
     public Spider(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

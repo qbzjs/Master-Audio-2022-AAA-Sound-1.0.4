@@ -12,7 +12,7 @@ public class Den : Building
 
     public override string GetDescription()
     {
-        return "Starts open, will close once touches a pack of Werewolfs, grants 1 points per werewolf. Can catch fire.";
+        return "Grants <b><color=\"red\">+1</color></b> to each werewolf in <b>Adjacent</b> <b>Pack</b>. Can catch #fire.";
     }
 
     public override Tag[] GetTags()

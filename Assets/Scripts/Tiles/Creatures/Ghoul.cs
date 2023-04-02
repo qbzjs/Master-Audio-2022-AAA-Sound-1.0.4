@@ -14,7 +14,7 @@ public class Ghoul : Monster
 
     public override string GetDescription()
     {
-        return "+1 for each ghoul in pack of up to 3";
+        return "+1 for each <b>Ghoul</b> in a <b>Pack</b> of <b><color=\"red\">max 3</color></b>";
     }
     public Ghoul(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {

@@ -10,7 +10,7 @@ public class Cave : Building
 
     public override string GetDescription()
     {
-        return $"+{scoreWorthAdjacent} for each adjacent #darkness";
+        return $"<b><color=\"red\">+{scoreWorthAdjacent}</color></b> for each <b>Adjacent</b> #darkness.";
     }
 
     public override Tag[] GetTags()

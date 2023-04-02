@@ -19,7 +19,7 @@ public class River : Building
 
     public override string GetDescription()
     {
-        return "If adjacent to #blood, turns into Blood River";
+        return "If <b>Adjacent</b> to #blood, becomes <b>Blood River</b>";
     }
 
     private static Rule PropagateBlood = new Rule("Propagate Blood", 10, () =>

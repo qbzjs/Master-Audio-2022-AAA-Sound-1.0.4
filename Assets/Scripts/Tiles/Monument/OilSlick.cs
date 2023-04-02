@@ -52,7 +52,7 @@ public class OilSlick : Creature
 
     public override string GetDescription()
     {
-        return $"{scoreWorth}pts - When adjacent to Fire, becomes a 5pt Hellfire.";
+        return $"If <b>Adjacent</b> to #fire, becomes <b>Hellfire</b>.";
     }
     
     

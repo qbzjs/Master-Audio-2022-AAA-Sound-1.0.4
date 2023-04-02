@@ -48,12 +48,14 @@ MonoBehaviour:
     - Gargoyle
     - River
     - Tenement
+    - Human
     _keys:
     - Ghoul
     - Gargoyle
     - River
     - Tenement
-    _values: 04000000040000000400000004000000
+    - Human
+    _values: 0400000004000000040000000300000001000000
   Commons:
   - River
   - Human

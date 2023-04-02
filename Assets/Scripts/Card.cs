@@ -10,7 +10,7 @@ public class Card : MonoBehaviour
     private string cardName, cardDescription, cardPoints, cardTags;
     [SerializeField] private TextMeshProUGUI titleText, descriptionText, tagsText, scoreText;
     [SerializeField] public Image cardArt; 
-
+ 
     public string CardName
     {
         get => cardName;
@@ -54,12 +54,12 @@ public class Card : MonoBehaviour
         CardName = tile.GetType().FullName;
 
         string description = tile.GetDescription();
+        descriptionText.text = description;
+
         //description += "<br><br>";
         //description += "Score: ";
         //description += body.explanation;
         //description += $" = {body.score}";
-        CardDescription = description;
-
         CardPoints = body.score.ToString();
 
         Tag[] tags = tile.GetTags();
@@ -83,4 +83,5 @@ public class Card : MonoBehaviour
         CreateCardExistingTile(tile);
         
     }
+
 }
