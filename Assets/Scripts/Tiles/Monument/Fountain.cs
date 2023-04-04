@@ -35,9 +35,7 @@ public class Fountain : Monument
                 foreach (Vector2Int subdirection in Directions.Cardinal)
                 {
                     ITile bloodyTile = GridManager.Instance.GetTile(x + subdirection.x, y + subdirection.y);
-                    if (bloodyTile.TileObject != null && !bloodyTile.HasEffect(BloodMultiplier)
-                                                      /*&& bloodyTile.GetType() != typeof(BloodRiver)
-                                                      && bloodyTile.GetType() != typeof(Fountain)*/)
+                    if (bloodyTile.TileObject != null)
                     {
                         
                         ParticleManager.Instance.InstantiateBloodParticles(bloodyTile.TileObject.transform);
