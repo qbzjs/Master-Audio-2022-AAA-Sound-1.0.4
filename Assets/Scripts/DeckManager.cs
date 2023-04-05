@@ -15,6 +15,7 @@ public class DeckManager : Singleton<DeckManager>
     [SerializeField] private TextMeshProUGUI DiscardText, DrawText;
     [SerializeField] private Card template;
     [SerializeField] private GameObject deckParent;
+    [SerializeField] public RectTransform topRightBoundary;
 
     private List<string> discard = new(), deck = new(), drawPile = new();
     
@@ -143,6 +144,7 @@ public class DeckManager : Singleton<DeckManager>
                 LeanTween.moveLocalY(innerCard.gameObject, -(i*15f), 0f);
             } 
             CreateCardToolTips(newCard);
+            newCard.tooltipParent.transform.SetAsLastSibling();
             
         }
     }
@@ -205,7 +207,7 @@ public class DeckManager : Singleton<DeckManager>
         {
             if (description.Contains(key))
             {
-                GameObject newOb = Instantiate(GameManager.Instance.tooltipPrefab, card.transform.GetChild(7).transform);
+                GameObject newOb = Instantiate(GameManager.Instance.tooltipPrefab, card.tooltipParent.transform);
                 TextMeshProUGUI newTextMesh = newOb.GetComponentInChildren<TextMeshProUGUI>();
                 newTextMesh.text = key + ": " + GameManager.Instance.Keywords[key];
                 card.toolTips.Add(newOb);

@@ -6050,7 +6050,6 @@ MonoBehaviour:
     - Remove a tile and its points from the board.
     - This tile destroys other tiles and gains their points.
   tooltipPrefab: {fileID: 7213472055447351774, guid: 2229341d1e5c9443ea253fc91f2c00fa, type: 3}
-  tooltipParent: {fileID: 2111703289}
   winningScore: 80
   upgradeIncrement: 10
   totalTurns: 20
@@ -8215,6 +8214,7 @@ MonoBehaviour:
   DrawText: {fileID: 2042488194}
   template: {fileID: 5585629550561010621, guid: 716cda9c7e2a4411aa6c620c00de02e3, type: 3}
   deckParent: {fileID: 557284880}
+  topRightBoundary: {fileID: 2074642466}
 --- !u!1 &507474860
 GameObject:
   m_ObjectHideFlags: 0
@@ -13116,8 +13116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65b152e70ac95e4b9c5a3e62802b0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topRightBoundary: {fileID: 2074642466}
-  card: {fileID: 1944677900}
+  card: {fileID: 0}
 --- !u!1 &835768315
 GameObject:
   m_ObjectHideFlags: 0
@@ -14855,7 +14854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.06}
   m_AnchorMax: {x: 0.76, y: 0.43}
-  m_AnchoredPosition: {x: 608, y: -124.0011}
+  m_AnchoredPosition: {x: 608, y: -124.00134}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &951310918
@@ -27274,17 +27273,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7681030474460885711, guid: 716cda9c7e2a4411aa6c620c00de02e3, type: 3}
   m_PrefabInstance: {fileID: 1944677898}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1944677900 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5585629550561010621, guid: 716cda9c7e2a4411aa6c620c00de02e3, type: 3}
-  m_PrefabInstance: {fileID: 1944677898}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c14cfa8ae01f4e27892c7bbcfe2d2c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1953758978
 GameObject:
   m_ObjectHideFlags: 0
@@ -29019,7 +29007,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -152.15991, y: -178.20001}
+  m_AnchoredPosition: {x: -500, y: -178.20001}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2074642467

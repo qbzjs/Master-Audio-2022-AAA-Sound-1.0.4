@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1432639769162607104}
   - component: {fileID: 8192431253277167377}
+  - component: {fileID: 4874056984555706727}
+  - component: {fileID: 5015774443951197184}
   m_Layer: 5
   m_Name: ToolTipParent
   m_TagString: Untagged
@@ -63,6 +65,31 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!225 &4874056984555706727
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053795084234191015}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &5015774443951197184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053795084234191015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65b152e70ac95e4b9c5a3e62802b0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card: {fileID: 0}
 --- !u!1 &4495369732760588507
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +313,7 @@ GameObject:
   - component: {fileID: 7681030474460885709}
   - component: {fileID: 7681030474460885710}
   - component: {fileID: 5585629550561010621}
+  - component: {fileID: 7627098772767032552}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -376,7 +404,21 @@ MonoBehaviour:
   tagsText: {fileID: 7681030475259900515}
   scoreText: {fileID: 7681030474294937036}
   cardArt: {fileID: 7681030474836713427}
+  tooltipParent: {fileID: 2053795084234191015}
   toolTips: []
+  cardRefs: []
+--- !u!225 &7627098772767032552
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7681030474460885696}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7681030474529948171
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,8 +33,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public SerializableDictionaryBase<string, string> Keywords;
     [Foldout("Tooltip")]
     [SerializeField] public GameObject tooltipPrefab;
-    [Foldout("Tooltip")]
-    [SerializeField] public Transform tooltipParent;
 
     [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
 

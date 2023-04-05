@@ -11,6 +11,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private string cardName, cardDescription, cardPoints, cardTags;
     [SerializeField] public TextMeshProUGUI titleText, descriptionText, tagsText, scoreText;
     [SerializeField] public Image cardArt; 
+    [SerializeField] public GameObject tooltipParent;
     public List<GameObject> toolTips;
     public List<GameObject> cardRefs;
  
@@ -92,7 +93,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        transform.GetChild(7).gameObject.SetActive(true);
+        tooltipParent.SetActive(true);
         foreach(var card in cardRefs)
         {
             card.SetActive(true);
@@ -101,7 +102,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     
     public void OnPointerExit(PointerEventData pointerEventData)
     {
-        transform.GetChild(7).gameObject.SetActive(false);
+        tooltipParent.SetActive(false);
         foreach(var card in cardRefs)
         {
             card.SetActive(false);
