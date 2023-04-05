@@ -11,7 +11,7 @@ public class Werewolf : Monster
 
     public override string GetDescription()
     {
-        return "<b>Absorbs</b> <b>Adjacent</b> <b>Vampires</b>. <b>Pack</b> of 5 worth <b><color=\"red\">x2</color></b>.";
+        return "<b>Absorbs</b> <b>Adjacent</b> <b><link>Vampire</link>s</b>. <b>Pack</b> of 5 worth <b><color=\"red\">x2</color></b>.";
     }
 
     public Werewolf(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

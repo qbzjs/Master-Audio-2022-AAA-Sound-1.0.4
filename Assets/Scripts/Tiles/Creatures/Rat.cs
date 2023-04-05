@@ -9,7 +9,7 @@ public class Rat : Animal
 
     public override string GetDescription()
     {
-        return "Empty tile <b>Adjacent</b> to <b><color=\"red\">2 or more</color></b> <b>Rats</b> becomes a <b>Rat</b>.";
+        return "Empty tile <b>Adjacent</b> to <b><color=\"red\">2 or more</color></b> <b>Rats</b> becomes a <link><b>Rat</b></link>.";
     }
     
     public static Rule PropagateRats = new Rule("Propagate Rats", 10, () =>

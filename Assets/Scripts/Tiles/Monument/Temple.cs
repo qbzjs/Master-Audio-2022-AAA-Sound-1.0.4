@@ -20,7 +20,7 @@ public class Temple : Monument
 
     public override string GetDescription()
     {
-        return "<b>Absorbs</b> all <b>Ghosts</b>";
+        return "<b>Absorbs</b> all <b><link>Ghost</link>s</b>";
     }
 
     public override void WhenPlaced()

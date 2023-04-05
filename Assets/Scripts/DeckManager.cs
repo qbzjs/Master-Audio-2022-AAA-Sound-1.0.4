@@ -9,20 +9,17 @@ using TMPro;
 
 public class DeckManager : Singleton<DeckManager>
 {
+
      [SerializeField] private FullTilePool tilePool;
     [SerializeField] public GameObject DiscardButton, DrawButton, DeckButton;
     [SerializeField] private TextMeshProUGUI DiscardText, DrawText;
     [SerializeField] private Card template;
-    [SerializeField] private GameObject deckParent, discardParent, drawParent;
+    [SerializeField] private GameObject deckParent;
 
     private List<string> discard = new(), deck = new(), drawPile = new();
-    private List<Card> cardDeck = new();
-    private List<Card> discardDeck = new();
-    private List<Card> drawDeck = new();
     
     public void ShuffleBack()
     {
-        TweenManager.Instance.MoveCard(DiscardButton.transform, DrawButton.transform, discard.Count);
         UpdateDeckCounts();
         drawPile.AddRange(discard);
         discard.Clear();
@@ -44,33 +41,30 @@ public class DeckManager : Singleton<DeckManager>
 
     public void LoadCardDeck()
     {
-        foreach (var card in cardDeck)
-        {
-            Destroy(card.gameObject);
+        Transform deckTransform = deckParent.transform;
+        while (deckTransform.childCount > 0) {
+            DestroyImmediate(deckTransform.GetChild(0).gameObject);
         }
-        cardDeck.Clear();
-        cardDeck = createCardDictFromList(deck, deckParent.transform);
+        createCardDictFromList(deck, deckTransform);
     }
 
     public void LoadDiscardDeck()
     {
-        foreach (var card in discardDeck)
-        {
-            Destroy(card.gameObject);
+       Transform deckTransform = deckParent.transform;
+        while (deckTransform.childCount > 0) {
+            DestroyImmediate(deckTransform.transform.GetChild(0).gameObject);
         }
-        discardDeck.Clear();
-        discardDeck = createCardDictFromList(discard, discardParent.transform);
+        createCardDictFromList(discard, deckTransform);
     }
 
     public void LoadDrawDeck()
     {
-        foreach (var card in drawDeck)
-        {
-            Destroy(card.gameObject);
+        Transform deckTransform = deckParent.transform;
+        while (deckTransform.childCount > 0) {
+            DestroyImmediate(deckTransform.GetChild(0).gameObject);
         }
-        drawDeck.Clear();
-        drawDeck = createCardDictFromList(drawPile, drawParent.transform);
-    }
+        createCardDictFromList(drawPile, deckTransform);
+    } 
 
     public string Draw()
     {
@@ -87,7 +81,6 @@ public class DeckManager : Singleton<DeckManager>
     {
         discard.Add(name);
         UpdateDeckCounts();
-
     }
     public string GetRandomCard()
     {
@@ -127,10 +120,9 @@ public class DeckManager : Singleton<DeckManager>
         }
     }
 
-    private List<Card> createCardDictFromList(List<string> deck, Transform parent)
+    private void createCardDictFromList(List<string> deck, Transform parent)
     {
         Dictionary<string, int> newDeck = new Dictionary<string, int>();
-        List<Card> returnCards = new();
         foreach(var cardName in deck)
         {
             if(!newDeck.ContainsKey(cardName))
@@ -142,21 +134,19 @@ public class DeckManager : Singleton<DeckManager>
         foreach(var cardName in newDeck.Keys)
         {
             Card newCard = createCardFromTile(cardName, parent);
-            returnCards.Add(newCard);
             newCard.GetComponent<Image>().raycastTarget=true;
             for (int i = 1; i < newDeck[cardName]; i++)
             {
                 Card innerCard = createCardFromTile(cardName, newCard.gameObject.transform);
-                returnCards.Add(innerCard);
                 RectTransform rt = innerCard.gameObject.GetComponent<RectTransform>();
                 SetCardAnchoredSize(rt);
-                LeanTween.moveLocalY(innerCard.gameObject, -(i*15f), 0.75f);
+                LeanTween.moveLocalY(innerCard.gameObject, -(i*15f), 0f);
             } 
-            CreateCardToolTips(newCard, newCard.transform);
+            CreateCardToolTips(newCard);
             
         }
-        return returnCards;
     }
+
     private Card createCardFromTile(string name, Transform parent)
     {
         Card newCard = Instantiate(template, parent.transform);
@@ -164,10 +154,7 @@ public class DeckManager : Singleton<DeckManager>
         newCard.gameObject.transform.GetChild(1).gameObject.GetComponent<Image>().color = UpgradeManager.Instance.FindColor(name);
         return newCard;
     }
-    public void moveBlockCards(int blockSize)
-    {
-        TweenManager.Instance.MoveCard(DrawButton.transform, DiscardButton.transform, blockSize);
-    }
+
     private void UpdateDeckCounts()
     {
         float discardNum = float.Parse(DiscardText.text);
@@ -188,6 +175,17 @@ public class DeckManager : Singleton<DeckManager>
             { 
                 DrawText.text = $"{(int)val}"; 
             });  
+
+        Toggle drawToggle = DrawButton.GetComponent<Toggle>();
+        if (drawToggle.isOn)
+        {
+            LoadDrawDeck();
+        }
+        Toggle discardToggle = DiscardButton.GetComponent<Toggle>();
+        if (discardToggle.isOn)
+        {
+            LoadDiscardDeck();
+        }
     }
 
     public void SetCardAnchoredSize(RectTransform _mRect)
@@ -199,7 +197,7 @@ public class DeckManager : Singleton<DeckManager>
         _mRect.pivot = new Vector2(0.5f, 0.5f);
     }
 
-    public void CreateCardToolTips(Card card, Transform parent)
+    public void CreateCardToolTips(Card card)
     {
         string description = card.descriptionText.text;
         List<string> keys = new List<string>(GameManager.Instance.Keywords.Keys);
@@ -207,12 +205,10 @@ public class DeckManager : Singleton<DeckManager>
         {
             if (description.Contains(key))
             {
-                GameObject newOb = Instantiate(GameManager.Instance.tooltipPrefab, parent);
+                GameObject newOb = Instantiate(GameManager.Instance.tooltipPrefab, card.transform.GetChild(7).transform);
                 TextMeshProUGUI newTextMesh = newOb.GetComponentInChildren<TextMeshProUGUI>();
                 newTextMesh.text = key + ": " + GameManager.Instance.Keywords[key];
                 card.toolTips.Add(newOb);
-                newOb.SetActive(false);
-
             }
         }
         TMP_TextInfo textInfo = card.descriptionText.GetTextInfo(description);
@@ -220,12 +216,12 @@ public class DeckManager : Singleton<DeckManager>
         for(int i = 0; i < linkCount; i++)
         {
             string cardName = textInfo.linkInfo[i].GetLinkText();
-            Card newCard = createCardFromTile(cardName, parent);
+            Card newCard = createCardFromTile(cardName, card.transform);
             newCard.gameObject.SetActive(false);
             RectTransform rt = newCard.gameObject.GetComponent<RectTransform>();
             SetCardAnchoredSize(rt);
             rt.anchoredPosition = new Vector2(0f, 350f);
-            card.toolTips.Add(newCard.gameObject);
+            card.cardRefs.Add(newCard.gameObject);
         }
     }
 }

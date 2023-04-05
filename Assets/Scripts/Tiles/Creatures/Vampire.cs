@@ -12,7 +12,7 @@ public class Vampire : Monster
 
     public override string GetDescription()
     {
-        return "In a <b>Pack</b> of <b><color=\"red\">5</color></b>, all <b>Blood Rivers</b> <b><color=\"red\">x3</color></b> <b>Adjacent</b> tiles";
+        return "In a <b>Pack</b> of <b><color=\"red\">5</color></b>, all <b><link>BloodRiver</link>s</b> <b><color=\"red\">x3</color></b>";
     }
     
     public override Tag[] GetTags()

@@ -14,7 +14,7 @@ public class CinderDemon : Wasteland
     
     public override string GetDescription()
     {
-        return scoreWorth + " pts";
+        return " ";
     }
     public CinderDemon(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {

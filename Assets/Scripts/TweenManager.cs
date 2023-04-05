@@ -205,7 +205,6 @@ public class TweenManager : Singleton<TweenManager>
     }
     public void MoveCard(Transform startPos, Transform endPos, int size)
     {
-
         List<GameObject> cards = new();
         for (int i = 0; i < size; i++){
             GameObject card = Instantiate(cardBack, startPos);
@@ -215,8 +214,7 @@ public class TweenManager : Singleton<TweenManager>
         for (int i = 0; i < size; i++){
             float f = 1 - (i * 0.3f);
             LeanTween.move(cards[i], endPos, 0.6f).setEaseInCirc().setDelay(f);
-        }   
-
+        } 
     }
 
     public void DestroyEffect(Vector2Int location, Action CB)

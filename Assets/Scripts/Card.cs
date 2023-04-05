@@ -12,6 +12,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] public TextMeshProUGUI titleText, descriptionText, tagsText, scoreText;
     [SerializeField] public Image cardArt; 
     public List<GameObject> toolTips;
+    public List<GameObject> cardRefs;
  
     public string CardName
     {
@@ -51,6 +52,14 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void CreateCardExistingTile(ITile tile)
     {
+        if (toolTips!= null)
+        {
+            foreach (var tooltip in toolTips)
+            {
+                Destroy(tooltip.gameObject);
+            }
+            toolTips.Clear();
+        }
         Score body = tile.CalculateScore();
     
         CardName = tile.GetType().FullName;
@@ -83,25 +92,20 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
-       if (toolTips == null){
-            return;
-        }
-        foreach(var ob in toolTips)
+        transform.GetChild(7).gameObject.SetActive(true);
+        foreach(var card in cardRefs)
         {
-
-            ob.SetActive(true);
-        } 
+            card.SetActive(true);
+        }
     }
     
     public void OnPointerExit(PointerEventData pointerEventData)
     {
-        if (toolTips == null){
-            return;
-        }
-        foreach(var ob in toolTips)
+        transform.GetChild(7).gameObject.SetActive(false);
+        foreach(var card in cardRefs)
         {
-            ob.SetActive(false);
-        } 
+            card.SetActive(false);
+        }
     }  
 
 }
