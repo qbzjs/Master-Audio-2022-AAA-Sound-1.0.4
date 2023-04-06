@@ -229,14 +229,12 @@ public class GameManager : Singleton<GameManager>
         winTurnCounter.text = "With " + turns + " turns to spare";
         winningScore += winningScoreIncrement;
         upgradeIncrement = winningScore / 2;
-        rules.Clear();
     }
 
     public void Lose()
     {
         loseScreen.SetActive(true);
         loseFinalScore.text = "Final Score: " + score + "/" + winningScore;
-        rules.Clear();
     }
 
     public void Reset()

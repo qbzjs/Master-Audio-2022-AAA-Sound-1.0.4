@@ -44,12 +44,12 @@ MonoBehaviour:
     reqReferences: {fileID: 0}
     isExpanded: 1
     _keyValues:
-    - Void
+    - Ghoul
     - Gargoyle
     - River
     - Tenement
     _keys:
-    - Void
+    - Ghoul
     - Gargoyle
     - River
     - Tenement
