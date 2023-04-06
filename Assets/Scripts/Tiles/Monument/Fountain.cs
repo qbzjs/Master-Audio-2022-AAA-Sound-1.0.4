@@ -60,6 +60,12 @@ public class Fountain : Monument
     
     public Fountain(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
+        BloodMultiplier = new Effect(
+            "Blood multiplier", 20, 1, 1, (value) =>
+            {
+                return new Score(value.score * 2, value.explanation + " * 2");
+            }
+        );
         GameManager.Instance.AddRule(SetBloodMultiplier);
         ParticleManager.Instance.InstantiateBloodGlow(TileObject.transform);
     }
