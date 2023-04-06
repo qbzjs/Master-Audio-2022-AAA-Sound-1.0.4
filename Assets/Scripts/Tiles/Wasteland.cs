@@ -101,8 +101,8 @@ public class Wasteland : ITile
             //If there is already a version of this effect, add it to a stack (or maybe overwrite)
             Effect priorEffect = ongoingEffects.FirstOrDefault((value) => { return value.description.Equals(toAdd.description); });
             ongoingEffects.Remove(priorEffect);
-            priorEffect.stacks = Mathf.Min(priorEffect.stacks + toAdd.stacks, priorEffect.maxStacks);
-            ongoingEffects.Add(priorEffect);
+            toAdd.stacks = Mathf.Min(priorEffect.stacks + toAdd.stacks, priorEffect.maxStacks);
+            ongoingEffects.Add(toAdd);
             return;
         }
         
