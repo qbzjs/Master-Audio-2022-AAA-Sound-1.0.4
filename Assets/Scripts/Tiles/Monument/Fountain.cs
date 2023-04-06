@@ -37,8 +37,10 @@ public class Fountain : Monument
                     ITile bloodyTile = GridManager.Instance.GetTile(x + subdirection.x, y + subdirection.y);
                     if (bloodyTile.TileObject != null)
                     {
-                        
-                        ParticleManager.Instance.InstantiateBloodParticles(bloodyTile.TileObject.transform);
+                        if (!bloodyTile.HasEffect(BloodMultiplier))
+                        {
+                            ParticleManager.Instance.InstantiateBloodParticles(bloodyTile.TileObject.transform);
+                        }
                         bloodyTile.AddEffect(BloodMultiplier);
                     }
                 }
