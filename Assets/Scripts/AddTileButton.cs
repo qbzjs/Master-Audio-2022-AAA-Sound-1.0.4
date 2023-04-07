@@ -4,9 +4,10 @@ using NaughtyAttributes;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AddTileButton : MonoBehaviour
+public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Card card;
     public GameObject highlight;
@@ -40,7 +41,15 @@ public class AddTileButton : MonoBehaviour
     {
         DeckManager.Instance.AddToDeck(tileName);
     }
-    
-    
 
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        card.tooltipParent.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        card.tooltipParent.SetActive(false);
+    }
 }
