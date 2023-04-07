@@ -68,6 +68,7 @@ namespace Scripts
         //Uses copies of the gridLine prefab to draw a grid.
         private void DrawGrid()
         {
+            gridLine.gameObject.layer = LayerMask.NameToLayer("Show On End");
             if (gridLines == null)
             {
                 gridLines = new List<GameObject>();
@@ -227,6 +228,7 @@ namespace Scripts
             DestroyTile(gridPos);
             tile.xPos = gridPos.x;
             tile.yPos = gridPos.y;
+            tile.TileObject.layer = LayerMask.NameToLayer("Show On End");
             tile.TileObject.transform.position = GridToWorldPos(gridPos);
             if (grid.InRange(gridPos.x, gridPos.y)){
                 tile.TileScore = grid[gridPos.x, gridPos.y].TileScore;
