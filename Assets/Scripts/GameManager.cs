@@ -27,7 +27,7 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private Image ProgressBarShadow;
     [Foldout("UI")]
-    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter;
+    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, nextRound, progressCounter;
     [Foldout("UI")]
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen, deckScreen, tempBlocker;
     [Foldout("UI")]
@@ -116,8 +116,7 @@ public class GameManager : Singleton<GameManager>
     {
         NewBoard();
         InitializeDeck();
-        TutorialMode = TutorialParent.activeSelf;
-        if(!TutorialMode)
+        if(!TutorialParent.activeSelf)
         {
             BlockSpawner.Instance.GenerateBlock();
             BlockSpawner.Instance.GenerateMaw();
@@ -221,9 +220,8 @@ public class GameManager : Singleton<GameManager>
     public void Win()
     {
         winScreen.SetActive(true);
-        winFinalScore.text = "Final Score: " + score + "/" + winningScore;
-        winTurnCounter.text = "With " + turns + " turns to spare";
         winningScore += winningScoreIncrement;
+        nextRound.text = "Next Round build a city worth " + winningScore + " points";
         upgradeIncrement = winningScore / 2;
         rules.Clear();
     }
