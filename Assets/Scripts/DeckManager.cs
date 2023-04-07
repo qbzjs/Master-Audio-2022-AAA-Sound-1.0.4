@@ -6,16 +6,24 @@ using Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using NaughtyAttributes;
+using RotaryHeart.Lib.SerializableDictionary;
+using Unity.VisualScripting;
 
 public class DeckManager : Singleton<DeckManager>
 {
 
-     [SerializeField] private FullTilePool tilePool;
+    [SerializeField] private FullTilePool tilePool;
     [SerializeField] public GameObject DiscardButton, DrawButton, DeckButton;
     [SerializeField] private TextMeshProUGUI DiscardText, DrawText;
     [SerializeField] private Card template;
     [SerializeField] private GameObject deckParent;
     [SerializeField] public RectTransform topRightBoundary;
+
+    [Foldout("Tooltip")]
+    [SerializeField] public SerializableDictionaryBase<string, string> Keywords;
+    [Foldout("Tooltip")]
+    [SerializeField] public GameObject tooltipPrefab;
 
     private List<string> discard = new(), deck = new(), drawPile = new();
     
@@ -202,14 +210,14 @@ public class DeckManager : Singleton<DeckManager>
     public void CreateCardToolTips(Card card)
     {
         string description = card.descriptionText.text;
-        List<string> keys = new List<string>(GameManager.Instance.Keywords.Keys);
+        List<string> keys = new List<string>(Keywords.Keys);
         foreach(string key in keys)
         {
             if (description.Contains(key))
             {
-                GameObject newOb = Instantiate(GameManager.Instance.tooltipPrefab, card.tooltipParent.transform);
+                GameObject newOb = Instantiate(tooltipPrefab, card.tooltipParent.transform);
                 TextMeshProUGUI newTextMesh = newOb.GetComponentInChildren<TextMeshProUGUI>();
-                newTextMesh.text = key + ": " + GameManager.Instance.Keywords[key];
+                newTextMesh.text = key + ": " + Keywords[key];
                 card.toolTips.Add(newOb);
             }
         }

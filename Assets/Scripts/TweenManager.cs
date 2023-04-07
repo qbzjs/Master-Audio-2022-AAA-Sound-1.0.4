@@ -273,8 +273,8 @@ public class TweenManager : Singleton<TweenManager>
             });
     }
 
-    public void ToolTipHelper(Transform location)
-    {
-
+    public void Reveal(GameObject obj)
+    {;
+        Instantiate(cardParticles, obj.transform.position, Quaternion.identity);
     }
 }

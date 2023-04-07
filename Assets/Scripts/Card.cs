@@ -60,6 +60,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 Destroy(tooltip.gameObject);
             }
             toolTips.Clear();
+            foreach (var cardRef in cardRefs)
+            {
+                Destroy(cardRef.gameObject);
+            }
+            cardRefs.Clear();
         }
         Score body = tile.CalculateScore();
     
@@ -94,6 +99,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         tooltipParent.SetActive(true);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipParent.transform.GetComponent<RectTransform>());
         foreach(var card in cardRefs)
         {
             card.SetActive(true);
