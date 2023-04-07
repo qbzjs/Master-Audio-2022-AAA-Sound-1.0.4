@@ -43,11 +43,5 @@ public class BlockSpawner : Singleton<BlockSpawner>
         NewBlock.AddComponent<Block>();
         NewBlock.GetComponent<Block>().GenerateMaw(NewBlock.transform);
     }
-    
-    void Start()
-    {
-        GenerateBlock();
-        GenerateMaw();
-    }
 
 }

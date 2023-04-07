@@ -6,6 +6,7 @@ using NaughtyAttributes;
 using Scripts;
 using TMPro;
 using UnityEngine;
+ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class TweenManager : Singleton<TweenManager>
@@ -204,7 +205,6 @@ public class TweenManager : Singleton<TweenManager>
     }
     public void MoveCard(Transform startPos, Transform endPos, int size)
     {
-
         List<GameObject> cards = new();
         for (int i = 0; i < size; i++){
             GameObject card = Instantiate(cardBack, startPos);
@@ -214,11 +214,7 @@ public class TweenManager : Singleton<TweenManager>
         for (int i = 0; i < size; i++){
             float f = 1 - (i * 0.3f);
             LeanTween.move(cards[i], endPos, 0.6f).setEaseInCirc().setDelay(f);
-        }   
-        for (int i = 0; i < size; i++){
-            Destroy(cards[i], 2);
-        }
-
+        } 
     }
 
     public void DestroyEffect(Vector2Int location, Action CB)
@@ -275,5 +271,10 @@ public class TweenManager : Singleton<TweenManager>
                 CB.Invoke();
                 Destroy(newOb, 0.3f);
             });
+    }
+
+    public void Reveal(GameObject obj)
+    {
+        Instantiate(cardParticles, obj.transform.position, Quaternion.identity);
     }
 }

@@ -9,7 +9,7 @@ public class Graveyard : Wasteland
     public int adjacentDestroyed = 0;
     public override string GetDescription()
     {
-        return "+2 when an adjacent tile is destroyed";
+        return "<b><color=\"red\">+2</color></b> when an <b>Adjacent</b> tile is <b>Destroyed</b>.";
     }
 
     public override Tag[] GetTags()

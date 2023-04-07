@@ -9,7 +9,7 @@ public class Legion : Creature
 
     public override string GetDescription()
     {
-        return $"Placed - A random adjacent tile BECOMES LEGION";
+        return $"A random <b>Adjacent</b> tile BECOMES LEGION";
     }
     
     public Legion(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

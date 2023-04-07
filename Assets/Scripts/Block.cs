@@ -110,16 +110,21 @@ public class Block : MonoBehaviour, IDragParent
         if (clicked == true)
         {
             FollowMousePos();
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.E))
             {
                 Rotate(-90);
+            }
+            else if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Rotate(90);
             }
             if(Input.GetMouseButtonDown(0) && GameManager.Instance.dragging)
             {
                 OnMouseDown();
                 OnMouseUp();
             }
-            else{
+            else
+            {
                 GameManager.Instance.dragging = true;
             }
         }

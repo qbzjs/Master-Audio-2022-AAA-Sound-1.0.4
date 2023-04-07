@@ -118,6 +118,7 @@ namespace Scripts
 
         public void PlaceBlock(Block block)
         {
+            GameManager.Instance.dragging = false;
             TweenManager.Instance.PlaceBlock(block.gameObject, delegate
             {
                 foreach (ITile tile in block.Tiles)

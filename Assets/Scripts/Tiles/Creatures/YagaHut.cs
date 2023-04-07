@@ -8,7 +8,7 @@ public class YagaHut : Creature
     [SerializeField] new protected int scoreWorth = 3;
     public override string GetDescription()
     {
-        return scoreWorth + " pts";
+        return " ";
     }
 
     public override Tag[] GetTags()

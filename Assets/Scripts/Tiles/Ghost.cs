@@ -14,7 +14,7 @@ public class Ghost : Wasteland
     
     public override string GetDescription()
     {
-        return scoreWorth + " pts";
+        return " ";
     }
     public Ghost(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {

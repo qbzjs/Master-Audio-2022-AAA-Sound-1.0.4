@@ -10,7 +10,6 @@ public class Tooltip : MonoBehaviour
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
-    [SerializeField] private RectTransform topRightBoundary;
 
     public Card card;
     
@@ -20,14 +19,11 @@ public class Tooltip : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    private void Update()
+    private void Start()
     {
-        Vector3 temp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        temp.z = 0;
-        transform.position = temp;
 
         Vector2 topRightCorner = rectTransform.GetCorners().topRight;
-        Vector2 topRightBoundaryPoint = topRightBoundary.GetCorners().topRight;
+        Vector2 topRightBoundaryPoint = DeckManager.Instance.topRightBoundary.GetCorners().topRight;
         Vector3 worldPosition = rectTransform.TransformPoint(rectTransform.rect.position);
         
         if (topRightCorner.x > topRightBoundaryPoint.x)
@@ -39,7 +35,7 @@ public class Tooltip : MonoBehaviour
             worldPosition.y += topRightBoundaryPoint.y - topRightCorner.y;
         }
 
-        transform.position = worldPosition;
+        transform.position = worldPosition; 
     }
     
     /// <summary>
@@ -51,6 +47,8 @@ public class Tooltip : MonoBehaviour
     {
         canvasGroup.alpha = 1;
         card.CreateCardExistingTile(tile);
+        DeckManager.Instance.CreateCardToolTips(card);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
     }
 
     /// <summary>

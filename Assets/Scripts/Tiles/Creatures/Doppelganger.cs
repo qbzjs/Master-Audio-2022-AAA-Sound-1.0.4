@@ -9,7 +9,7 @@ public class Doppelganger : Creature
 
     public override string GetDescription()
     {
-        return $"Placed - Copies a random adjacent tile";
+        return $"<b>Spawn</b> a copy of a random <b>Adjacent</b> tile";
     }
     
     public Doppelganger(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
