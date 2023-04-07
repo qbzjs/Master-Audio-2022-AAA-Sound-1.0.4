@@ -26,7 +26,7 @@ public class TweenManager : Singleton<TweenManager>
     public Transform cardStart, cardStop, cardMiddle1, cardMiddle2;
     public float cardRandomness;
 
-    [SerializeField, BoxGroup("waiting")] private float waitTime = 0.2f, waitRandomNoise = 0.05f;
+    [SerializeField, BoxGroup("waiting")] private float waitTime = 0.2f, waitTimeMultiplier;
     
     [SerializeField, BoxGroup("tileEffects")] private GameObject destroyEffectPrefab, createEffectPrefab, transformEffectPrefab;
     [SerializeField, BoxGroup("tileEffects")] private float bigSize, smallSize, effectTweenTime;
@@ -37,9 +37,12 @@ public class TweenManager : Singleton<TweenManager>
     private GameObject mainCanvas;
 
     private Queue<Action> tweenQueue = new();
+    private int consecutiveActions = 0;
+    private float adjustedWaitTime;
 
     private void Awake()
     {
+        adjustedWaitTime = waitTime;
         mainCanvas = FindObjectOfType<Canvas>().gameObject;
         StartCoroutine(CheckNextRecursive());
     }
@@ -54,11 +57,18 @@ public class TweenManager : Singleton<TweenManager>
 
     private IEnumerator CheckNextRecursive()
     {
-        yield return new WaitForSeconds(waitTime + Random.Range(-waitRandomNoise, waitRandomNoise));
+        yield return new WaitForSeconds(adjustedWaitTime);
         Action toInvoke;
         if (tweenQueue.TryDequeue(out toInvoke))
         {
             toInvoke.Invoke();
+            consecutiveActions++;
+            adjustedWaitTime *= waitTimeMultiplier;
+        }
+        else
+        {
+            adjustedWaitTime = waitTime;
+            consecutiveActions = 0;
         }
 
         StartCoroutine(CheckNextRecursive());

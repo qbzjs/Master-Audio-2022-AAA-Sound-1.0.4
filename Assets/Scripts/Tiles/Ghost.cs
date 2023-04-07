@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ghost : Wasteland
 {
-    [SerializeField] new protected int scoreWorth = 5;
+    [SerializeField] new protected int scoreWorth = 4;
 
     public override Tag[] GetTags()
     {
