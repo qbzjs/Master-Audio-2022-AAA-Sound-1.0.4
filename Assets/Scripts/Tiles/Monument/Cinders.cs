@@ -37,7 +37,7 @@ public class Cinders : Wasteland
 
     public override string GetDescription()
     {
-        return $"If <b>Adjacent</b> to <b><color=\"red\">4</color></b>  #fire becomes <link><b>CinderDemon</b></link>";
+        return $"If <b>Adjacent</b> to <b><color=\"red\">4</color></b>  #fire becomes <b><link>CinderDemon</link></b>";
     }
     
     
