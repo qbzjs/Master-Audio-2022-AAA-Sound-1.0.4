@@ -5805,6 +5805,7 @@ MonoBehaviour:
   winningScoreIncrement: 25
   SetOffInEditor:
   - {fileID: 323516238}
+  - {fileID: 559130375}
   dragging: 0
 --- !u!114 &401999804
 MonoBehaviour:
@@ -11697,7 +11698,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24, y: 0.06}
   m_AnchorMax: {x: 0.75, y: 0.43}
-  m_AnchoredPosition: {x: -538.50006, y: -142.00037}
+  m_AnchoredPosition: {x: -538.5001, y: -142.00037}
   m_SizeDelta: {x: -234.99, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708671904
