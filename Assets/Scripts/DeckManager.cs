@@ -157,6 +157,21 @@ public class DeckManager : Singleton<DeckManager>
         }
     }
 
+    public Dictionary<string, int> GetDeckList()
+    {
+        Dictionary<string, int> newDeck = new Dictionary<string, int>();
+        foreach(var cardName in deck)
+        {
+            if(!newDeck.ContainsKey(cardName))
+            {  
+                newDeck.Add(cardName, 0);
+            }
+            newDeck[cardName]++;
+        }
+
+        return newDeck;
+    }
+
     private Card createCardFromTile(string name, Transform parent)
     {
         Card newCard = Instantiate(template, parent.transform);
