@@ -17,7 +17,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public List<GameObject> TutorialScreens;
     [Foldout("Tutorial")]
     [SerializeField] public GameObject TutorialParent;
-    private bool TutorialMode;
+    public bool TutorialMode {get; set;}
     private int tutorialIndex;
 
     [SerializeField] public Tooltip Tooltip;
