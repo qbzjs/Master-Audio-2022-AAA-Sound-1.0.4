@@ -274,7 +274,7 @@ public class TweenManager : Singleton<TweenManager>
     }
 
     public void Reveal(GameObject obj)
-    {;
+    {
         Instantiate(cardParticles, obj.transform.position, Quaternion.identity);
     }
 }
