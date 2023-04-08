@@ -45,6 +45,8 @@ public class GameManager : Singleton<GameManager>
 
     public bool dragging;
 
+    public int Round => totalRounds - roundsLeft;
+
     public int Score
     {
         get => score;

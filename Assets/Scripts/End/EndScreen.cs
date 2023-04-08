@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class EndScreen : MonoBehaviour
 {
-    [SerializeField] private GameObject deckListParent, deckLabel, points, summaryLabel, playAgain, feedback;
-    [SerializeField] private TextMeshProUGUI deckItem, pointValue, title;
+    [SerializeField] private GameObject deckListParent, deckLabel, points, summaryLabel, playAgain, feedback, round;
+    [SerializeField] private TextMeshProUGUI deckItem, pointValue, title, roundValue;
 
     [SerializeField] private float shortWait, longWait;
         
@@ -50,12 +50,25 @@ public class EndScreen : MonoBehaviour
         summaryLabel.SetActive(false);
         playAgain.SetActive(false);
         feedback.SetActive(false);
+        round.SetActive(false);
         deckListParent.transform.DestroyAllChildren();
         
         title.text = won ? "You Won!" : "You have failed.";
         yield return new WaitForSeconds(longWait);
         MasterAudio.PlaySound("Click");
         summaryLabel.SetActive(true);
+        
+        yield return new WaitForSeconds(longWait);
+        MasterAudio.PlaySound("Click");
+        round.SetActive(true);
+        if (won)
+        {
+            roundValue.text = "!!!";
+        }
+        else
+        {
+            roundValue.text = (GameManager.Instance.Round + 1).ToString();
+        }
         
         yield return new WaitForSeconds(longWait);
         MasterAudio.PlaySound("Click");
