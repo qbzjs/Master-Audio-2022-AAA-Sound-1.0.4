@@ -27,15 +27,16 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private Image ProgressBarShadow;
     [Foldout("UI")]
-    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, nextRound, progressCounter;
+    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, nextRound, roundsLeftText, progressCounter;
     [Foldout("UI")]
-    [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen, deckScreen, tempBlocker;
+    [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen, deckScreen, tempBlocker, endScreen;
     [Foldout("UI")]
     [SerializeField] private FullTilePool tilePool;
 
 
-    [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
-
+    [SerializeField, BoxGroup("Difficulty Parameters")]
+    private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement, totalRounds;
+    private int roundsLeft;
     private int score;
 
     private List<Rule> rules = new List<Rule>();
@@ -103,6 +104,7 @@ public class GameManager : Singleton<GameManager>
     public void Awake()
     {
         upgradeIncrement = winningScore / 2;
+        roundsLeft = totalRounds;
         #if UNITY_EDITOR
         foreach (var GO in SetOffInEditor)
         {
@@ -219,17 +221,37 @@ public class GameManager : Singleton<GameManager>
 
     public void Win()
     {
+        roundsLeft--;
+        if (roundsLeft <= 0)
+        {
+            endScreen.SetActive(true);
+            endScreen.GetComponent<EndScreen>().Won();
+            return;
+        }
         winScreen.SetActive(true);
         winningScore += winningScoreIncrement;
-        nextRound.text = "Next Round build a city worth " + winningScore + " points";
-        upgradeIncrement = winningScore / 2;
+
+        if (roundsLeft == 1)
+        {
+            nextRound.text = $"Build me one last city worth {winningScore} points";
+        }
+        else
+        {
+            roundsLeftText.text = $"Well Done, But you have {roundsLeft} rounds remaining";
+            nextRound.text = "Next Round, build me a city worth " + winningScore + " points";
+        }
+        
+       
+        upgradeIncrement = winningScore / 3;
         rules.Clear();
     }
 
     public void Lose()
     {
-        loseScreen.SetActive(true);
-        loseFinalScore.text = "Final Score: " + score + "/" + winningScore;
+        endScreen.SetActive(true);
+        endScreen.GetComponent<EndScreen>().Lose();
+        /*loseScreen.SetActive(true);
+        loseFinalScore.text = "Final Score: " + score + "/" + winningScore;*/
         rules.Clear();
     }
 

@@ -23,6 +23,13 @@ public class EndScreen : MonoBehaviour
     {
         
     }
+    
+    [Button()]
+    public void Lose()
+    {
+        StartCoroutine(Ending(false));
+    }
+
 
     [Button()]
     public void Won()

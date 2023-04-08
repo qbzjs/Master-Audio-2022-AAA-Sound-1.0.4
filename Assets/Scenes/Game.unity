@@ -5791,6 +5791,7 @@ MonoBehaviour:
   turnCounter: {fileID: 1741551681}
   loseFinalScore: {fileID: 914472384}
   nextRound: {fileID: 685443256}
+  roundsLeftText: {fileID: 1527290182}
   progressCounter: {fileID: 183517444}
   winButton: {fileID: 1986029110}
   winScreen: {fileID: 430809457}
@@ -5798,11 +5799,13 @@ MonoBehaviour:
   upgradeScreen: {fileID: 323516238}
   deckScreen: {fileID: 373795312}
   tempBlocker: {fileID: 1221950031}
+  endScreen: {fileID: 725703294}
   tilePool: {fileID: 11400000, guid: ca939c862f8cd27479519208f78516d4, type: 2}
   winningScore: 80
   upgradeIncrement: 10
   totalTurns: 20
   winningScoreIncrement: 25
+  totalRounds: 6
   SetOffInEditor:
   - {fileID: 323516238}
   - {fileID: 895698015}
@@ -13508,7 +13511,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -17797,6 +17800,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17a78500d52ed6c4cb9d4030cb947cb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1527290182 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3542531518343873764, guid: f824aceb6456547f5a4bf56384bcb531, type: 3}
+  m_PrefabInstance: {fileID: 3542531518829397577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1529627758
@@ -26098,31 +26112,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7914897168786668401, guid: 3392a8419287c7f4eb6a599ecfaad8e0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7914897169473834103, guid: 3392a8419287c7f4eb6a599ecfaad8e0, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7914897169473834103, guid: 3392a8419287c7f4eb6a599ecfaad8e0, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7914897169473834103, guid: 3392a8419287c7f4eb6a599ecfaad8e0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7914897169473834103, guid: 3392a8419287c7f4eb6a599ecfaad8e0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7914897169473834103, guid: 3392a8419287c7f4eb6a599ecfaad8e0, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 115
       objectReference: {fileID: 0}
     - target: {fileID: 7914897169473834103, guid: 3392a8419287c7f4eb6a599ecfaad8e0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 8972825818244760707, guid: 3392a8419287c7f4eb6a599ecfaad8e0, type: 3}
       propertyPath: m_AnchorMax.y

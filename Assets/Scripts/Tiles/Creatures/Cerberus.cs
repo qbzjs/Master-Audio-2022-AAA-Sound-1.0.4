@@ -7,7 +7,7 @@ public class Cerberus : Monster
 {
     [SerializeField] protected int packSize = 3;
 
-    private int bigScore = 10, smallScore = 0;
+    private int bigScore = 8, smallScore = 0;
     private bool called = false;
 
     public override Tag[] GetTags()
@@ -17,7 +17,7 @@ public class Cerberus : Monster
 
     public override string GetDescription()
     {
-        return "Worth <b><color=\"red\">10</color></b> in a <b>Pack</b> of <b><color=\"red\">3</color></b>.";
+        return "Worth <b><color=\"red\">8</color></b> in a <b>Pack</b> of <b><color=\"red\">3</color></b>.";
     }
     public Cerberus(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
