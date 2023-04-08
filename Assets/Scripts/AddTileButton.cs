@@ -46,10 +46,19 @@ public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerEnter(PointerEventData eventData)
     {
         card.tooltipParent.SetActive(true);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
+        foreach(var card in card.cardRefs)
+        {
+            card.SetActive(true);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         card.tooltipParent.SetActive(false);
+        foreach(var card in card.cardRefs)
+        {
+            card.SetActive(false);
+        }
     }
 }
