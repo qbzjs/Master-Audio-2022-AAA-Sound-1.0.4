@@ -48,6 +48,10 @@ public class Tooltip : MonoBehaviour
         canvasGroup.alpha = 1;
         card.CreateCardExistingTile(tile);
         DeckManager.Instance.CreateCardToolTips(card);
+        if(card.cardRef)
+        {
+            card.cardRef.SetActive(true);
+        }
         LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
     }
 

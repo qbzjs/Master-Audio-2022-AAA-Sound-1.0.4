@@ -33,8 +33,8 @@ public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         tileName = myTileName;
         border.color = newColor;
         card.CreateCardNewTile(myTileName);
-        card.GetComponent<Image>().raycastTarget=true;
         DeckManager.Instance.CreateCardToolTips(card);
+        card.GetComponent<Image>().raycastTarget=true;
     }
 
     public void AddMyTile()
@@ -46,19 +46,20 @@ public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerEnter(PointerEventData eventData)
     {
         card.tooltipParent.SetActive(true);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
-        foreach(var card in card.cardRefs)
+        DeckManager.Instance.CreateCardToolTip(card);
+        if (card.cardRef)
         {
-            card.SetActive(true);
+            card.cardRef.SetActive(true);
         }
+          LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         card.tooltipParent.SetActive(false);
-        foreach(var card in card.cardRefs)
+        if (card.cardRef)
         {
-            card.SetActive(false);
+            card.cardRef.SetActive(false);
         }
     }
 }
