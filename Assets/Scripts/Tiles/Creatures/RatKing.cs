@@ -15,7 +15,12 @@ public class RatKing : Rat
     
     public RatKing(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-        
+
+    }
+
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Animal };
     }
 
     protected override Score CalculateBaseScore()

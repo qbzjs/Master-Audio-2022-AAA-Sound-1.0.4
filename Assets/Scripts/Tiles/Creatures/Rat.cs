@@ -11,7 +11,12 @@ public class Rat : Animal
     {
         return $"{scoreWorth}pts - Any Empty tile adjacent to 2 or more rats becomes a rat.";
     }
-    
+
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Animal };
+    }
+
     public static Rule PropagateRats = new Rule("Propagate Rats", 10, () =>
     {
         bool checkAgain = true;

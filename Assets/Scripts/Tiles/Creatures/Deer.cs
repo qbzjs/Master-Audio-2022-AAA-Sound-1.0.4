@@ -13,6 +13,11 @@ public class Deer : Animal
         return $"{scoreWorth}pts - Just a normal \"Deer\", moves to a new empty tile every turn if able";
     }
 
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Darkness, Tag.Animal };
+    }
+
     public static Rule MoveDeer = new Rule("Move Deer", 10, () =>
     {
         int deerCount = 0;
