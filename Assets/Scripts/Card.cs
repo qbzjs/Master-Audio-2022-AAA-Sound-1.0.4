@@ -4,13 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Scripts;
+using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private string cardName, cardDescription, cardPoints, cardTags;
-    [SerializeField] private TextMeshProUGUI titleText, descriptionText, tagsText, scoreText;
+    [SerializeField] public TextMeshProUGUI titleText, descriptionText, tagsText, scoreText;
     [SerializeField] public Image cardArt; 
-
+    [SerializeField] public GameObject tooltipParent;
+    public List<GameObject> toolTips;
+    public List<GameObject> cardRefs;
+ 
     public string CardName
     {
         get => cardName;
@@ -49,16 +53,25 @@ public class Card : MonoBehaviour
     }
     public void CreateCardExistingTile(ITile tile)
     {
+        if (toolTips!= null)
+        {
+            foreach (var tooltip in toolTips)
+            {
+                Destroy(tooltip.gameObject);
+            }
+            toolTips.Clear();
+            foreach (var cardRef in cardRefs)
+            {
+                Destroy(cardRef.gameObject);
+            }
+            cardRefs.Clear();
+        }
         Score body = tile.CalculateScore();
     
         CardName = tile.GetType().FullName;
 
         string description = tile.GetDescription();
-        //description += "<br><br>";
-        //description += "Score: ";
-        //description += body.explanation;
-        //description += $" = {body.score}";
-        CardDescription = description;
+        descriptionText.text = description;
 
         CardPoints = body.score.ToString();
 
@@ -83,4 +96,23 @@ public class Card : MonoBehaviour
         CreateCardExistingTile(tile);
         
     }
+    public void OnPointerEnter(PointerEventData pointerEventData)
+    {
+        tooltipParent.SetActive(true);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipParent.transform.GetComponent<RectTransform>());
+        foreach(var card in cardRefs)
+        {
+            card.SetActive(true);
+        }
+    }
+    
+    public void OnPointerExit(PointerEventData pointerEventData)
+    {
+        tooltipParent.SetActive(false);
+        foreach(var card in cardRefs)
+        {
+            card.SetActive(false);
+        }
+    }  
+
 }

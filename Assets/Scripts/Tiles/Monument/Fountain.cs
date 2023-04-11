@@ -10,7 +10,7 @@ public class Fountain : Monument
 
     public override string GetDescription()
     {
-        return "x2 each adjacent tile";
+        return "<b><color=\"red\">x2</color></b> the score of each <b>Adjacent</b> tile";
     }
 
     public override Tag[] GetTags()
@@ -37,8 +37,10 @@ public class Fountain : Monument
                     ITile bloodyTile = GridManager.Instance.GetTile(x + subdirection.x, y + subdirection.y);
                     if (bloodyTile.TileObject != null)
                     {
-                        
-                        ParticleManager.Instance.InstantiateBloodParticles(bloodyTile.TileObject.transform);
+                        if (!bloodyTile.HasEffect(BloodMultiplier))
+                        {
+                            ParticleManager.Instance.InstantiateBloodParticles(bloodyTile.TileObject.transform);
+                        }
                         bloodyTile.AddEffect(BloodMultiplier);
                     }
                 }
@@ -57,7 +59,13 @@ public class Fountain : Monument
     }
     
     public Fountain(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
-    {
+    { 
+        BloodMultiplier = new Effect(
+            "Blood multiplier", 20, 1, 1, (value) =>
+            {
+                return new Score(value.score * 2, value.explanation + " * 2");
+            }
+        );
         GameManager.Instance.AddRule(SetBloodMultiplier);
         ParticleManager.Instance.InstantiateBloodGlow(TileObject.transform);
     }

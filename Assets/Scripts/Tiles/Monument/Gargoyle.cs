@@ -14,7 +14,7 @@ public class Gargoyle : Monument
 
     public override string GetDescription()
     {
-        return scoreWorth + " points";
+        return " ";
     }
     
     public Gargoyle(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

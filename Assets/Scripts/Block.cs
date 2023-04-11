@@ -110,16 +110,21 @@ public class Block : MonoBehaviour, IDragParent
         if (clicked == true)
         {
             FollowMousePos();
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.E))
             {
                 Rotate(-90);
+            }
+            else if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Rotate(90);
             }
             if(Input.GetMouseButtonDown(0) && GameManager.Instance.dragging)
             {
                 OnMouseDown();
                 OnMouseUp();
             }
-            else{
+            else
+            {
                 GameManager.Instance.dragging = true;
             }
         }
@@ -160,12 +165,6 @@ public class Block : MonoBehaviour, IDragParent
     {
         bool onGrid = true;
 
-        foreach(ITile tile in Tiles)
-        {
-            tile.TileObject.GetComponent<SpriteRenderer>().color = new Color(0.71f, 1f, 0.72f);
-            tile.TileObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
-        }
-
         Vector3 mousePos = GetMousePos();
         this.gameObject.transform.position = mousePos;
             
@@ -186,7 +185,44 @@ public class Block : MonoBehaviour, IDragParent
         {
             transform.position = dragOffset + GetMousePos();
         }
+        
+        foreach(ITile tile in Tiles)
+        {
+            tile.TileObject.GetComponent<SpriteRenderer>().color = PlaceIndicatorColor(onGrid);
+            tile.TileObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        }
+        
         prevPosition = GridManager.Instance.WorldToGridPos(transform.position);
+    }
+
+    private Color PlaceIndicatorColor(bool onBoard)
+    {
+        
+        Color offBoard = Color.white;
+        Color valid = new Color(0.71f, 1f, 0.72f);
+        Color invalid = new Color(1f, 0.56f, 0.58f);
+
+        if (!onBoard)
+        {
+            return offBoard;
+        }
+
+        if (isMaw)
+        {
+            return valid;
+        }
+        
+        bool allValid = true;
+        foreach (ITile tile in Tiles)
+        {
+            Vector2Int location = GridManager.Instance.WorldToGridPos(tile.Position());
+            if (GridManager.Instance.GetTile(location.x, location.y).GetType().ToString() != "Wasteland")
+            {
+                return invalid;
+            }
+        }
+
+        return valid;
     }
 
     public void OnMouseUp()

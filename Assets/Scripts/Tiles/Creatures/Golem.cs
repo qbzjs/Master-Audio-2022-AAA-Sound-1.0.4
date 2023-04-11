@@ -14,8 +14,7 @@ public class Golem : Creature
     
     public override string GetDescription()
     {
-        return $"{scoreWorth}pts - When Placed: Gains Tags of all adjacent Tiles" +
-               $"<br>+1 for each tag";
+        return $"Gains tags of all <b>Adjacent</b> tiles, <b><color=\"red\">+1</color></b> for each tag";
     }
     
     public override Tag[] GetTags()

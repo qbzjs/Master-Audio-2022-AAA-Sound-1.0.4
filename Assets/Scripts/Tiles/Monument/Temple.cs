@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Temple : Monument
 {
-    [SerializeField] protected int scoreWorth = 6;
+    [SerializeField] protected int scoreWorth = 2;
     [SerializeField] protected int ghostsAbsorbed = 0;
 
     public Temple(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
@@ -20,7 +20,7 @@ public class Temple : Monument
 
     public override string GetDescription()
     {
-        return "The haunted temple! Absorbs all ghosts and their points";
+        return "<b>Absorbs</b> all <b><link>Ghost</link>s</b>";
     }
 
     public override void WhenPlaced()

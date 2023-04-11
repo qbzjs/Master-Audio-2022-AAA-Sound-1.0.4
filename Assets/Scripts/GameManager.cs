@@ -15,22 +15,24 @@ public class GameManager : Singleton<GameManager>
 {
     [Foldout("Tutorial")]
     [SerializeField] public List<GameObject> TutorialScreens;
+    [Foldout("Tutorial")]
+    [SerializeField] public GameObject TutorialParent;
+    public bool TutorialMode {get; set;}
     private int tutorialIndex;
 
+    [SerializeField] public Tooltip Tooltip;
 
     [Foldout("UI")]
     [SerializeField] private Image progressBar;
     [Foldout("UI")]
     [SerializeField] private Image ProgressBarShadow;
     [Foldout("UI")]
-    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, winFinalScore, winTurnCounter, progressCounter;
+    [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, nextRound, progressCounter;
     [Foldout("UI")]
     [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen, deckScreen, tempBlocker;
     [Foldout("UI")]
-    [SerializeField] public Tooltip tooltip;
-    [Foldout("UI")]
-   // [SerializeField] public ScoreTip scoretip;
     [SerializeField] private FullTilePool tilePool;
+
 
     [SerializeField, BoxGroup("Difficulty Parameters")] private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement;
 
@@ -98,18 +100,6 @@ public class GameManager : Singleton<GameManager>
         } 
     }
 
-    private bool tutorialMode;
-
-    public bool TutorialMode
-    {
-        get =>  tutorialMode;
-        set
-        {
-            tutorialMode = value;
-        }
-    } 
-
-
     public void Awake()
     {
         upgradeIncrement = winningScore / 2;
@@ -126,6 +116,11 @@ public class GameManager : Singleton<GameManager>
     {
         NewBoard();
         InitializeDeck();
+        if(!TutorialParent.activeSelf)
+        {
+            BlockSpawner.Instance.GenerateBlock();
+            BlockSpawner.Instance.GenerateMaw();
+        }
     }
 
     public void NewBoard()
@@ -196,7 +191,7 @@ public class GameManager : Singleton<GameManager>
         }
         UpdateScore();
         DecrementTurns();
-        if(TutorialMode)
+        if(TutorialMode && tutorialIndex < TutorialScreens.Count)
         {
             CanvasGroup canvas = TutorialScreens[tutorialIndex].AddComponent<CanvasGroup>();
             canvas.alpha = 0f;
@@ -225,16 +220,17 @@ public class GameManager : Singleton<GameManager>
     public void Win()
     {
         winScreen.SetActive(true);
-        winFinalScore.text = "Final Score: " + score + "/" + winningScore;
-        winTurnCounter.text = "With " + turns + " turns to spare";
         winningScore += winningScoreIncrement;
+        nextRound.text = "Next Round build a city worth " + winningScore + " points";
         upgradeIncrement = winningScore / 2;
+        rules.Clear();
     }
 
     public void Lose()
     {
         loseScreen.SetActive(true);
         loseFinalScore.text = "Final Score: " + score + "/" + winningScore;
+        rules.Clear();
     }
 
     public void Reset()

@@ -118,6 +118,7 @@ namespace Scripts
 
         public void PlaceBlock(Block block)
         {
+            GameManager.Instance.dragging = false;
             TweenManager.Instance.PlaceBlock(block.gameObject, delegate
             {
                 foreach (ITile tile in block.Tiles)
@@ -149,7 +150,7 @@ namespace Scripts
                             return;
                         } 
                     }
-                    if (grid[gridPos.x, gridPos.y].GetType().Name != "Wasteland")
+                    if (grid[gridPos.x, gridPos.y].GetType().Name != "Wasteland" && !block.isMaw)
                     {
                         Vector3 finalPos = block.isMaw ? BlockSpawner.Instance.mawSpawner.position : 
                                                          BlockSpawner.Instance.transform.position  ;
@@ -164,6 +165,12 @@ namespace Scripts
                 } 
                 foreach (ITile tile in block.Tiles)
                 {
+                    if (block.isMaw)
+                    {
+                        MasterAudio.PlaySound("BITE");
+                        TweenManager.Instance.Callout("Maw Devours!", tile.Position());
+                        GameManager.Instance.DestroyTile(WorldToGridPos(tile.TileObject.transform.position));
+                    }
                     PlaceTile(tile, WorldToGridPos(tile.TileObject.transform.position));
                     if(!block.isMaw) 
                     {

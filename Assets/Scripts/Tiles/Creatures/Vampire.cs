@@ -12,7 +12,7 @@ public class Vampire : Monster
 
     public override string GetDescription()
     {
-        return "2pts - In a pack of 5, blood rivers become x3";
+        return "In a <b>Pack</b> of <b><color=\"red\">5</color></b>, all <b><link>BloodRiver</link>s</b> <b><color=\"red\">x3</color></b>";
     }
     
     public override Tag[] GetTags()

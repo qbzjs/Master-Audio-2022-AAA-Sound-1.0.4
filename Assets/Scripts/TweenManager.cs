@@ -6,6 +6,7 @@ using NaughtyAttributes;
 using Scripts;
 using TMPro;
 using UnityEngine;
+ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class TweenManager : Singleton<TweenManager>
@@ -25,7 +26,7 @@ public class TweenManager : Singleton<TweenManager>
     public Transform cardStart, cardStop, cardMiddle1, cardMiddle2;
     public float cardRandomness;
 
-    [SerializeField, BoxGroup("waiting")] private float waitTime = 0.2f, waitRandomNoise = 0.05f;
+    [SerializeField, BoxGroup("waiting")] private float waitTime = 0.2f, waitTimeMultiplier;
     
     [SerializeField, BoxGroup("tileEffects")] private GameObject destroyEffectPrefab, createEffectPrefab, transformEffectPrefab;
     [SerializeField, BoxGroup("tileEffects")] private float bigSize, smallSize, effectTweenTime;
@@ -36,9 +37,12 @@ public class TweenManager : Singleton<TweenManager>
     private GameObject mainCanvas;
 
     private Queue<Action> tweenQueue = new();
+    private int consecutiveActions = 0;
+    private float adjustedWaitTime;
 
     private void Awake()
     {
+        adjustedWaitTime = waitTime;
         mainCanvas = FindObjectOfType<Canvas>().gameObject;
         StartCoroutine(CheckNextRecursive());
     }
@@ -53,11 +57,18 @@ public class TweenManager : Singleton<TweenManager>
 
     private IEnumerator CheckNextRecursive()
     {
-        yield return new WaitForSeconds(waitTime + Random.Range(-waitRandomNoise, waitRandomNoise));
+        yield return new WaitForSeconds(adjustedWaitTime);
         Action toInvoke;
         if (tweenQueue.TryDequeue(out toInvoke))
         {
             toInvoke.Invoke();
+            consecutiveActions++;
+            adjustedWaitTime *= waitTimeMultiplier;
+        }
+        else
+        {
+            adjustedWaitTime = waitTime;
+            consecutiveActions = 0;
         }
 
         StartCoroutine(CheckNextRecursive());
@@ -204,7 +215,6 @@ public class TweenManager : Singleton<TweenManager>
     }
     public void MoveCard(Transform startPos, Transform endPos, int size)
     {
-
         List<GameObject> cards = new();
         for (int i = 0; i < size; i++){
             GameObject card = Instantiate(cardBack, startPos);
@@ -214,11 +224,7 @@ public class TweenManager : Singleton<TweenManager>
         for (int i = 0; i < size; i++){
             float f = 1 - (i * 0.3f);
             LeanTween.move(cards[i], endPos, 0.6f).setEaseInCirc().setDelay(f);
-        }   
-        for (int i = 0; i < size; i++){
-            Destroy(cards[i], 2);
-        }
-
+        } 
     }
 
     public void DestroyEffect(Vector2Int location, Action CB)
@@ -275,5 +281,10 @@ public class TweenManager : Singleton<TweenManager>
                 CB.Invoke();
                 Destroy(newOb, 0.3f);
             });
+    }
+
+    public void Reveal(GameObject obj)
+    {
+        Instantiate(cardParticles, obj.transform.position, Quaternion.identity);
     }
 }

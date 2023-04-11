@@ -37,7 +37,7 @@ public class Cinders : Wasteland
 
     public override string GetDescription()
     {
-        return $"If surrounded by #fire, become Cinder Demon (16 pts)";
+        return $"If <b>Adjacent</b> to <b><color=\"red\">4</color></b>  #fire becomes <b><link>CinderDemon</link></b>";
     }
     
     

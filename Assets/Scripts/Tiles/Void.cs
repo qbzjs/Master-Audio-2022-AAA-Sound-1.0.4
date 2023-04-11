@@ -13,7 +13,7 @@ public class Void : Wasteland
     
     public override string GetDescription()
     {
-        return $"When destroyed - All voids are worth +1, forever (currently {voidsDestroyed})";
+        return $"Score is the number of <b><link>Void</link>s</b> that have been <b>Destroyed</b>";
     }
 
     public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)
