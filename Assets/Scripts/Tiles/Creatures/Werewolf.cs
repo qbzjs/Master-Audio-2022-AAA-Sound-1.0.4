@@ -7,11 +7,11 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Werewolf : Monster
 {
-    private int vampiresKilled = 0;
+    private int monstersKilled = 0;
 
     public override string GetDescription()
     {
-        return "<b>Absorbs</b> <b>Adjacent</b> <b><link>Vampire</link>s</b>. <b>Pack</b> of 5 worth <b><color=\"red\">x2</color></b>.";
+        return "<b>Absorbs</b> <b>Adjacent</b> #Monster. <b>Pack</b> of 5 worth <b><color=\"red\">x2</color></b>.";
     }
 
     public Werewolf(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
@@ -63,28 +63,25 @@ public class Werewolf : Monster
 
     protected override Score CalculateBaseScore()
     {
-        //List<Creature> adjacentVampirePacks = new();
+        List<Creature> adjacentMonsterPacks = new();
         foreach (Vector2Int dir in Directions.Cardinal)
         {
             ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
-            if (tile is Vampire vampire)
+            if (tile is Monster monster && !(tile is Werewolf))
             {
-                vampiresKilled += vampire.CalculateScore().score;
-                GridManager.Instance.KillTile(new Vector2Int(vampire.xPos, vampire.yPos));
-                /*List<Creature> pack = new();
-                pack.Add(vampire);
-                vampire.CountGroupCreatures(vampire.GetType(), pack);
-                adjacentVampirePacks.AddRange(pack);*/
+                List<Creature> pack = new();
+                pack.Add(monster);
+                monster.CountGroupCreatures(monster.GetType(), pack);
+                adjacentMonsterPacks.AddRange(pack);
             }
         }
 
-        /*vampiresKilled += adjacentVampirePacks.Count;
-
-        foreach(Vampire vampire in adjacentVampirePacks)
+        foreach(Monster monster in adjacentMonsterPacks)
         {
-            GridManager.Instance.KillTile(new Vector2Int(vampire.xPos, vampire.yPos));
-        }*/
+            monstersKilled += monster.CalculateScore().score;
+            GridManager.Instance.KillTile(new Vector2Int(monster.xPos, monster.yPos));
+        }
 
-        return new Score(vampiresKilled);
+        return new Score(monstersKilled);
     }
 }

@@ -7,10 +7,10 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Totem : Monument
 {
-    [SerializeField] new protected int scoreWorth = 8;
+    [SerializeField] new protected int scoreWorth = 2;
     public override string GetDescription()
     {
-        return scoreWorth + " pts";
+        return "+2 for each <b>Adjacent</b> #Monster";
     }
 
     public override Tag[] GetTags()
@@ -24,7 +24,16 @@ public class Totem : Monument
     }
     protected override Score CalculateBaseScore()
     {
-        return new Score(scoreWorth);
+        int numMonsters = 0;
+        foreach (Vector2Int dir in Directions.Cardinal)
+        {
+            ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
+            if (tile is Monster monster)
+            {
+                numMonsters++;
+            }
+        }
+        return new Score(scoreWorth * numMonsters);
     }
 
 }
