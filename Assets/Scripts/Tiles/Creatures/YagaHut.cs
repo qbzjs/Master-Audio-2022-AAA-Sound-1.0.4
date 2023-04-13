@@ -13,7 +13,7 @@ public class YagaHut : Creature
 
     public override Tag[] GetTags()
     {
-        return new[] {Tag.Monster, Tag.Chaos};
+        return new[] {Tag.Monster, Tag.Building};
     }
 
     public YagaHut(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

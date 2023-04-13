@@ -14,7 +14,7 @@ public class River : Building
 
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Building };
+        return new[] { Tag.Null};
     }
 
     public override string GetDescription()

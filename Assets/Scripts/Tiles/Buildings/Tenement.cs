@@ -11,7 +11,7 @@ public class Tenement : Building
 
     public override string GetDescription()
     {
-        return "<color=\"red\"><b>+1</b></color> for each <b>Adjacent</b> <b>#Building</b>";
+        return "<color=\"red\"><b>+1</b></color> for each <b>Adjacent</b> #Building";
     }
     
     public Tenement(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
