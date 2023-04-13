@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts;
 using UnityEngine;
 using TMPro;
@@ -10,7 +11,7 @@ public class Tenement : Building
 
     public override string GetDescription()
     {
-        return "<color=\"red\"><b>+1</b></color> for each <b>Adjacent</b> <b>Tenement</b>";
+        return "<color=\"red\"><b>+1</b></color> for each <b>Adjacent</b> <b>#Building</b>";
     }
     
     public Tenement(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
@@ -30,7 +31,7 @@ public class Tenement : Building
         foreach (Vector2Int dir in Directions.Cardinal)
         {
             ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
-            if (tile is Tenement)
+            if (tile.GetTags().Contains(Tag.Building))
             {
                 adjacentTenements++;
             }

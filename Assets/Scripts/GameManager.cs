@@ -33,6 +33,9 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private FullTilePool tilePool;
 
+    public delegate void VoidDelegate();
+
+    public static VoidDelegate gameStart;
 
     [SerializeField, BoxGroup("Difficulty Parameters")]
     private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement, totalRounds;
@@ -120,6 +123,8 @@ public class GameManager : Singleton<GameManager>
     {
         NewBoard();
         InitializeDeck();
+        gameStart?.Invoke();
+        gameStart = null;
         if(!TutorialParent.activeSelf)
         {
             BlockSpawner.Instance.GenerateBlock();
