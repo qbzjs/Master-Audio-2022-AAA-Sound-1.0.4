@@ -39,28 +39,30 @@ public class Den : Building
     //    });
     //});
 
+    public override void WhenPlaced()
+    {
+        base.WhenPlaced();
+    }
+
     protected override Score CalculateBaseScore()
     {
         if (open)
         {
             List<Creature> monsterPacks = new();
+            int maxPack = 0;
             GridManager.ForEach((int x, int y, ITile tile) =>
             {
                 if (tile is Monster monster)
                 {
                     List<Creature> pack = new();
                     pack.Add(monster);
-                    monster.CountGroupCreatures(monster.GetType(), pack);
+                    maxPack = Mathf.Max(maxPack, monster.CountGroupCreatures(monster.GetType(), pack));
                     monsterPacks.AddRange(pack);
                 }
             });
-
-            if (monsterPacks.Count > 0)
-            {
-                open = false;
-                scoreworth = monsterPacks.Count;
-            }
-
+            
+            scoreworth = maxPack;
+            open = false;
         }
 
         return new Score(scoreworth);

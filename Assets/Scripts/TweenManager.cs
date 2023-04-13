@@ -47,6 +47,11 @@ public class TweenManager : Singleton<TweenManager>
         StartCoroutine(CheckNextRecursive());
     }
 
+    public void AddCallbackToQueue(Action CB)
+    {
+        tweenQueue.Enqueue(CB);
+    }
+
     /*
     [Button()]
     public void TestPlaceBlock()

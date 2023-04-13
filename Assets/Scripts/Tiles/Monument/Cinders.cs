@@ -25,7 +25,7 @@ public class Cinders : Wasteland
             if (numFire == 4)
             {
                 TweenManager.Instance.Callout("Cinder Demon!", new Vector2Int(x, y));
-                GridManager.Instance.PlaceTile("CinderDemon", new Vector2Int(x, y));
+                GameManager.Instance.TransformTile( new Vector2Int(x, y), "CinderDemon");
             }
         });
     });

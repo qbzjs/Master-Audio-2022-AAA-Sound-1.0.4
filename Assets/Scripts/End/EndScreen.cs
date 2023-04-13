@@ -92,8 +92,8 @@ public class EndScreen : MonoBehaviour
         MasterAudio.PlaySound("Click");
         playAgain.SetActive(true);
         
-        yield return new WaitForSeconds(longWait);
+        /*yield return new WaitForSeconds(longWait);
         MasterAudio.PlaySound("Click");
-        feedback.SetActive(true);
+        feedback.SetActive(true);*/
     }
 }

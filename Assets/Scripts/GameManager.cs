@@ -18,6 +18,7 @@ public class GameManager : Singleton<GameManager>
     [Foldout("Tutorial")]
     [SerializeField] public GameObject TutorialParent;
     public bool TutorialMode {get; set;}
+    public bool Interactable {get; set;}
     private int tutorialIndex;
 
     [SerializeField] public Tooltip Tooltip;
@@ -36,6 +37,8 @@ public class GameManager : Singleton<GameManager>
     public delegate void VoidDelegate();
 
     public static VoidDelegate gameStart;
+
+    private Action ExecuteAfterScore;
 
     [SerializeField, BoxGroup("Difficulty Parameters")]
     private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement, totalRounds;
@@ -96,11 +99,11 @@ public class GameManager : Singleton<GameManager>
             {
                 if (score >= winningScore)
                 {
-                    Win();
+                    ExecuteAfterScore = Win;
                 }
                 else
                 {
-                    Lose();
+                    ExecuteAfterScore = Lose;
                 }
             }
         } 
@@ -231,35 +234,48 @@ public class GameManager : Singleton<GameManager>
         roundsLeft--;
         if (roundsLeft <= 0)
         {
-            endScreen.SetActive(true);
-            endScreen.GetComponent<EndScreen>().Won();
+            TweenManager.Instance.AddCallbackToQueue(() =>
+            {
+                endScreen.SetActive(true);
+                endScreen.GetComponent<EndScreen>().Won();
+            });
             return;
         }
-        winScreen.SetActive(true);
-        winningScore += winningScoreIncrement;
+        TweenManager.Instance.AddCallbackToQueue(() =>
+        {
+            
+            winScreen.SetActive(true);
+            winningScore += winningScoreIncrement;
 
-        if (roundsLeft == 1)
-        {
-            nextRound.text = $"Build me one last city worth {winningScore} points";
-        }
-        else
-        {
-            roundsLeftText.text = $"Well Done, But you have {roundsLeft} rounds remaining";
-            nextRound.text = "Next Round, build me a city worth " + winningScore + " points";
-        }
+            if (roundsLeft == 1)
+            {
+                nextRound.text = $"Build me one last city worth {winningScore} points";
+            }
+            else
+            {
+                roundsLeftText.text = $"Well Done, But you have {roundsLeft} rounds remaining";
+                nextRound.text = "Next Round, build me a city worth " + winningScore + " points";
+            }
         
        
-        upgradeIncrement = winningScore / 3;
-        rules.Clear();
+            upgradeIncrement = winningScore / 3;
+            rules.Clear();
+        });
+
     }
 
     public void Lose()
     {
-        endScreen.SetActive(true);
-        endScreen.GetComponent<EndScreen>().Lose();
-        /*loseScreen.SetActive(true);
-        loseFinalScore.text = "Final Score: " + score + "/" + winningScore;*/
-        rules.Clear();
+        TweenManager.Instance.AddCallbackToQueue(() =>
+        {
+            endScreen.SetActive(true);
+            endScreen.GetComponent<EndScreen>().Lose();
+            /*loseScreen.SetActive(true);
+            loseFinalScore.text = "Final Score: " + score + "/" + winningScore;*/
+            rules.Clear();
+        });
+        
+
     }
 
     public void Reset()
@@ -267,7 +283,9 @@ public class GameManager : Singleton<GameManager>
         SceneManager.GetActiveScene().Load();
     }
     
-    public void ScoreIncrementEffect(float oldScore, float nextUpgrade){
+    public void ScoreIncrementEffect(float oldScore, float nextUpgrade)
+    {
+        bool willUpgrade = false;
         LeanTween.value(gameObject, oldScore, score, 0.1f)
         .setEaseOutQuart()
         .setOnUpdate((val)=>{ProgressBarShadow.fillAmount = val / winningScore;});    
@@ -280,11 +298,7 @@ public class GameManager : Singleton<GameManager>
             if (untilNext <= 0)
             {
                 nextUpgrade += upgradeIncrement;
-                tempBlocker.SetActive(false);
-                if (!TutorialMode){
-                    upgradeScreen.SetActive(true);
-                    TweenManager.Instance.SlideOnLocal(upgradeScreen);
-                }
+                willUpgrade = true;
             }
             if(TutorialMode)
             {
@@ -292,7 +306,11 @@ public class GameManager : Singleton<GameManager>
             }
             else 
             {
-                 progressCounter.text = $"Progress: {(int) val}/{winningScore} ({untilNext} until next deal)"; 
+                 progressCounter.text = $"Progress: {(int) val}/{winningScore} ({untilNext} until next deal)";
+                 if (willUpgrade)
+                 {
+                     progressCounter.text = "Prepare for a deal";
+                 }
             }
             if (progressBar != null){
                 progressBar.fillAmount = val / winningScore;
@@ -309,6 +327,20 @@ public class GameManager : Singleton<GameManager>
             else
             {
                 progressCounter.text = $"Progress: {score}/{winningScore} ({CalculateNextUpgrade() - score} until next deal)";               
+            }
+
+            if (ExecuteAfterScore != null)
+            {
+                tempBlocker.SetActive(false);
+                ExecuteAfterScore();
+                ExecuteAfterScore = null;
+            } else if (willUpgrade)
+            {
+                tempBlocker.SetActive(false);
+                if (!TutorialMode){
+                    upgradeScreen.SetActive(true);
+                    TweenManager.Instance.SlideOnLocal(upgradeScreen);
+                }
             }
         });
     }

@@ -1631,6 +1631,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: QR Code
       objectReference: {fileID: 0}
+    - target: {fileID: 3767577099331604935, guid: 8cf7f6400480d3d44812e51b4e9f212d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cf7f6400480d3d44812e51b4e9f212d, type: 3}
 --- !u!224 &6391480571636322328 stripped
@@ -1740,7 +1744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7903931741750475901, guid: 75e33d6cc2dc21744b335f03acda2eeb, type: 3}
       propertyPath: m_text
-      value: V. 0.7
+      value: V. 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7903931741750475901, guid: 75e33d6cc2dc21744b335f03acda2eeb, type: 3}
       propertyPath: m_fontAsset
