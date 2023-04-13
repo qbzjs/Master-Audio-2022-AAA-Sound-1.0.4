@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -7,6 +8,8 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Angel : Monument
 {
     bool blood = false;
+
+    private List<Tag> Tags = new List<Tag>();
 
     [SerializeField] new protected int scoreWorth = -3;
 
@@ -17,12 +20,12 @@ public class Angel : Monument
 
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Monument };
+        return Tags.ToArray();
     }
 
     public Angel(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-
+        Tags.Add(Tag.Monument);
     }
     
     //TODO turn this into a rule, and make a corrupted angel tile to go with it
@@ -32,10 +35,10 @@ public class Angel : Monument
         {
             if (blood) break; //can't turn if already made of blood
             Wasteland tile = (Wasteland)GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
-            if (tile.Type == "Blood")
+            if (tile.GetTags().Contains(Tag.Blood))
             {
                 blood = true;
-                Type = "Blood";
+                Tags.Add(Tag.Blood);
                 //Art
                 scoreWorth = 6;
             }

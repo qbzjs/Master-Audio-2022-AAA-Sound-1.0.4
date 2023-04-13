@@ -11,7 +11,12 @@ public class Rat : Animal
     {
         return "Empty tile <b>Adjacent</b> to <b><color=\"red\">2 or more</color></b> <b>Rats</b> becomes a <link><b>Rat</b></link>.";
     }
-    
+
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Animal };
+    }
+
     public static Rule PropagateRats = new Rule("Propagate Rats", 10, () =>
     {
         bool checkAgain = true;

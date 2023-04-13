@@ -12,7 +12,7 @@ public class Den : Building
 
     public override string GetDescription()
     {
-        return "Grants <b><color=\"red\">+1</color></b> to each <link><b>Werewolf</b></link> in an <b>Adjacent</b> <b>Pack</b>. Can catch #fire.";
+        return "When placed, +1 for each #Monster in largest pack";
     }
 
     public override Tag[] GetTags()
@@ -22,44 +22,43 @@ public class Den : Building
 
     public Den(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-        GameManager.Instance.AddRule(BurnDen);
+        //GameManager.Instance.AddRule(BurnDen);
     }
 
-    private Rule BurnDen = new Rule("Den checks for #fire", 80, () =>
-    {
-        GridManager.ForEach((int x, int y, Den den) =>
-        {
-            foreach (var dir in Directions.Cardinal)
-            {
-                if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Fire))
-                {
-                    GridManager.Instance.PlaceTile("HellFire", new Vector2Int(x, y));
-                }
-            }
-        });
-    });
+    //private Rule BurnDen = new Rule("Den checks for #fire", 80, () =>
+    //{
+    //    GridManager.ForEach((int x, int y, Den den) =>
+    //    {
+    //        foreach (var dir in Directions.Cardinal)
+    //        {
+    //            if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Fire))
+    //            {
+    //                GridManager.Instance.PlaceTile("HellFire", new Vector2Int(x, y));
+    //            }
+    //        }
+    //    });
+    //});
 
     protected override Score CalculateBaseScore()
     {
         if (open)
         {
-            List<Creature> adjacentWolfPacks = new();
-            foreach (Vector2Int dir in Directions.Cardinal)
+            List<Creature> monsterPacks = new();
+            GridManager.ForEach((int x, int y, ITile tile) =>
             {
-                ITile tile = GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
-                if (tile is Werewolf werewolf)
+                if (tile is Monster monster)
                 {
                     List<Creature> pack = new();
-                    pack.Add(werewolf);
-                    werewolf.CountGroupCreatures(werewolf.GetType(), pack);
-                    adjacentWolfPacks.AddRange(pack);
+                    pack.Add(monster);
+                    monster.CountGroupCreatures(monster.GetType(), pack);
+                    monsterPacks.AddRange(pack);
                 }
-            }
+            });
 
-            if (adjacentWolfPacks.Count > 0)
+            if (monsterPacks.Count > 0)
             {
                 open = false;
-                scoreworth = adjacentWolfPacks.Count;
+                scoreworth = monsterPacks.Count;
             }
 
         }

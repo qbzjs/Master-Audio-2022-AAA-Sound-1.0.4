@@ -17,6 +17,11 @@ public class Spider : Animal
 
     }
 
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Animal };
+    }
+
     protected override Score CalculateBaseScore()
     {
         return new Score(scoreWorth);
