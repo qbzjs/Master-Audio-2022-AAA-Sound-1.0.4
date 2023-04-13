@@ -48,16 +48,12 @@ MonoBehaviour:
     - Gargoyle
     - River
     - Tenement
-    - Spider
-    - SpiderQueen
     _keys:
     - Ghoul
     - Gargoyle
     - River
     - Tenement
-    - Spider
-    - SpiderQueen
-    _values: 040000000400000004000000040000000400000004000000
+    _values: 04000000040000000400000004000000
   Commons:
   - River
   - Human
@@ -87,5 +83,6 @@ MonoBehaviour:
   - Temple
   - Cerberus
   - Den
-  Legendaries:
   - SpiderQueen
+  Legendaries:
+  - TheCollector
