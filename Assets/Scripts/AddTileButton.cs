@@ -59,7 +59,7 @@ public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         card.tooltipParent.SetActive(false);
         if (card.cardRef)
         {
-            card.cardRef.SetActive(false);
+            Destroy(card.cardRef);
         }
     }
 }

@@ -10,6 +10,11 @@ public class Clocktower : Wasteland, IEffectOnDestroyed
         return "While on the board, gives <b><color=\"red\">+1</color></b> turn";
     }
 
+    public override Tag[] GetTags()
+    {
+        return new Tag[] {Tag.Building};
+    }
+
     public override void WhenPlaced()
     {
         TweenManager.Instance.Callout("Extra Turn!", Position());

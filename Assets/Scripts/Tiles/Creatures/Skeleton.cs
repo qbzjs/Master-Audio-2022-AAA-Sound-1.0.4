@@ -12,22 +12,6 @@ public class Skeleton : Creature, IEffectOnDestroyed
     
     private static List<Vector2Int> toHaunt = new ();
 
-    private Rule CheckForMonsters = new Rule("Humans checking for monsters", 2, () =>
-    {
-        GridManager.ForEach((int x, int y, Human human) =>
-        {
-            foreach (var dir in Directions.Cardinal)
-            {
-                if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Monster))
-                {
-                    GameManager.Instance.DestroyTile(new Vector2Int(x, y));
-                    break;
-                    //toHaunt.Add(new Vector2Int(x, y));
-                }
-            }
-        });
-    });
-
     public override Tag[] GetTags()
     {
         return new[] {Tag.Death};
@@ -41,8 +25,6 @@ public class Skeleton : Creature, IEffectOnDestroyed
     
     public Skeleton(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-        GameManager.Instance.AddRule(CheckForMonsters);
-        //GameManager.Instance.AddRule(Haunting);
     }
 
     protected override Score CalculateBaseScore()

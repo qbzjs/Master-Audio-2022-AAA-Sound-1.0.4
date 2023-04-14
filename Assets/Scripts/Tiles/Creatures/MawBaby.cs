@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MawBaby : Monument
 {
-    [SerializeField] protected int absorbed = 0;
+    [SerializeField] protected int absorbed = 1;
 
     public MawBaby(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
