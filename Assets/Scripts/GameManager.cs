@@ -92,6 +92,7 @@ public class GameManager : Singleton<GameManager>
             if (turns != value)
             {
                 TweenManager.Instance.Emphasize(turnCounter.GameObject(), value < 5 ? 1.5f : 1);
+            //    TweenManager.Instance.Emphasize(turnCounter.GameObject(), new Color(0.62f, 0.09f, 0.11f));
             }
             turns = value;
             turnCounter.text = turns + " turns remaining.";
