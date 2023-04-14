@@ -9,7 +9,7 @@ public class Homestead : Building
 
     public override string GetDescription()
     {
-        return "+2 point for each adjacent homestead";
+        return "<color=\"red\"><b>+2</b></color> for each <b>Adjacent</b> <b>Homestead</b>";
     }
 
     public Homestead(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

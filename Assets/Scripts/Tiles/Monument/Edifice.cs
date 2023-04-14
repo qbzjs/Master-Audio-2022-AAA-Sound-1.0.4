@@ -10,7 +10,7 @@ public class Edifice : Monument
 {
     public override string GetDescription()
     {
-        return "Surround: +2 each adjacent #building's score";
+        return "<color=\"red\"><b>+2</b></color> to each <b>Adjacent</b> #Building";
     }
 
     private static Effect EdificeEffect = new Effect("Edifice", 3, 1, 1,
@@ -45,7 +45,7 @@ public class Edifice : Monument
     }
     protected override Score CalculateBaseScore()
     {
-        return new Score(6);
+        return new Score(3);
     }
 
 }

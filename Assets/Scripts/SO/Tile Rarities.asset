@@ -67,7 +67,7 @@ MonoBehaviour:
   - Cinders
   - Cabin
   - Golem
-  - Golem
+  - Homestead
   Uncommons:
   - Clocktower
   - Ghost
@@ -77,6 +77,8 @@ MonoBehaviour:
   - Void
   - Campfire
   - Werewolf
+  - Totem
+  - Edifice
   Rares:
   - RatKing
   - Temple
