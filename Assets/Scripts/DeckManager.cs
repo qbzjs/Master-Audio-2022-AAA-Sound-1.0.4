@@ -152,7 +152,7 @@ public class DeckManager : Singleton<DeckManager>
                 LeanTween.moveLocalY(innerCard.gameObject, -(i*15f), 0f);
             } 
             CreateCardToolTips(newCard);
-            CreateCardToolTip(newCard);
+            CreateCardRef(newCard);
             newCard.tooltipParent.transform.SetAsLastSibling();
             
         }
@@ -239,7 +239,7 @@ public class DeckManager : Singleton<DeckManager>
         }
     }
     
-    public void CreateCardToolTip(Card card)
+    public void CreateCardRef(Card card)
     {
         string description = card.descriptionText.text;
         TMP_TextInfo textInfo = card.descriptionText.GetTextInfo(description);

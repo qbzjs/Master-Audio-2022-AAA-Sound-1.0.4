@@ -46,7 +46,7 @@ public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerEnter(PointerEventData eventData)
     {
         card.tooltipParent.SetActive(true);
-        DeckManager.Instance.CreateCardToolTip(card);
+        DeckManager.Instance.CreateCardRef(card);
         if (card.cardRef)
         {
             card.cardRef.SetActive(true);
