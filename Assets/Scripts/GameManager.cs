@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
     [Foldout("UI")]
     [SerializeField] private TextMeshProUGUI turnCounter, loseFinalScore, nextRound, roundsLeftText, progressCounter;
     [Foldout("UI")]
-    [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen, deckScreen, tempBlocker, endScreen;
+    [SerializeField] private GameObject winButton, winScreen, loseScreen, upgradeScreen, deckScreen, tempBlocker, endScreen, upgradePointer;
     [Foldout("UI")]
     [SerializeField] private FullTilePool tilePool;
 
@@ -44,6 +44,7 @@ public class GameManager : Singleton<GameManager>
     private int winningScore, upgradeIncrement, totalTurns, winningScoreIncrement, totalRounds;
     private int roundsLeft;
     private int score;
+    private List<GameObject> upgradePointers = new();
 
     private List<Rule> rules = new List<Rule>();
 
@@ -63,6 +64,12 @@ public class GameManager : Singleton<GameManager>
             {
                 UpgradeManager.Instance.FirstTimeUpgrade();
                 TweenManager.Instance.Emphasize(progressBar.transform.parent.gameObject);
+                if (value < winningScore)
+                {
+                    //TODO do an effect on the appropriate upgrade pointer here
+                    /*int index = (int)(value / upgradeIncrement) - 1;
+                    TweenManager.Instance.Emphasize(upgradePointers[index]);*/
+                }
                 tempBlocker.SetActive(true);
                 //upgradeScreen.SetActive(true);
                 
@@ -150,6 +157,30 @@ public class GameManager : Singleton<GameManager>
         Score = 0;
         Turns = totalTurns;
         tutorialIndex = 0;
+        SetUpgradePointers();
+    }
+
+    public void SetUpgradePointers()
+    {
+        upgradePointer.SetActive(true);
+        foreach (GameObject pointer in upgradePointers)
+        {
+            Destroy(pointer);
+        }
+        RectTransform progressBarRect = ProgressBarShadow.GetComponent<RectTransform>();
+        
+        for (int i = upgradeIncrement; i < winningScore; i += upgradeIncrement)
+        {
+            RectTransform pointer = Instantiate(upgradePointer, upgradePointer.transform.parent).GetComponent<RectTransform>();
+            upgradePointers.Add(pointer.gameObject);
+            Vector3 tempPos = pointer.position;
+            Vector3[] corners = new Vector3[4];
+            progressBarRect.GetWorldCorners(corners);
+            float width = corners[2].x - corners[0].x;
+            tempPos.x = corners[0].x + ((float) i / winningScore) * width;
+            pointer.position = tempPos;
+        }
+        upgradePointer.SetActive(false);
     }
 
     public void AddRule(Rule newRule)
