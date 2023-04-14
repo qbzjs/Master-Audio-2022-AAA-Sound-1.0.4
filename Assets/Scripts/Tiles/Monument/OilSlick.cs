@@ -17,7 +17,7 @@ public class OilSlick : Creature
             return new Score(score.score + 2, $"{score.explanation} + 2");
         });
     
-    private Rule BurnOil = new Rule("Oil checks for #fire", 80, () =>
+    private Rule BurnOil = new Rule("Oil checks for #Fire", 80, () =>
     {
         bool goAgain = true;
         while (goAgain)
@@ -52,7 +52,7 @@ public class OilSlick : Creature
 
     public override string GetDescription()
     {
-        return $"If <b>Adjacent</b> to #fire, becomes <b><link>HellFire</link></b>.";
+        return $"If <b>Adjacent</b> to #Fire, becomes <b><link>HellFire</link></b> and gets +2.";
     }
     
     

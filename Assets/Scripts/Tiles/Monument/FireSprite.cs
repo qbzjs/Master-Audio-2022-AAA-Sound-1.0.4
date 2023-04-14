@@ -8,7 +8,7 @@ public class FireSprite : Monument
 {
     [SerializeField] new protected int scoreWorth = 8;
     
-    private Rule CheckSprites = new Rule("FireSprite checks for #fire", 200, () =>
+    private Rule CheckSprites = new Rule("FireSprite checks for #Fire", 200, () =>
     {
         GridManager.ForEach((int x, int y, FireSprite fireSprite) =>
         {
@@ -31,7 +31,7 @@ public class FireSprite : Monument
     
     public override string GetDescription()
     {
-        return  $"{scoreWorth} pts - destroy if not adjacent to #fire";
+        return  $"{scoreWorth} pts - destroy if not adjacent to #Fire";
     }
 
     public override Tag[] GetTags()

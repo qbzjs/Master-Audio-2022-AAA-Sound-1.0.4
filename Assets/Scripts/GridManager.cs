@@ -179,6 +179,34 @@ namespace Scripts
                     }
                 }
                 
+                //sorts top to bottom, left to right. like reading
+                block.Tiles.Sort((ITile a, ITile b) =>
+                {
+                    if (a.yPos > b.yPos)
+                    {
+                        return -1;
+                    }
+                    else if(a.yPos < b.yPos)
+                    {
+                        return 1;
+                    } else //if (a.yPos == b.yPos)
+                    {
+                        if (a.xPos > b.xPos)
+                        {
+                            return 1;
+                        }
+                        else if(a.xPos < b.xPos)
+                        {
+                            return -1;
+                        }
+                        else
+                        {
+                            return 0;
+                        }
+                    }
+                
+                });
+                
                 foreach (ITile tile in block.Tiles)
                 {
                     tile.WhenPlaced();
@@ -383,9 +411,9 @@ namespace Scripts
         /// <param name="toApply">takes int x, int y and ITile tile. This is called for every position on the board</param>
         public static void ForEach(Action<int, int, ITile> toApply)
         {
-            for (int x = 0; x < Instance.Size; x++)
+            for (int x = Instance.Size - 1; x >= 0; x--)
             {
-                for (int y = 0; y < Instance.Size; y++)
+                for (int y = Instance.Size - 1; y >= 0; y--)
                 {
                     toApply.Invoke(x, y, Instance.GetTile(x, y));
                 }

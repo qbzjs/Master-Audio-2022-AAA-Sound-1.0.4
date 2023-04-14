@@ -768,7 +768,7 @@ MonoBehaviour:
   groupPlayType: 0
   isSelected: 0
   isExpanded: 1
-  groupMasterVolume: 1
+  groupMasterVolume: 0.28840312
   retriggerPercentage: 100
   curVariationMode: 0
   alwaysHighestPriority: 0
@@ -8422,7 +8422,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1.0012196
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
