@@ -35,7 +35,7 @@ public class Homestead : Building
             }
         }
 
-        return new Score(1 + adjacentHomes * scoreWorthAdjacent,
+        return new Score(0 + adjacentHomes * scoreWorthAdjacent,
             $"[{adjacentHomes}] * {scoreWorthAdjacent}");
     }
 }

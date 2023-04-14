@@ -66,24 +66,23 @@ MonoBehaviour:
   - Graveyard
   - Cinders
   - Cabin
+  - Golem
   - Homestead
   Uncommons:
   - Clocktower
+  - Ghost
+  - Vampire
   - Ghost
   - Doppelganger
   - Void
   - Campfire
   - Werewolf
   - Totem
-  - Golem
-  - Tombstone
-  - Castle
+  - Edifice
   Rares:
   - RatKing
   - Temple
   - Cerberus
   - Den
-  - Vampire
   Legendaries:
-  - TheCollector
-  - SpiderQueen
+  - Legion
