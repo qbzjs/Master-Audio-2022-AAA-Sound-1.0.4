@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using DarkTonic.MasterAudio;
 using Unity.Mathematics;
+using UnityEngine.UI;
 using Unity.VisualScripting;
 using Scripts;
 using UnityEngine;
@@ -27,23 +28,7 @@ public class Block : MonoBehaviour, IDragParent
 
     Vector2Int prevPosition = new Vector2Int(0,0);
     Vector2Int newPosition = new Vector2Int(0,0);
-    
-    public void GenerateFakeTiles(Transform parentTransform, int blockSize, List<string> names, List<Vector2Int> positions)
-    {
-        Vector3 position = parentTransform.position;
-        for(int i = 0; i < blockSize; i++)
-        {
-            string tileID = names[i];
-            ITile myTile = TileFactory.CreateTile(Type.GetType(tileID), transform, Vector2IntToWorldPosition(positions[i], position));
-           
-            myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
-            myTile.TileObject.AddComponent<DragChild>().parent = this;
-            myTile.TileObject.AddComponent<MouseOverTile>().Tile = myTile;
 
-            Tiles.Add(myTile);
-        }
-
-    }
 
     public void GenerateTiles(Transform parentTransform, int blockSize)
     {
@@ -61,6 +46,7 @@ public class Block : MonoBehaviour, IDragParent
 
             myTile.TileObject.transform.localScale *= GridManager.Instance.GridUnit;
             myTile.TileObject.AddComponent<DragChild>().parent = this;
+             myTile.TileObject.AddComponent<Image>().raycastTarget = true;
             myTile.TileObject.AddComponent<MouseOverTile>().Tile = myTile;
 
             Tiles.Add(myTile);

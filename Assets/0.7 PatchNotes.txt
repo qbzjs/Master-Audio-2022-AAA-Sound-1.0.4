@@ -8,6 +8,8 @@ Tiles added:
 - SpiderQueen 
 - MawBaby
 - Tombstone
+- Castle
+- Homestead
 
 Tiles Changed:
 - Tenements now count other #Buildings, not just tenements
@@ -15,6 +17,10 @@ Tiles Changed:
 - Golems moved from common to uncommon
 - Fine tuned tags on a couple tiles
 - "When Placed" effects, like golems, now occur predictably in a top-bottom, left-right order
+
+Quality of life:
+- Progress bar redesign
+- 
 
 
 

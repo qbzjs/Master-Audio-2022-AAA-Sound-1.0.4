@@ -2,23 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Scripts;
+using UnityEngine.EventSystems;
 
-public class MouseOverTile: MonoBehaviour
+public class MouseOverTile: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] public ITile Tile;
-    public void OnMouseDown()
+    public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        if(!GameManager.Instance.dragging && GridManager.Instance.OverGrid(Tile.Position())){
+        StartCoroutine(HoverForSeconds());
+    }
+    
+    public void OnPointerExit(PointerEventData pointerEventData)
+    {
+        StopAllCoroutines();
+        GameManager.Instance.Tooltip.Hide();
+    }
+
+    public IEnumerator HoverForSeconds()
+    {
+        yield return new WaitForSeconds(1f);
+        if(!GameManager.Instance.dragging){
             GameManager.Instance.Tooltip.Show(Tile);
         }
-    }
-    public void OnMouseUp()
-    {
-        GameManager.Instance.Tooltip.Hide();
-    }
-     public void OnMouseExit()
-    {
-        GameManager.Instance.Tooltip.Hide();
+        yield break;
     }
 
 
