@@ -11417,7 +11417,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24, y: 0.06}
   m_AnchorMax: {x: 0.75, y: 0.43}
-  m_AnchoredPosition: {x: -538.5, y: -142.00047}
+  m_AnchoredPosition: {x: -538.50006, y: -142.00049}
   m_SizeDelta: {x: -234.99, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708671904
@@ -13686,7 +13686,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.06}
   m_AnchorMax: {x: 0.76, y: 0.43}
-  m_AnchoredPosition: {x: 608, y: -124.001816}
+  m_AnchoredPosition: {x: 608, y: -124.00183}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &951310918
@@ -24292,7 +24292,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click a tile on the board to find out more about it.
+  m_text: Hover over a tile find out more about it.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 176049ec0a7c47b4cab1674e5602ee9d, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
