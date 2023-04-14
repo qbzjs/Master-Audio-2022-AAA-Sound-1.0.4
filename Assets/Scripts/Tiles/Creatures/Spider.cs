@@ -35,7 +35,7 @@ public class Spider : Animal
             ITile tile = GridManager.Instance.GetTile(gridPos.x, gridPos.y);
             if ((tile.GetType() == typeof(Wasteland)) && GridManager.Instance.OverGrid(gridPos))
             {
-                GridManager.Instance.PlaceTile("Web", gridPos);
+                GameManager.Instance.PlaceTile("Web", gridPos);
             }
         }
     }

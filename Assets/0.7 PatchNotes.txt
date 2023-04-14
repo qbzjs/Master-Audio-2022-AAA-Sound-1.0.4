@@ -1,0 +1,21 @@
+Patch notes
+
+Bug fixes: 
+- Voids no longer increase across game-plays
+- Humans no longer double-die when adjacent to two or more #Monsters
+
+Tiles added:
+- SpiderQueen 
+- MawBaby
+- Tombstone
+
+Tiles Changed:
+- Tenements now count other #Buildings, not just tenements
+- Removed legion until we can figure out how to balance it
+- Golems moved from common to uncommon
+- Fine tuned tags on a couple tiles
+- "When Placed" effects, like golems, now occur predictably in a top-bottom, left-right order
+
+
+
+

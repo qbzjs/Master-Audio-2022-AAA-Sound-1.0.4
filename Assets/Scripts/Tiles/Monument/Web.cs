@@ -9,7 +9,7 @@ public class Web : Monument
     [SerializeField] new protected int scoreWorth = 0;
     public override string GetDescription()
     {
-        return scoreWorth + " pts - " + "Destroy if adjacent to #fire";
+        return scoreWorth + " pts - " + "Destroy if adjacent to #Fire";
     }
 
     private Rule BurnWebs = new Rule("Burn webs", 100, () =>

@@ -13,7 +13,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] public Image cardArt; 
     [SerializeField] public GameObject tooltipParent;
     public List<GameObject> toolTips;
-    public List<GameObject> cardRefs;
+    public GameObject cardRef = null;
  
     public string CardName
     {
@@ -60,11 +60,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 Destroy(tooltip.gameObject);
             }
             toolTips.Clear();
-            foreach (var cardRef in cardRefs)
-            {
-                Destroy(cardRef.gameObject);
-            }
-            cardRefs.Clear();
+        }
+        if(cardRef != null)
+        {
+            Destroy(cardRef.gameObject);
+            cardRef = null;
         }
         Score body = tile.CalculateScore();
     
@@ -100,18 +100,18 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         tooltipParent.SetActive(true);
         LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipParent.transform.GetComponent<RectTransform>());
-        foreach(var card in cardRefs)
+        if(cardRef)
         {
-            card.SetActive(true);
+            cardRef.SetActive(true);
         }
     }
     
     public void OnPointerExit(PointerEventData pointerEventData)
     {
         tooltipParent.SetActive(false);
-        foreach(var card in cardRefs)
+        if(cardRef)
         {
-            card.SetActive(false);
+            cardRef.SetActive(false);
         }
     }  
 

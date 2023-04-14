@@ -14,12 +14,12 @@ public class River : Building
 
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Building };
+        return new[] { Tag.Null};
     }
 
     public override string GetDescription()
     {
-        return "If <b>Adjacent</b> to #blood, becomes <link><b>BloodRiver</b></link>";
+        return "If <b>Adjacent</b> to #Blood, becomes <link><b>BloodRiver</b></link>";
     }
 
     private static Rule PropagateBlood = new Rule("Propagate Blood", 10, () =>

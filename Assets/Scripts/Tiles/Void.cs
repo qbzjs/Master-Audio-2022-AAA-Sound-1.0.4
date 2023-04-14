@@ -4,7 +4,17 @@ public class Void : Wasteland
 {
     private static int voidsDestroyed;
     
-    public Void(Transform parentTransform, Vector3 pos) : base(parentTransform, pos) { }
+    public Void(Transform parentTransform, Vector3 pos) : base(parentTransform, pos) { 
+        
+        GameManager.gameStart += OnGameStart;
+        
+    }
+
+    public void OnGameStart()
+    {
+        Debug.Log("In void OnGameStart");
+        voidsDestroyed = 0;
+    }
 
     public override Tag[] GetTags()
     {

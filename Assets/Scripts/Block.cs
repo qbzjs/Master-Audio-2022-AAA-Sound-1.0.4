@@ -152,6 +152,7 @@ public class Block : MonoBehaviour, IDragParent
 
     public void OnMouseDown()
     {
+        if (!GameManager.Instance.Interactable) return;
         dragOffset = transform.position - GetMousePos();
         dragOffset.z = 0;
         if(clicked == true){

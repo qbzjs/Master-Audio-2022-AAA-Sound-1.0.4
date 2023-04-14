@@ -79,6 +79,10 @@ public class Werewolf : Monster
         foreach(Monster monster in adjacentMonsterPacks)
         {
             monstersKilled += monster.CalculateScore().score;
+        }
+        
+        foreach(Monster monster in adjacentMonsterPacks)
+        {
             GridManager.Instance.KillTile(new Vector2Int(monster.xPos, monster.yPos));
         }
 

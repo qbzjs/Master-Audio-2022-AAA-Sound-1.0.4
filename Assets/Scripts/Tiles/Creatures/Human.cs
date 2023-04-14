@@ -21,6 +21,7 @@ public class Human : Creature, IEffectOnDestroyed
                 if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Monster))
                 {
                     GameManager.Instance.DestroyTile(new Vector2Int(x, y));
+                    break;
                     //toHaunt.Add(new Vector2Int(x, y));
                 }
             }
@@ -30,7 +31,7 @@ public class Human : Creature, IEffectOnDestroyed
     
     public override string GetDescription()
     {
-        return "If <b>Adjacent</b> to #monster, is <b>Destroyed</b> and <b>Spawns</b> a <link><b>Ghost</b></link>.";
+        return "If <b>Adjacent</b> to #Monster, is <b>Destroyed</b> and <b>Spawns</b> a <b><link=\"card\">Ghost</link></b>.";
     }
     
     
