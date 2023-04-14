@@ -29,8 +29,8 @@ public class OilSlick : Creature
                 {
                     if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Fire))
                     {
-                        GameManager.Instance.TransformTile(new Vector2Int(x, y), "HellFire");
-                        GridManager.Instance.GetTile(x, y).AddEffect(Roaring);
+                        GameManager.Instance.DestroyTile(new Vector2Int(x, y));
+                        GameManager.Instance.PlaceTile("HellFire", new Vector2Int(x, y));
                         goAgain = true;
                     }
                 }
@@ -41,7 +41,7 @@ public class OilSlick : Creature
 
     public override Tag[] GetTags()
     {
-        return new[] {Tag.Darkness, Tag.Monument};
+        return new[] {Tag.Darkness};
     }
 
 
@@ -52,7 +52,7 @@ public class OilSlick : Creature
 
     public override string GetDescription()
     {
-        return $"If <b>Adjacent</b> to #Fire, becomes <b><link>HellFire</link></b> and gets +2.";
+        return $"If <b>Adjacent</b> to #Fire, is destroyed and <b>Spawns</b> a <b><link>HellFire</link></b>.";
     }
     
     

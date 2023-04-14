@@ -175,11 +175,12 @@ public class TweenManager : Singleton<TweenManager>
             .setEase(LeanTweenType.easeShake).setDelay(0.1f);
     }
 
-    public void Emphasize(GameObject ob)
+    public void Emphasize(GameObject ob, float multiplier = 1)
     {
-        LeanTween.scale(ob, Vector3.one * emphasizeAmount, emphasizeTime)
+        LeanTween.scale(ob, Vector3.one * emphasizeAmount * multiplier, emphasizeTime)
             .setEasePunch();
     }
+
 
     public void Move(GameObject ob)
     {

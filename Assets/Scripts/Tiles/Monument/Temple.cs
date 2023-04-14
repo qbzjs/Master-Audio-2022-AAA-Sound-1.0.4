@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Temple : Monument
 {
-    [SerializeField] protected int scoreWorth = -3;
+    [SerializeField] protected int scoreWorth = -5;
     [SerializeField] protected int deathAbsorbed = 0;
 
     public Temple(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

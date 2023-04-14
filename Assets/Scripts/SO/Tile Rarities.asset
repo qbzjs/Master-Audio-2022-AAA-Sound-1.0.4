@@ -78,6 +78,7 @@ MonoBehaviour:
   - Werewolf
   - Tombstone
   - Golem
+  - Skeleton
   Rares:
   - RatKing
   - Temple

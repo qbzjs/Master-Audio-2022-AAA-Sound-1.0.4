@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Tombstone : Wasteland
 {
+    
+    [SerializeField] private int scoreWorth = 1;
     [SerializeField] private int scoreWorthAdjacent = 3;
     public int adjacentDestroyed = 0;
     public override string GetDescription()
@@ -24,8 +26,8 @@ public class Tombstone : Wasteland
 
     protected override Score CalculateBaseScore()
     {
-        return new Score(adjacentDestroyed * scoreWorthAdjacent,
-            $"[{adjacentDestroyed}] * {scoreWorthAdjacent}");
+        return new Score(scoreWorth + adjacentDestroyed * scoreWorthAdjacent,
+            $"scoreWorth + [{adjacentDestroyed}] * {scoreWorthAdjacent}");
     }
 
     public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)

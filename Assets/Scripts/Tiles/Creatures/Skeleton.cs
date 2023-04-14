@@ -6,9 +6,9 @@ using UnityEngine;
 using Scripts;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class Human : Creature, IEffectOnDestroyed
+public class Skeleton : Creature, IEffectOnDestroyed
 {
-    [SerializeField] protected int scoreWorth = 3;
+    [SerializeField] protected int scoreWorth = 2;
     
     private static List<Vector2Int> toHaunt = new ();
 
@@ -27,31 +27,22 @@ public class Human : Creature, IEffectOnDestroyed
             }
         });
     });
-    
-    
+
+    public override Tag[] GetTags()
+    {
+        return new[] {Tag.Death};
+    }
+
     public override string GetDescription()
     {
-        return "If <b>Adjacent</b> to #Monster, is <b>Destroyed</b> and <b>Spawns</b> a <b><link=\"card\">Ghost</link></b>.";
+        return "If <b>Destroyed</b>, <b>Spawns</b> a new <b><link=\"card\">Skeleton</link></b>.";
     }
     
     
-    public Human(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
+    public Skeleton(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
         GameManager.Instance.AddRule(CheckForMonsters);
         //GameManager.Instance.AddRule(Haunting);
-    }
-
-    
-    public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)
-    {
-        if (aboutToBeDestroyed != this)
-        {
-            //If we're not referencing this object, don't do anything
-            return;
-        }
-
-
-        //toHaunt.Add(new Vector2Int(xPos, yPos));
     }
 
     protected override Score CalculateBaseScore()
@@ -64,9 +55,8 @@ public class Human : Creature, IEffectOnDestroyed
         Vector2Int spot = new Vector2Int(xPos, yPos);
         return () =>
         {
-            TweenManager.Instance.Callout("Haunted!", spot);
-            GameManager.Instance.PlaceTile("Ghost", spot);
+            TweenManager.Instance.Callout("Reassembled!", spot);
+            GameManager.Instance.PlaceTile("Skeleton", spot);
         };
     }
 }
-

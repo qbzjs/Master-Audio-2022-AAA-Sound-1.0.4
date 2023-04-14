@@ -91,12 +91,14 @@ public class GameManager : Singleton<GameManager>
         {
             if (turns != value)
             {
-                TweenManager.Instance.Emphasize(turnCounter.GameObject());
+                TweenManager.Instance.Emphasize(turnCounter.GameObject(), value < 5 ? 1.5f : 1);
+                TweenManager.Instance.Emphasize(turnCounter.GameObject(), new Color(0.62f, 0.09f, 0.11f));
             }
             turns = value;
             turnCounter.text = turns + " turns remaining.";
             if (turns <= 0)
             {
+                Interactable = false;
                 if (score >= winningScore)
                 {
                     ExecuteAfterScore = Win;
@@ -111,6 +113,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Awake()
     {
+        Interactable = true;
         upgradeIncrement = winningScore / 2;
         roundsLeft = totalRounds;
         #if UNITY_EDITOR
@@ -124,6 +127,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
+        Interactable = true;
         NewBoard();
         InitializeDeck();
         gameStart?.Invoke();
@@ -137,6 +141,7 @@ public class GameManager : Singleton<GameManager>
 
     public void NewBoard()
     {
+        Interactable = true;
         winButton.SetActive(false);
         winScreen.SetActive(false);
         upgradeScreen.SetActive(false);
@@ -281,6 +286,11 @@ public class GameManager : Singleton<GameManager>
     public void Reset()
     {
         SceneManager.GetActiveScene().Load();
+    }
+
+    public void Focus()
+    {
+        Interactable = true;
     }
     
     public void ScoreIncrementEffect(float oldScore, float nextUpgrade)
