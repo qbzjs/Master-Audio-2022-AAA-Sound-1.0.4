@@ -19217,6 +19217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bloodParticles: {fileID: 2025277169817453880, guid: 841a2e49bee4ca64d9dfe33360141ae5, type: 3}
   bloodGlow: {fileID: 3180638715234235195, guid: b96695f94f12fa04b8ba07f02ea5e419, type: 3}
+  endParticles: {fileID: 8887492853119595625, guid: 2187ba9538eede940a8b098ee73149cd, type: 3}
 --- !u!1 &1741551678
 GameObject:
   m_ObjectHideFlags: 0

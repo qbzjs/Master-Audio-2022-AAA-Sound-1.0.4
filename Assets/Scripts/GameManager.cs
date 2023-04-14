@@ -105,6 +105,7 @@ public class GameManager : Singleton<GameManager>
             turnCounter.text = turns + " turns remaining.";
             if (turns <= 0)
             {
+                ParticleManager.Instance.InstantiateEndParticles();
                 Interactable = false;
                 if (score >= winningScore)
                 {
