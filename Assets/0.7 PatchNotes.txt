@@ -20,6 +20,7 @@ Tiles Changed:
 
 Quality of life:
 - Progress bar redesign
+- Hover over tiles to view their effect
 - 
 
 
