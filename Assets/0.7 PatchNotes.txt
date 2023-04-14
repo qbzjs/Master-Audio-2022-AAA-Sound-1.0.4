@@ -9,6 +9,7 @@ Tiles added:
 - MawBaby
 - Tombstone
 - Castle
+- Skeleton
 
 Tiles Changed:
 - Tenements now count other #Buildings, not just tenements
@@ -20,7 +21,7 @@ Tiles Changed:
 Quality of life:
 - Progress bar redesign
 - Hover over tiles to view their effect
-- 
+- Removed Herobrine
 
 
 
