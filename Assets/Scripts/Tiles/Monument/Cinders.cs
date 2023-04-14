@@ -43,6 +43,10 @@ public class Cinders : Wasteland
     
     public Cinders(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
+    }
+
+    public override void WhenPlaced()
+    {
         GameManager.Instance.AddRule(CheckCinders);
     }
 

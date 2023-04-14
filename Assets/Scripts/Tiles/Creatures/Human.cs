@@ -37,11 +37,14 @@ public class Human : Creature, IEffectOnDestroyed
     
     public Human(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
-        GameManager.Instance.AddRule(CheckForMonsters);
         //GameManager.Instance.AddRule(Haunting);
     }
 
-    
+    public override void WhenPlaced()
+    {   
+        GameManager.Instance.AddRule(CheckForMonsters);
+    }
+
     public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)
     {
         if (aboutToBeDestroyed != this)
