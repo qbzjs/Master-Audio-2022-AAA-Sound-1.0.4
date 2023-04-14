@@ -8,6 +8,8 @@ Tiles added:
 - SpiderQueen 
 - MawBaby
 - Tombstone
+- Castle
+- Homestead
 
 Tiles Changed:
 - Tenements now count other #Buildings, not just tenements
