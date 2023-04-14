@@ -15,7 +15,7 @@ public class Temple : Monument
     }
     public override Tag[] GetTags()
     {
-        return new[] { Tag.Chaos, Tag.Monument };
+        return new[] { Tag.Chaos, Tag.Building };
     }
 
 

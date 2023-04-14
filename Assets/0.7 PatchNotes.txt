@@ -18,6 +18,10 @@ Tiles Changed:
 - Fine tuned tags on a couple tiles
 - "When Placed" effects, like golems, now occur predictably in a top-bottom, left-right order
 
+Quality of life:
+- Progress bar redesign
+- 
+
 
 
 
