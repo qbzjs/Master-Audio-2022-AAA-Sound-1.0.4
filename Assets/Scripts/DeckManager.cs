@@ -152,6 +152,7 @@ public class DeckManager : Singleton<DeckManager>
                 LeanTween.moveLocalY(innerCard.gameObject, -(i*15f), 0f);
             } 
             CreateCardToolTips(newCard);
+            CreateCardRef(newCard);
             newCard.tooltipParent.transform.SetAsLastSibling();
             
         }
@@ -236,17 +237,27 @@ public class DeckManager : Singleton<DeckManager>
                 card.toolTips.Add(newOb);
             }
         }
+    }
+    
+    public void CreateCardRef(Card card)
+    {
+        string description = card.descriptionText.text;
         TMP_TextInfo textInfo = card.descriptionText.GetTextInfo(description);
-        int linkCount = textInfo.linkCount;
+        int linkCount = 0;
+        if(textInfo != null)
+        {
+            linkCount = textInfo.linkCount;
+        }
         for(int i = 0; i < linkCount; i++)
         {
-            string cardName = textInfo.linkInfo[i].GetLinkText();
-            Card newCard = createCardFromTile(cardName, card.transform);
-            newCard.gameObject.SetActive(false);
+            string newCardName = textInfo.linkInfo[i].GetLinkText();
+            Card newCard = createCardFromTile(newCardName, card.transform);
             RectTransform rt = newCard.gameObject.GetComponent<RectTransform>();
             SetCardAnchoredSize(rt);
             rt.anchoredPosition = new Vector2(0f, 350f);
-            card.cardRefs.Add(newCard.gameObject);
+            card.cardRef = newCard.gameObject;
+            newCard.gameObject.SetActive(false);
         }
+
     }
 }
