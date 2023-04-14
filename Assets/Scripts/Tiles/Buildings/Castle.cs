@@ -1,13 +1,58 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mono.Cecil.Cil;
 using Scripts;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
-public class Castle : Building
+public class Castle : Monument
 {
-    [SerializeField] protected int scoreWorthAdjacent = 2;
+    public override string GetDescription()
+    {
+        return "<color=\"red\"><b>+2</b></color> to each <b>Adjacent</b> #Building";
+    }
+
+    private static Effect EdificeEffect = new Effect("Edifice", 3, 1, 4,
+        (score) =>
+        {
+            return new Score(score.score + 2, $"{score.explanation} + 2");
+        });
+
+    private Rule Edificed = new Rule("Edificed", 80, () =>
+    {
+        GridManager.ForEach((int x, int y, Castle castle) =>
+        {
+            foreach (var dir in Directions.Cardinal)
+            {
+                if (GridManager.Instance.GetTile(x + dir.x, y + dir.y).GetTags().Contains(Tag.Building))
+                {
+                    GridManager.Instance.GetTile(x + dir.x, y + dir.y).AddEffect(EdificeEffect);
+                }
+            }
+        });
+
+    });
+
+    public override Tag[] GetTags()
+    {
+        return new[] { Tag.Building };
+    }
+
+    public Castle(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
+    {
+        GameManager.Instance.AddRule(Edificed);
+    }
+    protected override Score CalculateBaseScore()
+    {
+        return new Score(0);
+    }
+
+}
+
+
+/*Old castle code
+ 
+     [SerializeField] protected int scoreWorthAdjacent = 2;
 
     private List<Tag> newTags = new List<Tag>();
 
@@ -61,4 +106,4 @@ public class Castle : Building
 
         return new Score(2 + adjacentCastles * scoreWorthAdjacent);
     }
-}
+    */
