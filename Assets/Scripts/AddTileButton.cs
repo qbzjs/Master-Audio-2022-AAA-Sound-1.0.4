@@ -34,6 +34,9 @@ public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         border.color = newColor;
         card.CreateCardNewTile(myTileName);
         card.GetComponent<Image>().raycastTarget=true;
+        card.tooltipParent.SetActive(false);
+        card.cardRef.gameObject.SetActive(false);
+
     }
 
     public void AddMyTile()
