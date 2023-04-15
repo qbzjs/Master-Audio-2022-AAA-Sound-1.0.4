@@ -33,33 +33,27 @@ public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         tileName = myTileName;
         border.color = newColor;
         card.CreateCardNewTile(myTileName);
-        DeckManager.Instance.CreateCardToolTips(card);
         card.GetComponent<Image>().raycastTarget=true;
+        card.tooltipParent.SetActive(false);
+        card.cardRef.gameObject.SetActive(false);
+
     }
 
     public void AddMyTile()
     {
         DeckManager.Instance.AddToDeck(tileName);
     }
-
-
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
         card.tooltipParent.SetActive(true);
-        DeckManager.Instance.CreateCardRef(card);
-        if (card.cardRef)
-        {
-            card.cardRef.SetActive(true);
-        }
-          LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
+        card.cardRef.gameObject.SetActive(card.HasCardRef);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         card.tooltipParent.SetActive(false);
-        if (card.cardRef)
-        {
-            card.cardRef.SetActive(false);
-        }
+        card.cardRef.gameObject.SetActive(false);
     }
 }

@@ -21,21 +21,6 @@ public class Tooltip : MonoBehaviour
 
     private void Start()
     {
-
-        Vector2 topRightCorner = rectTransform.GetCorners().topRight;
-        Vector2 topRightBoundaryPoint = DeckManager.Instance.topRightBoundary.GetCorners().topRight;
-        Vector3 worldPosition = rectTransform.TransformPoint(rectTransform.rect.position);
-        
-        if (topRightCorner.x > topRightBoundaryPoint.x)
-        {
-            worldPosition.x += topRightBoundaryPoint.x - topRightCorner.x;
-        }
-        if (topRightCorner.y > topRightBoundaryPoint.y)
-        {
-            worldPosition.y += topRightBoundaryPoint.y - topRightCorner.y;
-        }
-
-        transform.position = worldPosition; 
     }
     
     /// <summary>
@@ -47,13 +32,9 @@ public class Tooltip : MonoBehaviour
     {
         canvasGroup.alpha = 1;
         card.CreateCardExistingTile(tile);
-        DeckManager.Instance.CreateCardToolTips(card);
-        DeckManager.Instance.CreateCardRef(card);
+        card.tooltipParent.SetActive(true);
+        card.cardRef.gameObject.SetActive(card.HasCardRef);
         LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
-        if(card.cardRef)
-        {
-            card.cardRef.SetActive(true);
-        }
     }
 
     /// <summary>
