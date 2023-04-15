@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 public class MouseOverTile: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] public ITile Tile;
+    Card card;
+    
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         StartCoroutine(HoverForSeconds());
@@ -15,6 +17,7 @@ public class MouseOverTile: MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerExit(PointerEventData pointerEventData)
     {
         StopAllCoroutines();
+
         GameManager.Instance.Tooltip.Hide();
     }
 

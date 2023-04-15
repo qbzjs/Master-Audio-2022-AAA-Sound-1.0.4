@@ -19,9 +19,13 @@ public class River : Building
 
     public override string GetDescription()
     {
-        return "If <b>Adjacent</b> to #Blood, becomes <link><b>BloodRiver</b></link>";
+        return "If <b>Adjacent</b> to #Blood, becomes <b>BloodRiver</b>";
     }
 
+    public override string GetCardRefName()
+    {
+        return "BloodRiver";
+    }
     private static Rule PropagateBlood = new Rule("Propagate Blood", 10, () =>
     {
         bool turnMore = true;

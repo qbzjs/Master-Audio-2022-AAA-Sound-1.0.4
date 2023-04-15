@@ -13,7 +13,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] public Image cardArt; 
     [SerializeField] public GameObject tooltipParent;
     public List<GameObject> toolTips;
-    public GameObject cardRef = null;
+    public Card cardRef;
+    public bool HasCardRef;
  
     public string CardName
     {
@@ -28,10 +29,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public string CardDescription
     {
+         get => cardDescription;
         set
         {
             cardDescription = value;
             descriptionText.text = value;
+
         }
     }
     
@@ -53,29 +56,27 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void CreateCardExistingTile(ITile tile)
     {
-        if (toolTips!= null)
-        {
-            foreach (var tooltip in toolTips)
-            {
-                Destroy(tooltip.gameObject);
-            }
-            toolTips.Clear();
-        }
-        if(cardRef != null)
-        {
-            Destroy(cardRef.gameObject);
-            cardRef = null;
-        }
         Score body = tile.CalculateScore();
     
         CardName = tile.GetType().FullName;
 
-        string description = tile.GetDescription();
-        descriptionText.text = description;
+        CardDescription = tile.GetDescription();
+        descriptionText.text = CardDescription;
 
         CardPoints = body.score.ToString();
 
         Tag[] tags = tile.GetTags();
+        CardTags = tagsToString(tags);
+        foreach(var tooltip in toolTips){
+            Destroy(tooltip);
+        }
+        toolTips.Clear();
+        CreateCardToolTips();
+        string cardRefName = tile.GetCardRefName();
+        CreateCardRef(cardRefName);
+    }
+    private string tagsToString(Tag[] tags)
+    {
         string tags_string = "";
         foreach (Tag tag in tags){
             if (tag != Tag.Null){
@@ -84,8 +85,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 tags_string += t_str;
             }
         }
-        CardTags = tags_string;  
-
+        return tags_string;
     }
     public void CreateCardNewTile(string myTileName)
     {
@@ -96,23 +96,55 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         CreateCardExistingTile(tile);
         
     }
+    public void CreateCardToolTips()
+    {
+        string description = cardDescription;
+        List<string> keys = new List<string>(DeckManager.Instance.Keywords.Keys);
+        foreach(string key in keys)
+        {
+            if (description.Contains(key))
+            {
+                GameObject newOb = Instantiate(DeckManager.Instance.tooltipPrefab, tooltipParent.transform);
+                TextMeshProUGUI newTextMesh = newOb.GetComponentInChildren<TextMeshProUGUI>();
+                newTextMesh.text = key + ": " + DeckManager.Instance.Keywords[key];
+                toolTips.Add(newOb);
+            }
+        }
+    }
+    
+    public void CreateCardRef(string cardRefName)
+    {
+        if(cardRefName == "")
+        {
+            HasCardRef = false;
+            return;
+        }
+        cardRef.CreateCardNewTile(cardRefName);
+        RectTransform rt = this.gameObject.GetComponent<RectTransform>();
+        SetCardAnchoredSize(rt);
+        HasCardRef = true;
+        return;
+    } 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         tooltipParent.SetActive(true);
+        cardRef.gameObject.SetActive(HasCardRef);
         LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipParent.transform.GetComponent<RectTransform>());
-        if(cardRef)
-        {
-            cardRef.SetActive(true);
-        }
     }
     
     public void OnPointerExit(PointerEventData pointerEventData)
     {
-        tooltipParent.SetActive(false);
-        if(cardRef)
-        {
-            cardRef.SetActive(false);
-        }
+        tooltipParent.SetActive(false); 
+        cardRef.gameObject.SetActive(false);
     }  
+    
+    public void SetCardAnchoredSize(RectTransform _mRect)
+    {
+        _mRect.sizeDelta = new Vector2(0f, 0f);
+        _mRect.anchoredPosition = new Vector2(0f, 0f);
+        _mRect.anchorMin = new Vector2(0, 0);
+        _mRect.anchorMax = new Vector2(1, 1);
+        _mRect.pivot = new Vector2(0.5f, 0.5f);
+    }
 
 }
