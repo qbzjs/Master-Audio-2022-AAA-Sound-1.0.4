@@ -29,6 +29,7 @@ public class DeckManager : Singleton<DeckManager>
     
     public void ShuffleBack()
     {
+        TweenManager.Instance.MoveCard(DiscardButton.transform, DrawButton.transform, discard.Count);
         UpdateDeckCounts();
         drawPile.AddRange(discard);
         discard.Clear();

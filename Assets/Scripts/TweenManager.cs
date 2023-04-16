@@ -221,15 +221,14 @@ public class TweenManager : Singleton<TweenManager>
     }
     public void MoveCard(Transform startPos, Transform endPos, int size)
     {
-        List<GameObject> cards = new();
         for (int i = 0; i < size; i++){
             GameObject card = Instantiate(cardBack, startPos);
             card.transform.localPosition = Vector3.zero;
-            cards.Add(card);
-        }
-        for (int i = 0; i < size; i++){
             float f = 1 - (i * 0.3f);
-            LeanTween.move(cards[i], endPos, 0.6f).setEaseInCirc().setDelay(f);
+            LeanTween.move(card, endPos, 0.6f).setEaseInBack().setDelay(f).setOnComplete(()=>
+            {
+                Destroy(card, f);
+            });
         } 
     }
 
@@ -293,4 +292,5 @@ public class TweenManager : Singleton<TweenManager>
     {
         Instantiate(cardParticles, obj.transform.position, Quaternion.identity);
     }
+
 }
