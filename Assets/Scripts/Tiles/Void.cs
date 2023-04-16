@@ -26,11 +26,6 @@ public class Void : Wasteland
         return $"Score is the number of <b>Voids</b> that have been <b>Destroyed</b> (currently {voidsDestroyed})";
     }
 
-    public override string GetCardRefName()
-    {
-        return "Void";
-    }
-
     public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)
     {
         if (this != aboutToBeDestroyed)

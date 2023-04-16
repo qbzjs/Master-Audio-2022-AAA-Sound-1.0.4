@@ -155,7 +155,7 @@ public class DeckManager : Singleton<DeckManager>
                 Card innerCard = createCardFromTile(cardName, newCard.gameObject.transform);
                 RectTransform rt = innerCard.gameObject.GetComponent<RectTransform>();
                 innerCard.SetCardAnchoredSize(rt);
-                LeanTween.moveLocalY(innerCard.gameObject, -(i*15f), 0f);
+                LeanTween.moveLocalY(innerCard.gameObject, -(i*15f), 0.75f).setDelay(0.5f);
                 innerCard.tooltipParent.SetActive(false);
                 if(innerCard.cardRef)
                 {
@@ -209,17 +209,5 @@ public class DeckManager : Singleton<DeckManager>
             { 
                 DrawText.text = $"{(int)val}"; 
             });  
-
-        Toggle drawToggle = DrawButton.GetComponent<Toggle>();
-        if (drawToggle.isOn)
-        {
-            LoadDrawDeck();
-        }
-        Toggle discardToggle = DiscardButton.GetComponent<Toggle>();
-        if (discardToggle.isOn)
-        {
-            LoadDiscardDeck();
-        }
     }
-
 }

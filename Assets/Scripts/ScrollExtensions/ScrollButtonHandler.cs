@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class ScrollButtonHandler : MonoBehaviour
 {
     private ScrollRect scrollRect;
-    [SerializeField] private ScrollButton leftButton;
-    [SerializeField] private ScrollButton rightButton;
-    [SerializeField] private float scrollSpeed = 0.00001f;
+    [SerializeField] private ScrollButton downButton;
+    [SerializeField] private ScrollButton upButton;
+    [SerializeField] private float scrollSpeed;
 
     void Start()
     {
@@ -18,40 +18,40 @@ public class ScrollButtonHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(leftButton != null)
+        if(downButton != null)
         {
-            if(leftButton.isDown)
+            if(downButton.isDown)
             {
-                ScrollLeft();    
+                ScrollDown();    
             }
         }
-        if(rightButton != null)
+        if(upButton != null)
         {
-            if(rightButton.isDown)
+            if(upButton.isDown)
             {
-                ScrollRight();    
+                ScrollUp();    
             }
         }
         
     }
 
-    private void ScrollLeft()
+    private void ScrollDown()
     {
         if(scrollRect != null)
         {
-            if(scrollRect.horizontalNormalizedPosition >= 0f)
+            if(scrollRect.verticalNormalizedPosition >= 0f)
             {
-                scrollRect.horizontalNormalizedPosition -= scrollSpeed;
+                scrollRect.verticalNormalizedPosition -= scrollSpeed;
             }
         }
     }
-    private void ScrollRight()
+    private void ScrollUp()
     {
         if(scrollRect != null)
         {
-            if(scrollRect.horizontalNormalizedPosition <= 1f)
+            if(scrollRect.verticalNormalizedPosition <= 1f)
             {
-                scrollRect.horizontalNormalizedPosition += scrollSpeed;
+                scrollRect.verticalNormalizedPosition += scrollSpeed;
             }
         }
     }

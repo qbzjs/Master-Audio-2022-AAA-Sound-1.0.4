@@ -241,6 +241,7 @@ MonoBehaviour:
   tooltipParent: {fileID: 8574439628192828064}
   toolTips: []
   cardRef: {fileID: 0}
+  HasCardRef: 0
 --- !u!225 &4063667450219170800
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1145,6 +1146,7 @@ MonoBehaviour:
   tooltipParent: {fileID: 2053795084234191015}
   toolTips: []
   cardRef: {fileID: 5510784799154689380}
+  HasCardRef: 0
 --- !u!225 &7627098772767032552
 CanvasGroup:
   m_ObjectHideFlags: 0
