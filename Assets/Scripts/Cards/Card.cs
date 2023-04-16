@@ -98,6 +98,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void CreateCardToolTips()
     {
+        if(!tooltipParent)
+        {
+            return;
+        }
         string description = cardDescription;
         List<string> keys = new List<string>(DeckManager.Instance.Keywords.Keys);
         foreach(string key in keys)
