@@ -23,7 +23,7 @@ public class MouseOverTile: MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public IEnumerator HoverForSeconds()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.75f);
         if(!GameManager.Instance.dragging){
             GameManager.Instance.Tooltip.Show(Tile);
         }
