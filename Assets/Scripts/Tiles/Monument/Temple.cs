@@ -21,7 +21,7 @@ public class Temple : Monument
 
     public override string GetDescription()
     {
-        return "<b>Absorbs</b> all #Death when placed";
+        return "When Placed: <b>Absorbs</b> all #Death";
     }
 
     public override void WhenPlaced()

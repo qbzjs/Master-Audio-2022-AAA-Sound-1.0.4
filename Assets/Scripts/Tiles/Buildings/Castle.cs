@@ -9,7 +9,7 @@ public class Castle : Monument
 {
     public override string GetDescription()
     {
-        return "<color=\"red\"><b>+2</b></color> to each <b>Adjacent</b> #Building when placed.";
+        return "When Placed: <color=\"red\"><b>+2</b></color> to each <b>Adjacent</b> #Building.";
     }
 
     private static Effect EdificeEffect = new Effect("Edifice", 3, 1, 4,

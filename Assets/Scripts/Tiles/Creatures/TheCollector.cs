@@ -10,7 +10,7 @@ public class TheCollector : Wasteland
 
     public override string GetDescription()
     {
-        return "<b>Absorbs</b> all other tiles when placed";
+        return "When Placed: <b>Absorbs</b> all other tiles";
     }
     
     public TheCollector(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
