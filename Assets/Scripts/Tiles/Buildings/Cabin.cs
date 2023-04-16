@@ -20,7 +20,7 @@ public class Cabin : Building
 
     public override string GetDescription()
     {
-        return "<b><color=\"red\">+2</color></b> for each <b>Adjacent</b> empty tile.";
+        return "When Placed: <b><color=\"red\">+2</color></b> for each <b>Adjacent</b> empty tile.";
     }
 
     public override void WhenPlaced()

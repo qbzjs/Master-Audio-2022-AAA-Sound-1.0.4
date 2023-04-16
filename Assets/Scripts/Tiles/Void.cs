@@ -23,12 +23,7 @@ public class Void : Wasteland
     
     public override string GetDescription()
     {
-        return $"Score is the number of <b>Voids</b> that have been <b>Destroyed</b>";
-    }
-
-    public override string GetCardRefName()
-    {
-        return "Void";
+        return $"Score is the number of <b>Voids</b> that have been <b>Destroyed</b> (currently {voidsDestroyed})";
     }
 
     public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)

@@ -52,7 +52,7 @@ public class OilSlick : Creature
 
     public override string GetDescription()
     {
-        return $"If <b>Adjacent</b> to #Fire, is destroyed and <b>Spawns</b> a <b>HellFire</b>.";
+        return $"If <b>Adjacent</b> to #Fire, becomes <b>HellFire</b>.";
     }
     
     public override string GetCardRefName()

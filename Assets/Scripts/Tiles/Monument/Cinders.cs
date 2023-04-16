@@ -37,7 +37,7 @@ public class Cinders : Wasteland
 
     public override string GetDescription()
     {
-        return $"If <b>Adjacent</b> to <b><color=\"red\">4</color></b>  #fire becomes <b>CinderDemon</b>";
+        return $"If <b>Adjacent</b> to <b><color=\"red\">4</color></b> #fire becomes <b>CinderDemon</b>";
     }
     
     public override string GetCardRefName()

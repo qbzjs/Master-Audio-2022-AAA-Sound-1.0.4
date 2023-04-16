@@ -98,6 +98,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void CreateCardToolTips()
     {
+        if(!tooltipParent)
+        {
+            return;
+        }
         string description = cardDescription;
         List<string> keys = new List<string>(DeckManager.Instance.Keywords.Keys);
         foreach(string key in keys)
@@ -127,13 +131,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     } 
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        tooltipParent.SetActive(true);
-        cardRef.gameObject.SetActive(HasCardRef);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipParent.transform.GetComponent<RectTransform>());
+       StartCoroutine(HoverForSeconds());
     }
     
     public void OnPointerExit(PointerEventData pointerEventData)
     {
+        StopAllCoroutines();
         tooltipParent.SetActive(false); 
         cardRef.gameObject.SetActive(false);
     }  
@@ -145,6 +148,15 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         _mRect.anchorMin = new Vector2(0, 0);
         _mRect.anchorMax = new Vector2(1, 1);
         _mRect.pivot = new Vector2(0.5f, 0.5f);
+    }
+
+        public IEnumerator HoverForSeconds()
+    {
+        yield return new WaitForSeconds(0.75f);
+        tooltipParent.SetActive(true);
+        cardRef.gameObject.SetActive(HasCardRef);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipParent.transform.GetComponent<RectTransform>());
+        yield break;
     }
 
 }
