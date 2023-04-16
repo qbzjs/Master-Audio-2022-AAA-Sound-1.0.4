@@ -10,7 +10,7 @@ public class RatKing : Rat
 
     public override string GetDescription()
     {
-        return $"<b>Absorbs</b> all <b>Rats</b>";
+        return $"When Placed: <b>Absorbs</b> all <b>Rats</b>";
     }
     
     public override string GetCardRefName()
