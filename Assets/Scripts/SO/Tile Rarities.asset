@@ -49,13 +49,27 @@ MonoBehaviour:
     - River
     - Tenement
     - Human
+    - HellFire
+    - OilSlick
+    - Spider
+    - Rat
+    - YagaHut
+    - Cave
+    - Cinders
     _keys:
     - Ghoul
     - Gargoyle
     - River
     - Tenement
     - Human
-    _values: 0400000004000000040000000100000004000000
+    - HellFire
+    - OilSlick
+    - Spider
+    - Rat
+    - YagaHut
+    - Cave
+    - Cinders
+    _values: 040000000400000004000000010000000400000001000000010000000100000001000000010000000100000001000000
   Commons:
   - River
   - Human
