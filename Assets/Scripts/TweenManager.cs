@@ -172,6 +172,7 @@ public class TweenManager : Singleton<TweenManager>
     [SerializeField, BoxGroup("card")] private LeanTweenType cardMoveEase;
     public void ShowCard(GameObject ob)
     {
+        MasterAudio.PlaySound("CardSlide");
         Vector3 location = ob.transform.position; 
         location.y -= calloutMoveAmount;
         ob.transform.position = location;
