@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 1432639769162607104}
   - component: {fileID: 8192431253277167377}
   - component: {fileID: 4874056984555706727}
+  - component: {fileID: 7326126752861151656}
   m_Layer: 5
   m_Name: ToolTipParent
   m_TagString: Untagged
@@ -405,6 +406,18 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &7326126752861151656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053795084234191015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9385e12ea6cc9476f85add77d2a65ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2705289411479357094
 GameObject:
   m_ObjectHideFlags: 0
