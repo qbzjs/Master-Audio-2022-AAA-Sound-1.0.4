@@ -17,7 +17,6 @@ public class MouseOverTile: MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void OnPointerExit(PointerEventData pointerEventData)
     {
         StopAllCoroutines();
-
         GameManager.Instance.Tooltip.Hide();
     }
 
