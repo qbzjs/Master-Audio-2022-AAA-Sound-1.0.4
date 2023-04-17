@@ -167,6 +167,17 @@ public class TweenManager : Singleton<TweenManager>
                     .setOnComplete(() => Destroy(newOb, 0.1f));
             });
     }
+    
+    [SerializeField, BoxGroup("card")] private float cardTime, cardMoveAmount;
+    [SerializeField, BoxGroup("card")] private LeanTweenType cardMoveEase;
+    public void ShowCard(GameObject ob)
+    {
+        Vector3 location = ob.transform.position; 
+        location.y -= calloutMoveAmount;
+        ob.transform.position = location;
+        LeanTween.moveY(ob, location.y + cardMoveAmount, cardTime)
+            .setEase(cardMoveEase);
+    }    
 
     [Button()]
     public void Shake()

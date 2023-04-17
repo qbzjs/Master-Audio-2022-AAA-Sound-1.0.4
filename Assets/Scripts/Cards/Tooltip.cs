@@ -32,6 +32,7 @@ public class Tooltip : MonoBehaviour
     {
         canvasGroup.alpha = 1;
         card.CreateCardExistingTile(tile);
+        TweenManager.Instance.ShowCard(card.gameObject);
         card.tooltipParent.SetActive(true);
         card.cardRef.gameObject.SetActive(card.HasCardRef);
         LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
