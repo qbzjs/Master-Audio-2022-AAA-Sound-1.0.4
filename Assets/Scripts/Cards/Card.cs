@@ -74,6 +74,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         CreateCardToolTips();
         string cardRefName = tile.GetCardRefName();
         CreateCardRef(cardRefName);
+        this.gameObject.transform.GetChild(1).gameObject.GetComponent<Image>().color = UpgradeManager.Instance.FindColor(CardName);
     }
     private string tagsToString(Tag[] tags)
     {
