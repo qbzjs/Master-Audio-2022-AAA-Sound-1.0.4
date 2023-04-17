@@ -187,7 +187,6 @@ public class DeckManager : Singleton<DeckManager>
     {
         Card newCard = Instantiate(template, parent.transform);
         newCard.CreateCardNewTile(name);
-        newCard.gameObject.transform.GetChild(1).gameObject.GetComponent<Image>().color = UpgradeManager.Instance.FindColor(name);
         return newCard;
     }
 
