@@ -19362,10 +19362,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0227c63553fd445999dae7a07c028bb8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c3ff4554d194046dd8dae95b69cbf0eb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.4216965
-  m_Pitch: 1
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -19700,7 +19700,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 15808
+  frames: 19291
 --- !u!1 &1605296173
 GameObject:
   m_ObjectHideFlags: 0
