@@ -6,6 +6,7 @@ using Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DarkTonic.MasterAudio;
 using NaughtyAttributes;
 using RotaryHeart.Lib.SerializableDictionary;
 using Unity.VisualScripting;
@@ -133,6 +134,7 @@ public class DeckManager : Singleton<DeckManager>
     private void createCardDictFromList(List<string> deck, Transform parent)
     {
         Dictionary<string, int> newDeck = new Dictionary<string, int>();
+         MasterAudio.PlaySound("CardsCreak");
         foreach(var cardName in deck)
         {
             if(!newDeck.ContainsKey(cardName))
