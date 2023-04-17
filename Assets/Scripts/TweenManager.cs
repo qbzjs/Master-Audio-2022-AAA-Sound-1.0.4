@@ -230,6 +230,7 @@ public class TweenManager : Singleton<TweenManager>
                 Destroy(card, f);
             });
         } 
+         MasterAudio.PlaySound("CardShuffle");
     }
 
     public void DestroyEffect(Vector2Int location, Action CB)
