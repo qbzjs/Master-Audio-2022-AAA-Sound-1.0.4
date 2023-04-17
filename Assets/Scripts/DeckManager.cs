@@ -134,7 +134,7 @@ public class DeckManager : Singleton<DeckManager>
     private void createCardDictFromList(List<string> deck, Transform parent)
     {
         Dictionary<string, int> newDeck = new Dictionary<string, int>();
-         MasterAudio.PlaySound("CardsCreak");
+         MasterAudio.PlaySound("CardsOpen");
         foreach(var cardName in deck)
         {
             if(!newDeck.ContainsKey(cardName))
