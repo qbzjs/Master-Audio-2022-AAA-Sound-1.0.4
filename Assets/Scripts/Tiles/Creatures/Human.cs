@@ -31,7 +31,12 @@ public class Human : Creature, IEffectOnDestroyed
     
     public override string GetDescription()
     {
-        return "If <b>Adjacent</b> to #Monster, is <b>Destroyed</b> and <b>Spawns</b> a <b><link=\"card\">Ghost</link></b>.";
+        return "If <b>Adjacent</b> to #Monster, becomes <b>Ghost</b>.";
+    }
+
+    public override string GetCardRefName()
+    {
+        return "Ghost";
     }
     
     

@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Deer : Animal
 {
-    [SerializeField] new protected int scoreWorth = 5;
+    [SerializeField] new protected int scoreWorth = 3;
 
     public override string GetDescription()
     {

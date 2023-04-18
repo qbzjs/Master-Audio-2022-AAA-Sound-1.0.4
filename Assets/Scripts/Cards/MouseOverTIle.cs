@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 public class MouseOverTile: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] public ITile Tile;
+    Card card;
+    
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         StartCoroutine(HoverForSeconds());
@@ -20,7 +22,7 @@ public class MouseOverTile: MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public IEnumerator HoverForSeconds()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.75f);
         if(!GameManager.Instance.dragging){
             GameManager.Instance.Tooltip.Show(Tile);
         }

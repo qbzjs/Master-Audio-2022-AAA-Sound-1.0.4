@@ -7,6 +7,7 @@ public interface ITile
 {
 
     public string GetDescription();
+    public string GetCardRefName();
 
     public bool HighlightPredicate(ITile otherTile);
     public Tag[] GetTags();

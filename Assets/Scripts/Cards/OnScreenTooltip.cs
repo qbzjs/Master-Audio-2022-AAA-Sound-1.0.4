@@ -6,19 +6,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform)),RequireComponent(typeof(CanvasGroup))]
-public class Tooltip : MonoBehaviour
+public class OnScreenTooltip : MonoBehaviour
 {
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
-    public Card card;
-    
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
-
+    
     private void Start()
     {
 
@@ -37,30 +35,9 @@ public class Tooltip : MonoBehaviour
 
         transform.position = worldPosition; 
     }
-    
-    /// <summary>
-    /// Makes tooltip visible, sets the title and body (form will be scoreCalculation = scoreValue)
-    /// </summary>
-    /// <param name="title">title of the tooltip</param>
-    /// <param name="body">Score to display in the body</param>
-    public void Show(ITile tile)
+    // Update is called once per frame
+    void Update()
     {
-        canvasGroup.alpha = 1;
-        card.CreateCardExistingTile(tile);
-        DeckManager.Instance.CreateCardToolTips(card);
-        DeckManager.Instance.CreateCardRef(card);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
-        if(card.cardRef)
-        {
-            card.cardRef.SetActive(true);
-        }
-    }
-
-    /// <summary>
-    /// Turns the tooltip invisible
-    /// </summary>
-    public void Hide()
-    {
-        canvasGroup.alpha = 0;
+        
     }
 }

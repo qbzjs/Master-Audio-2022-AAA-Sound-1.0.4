@@ -6,6 +6,7 @@ using Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DarkTonic.MasterAudio;
 using NaughtyAttributes;
 using RotaryHeart.Lib.SerializableDictionary;
 using Unity.VisualScripting;
@@ -29,6 +30,7 @@ public class DeckManager : Singleton<DeckManager>
     
     public void ShuffleBack()
     {
+        TweenManager.Instance.MoveCard(DiscardButton.transform, DrawButton.transform, discard.Count);
         UpdateDeckCounts();
         drawPile.AddRange(discard);
         discard.Clear();
@@ -132,6 +134,7 @@ public class DeckManager : Singleton<DeckManager>
     private void createCardDictFromList(List<string> deck, Transform parent)
     {
         Dictionary<string, int> newDeck = new Dictionary<string, int>();
+         MasterAudio.PlaySound("CardsOpen");
         foreach(var cardName in deck)
         {
             if(!newDeck.ContainsKey(cardName))
@@ -143,17 +146,24 @@ public class DeckManager : Singleton<DeckManager>
         foreach(var cardName in newDeck.Keys)
         {
             Card newCard = createCardFromTile(cardName, parent);
+            newCard.tooltipParent.SetActive(false);
+            if(newCard.cardRef)
+            {
+                newCard.cardRef.gameObject.SetActive(false);
+            } 
             newCard.GetComponent<Image>().raycastTarget=true;
             for (int i = 1; i < newDeck[cardName]; i++)
             {
                 Card innerCard = createCardFromTile(cardName, newCard.gameObject.transform);
                 RectTransform rt = innerCard.gameObject.GetComponent<RectTransform>();
-                SetCardAnchoredSize(rt);
-                LeanTween.moveLocalY(innerCard.gameObject, -(i*15f), 0f);
+                innerCard.SetCardAnchoredSize(rt);
+                LeanTween.moveLocalY(innerCard.gameObject, -(i*15f), 0.75f).setDelay(0.5f);
+                innerCard.tooltipParent.SetActive(false);
+                if(innerCard.cardRef)
+                {
+                    innerCard.cardRef.gameObject.SetActive(false);
+                } 
             } 
-            CreateCardToolTips(newCard);
-            CreateCardRef(newCard);
-            newCard.tooltipParent.transform.SetAsLastSibling();
             
         }
     }
@@ -173,11 +183,10 @@ public class DeckManager : Singleton<DeckManager>
         return newDeck;
     }
 
-    private Card createCardFromTile(string name, Transform parent)
+    public Card createCardFromTile(string name, Transform parent)
     {
         Card newCard = Instantiate(template, parent.transform);
         newCard.CreateCardNewTile(name);
-        newCard.gameObject.transform.GetChild(1).gameObject.GetComponent<Image>().color = UpgradeManager.Instance.FindColor(name);
         return newCard;
     }
 
@@ -201,63 +210,5 @@ public class DeckManager : Singleton<DeckManager>
             { 
                 DrawText.text = $"{(int)val}"; 
             });  
-
-        Toggle drawToggle = DrawButton.GetComponent<Toggle>();
-        if (drawToggle.isOn)
-        {
-            LoadDrawDeck();
-        }
-        Toggle discardToggle = DiscardButton.GetComponent<Toggle>();
-        if (discardToggle.isOn)
-        {
-            LoadDiscardDeck();
-        }
-    }
-
-    public void SetCardAnchoredSize(RectTransform _mRect)
-    {
-        _mRect.sizeDelta = new Vector2(0f, 0f);
-        _mRect.anchoredPosition = new Vector2(0f, 0f);
-        _mRect.anchorMin = new Vector2(0, 0);
-        _mRect.anchorMax = new Vector2(1, 1);
-        _mRect.pivot = new Vector2(0.5f, 0.5f);
-    }
-
-    public void CreateCardToolTips(Card card)
-    {
-        string description = card.descriptionText.text;
-        List<string> keys = new List<string>(Keywords.Keys);
-        foreach(string key in keys)
-        {
-            if (description.Contains(key))
-            {
-                GameObject newOb = Instantiate(tooltipPrefab, card.tooltipParent.transform);
-                TextMeshProUGUI newTextMesh = newOb.GetComponentInChildren<TextMeshProUGUI>();
-                newTextMesh.text = key + ": " + Keywords[key];
-                card.toolTips.Add(newOb);
-            }
-        }
-    }
-    
-    public void CreateCardRef(Card card)
-    {
-        string description = card.descriptionText.text;
-        TMP_TextInfo textInfo = card.descriptionText.GetTextInfo(description);
-        int linkCount = 0;
-        if(textInfo != null)
-        {
-            linkCount = textInfo.linkCount;
-        }
-        for(int i = 0; i < linkCount; i++)
-        {
-            string newCardName = textInfo.linkInfo[i].GetLinkText();
-            Card newCard = createCardFromTile(newCardName, card.transform);
-            RectTransform rt = newCard.gameObject.GetComponent<RectTransform>();
-            SetCardAnchoredSize(rt);
-            rt.anchoredPosition = new Vector2(0f, 350f);
-            card.cardRef = newCard.gameObject;
-            newCard.gameObject.SetActive(false);
-        }
-
     }
 }

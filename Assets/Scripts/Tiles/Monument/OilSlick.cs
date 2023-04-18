@@ -52,10 +52,13 @@ public class OilSlick : Creature
 
     public override string GetDescription()
     {
-        return $"If <b>Adjacent</b> to #Fire, is destroyed and <b>Spawns</b> a <b><link>HellFire</link></b>.";
+        return $"If <b>Adjacent</b> to #Fire, becomes <b>HellFire</b>.";
     }
     
-    
+    public override string GetCardRefName()
+    {
+        return "HellFire";
+    }
     public OilSlick(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
         GameManager.Instance.AddRule(BurnOil);

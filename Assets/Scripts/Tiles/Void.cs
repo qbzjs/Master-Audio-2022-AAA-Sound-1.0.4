@@ -23,7 +23,7 @@ public class Void : Wasteland
     
     public override string GetDescription()
     {
-        return $"Score is the number of <b><link>Void</link>s</b> that have been <b>Destroyed</b>";
+        return $"Score is the number of <b>Voids</b> that have been <b>Destroyed</b> (currently {voidsDestroyed})";
     }
 
     public override void WhenAnyDestroyed(int x, int y, ITile aboutToBeDestroyed)

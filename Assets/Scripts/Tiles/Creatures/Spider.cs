@@ -9,9 +9,13 @@ public class Spider : Animal
 
     public override string GetDescription()
     {
-        return $"<b>Spawns</b> <b><link>Web</link>s</b> at each <b>Adjacent</b> empty tile.";
+        return $"When Placed: <b>Spawns</b> <b>Web</b> at each <b>Adjacent</b> empty tile.";
     }
     
+    public override string GetCardRefName()
+    {
+        return "Web";
+    }
     public Spider(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
 

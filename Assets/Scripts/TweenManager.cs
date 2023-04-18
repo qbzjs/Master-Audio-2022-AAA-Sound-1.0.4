@@ -167,6 +167,26 @@ public class TweenManager : Singleton<TweenManager>
                     .setOnComplete(() => Destroy(newOb, 0.1f));
             });
     }
+    
+    [SerializeField, BoxGroup("card")] private float cardTime, cardEmphasizeAmount, cardMoveAmount, cardEmphasizeTime;
+    [SerializeField, BoxGroup("card")] private LeanTweenType cardMoveEase, cardSizeEase;
+    public void ShowCard(GameObject ob)
+    {
+        MasterAudio.PlaySound("CardSlide");
+        Vector3 location = ob.transform.position; 
+        location.y -= calloutMoveAmount;
+        ob.transform.position = location;
+        LeanTween.moveY(ob, location.y + cardMoveAmount, cardTime)
+            .setEase(cardMoveEase);
+    }    
+    public void EmphasizeCard(GameObject ob)
+    {
+        LeanTween.scale(ob, Vector3.one * cardEmphasizeAmount, cardEmphasizeTime).setEase(cardSizeEase);
+    }
+     public void ResetCard(GameObject ob)
+    {
+        LeanTween.scale(ob, Vector3.one, cardEmphasizeTime);
+    }
 
     [Button()]
     public void Shake()
@@ -221,16 +241,16 @@ public class TweenManager : Singleton<TweenManager>
     }
     public void MoveCard(Transform startPos, Transform endPos, int size)
     {
-        List<GameObject> cards = new();
         for (int i = 0; i < size; i++){
             GameObject card = Instantiate(cardBack, startPos);
             card.transform.localPosition = Vector3.zero;
-            cards.Add(card);
-        }
-        for (int i = 0; i < size; i++){
             float f = 1 - (i * 0.3f);
-            LeanTween.move(cards[i], endPos, 0.6f).setEaseInCirc().setDelay(f);
+            LeanTween.move(card, endPos, 0.6f).setEaseInBack().setDelay(f).setOnComplete(()=>
+            {
+                Destroy(card, f);
+            });
         } 
+         MasterAudio.PlaySound("CardShuffle");
     }
 
     public void DestroyEffect(Vector2Int location, Action CB)
@@ -293,4 +313,5 @@ public class TweenManager : Singleton<TweenManager>
     {
         Instantiate(cardParticles, obj.transform.position, Quaternion.identity);
     }
+
 }

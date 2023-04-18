@@ -9,7 +9,12 @@ public class SpiderQueen : Animal
 
     public override string GetDescription()
     {
-        return $"<b>Fills its Row and Column with </b> <b><link>Web</link>s</b>.";
+        return $"<b>Fills its Row and Column with </b> <b>Webs</b>.";
+    }
+    
+    public override string GetCardRefName()
+    {
+        return "Web";
     }
     
     public SpiderQueen(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)

@@ -12,9 +12,13 @@ public class Vampire : Monster
 
     public override string GetDescription()
     {
-        return "In a <b>Pack</b> of <b><color=\"red\">5</color></b>, all <b><link>BloodRiver</link>s</b> <b><color=\"red\">x3</color></b>";
+        return "In a <b>Pack</b> of <b><color=\"red\">5</color></b>, all <b>BloodRivers</b> <b><color=\"red\">x3</color></b>";
     }
     
+    public override string GetCardRefName()
+    {
+        return "BloodRiver";
+    }
     public override Tag[] GetTags()
     {
         return new []{Tag.Blood, Tag.Monster};

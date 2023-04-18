@@ -13,6 +13,11 @@ public class Wasteland : ITile
         return "<i>A barren wasteland</i>";
     }
 
+    public virtual string GetCardRefName()
+    {
+        return "";
+    }
+
     public GameObject TileObject { get; set; }
 
     public List<Effect> ongoingEffects;
@@ -142,6 +147,4 @@ public class Wasteland : ITile
     {
 
     }
-
-
 }
