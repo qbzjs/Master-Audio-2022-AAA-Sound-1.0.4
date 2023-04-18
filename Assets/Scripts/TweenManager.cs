@@ -168,7 +168,7 @@ public class TweenManager : Singleton<TweenManager>
             });
     }
     
-    [SerializeField, BoxGroup("card")] private float cardTime, cardEmphasizeAmount, cardMoveAmount, cardRefMoveAmount, cardEmphasizeTime;
+    [SerializeField, BoxGroup("card")] private float cardTime, cardEmphasizeAmount, cardMoveAmount, cardRefMoveAmount, cardEmphasizeTime, tooltipEmphasizeTime, tooltipEmphasizeAmount;
     [SerializeField, BoxGroup("card")] private LeanTweenType cardMoveEase, cardSizeEase;
     public void ShowCard(GameObject ob)
     {
@@ -197,9 +197,9 @@ public class TweenManager : Singleton<TweenManager>
     {
         float delay = 0.2f;
         foreach(var tooltip in tooltips){
-            LeanTween.scale(tooltip, Vector3.one * cardEmphasizeAmount, emphasizeTime)
+            LeanTween.scale(tooltip, Vector3.one * tooltipEmphasizeAmount, tooltipEmphasizeTime)
             .setEasePunch();
-            LeanTween.alphaCanvas(tooltip.GetComponent<CanvasGroup>(), 1f, 0.5f)
+            LeanTween.alphaCanvas(tooltip.GetComponent<CanvasGroup>(), 1f, 0.6f)
             .setDelay(delay);
             delay += 0.1f;
         }
