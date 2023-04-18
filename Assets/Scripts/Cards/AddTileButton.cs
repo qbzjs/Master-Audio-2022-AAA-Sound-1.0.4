@@ -56,7 +56,8 @@ public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         StopAllCoroutines();
         card.tooltipParent.SetActive(false); 
         card.cardRef.gameObject.SetActive(false);
-        TweenManager.Instance.ResetCard(gameObject);
+        TweenManager.Instance.ResetCard(card.gameObject);
+        TweenManager.Instance.HideToolTips(card.toolTips);
     }
     
     public IEnumerator HoverForSeconds()
