@@ -22,6 +22,7 @@ public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
         set
         {
+            if (GameManager.Instance.DeckScreenActive) return;
             selected = value;
             highlight.SetActive(selected);
         }
@@ -46,6 +47,7 @@ public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (GameManager.Instance.DeckScreenActive) return;
         StartCoroutine(HoverForSeconds());
     }
 

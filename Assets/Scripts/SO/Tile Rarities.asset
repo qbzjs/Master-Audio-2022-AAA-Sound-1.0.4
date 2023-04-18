@@ -80,6 +80,8 @@ MonoBehaviour:
   - Tombstone
   - Castle
   - Angel
+  - Skeleton
+  - MawBaby
   Rares:
   - RatKing
   - Temple

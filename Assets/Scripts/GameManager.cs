@@ -18,7 +18,23 @@ public class GameManager : Singleton<GameManager>
     [Foldout("Tutorial")]
     [SerializeField] public GameObject TutorialParent;
     public bool TutorialMode {get; set;}
-    public bool Interactable {get; set;}
+
+    public bool Interactable
+    {
+        get
+        {
+            return !(winScreen.activeInHierarchy || endScreen.activeInHierarchy || upgradeScreen.activeInHierarchy || deckScreen.activeInHierarchy);
+        }
+    }
+
+    public bool DeckScreenActive
+    {
+        get
+        {
+            return deckScreen.activeInHierarchy;
+        }
+    }
+
     private int tutorialIndex;
 
     [SerializeField] public Tooltip Tooltip;
@@ -106,7 +122,6 @@ public class GameManager : Singleton<GameManager>
             if (turns <= 0)
             {
                 ParticleManager.Instance.InstantiateEndParticles();
-                Interactable = false;
                 if (score >= winningScore)
                 {
                     ExecuteAfterScore = Win;
@@ -121,7 +136,6 @@ public class GameManager : Singleton<GameManager>
 
     public void Awake()
     {
-        Interactable = true;
         upgradeIncrement = winningScore / 2;
         roundsLeft = totalRounds;
         #if UNITY_EDITOR
@@ -135,7 +149,6 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        Interactable = true;
         NewBoard();
         InitializeDeck();
         gameStart?.Invoke();
@@ -149,7 +162,6 @@ public class GameManager : Singleton<GameManager>
 
     public void NewBoard()
     {
-        Interactable = true;
         winButton.SetActive(false);
         winScreen.SetActive(false);
         upgradeScreen.SetActive(false);
@@ -319,11 +331,6 @@ public class GameManager : Singleton<GameManager>
     {
         SceneManager.GetActiveScene().Load();
     }
-
-    public void Focus()
-    {
-        Interactable = true;
-    }
     
     public void ScoreIncrementEffect(float oldScore, float nextUpgrade)
     {
@@ -344,15 +351,15 @@ public class GameManager : Singleton<GameManager>
             }
             if(TutorialMode)
             {
-                progressCounter.text = $"Progress: {(int) val}/{winningScore}"; 
+                progressCounter.text = $"{(int) val}/{winningScore}"; 
             }
             else 
             {
-                 progressCounter.text = $"Progress: {(int) val}/{winningScore} ({untilNext} until next deal)";
-                 if (willUpgrade)
+                 progressCounter.text = $"{(int) val}/{winningScore}";
+                 /*if (willUpgrade)
                  {
                      progressCounter.text = "Prepare for a deal";
-                 }
+                 }*/
             }
             if (progressBar != null){
                 progressBar.fillAmount = val / winningScore;
@@ -362,14 +369,7 @@ public class GameManager : Singleton<GameManager>
         setOnComplete(() =>
         {
 
-            if(TutorialMode)
-            { 
-                progressCounter.text = $"Progress: {score}/{winningScore}";
-            }
-            else
-            {
-                progressCounter.text = $"Progress: {score}/{winningScore} ({CalculateNextUpgrade() - score} until next deal)";               
-            }
+            progressCounter.text = $"{score}/{winningScore}";
 
             if (ExecuteAfterScore != null)
             {
