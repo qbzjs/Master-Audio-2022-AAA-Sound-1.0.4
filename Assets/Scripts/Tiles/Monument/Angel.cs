@@ -21,20 +21,28 @@ public class Angel : Monument
 
     public Angel(Transform parentTransform, Vector3 pos) : base(parentTransform, pos)
     {
+        GameManager.Instance.AddRule(CorruptAngel);
     }
-    
+
+    private static Rule CorruptAngel = new Rule("Corrupt Blood", 5, () =>
+    {
+        GridManager.ForEach((int x, int y, Angel angel) =>
+        {
+            foreach (Vector2Int dir in Directions.Cardinal)
+            {
+                ITile tile = (Wasteland)GridManager.Instance.GetTile(x + dir.x, y + dir.y);
+                if (tile.GetTags().Contains(Tag.Blood))
+                {
+                    Vector2Int location = new Vector2Int(x, y);
+                    GameManager.Instance.TransformTile(location, "CorruptedAngel");
+                }
+            }
+        });
+    });
+
     //TODO turn this into a rule, and make a corrupted angel tile to go with it
     protected override Score CalculateBaseScore()
     {
-        foreach (Vector2Int dir in Directions.Cardinal)
-        {
-            ITile tile = (Wasteland)GridManager.Instance.GetTile(xPos + dir.x, yPos + dir.y);
-            if (tile.GetTags().Contains(Tag.Blood))
-            {
-                Vector2Int location = new Vector2Int(xPos, yPos);
-                GameManager.Instance.TransformTile(location, "CorruptedAngel");
-            }
-        }
         return new Score(scoreWorth);
     }
 
