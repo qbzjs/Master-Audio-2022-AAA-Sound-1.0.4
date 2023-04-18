@@ -140,6 +140,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         StopAllCoroutines();
         tooltipParent.SetActive(false); 
         cardRef.gameObject.SetActive(false);
+        TweenManager.Instance.ResetCard(gameObject);
     }  
     
     public void SetCardAnchoredSize(RectTransform _mRect)
@@ -151,12 +152,13 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         _mRect.pivot = new Vector2(0.5f, 0.5f);
     }
 
-        public IEnumerator HoverForSeconds()
+    public IEnumerator HoverForSeconds()
     {
         yield return new WaitForSeconds(0.75f);
         tooltipParent.SetActive(true);
         cardRef.gameObject.SetActive(HasCardRef);
         LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipParent.transform.GetComponent<RectTransform>());
+        TweenManager.Instance.EmphasizeCard(gameObject);
         yield break;
     }
 

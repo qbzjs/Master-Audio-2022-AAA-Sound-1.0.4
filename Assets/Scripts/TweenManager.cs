@@ -168,8 +168,8 @@ public class TweenManager : Singleton<TweenManager>
             });
     }
     
-    [SerializeField, BoxGroup("card")] private float cardTime, cardMoveAmount;
-    [SerializeField, BoxGroup("card")] private LeanTweenType cardMoveEase;
+    [SerializeField, BoxGroup("card")] private float cardTime, cardEmphasizeAmount, cardMoveAmount, cardEmphasizeTime;
+    [SerializeField, BoxGroup("card")] private LeanTweenType cardMoveEase, cardSizeEase;
     public void ShowCard(GameObject ob)
     {
         MasterAudio.PlaySound("CardSlide");
@@ -179,6 +179,14 @@ public class TweenManager : Singleton<TweenManager>
         LeanTween.moveY(ob, location.y + cardMoveAmount, cardTime)
             .setEase(cardMoveEase);
     }    
+    public void EmphasizeCard(GameObject ob)
+    {
+        LeanTween.scale(ob, Vector3.one * cardEmphasizeAmount, cardEmphasizeTime).setEase(cardSizeEase);
+    }
+     public void ResetCard(GameObject ob)
+    {
+        LeanTween.scale(ob, Vector3.one, cardEmphasizeTime);
+    }
 
     [Button()]
     public void Shake()
