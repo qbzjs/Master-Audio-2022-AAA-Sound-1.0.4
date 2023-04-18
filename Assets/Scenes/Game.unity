@@ -8484,7 +8484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931518f9ca6c3844891dee74db8ed494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
+  weight: 2
   probabilityToPlay: 100
   importance: 5
   isUninterruptible: 0
@@ -11273,7 +11273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.24, y: 0.06}
   m_AnchorMax: {x: 0.75, y: 0.43}
-  m_AnchoredPosition: {x: -538.50006, y: -142.00098}
+  m_AnchoredPosition: {x: -538.50006, y: -142.00104}
   m_SizeDelta: {x: -234.99, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708671904
@@ -12102,7 +12102,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 20930
+  frames: 22851
 --- !u!1 &835768315
 GameObject:
   m_ObjectHideFlags: 0
@@ -13470,7 +13470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.06}
   m_AnchorMax: {x: 0.76, y: 0.43}
-  m_AnchoredPosition: {x: 608, y: -124.00281}
+  m_AnchoredPosition: {x: 608, y: -124.00305}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &951310918
@@ -16635,6 +16635,7 @@ MonoBehaviour:
   cardTime: 0.75
   cardEmphasizeAmount: 1.14
   cardMoveAmount: 1
+  cardRefMoveAmount: 379
   cardEmphasizeTime: 0.15
   cardMoveEase: 6
   cardSizeEase: 6
@@ -18310,7 +18311,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 20619
+  frames: 20641
 --- !u!1 &1605296173
 GameObject:
   m_ObjectHideFlags: 0
@@ -28982,6 +28983,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: DeckManager, Assembly-CSharp
         m_MethodName: LoadCardDeck
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2019481064}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

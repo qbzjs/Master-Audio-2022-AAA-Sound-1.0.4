@@ -14,7 +14,7 @@ public class BloodRiver : Building
     }
     public override string GetDescription()
     {
-        return "<b><color=\"red\">double</color></b> the score of each <b>Adjacent</b> tile";
+        return "<b><color=\"red\">Double</color></b> the score of each <b>Adjacent</b> tile";
     }
 
     public override Tag[] GetTags()

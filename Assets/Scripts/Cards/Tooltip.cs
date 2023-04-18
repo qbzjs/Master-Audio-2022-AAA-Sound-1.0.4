@@ -34,8 +34,13 @@ public class Tooltip : MonoBehaviour
         card.CreateCardExistingTile(tile);
         TweenManager.Instance.ShowCard(card.gameObject);
         card.tooltipParent.SetActive(true);
-        card.cardRef.gameObject.SetActive(card.HasCardRef);
+        if(card.HasCardRef){
+            TweenManager.Instance.ShowCardRef(card.cardRef.gameObject, card.transform.position);
+        }else{
+            card.cardRef.gameObject.SetActive(false);
+        }
         LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
+        TweenManager.Instance.EmphasizeTooltips(card.toolTips);
     }
 
     /// <summary>
