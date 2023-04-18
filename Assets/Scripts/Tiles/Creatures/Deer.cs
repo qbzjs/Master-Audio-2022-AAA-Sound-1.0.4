@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -10,7 +11,7 @@ public class Deer : Animal
 
     public override string GetDescription()
     {
-        return $"{scoreWorth}pts - Just a normal \"Deer\", moves to a new empty tile every turn if able";
+        return $"{scoreWorth}pts - Just a normal \"Deer\", moves to an empty adjacent tile every turn if able";
     }
 
     public override Tag[] GetTags()
@@ -20,26 +21,33 @@ public class Deer : Animal
 
     public static Rule MoveDeer = new Rule("Move Deer", 10, () =>
     {
-        int deerCount = 0;
         List<Vector2Int> coordinatesList = new List<Vector2Int>();
+        List<Vector2Int> interimList = new List<Vector2Int>();
         GridManager.ForEach((int x, int y, Deer deer) =>
         {
-            deerCount++;
-            GameManager.Instance.DestroyTile(new Vector2Int(x, y));
-        });
-        GridManager.ForEach((int x, int y, ITile tile) =>
-        {
-            if (tile.GetType() == typeof(Wasteland))
+            interimList.Clear();
+            foreach (Vector2Int dir in Directions.Cardinal)
             {
-                coordinatesList.Add(new Vector2Int(x, y));
+
+                ITile tile = GridManager.Instance.GetTile(x + dir.x, y + dir.y);
+                if (tile.GetType() == typeof(Wasteland) && GridManager.Instance.Grid.InRange(x + dir.x, y + dir.y) && !coordinatesList.Contains(new Vector2Int(x + dir.x, y + dir.y)))
+                {
+                    interimList.Add(new Vector2Int(x + dir.x, y + dir.y));
+                }
+
+                Debug.Log(interimList.Count());
+            }
+
+            if (interimList.Count() != 0)
+            {
+                coordinatesList.Add(interimList.PickRandom());
+                GameManager.Instance.DestroyTile(new Vector2Int(x, y));
             }
         });
 
-        for(int i = 0; i < deerCount; i++)
+        foreach (Vector2Int location in coordinatesList)
         {
-            Vector2Int coordinates = coordinatesList.PickRandom();
-            GridManager.Instance.PlaceTile("Deer", coordinates);
-            coordinatesList.Remove(coordinates);
+            GridManager.Instance.PlaceTile("Deer", location);
         }
     });
 
