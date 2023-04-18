@@ -8534,7 +8534,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d8c225d775c18438ba6615a89f78a474, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.26001596
+  m_Volume: 0.19952624
   m_Pitch: 1.2
   Loop: 0
   Mute: 0
@@ -12102,7 +12102,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 22851
+  frames: 23165
 --- !u!1 &835768315
 GameObject:
   m_ObjectHideFlags: 0
@@ -12511,7 +12511,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 16232
+  frames: 16261
 --- !u!224 &874133784 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7903931741750475891, guid: 75e33d6cc2dc21744b335f03acda2eeb, type: 3}

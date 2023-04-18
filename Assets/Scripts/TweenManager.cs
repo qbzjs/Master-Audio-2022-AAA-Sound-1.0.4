@@ -199,7 +199,7 @@ public class TweenManager : Singleton<TweenManager>
         foreach(var tooltip in tooltips){
             LeanTween.scale(tooltip, Vector3.one * tooltipEmphasizeAmount, tooltipEmphasizeTime)
             .setEasePunch();
-            LeanTween.alphaCanvas(tooltip.GetComponent<CanvasGroup>(), 1f, 0.5f)
+            LeanTween.alphaCanvas(tooltip.GetComponent<CanvasGroup>(), 1f, 0.6f)
             .setDelay(delay);
             delay += 0.1f;
         }
