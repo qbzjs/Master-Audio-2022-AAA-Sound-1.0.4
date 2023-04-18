@@ -12,7 +12,7 @@ public class Den : Building
 
     public override string GetDescription()
     {
-        return "When Placed: +1 for each #Monster in largest pack";
+        return "When Placed: +1 for each #Monster in largest <b>Pack</b>";
     }
 
     public override Tag[] GetTags()

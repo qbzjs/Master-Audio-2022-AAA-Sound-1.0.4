@@ -54,16 +54,22 @@ public class AddTileButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerExit(PointerEventData eventData)
     {
         StopAllCoroutines();
-        card.tooltipParent.SetActive(false);
+        card.tooltipParent.SetActive(false); 
         card.cardRef.gameObject.SetActive(false);
+        TweenManager.Instance.ResetCard(gameObject);
     }
     
     public IEnumerator HoverForSeconds()
     {
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.5f);
         card.tooltipParent.SetActive(true);
-        card.cardRef.gameObject.SetActive(card.HasCardRef);
+        if(card.HasCardRef){
+            card.cardRef.gameObject.SetActive(card.HasCardRef);
+            TweenManager.Instance.ShowCardRef(card.cardRef.gameObject, transform.position, 1.17f, 0.1f);
+        }
         LayoutRebuilder.ForceRebuildLayoutImmediate(card.tooltipParent.transform.GetComponent<RectTransform>());
+        TweenManager.Instance.EmphasizeCard(card.gameObject);
+        TweenManager.Instance.EmphasizeTooltips(card.toolTips);
         yield break;
     }
 }

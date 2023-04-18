@@ -168,20 +168,43 @@ public class TweenManager : Singleton<TweenManager>
             });
     }
     
-    [SerializeField, BoxGroup("card")] private float cardTime, cardEmphasizeAmount, cardMoveAmount, cardEmphasizeTime;
+    [SerializeField, BoxGroup("card")] private float cardTime, cardEmphasizeAmount, cardMoveAmount, cardRefMoveAmount, cardEmphasizeTime;
     [SerializeField, BoxGroup("card")] private LeanTweenType cardMoveEase, cardSizeEase;
     public void ShowCard(GameObject ob)
     {
         MasterAudio.PlaySound("CardSlide");
         Vector3 location = ob.transform.position; 
-        location.y -= calloutMoveAmount;
+        location.y -= cardMoveAmount;
         ob.transform.position = location;
         LeanTween.moveY(ob, location.y + cardMoveAmount, cardTime)
             .setEase(cardMoveEase);
+    }  
+    
+    public void ShowCardRef(GameObject ob, Vector3 startPos, float multiplier=1.18f, float delay=0.0f)
+    {
+        MasterAudio.PlaySound("CardSlide");
+        ob.transform.position = startPos;
+        float height = ob.GetComponent<RectTransform>().rect.height;
+        ob.SetActive(true);
+        LeanTween.moveLocalY(ob, startPos.y + (height*multiplier), cardTime)
+            .setEase(cardMoveEase).setDelay(delay);
     }    
     public void EmphasizeCard(GameObject ob)
     {
         LeanTween.scale(ob, Vector3.one * cardEmphasizeAmount, cardEmphasizeTime).setEase(cardSizeEase);
+    }
+    public void EmphasizeTooltips(List<GameObject> tooltips)
+    {
+        float delay = 0.2f;
+        foreach(var tooltip in tooltips){
+            LeanTween.alphaCanvas(tooltip.GetComponent<CanvasGroup>(), 1f, 0.5f)
+            .setDelay(delay)
+            .setOnComplete(() => {
+                LeanTween.scale(tooltip, Vector3.one * cardEmphasizeAmount, emphasizeTime)
+            .setEasePunch();
+            });
+            delay += 0.1f;
+        }
     }
      public void ResetCard(GameObject ob)
     {

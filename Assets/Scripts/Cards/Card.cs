@@ -130,14 +130,24 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         HasCardRef = true;
         return;
     } 
+    //applies on the deck screen
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
-       StartCoroutine(HoverForSeconds());
+        if (!GameManager.Instance.DeckScreenActive) return;
+        tooltipParent.SetActive(true);
+        if(HasCardRef){
+            cardRef.gameObject.SetActive(HasCardRef);
+            TweenManager.Instance.ShowCardRef(cardRef.gameObject, transform.position, 1.02f, 0.1f);
+        }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipParent.transform.GetComponent<RectTransform>());
+        TweenManager.Instance.EmphasizeCard(gameObject);
+        TweenManager.Instance.EmphasizeTooltips(toolTips);
     }
     
+    //applies on the deck screen
     public void OnPointerExit(PointerEventData pointerEventData)
     {
-        StopAllCoroutines();
+        if (!GameManager.Instance.DeckScreenActive) return;
         tooltipParent.SetActive(false); 
         cardRef.gameObject.SetActive(false);
         TweenManager.Instance.ResetCard(gameObject);
@@ -152,14 +162,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         _mRect.pivot = new Vector2(0.5f, 0.5f);
     }
 
-    public IEnumerator HoverForSeconds()
+    public void RevealCard()
     {
-        yield return new WaitForSeconds(0.75f);
-        tooltipParent.SetActive(true);
-        cardRef.gameObject.SetActive(HasCardRef);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipParent.transform.GetComponent<RectTransform>());
-        TweenManager.Instance.EmphasizeCard(gameObject);
-        yield break;
+        
     }
-
 }
