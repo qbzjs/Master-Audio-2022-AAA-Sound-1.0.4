@@ -16637,6 +16637,8 @@ MonoBehaviour:
   cardMoveAmount: 1
   cardRefMoveAmount: 379
   cardEmphasizeTime: 0.15
+  tooltipEmphasizeTime: 1
+  tooltipEmphasizeAmount: 1.4
   cardMoveEase: 6
   cardSizeEase: 6
   moveStop: {fileID: 642311767}
