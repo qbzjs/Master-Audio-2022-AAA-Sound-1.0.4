@@ -197,18 +197,22 @@ public class TweenManager : Singleton<TweenManager>
     {
         float delay = 0.2f;
         foreach(var tooltip in tooltips){
-            LeanTween.alphaCanvas(tooltip.GetComponent<CanvasGroup>(), 1f, 0.5f)
-            .setDelay(delay)
-            .setOnComplete(() => {
-                LeanTween.scale(tooltip, Vector3.one * cardEmphasizeAmount, emphasizeTime)
+            LeanTween.scale(tooltip, Vector3.one * cardEmphasizeAmount, emphasizeTime)
             .setEasePunch();
-            });
+            LeanTween.alphaCanvas(tooltip.GetComponent<CanvasGroup>(), 1f, 0.5f)
+            .setDelay(delay);
             delay += 0.1f;
         }
     }
-     public void ResetCard(GameObject ob)
+    public void ResetCard(GameObject ob)
     {
         LeanTween.scale(ob, Vector3.one, cardEmphasizeTime);
+    }
+    public void HideToolTips(List<GameObject> tooltips)
+    {
+        foreach(var tooltip in tooltips){
+            LeanTween.alphaCanvas(tooltip.GetComponent<CanvasGroup>(), 0f, 0f);
+        }
     }
 
     [Button()]

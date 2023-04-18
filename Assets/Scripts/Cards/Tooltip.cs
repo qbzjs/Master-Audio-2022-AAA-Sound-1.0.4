@@ -48,6 +48,7 @@ public class Tooltip : MonoBehaviour
     /// </summary>
     public void Hide()
     {
+        TweenManager.Instance.HideToolTips(card.toolTips);
         canvasGroup.alpha = 0;
     }
 }
