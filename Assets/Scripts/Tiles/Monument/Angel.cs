@@ -13,6 +13,11 @@ public class Angel : Monument
     {
         return "If <b>Adjacent</b> to #Blood, becomes <b>CorruptedAngel</b>";
     }
+    
+    public override string GetCardRefName()
+    {
+        return "CorruptedAngel";
+    }
 
     public override Tag[] GetTags()
     {
