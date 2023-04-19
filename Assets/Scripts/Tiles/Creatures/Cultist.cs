@@ -10,7 +10,7 @@ public class Cultist : Creature
     [SerializeField] new protected int scoreWorth = 2;
     public override string GetDescription()
     {
-        return scoreWorth + " pts, gives adjacent #Monuments the worshipped effect (+2 pts, stacks).";
+        return $"<b><color=\"red\">+{2}</color></b> to each <b>Adjacent</b> #Monument.";
     }
 
     public override Tag[] GetTags()
