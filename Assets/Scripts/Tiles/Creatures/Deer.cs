@@ -11,7 +11,7 @@ public class Deer : Animal
 
     public override string GetDescription()
     {
-        return $"{scoreWorth}pts - Just a normal \"Deer\", moves to an empty adjacent tile every turn if able";
+        return $"Reassembles in an empty <b>Adjacent</b> space each turn if able";
     }
 
     public override Tag[] GetTags()
@@ -35,7 +35,6 @@ public class Deer : Animal
                     interimList.Add(new Vector2Int(x + dir.x, y + dir.y));
                 }
 
-                Debug.Log(interimList.Count());
             }
 
             if (interimList.Count() != 0)
@@ -47,7 +46,7 @@ public class Deer : Animal
 
         foreach (Vector2Int location in coordinatesList)
         {
-            GridManager.Instance.PlaceTile("Deer", location);
+            GameManager.Instance.PlaceTile("Deer", location);
         }
     });
 
