@@ -7,12 +7,9 @@ public class Priest : Creature
 {
     [SerializeField] protected int packSize = 5;
 
-    private int timesFeasted = 0;
-
-
     public override string GetDescription()
     {
-        return "5pts - In a pack of 5, churches and temples x2";
+        return "In a <b>Pack</b> of <b><color=\"red\">5</color></b>, all <b>Churches</b> and <b>Temples</b> <b><color=\"red\">x2</color></b>";
     }
 
     public override Tag[] GetTags()
@@ -68,6 +65,6 @@ public class Priest : Creature
     protected override Score CalculateBaseScore()
     {
 
-        return new Score(5);
+        return new Score(1);
     }
 }
