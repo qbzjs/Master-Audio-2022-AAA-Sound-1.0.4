@@ -298,6 +298,7 @@ public class GameManager : Singleton<GameManager>
 
             if (roundsLeft == 1)
             {
+                roundsLeftText.text = "";
                 nextRound.text = $"Build me one last city worth {winningScore} points";
             }
             else
