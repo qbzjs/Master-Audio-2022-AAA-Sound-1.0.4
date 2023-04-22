@@ -127,14 +127,34 @@ public class Block : MonoBehaviour, IDragParent
     {
         float rad = degrees * Mathf.PI / 180;
         Matrix4x4 rotMat = Matrix4x4.Rotate(quaternion.RotateZ(rad));
-        Vector3 centerOfGravity = Vector3.zero;
+        Vector3 centerOfGravity = Vector3.zero;//-(transform.position - GetMousePos());
         Vector3 lastTile = Vector3.zero;
+
+        float minDist = 1000;
+        Vector3 localPosOfClosestTile = Vector3.zero;
         foreach (ITile tile in Tiles)
         {
-            lastTile = tile.TileObject.transform.position;
-            Vector3 localSpacePosition = tile.TileObject.transform.localPosition - centerOfGravity;
-            tile.TileObject.transform.localPosition = centerOfGravity + (Vector3)(rotMat *  localSpacePosition);
+            float dist = Vector3.Distance(tile.TileObject.transform.position, GetMousePos());
+            if (dist < minDist)
+            {
+                minDist = dist;
+                localPosOfClosestTile = tile.TileObject.transform.localPosition;
+                Debug.Log($"closest is {tile.GetType()}");
+            }
         }
+
+        //transform.position += localPosOfClosestTile;
+        
+        foreach (ITile tile in Tiles)
+        {
+            //lastTile = Tiles[0].TileObject.transform.localPosition;
+            Vector3 localSpacePosition = tile.TileObject.transform.localPosition - centerOfGravity;
+            //tile.TileObject.transform.position += (GetMousePos() - transform.position);
+            tile.TileObject.transform.localPosition = tile.TileObject.transform.localPosition - localPosOfClosestTile;
+            tile.TileObject.transform.localPosition = centerOfGravity + (Vector3)(rotMat *  (tile.TileObject.transform.localPosition));
+        }
+        dragOffset = Vector3.zero;
+        FollowMousePos();
     }
 
     public void OnMouseDown()
